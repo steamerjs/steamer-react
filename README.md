@@ -1,4 +1,4 @@
 # steamer-react
 react-redux-webpack-boilerplate
 
-coming at 2016.06.02
+coming by 2016.06.03
