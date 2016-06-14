@@ -14,6 +14,7 @@ export default class Scroll extends Component {
 		this.scrollTopCache = {};
 		this.prvScrollTopCache = {};
 		this.refreshScroll = this.refreshScroll.bind(this);
+		this.timer = null;
 	}
 
 	componentWillMount() {
@@ -28,30 +29,32 @@ export default class Scroll extends Component {
 		console.log("==================componentDidUpdate==============");
 	}
 
+	componentWillUnmount() {
+		window.removeEventListener('scroll');
+	}
+
 	refreshScroll() {
 		this.prvScrollTop = this.prvScrollTopCache[this.props.tabs.active] = 0;
 	}
 
 
 	bindScrollEvt() {
-		var _this = this;
-		var timer = null;
 
-		window.addEventListener('scroll', function(e) {
+		window.addEventListener('scroll', (e) => {
 			// 延迟计算
-			timer && clearTimeout(timer);
-			timer = setTimeout(function() {
+			this.timer && clearTimeout(this.timer);
+			this.timer = setTimeout(() => {
 
 				var doc = window.document;
 				var scrollTop = doc.body.scrollTop;
-				var isEnd = _this.props.isEnd;
+				var isEnd = this.props.isEnd;
 				// console.log(listType, isEnd);
 
 				// 防止向上滚动也拉数据
-                if (_this.prvScrollTop > scrollTop) {
+                if (this.prvScrollTop > scrollTop) {
                     return;
                 }
-                _this.prvScrollTop = scrollTop;
+                this.prvScrollTop = scrollTop;
 
 				var winHeight = window.document.documentElement.clientHeight;
 				var clientHeight = window.document.body.clientHeight;
@@ -60,7 +63,7 @@ export default class Scroll extends Component {
 				// if (scrollTop + winHeight >= clientHeight) {
 				// 条件二： 滚动到中间拉数据
 				if (scrollTop >= (clientHeight - winHeight) / 2 && !isEnd) {
-					_this.props.loadNewsList(null, false);
+					this.props.loadNewsList(null, false);
 				}
 
 			}, 50); 

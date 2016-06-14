@@ -3,7 +3,7 @@ import merge from 'lodash.merge';
 import { render } from 'react-dom';
 import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
-import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
+import { GET_NEWS_LIST, GET_TOP_NEWS, GET_NEWS_DETAIL } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
 import Scroll from 'scroll';
@@ -20,21 +20,28 @@ class Wrapper extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			
+			lock: true
 		};
 		this.firstGetAllData = false;
 		this.loadTopNews = this.loadTopNews.bind(this);
 		this.loadNewsList = this.loadNewsList.bind(this);
 		this.loadData = this.loadData.bind(this);
 		this.loadDataForScroll = this.loadDataForScroll.bind(this);
+		this.getNewsDetail = this.getNewsDetail.bind(this);
 	}
 
 	componentDidMount() {
-		
+		setTimeout(() => {
+			this.setState({
+				lock: false,
+			});
+		}, 100);
 	}
 
 	componentWillMount() {
-		this.loadTopNews();
+		if (this.props.news.ids.length === 0) {
+			this.loadTopNews();
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -133,8 +140,32 @@ class Wrapper extends Component {
 		this.props.request(url, param, opts);
 	}
 
-	render() {
+	getNewsDetail(item) {
+		let url = GET_NEWS_DETAIL,
+			opts = {};
 
+		var pa = merge({}, {
+			url: item.url,
+			news_id: item.id,
+			v: (new Date()).getTime(),
+		}, pa);
+
+		var param = {
+			param: pa,
+			ajaxType: 'POST',
+			onSuccess: function(data) {
+				
+			},
+			onError: function(res) {
+				console.log("err");
+			}
+		};
+
+		this.props.request(url, param, opts);
+	}
+
+	render() {
+		console.log(this.state.lock);
 		console.dev('render container!!!');
 		let tabStyle = this.props.tabs,
 			isEnd = this.props.news.listInfo['listLatest']['isEnd'],
@@ -151,6 +182,7 @@ class Wrapper extends Component {
 	            			wrapper={".content-wrap"}
 	            			ref="scroll"
 	            			loadDataForScroll={this.loadDataForScroll}
+	            			disable={this.state.lock}
 	            	>
 	            		<List 
 							  tabs={this.props.tabs}
@@ -158,8 +190,9 @@ class Wrapper extends Component {
 							  news={this.props.news.listLatest}
 							  listInfo={this.props.news.listInfo.listLatest}
 							  args={this.props.args}
-							  request={this.props.request}
 							  likeNews={this.props.likeNews}
+							  getNewsDetail={this.getNewsDetail}
+							  details={this.props.details}
 						/>
 						<List 
 							  tabs={this.props.tabs}
@@ -167,8 +200,9 @@ class Wrapper extends Component {
 							  news={this.props.news.listLike}
 							  listInfo={this.props.news.listInfo.listLike}
 							  args={this.props.args}
-							  request={this.props.request}
 							  dislikeNews={this.props.dislikeNews}
+							  getNewsDetail={this.getNewsDetail}
+							  details={this.props.details}
 						/>
 						<Loading isShow={isLoadingShow} isEnd={isEnd} />
 	            	</Scroll>

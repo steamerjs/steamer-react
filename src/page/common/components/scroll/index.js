@@ -46,6 +46,7 @@ export default class Scroll extends Component {
 		this.wrapper = props.wrapper;
 		this.bindScroll = this.bindScroll.bind(this);
 		this.scrollEvt = this.scrollEvt.bind(this);
+		this.timer = null;
 	}
 
 	componentWillMount() {
@@ -57,6 +58,11 @@ export default class Scroll extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+	
+	}
+
+	componentWillUnmount() {
+		this.scrollContainer.removeEventListener('scroll', this.scrollEvt);
 	}
 
 	bindScroll() {
@@ -65,13 +71,11 @@ export default class Scroll extends Component {
 	}
 
 	scrollEvt(evt) {
-		var timer = null,
-			isWindow = (this.scrollContainer === window);
+		var isWindow = (this.scrollContainer === window);
 
 		// 延迟计算
-		timer && clearTimeout(timer);
-		timer = setTimeout(() => {
-
+		this.timer && clearTimeout(this.timer);
+		this.timer = setTimeout(() => {
 			if (this.props.disable || this.props.isEnd) {
 				return;
 			}

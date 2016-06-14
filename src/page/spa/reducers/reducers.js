@@ -3,7 +3,7 @@ import { routerReducer } from 'react-router-redux'
 import merge from 'lodash.merge';
 import { setItem } from 'utils';
 import initialState from '../stores/stores';
-import { GET_NEWS_LIST, GET_TOP_NEWS, GET_COMMENT_LIST } from '../../common/constants/constants';
+import { GET_NEWS_LIST, GET_TOP_NEWS, GET_COMMENT_LIST, GET_NEWS_DETAIL } from '../../common/constants/constants';
 import { GET_ARGS, TABS_UPDATE, TOGGLE_CONTENT,
 		 TOGGLE_LIST_LOADING, TOGGLE_SPIN_LOADING, LIKE_NEWS, DISLIKE_NEWS } from '../actions/actions';
 
@@ -101,6 +101,20 @@ var news = function(state = initialState.news, action) {
 	}
 };
 
+var details = function(state = initialState.details, action) {
+	switch (action.type) {
+		case GET_NEWS_DETAIL + '_SUCCESS':
+			var newState = merge({}, state);
+			if (!action.data || !action.data.content) {
+				return newState;
+			}
+			newState[action.param.news_id] = action.data.content;
+			return newState;
+		default:
+			return state;
+	}
+}
+
 var comments = function(state = initialState.comments, action) {
 	switch (action.type) {
 		case GET_COMMENT_LIST + '_SUCCESS':
@@ -115,7 +129,7 @@ var comments = function(state = initialState.comments, action) {
 			
 			return state;
 	}
-}
+};
 
 var args = function(state = initialState.args, action) {
 	switch(action.type) {
@@ -151,12 +165,13 @@ var spinLoading = function(state = initialState.spinLoading, action) {
 			return action.value;
 		
 		case GET_COMMENT_LIST + '_ON':
+		case GET_NEWS_DETAIL + '_ON':
 			return true;
 
 		case GET_COMMENT_LIST + '_SUCCESS':
-			return false;
-
 		case GET_COMMENT_LIST + '_ERROR':
+		case GET_NEWS_DETAIL + '_SUCCESS':
+		case GET_NEWS_DETAIL + '_ERROR':
 			return false;
 
 		default:
@@ -170,6 +185,7 @@ const rootReducer = combineReducers({
 	args,
 	tabs,
 	news,
+	details,
 	comments,
 	listLoading,
 	spinLoading,

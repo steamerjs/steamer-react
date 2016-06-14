@@ -10,6 +10,7 @@ function mapStateToProps(state, ownProps)  {
         args: state.args,
         tabs: state.tabs,
         news: state.news,
+        details: state.details,
         comments: state.comments,
         spinLoading: state.spinLoading,
         listLoading: state.listLoading,

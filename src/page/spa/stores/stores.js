@@ -26,6 +26,9 @@ const initialState = {
 	        }
 	    },
 	},
+	details: {
+
+	},
 	comments: {
 		
 	},

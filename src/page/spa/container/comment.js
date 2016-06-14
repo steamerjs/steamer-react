@@ -95,9 +95,9 @@ class Comment extends Component {
 	        		<h1>
 	        			精选评论
 	        			<Touch onTap={() => {
-	        				console.log(this.context.router.goBack());
+	        				this.context.router.goBack();
 	        				// this.context.router
-	        			}}>返回</Touch>
+	        			}}><div className="back">返回</div></Touch>
 	        		</h1>
 	        		
 	        		<div className="comment-list_item">

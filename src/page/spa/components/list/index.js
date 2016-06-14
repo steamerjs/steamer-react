@@ -39,8 +39,20 @@ export default class List extends Component {
 
 	jumpToDetail(item) {
 		return (e) => {
+			console.log("!!!");
 			if (!this.isClickOnBtn) {
-            	this.context.router.push('comment/' + item.commentid);
+				console.log(item.articletype);
+				if (item.articletype === '100') {
+					var win = window.open(item.url, '_blank');
+					win.focus();
+				}
+				else {
+					if (!this.props.details.hasOwnProperty(item.id)) {
+						this.props.getNewsDetail(item);
+					}
+					this.context.router.push('detail/' + item.id + '/' + item.commentid);
+				}
+				
 			}
 		}
 	}
