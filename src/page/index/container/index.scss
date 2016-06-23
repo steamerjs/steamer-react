@@ -17,3 +17,9 @@ body {
     height: 100%;
     width: 100%;
 }
+
+.logo_news {
+	width: 119px;
+	height: 15px;
+	@include sprite($logo_news);
+}
