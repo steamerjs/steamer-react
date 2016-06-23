@@ -7,7 +7,15 @@ npm run pub
 打开页面
 1. 腾讯新闻主页
 127.0.0.1:9000/index.html
+或
+127.0.0.1:9000/news/index.html
+
 2. 腾讯新闻spa页
+127.0.0.1:9000/spa.html
+或
+127.0.0.1:9000/news/spa.html
+
+由于我们在webpack.server.js中，使用proxy映射路径到news，因此也可以带上路径news来访问
 
 
 # 多个页面的开发
@@ -48,3 +56,7 @@ ctrl + q切换位置
 尝试：
 https://github.com/nodejs/node-gyp/wiki/Visual-Studio-2010-Setup
 
+# 更多使用办法
+* 可参考webpack的官方文档
+* [webpack使用优化（基本篇）](https://github.com/lcxfs1991/blog/issues/2)
+* [webpack使用优化（react篇）](https://github.com/lcxfs1991/blog/issues/7)

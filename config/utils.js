@@ -17,15 +17,5 @@ module.exports = {
 		});
 
 		return srcFiles;
-	},
-	getAliasPath: function(parentFolder, childFolder, pathName) {
-		// get alias path, may from parent node_module / child node_module
-		let modulePath = path.join(parentFolder, pathName);
-
-		if (fs.existsSync(modulePath + '.js') || fs.existsSync(path.join(modulePath, 'index.js'))) {
-			return modulePath;
-		}
-
-		return path.join(childFolder, pathName);
 	}
 };

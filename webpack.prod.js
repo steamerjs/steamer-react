@@ -91,12 +91,13 @@ var prodConfig = {
         ]
     },
     resolve: {
+    	moduledirectories:['node_modules', config.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
         alias: {
         	// use production version of redux
-            'redux': utils.getAliasPath(parentNodeModulePath, nodeModulesPath, '/redux/dist/redux.min'),
-            'react-redux': utils.getAliasPath(parentNodeModulePath, nodeModulesPath, '/react-redux/dist/react-redux'),
-            'classnames': utils.getAliasPath(parentNodeModulePath, nodeModulesPath, '/classnames'),
+            'redux': 'redux/dist/redux.min',
+            'react-redux': 'react-redux/dist/react-redux',
+            'classnames': 'classnames',
             'utils': path.join(config.path.src, '/js/common/utils'),
             'spin': path.join(config.path.src, '/js/common/spin'),
             'spinner': path.join(config.path.src, '/page/common/components/spinner/'),
