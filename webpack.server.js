@@ -26,7 +26,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(config.hostDirectory, proxy('http://localhost:' + port));
 
-app.use('/api/', proxy('http://localhost:3000'));
+app.use('/api/', proxy('http://localhost:3001'));
 
 app.listen(port, function(err) {
 	if (err) {

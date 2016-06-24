@@ -37,7 +37,7 @@ class Detail extends Component {
 		var details = this.props.details || {},
 			detailStr = details.hasOwnProperty(this.newsId) ? details[this.newsId] : ''; 
 
-		console.log(detailStr);
+		// console.dev(detailStr);
 		var detailContent = detailStr.split('\n\n').map((item, index) => {
 			// console.log(item);
 			switch (index) {
