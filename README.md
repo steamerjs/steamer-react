@@ -19,14 +19,8 @@ npm run pub
 
 
 # 多个页面的开发
-* 添加html到src/目录下
-* 在webpack.config.js文件里的的config.html添加对应的html名称，例子如下
-```
-var config = {
-	html: ['index', 'spa'],
-	/** other code */
-};
-```
+添加html到src/目录下就可以了，现在steamer-react会自动识别
+
 
 # Devtools
 ctrl + h进行切换
