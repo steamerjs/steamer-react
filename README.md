@@ -23,15 +23,15 @@ npm run pub
 
 
 # Devtools
-ctrl + h进行切换
-ctrl + q切换位置
+* ctrl + h进行切换
+* ctrl + q切换位置
 其它命令可以参考src/page/common/DevTools
 可以调defaultSize设置自己喜欢的大小
 目前默认设置在底部，占30%的屏幕大小
 
 # 文件目录
-单页面文件可参考 src/page/index
-单页应用可参考 src/page/spa
+* 单页面文件可参考 src/page/index
+* 单页应用可参考 src/page/spa
 
 
 # 合图代码
