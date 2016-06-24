@@ -2,7 +2,7 @@
 
 const path = require('path'),
       utils = require('./utils'),
-      __basename = __dirname.replace('/config', '');
+      __basename = path.dirname(__dirname);
 
 /**
  * [config basic configuration]
