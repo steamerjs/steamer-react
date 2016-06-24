@@ -4,7 +4,7 @@ npm run dev
 # 编译
 npm run pub
 
-打开页面
+# 打开页面
 * 腾讯新闻主页
 127.0.0.1:9000/index.html
 或
