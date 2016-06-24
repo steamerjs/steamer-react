@@ -5,14 +5,15 @@ var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackHotMiddleware = require("webpack-hot-middleware");
 var proxy = require('proxy-middleware');
 
-var config = require("./webpack.config.js");
-var port = 9000;
+var webpackConfig = require("./webpack.config.js"),
+	config = require("./config/config.js");
+var port = config.serverPort;
 
-for (var key in config.entry) {
-	config.entry[key].unshift('webpack-hot-middleware/client');
+for (var key in webpackConfig.entry) {
+	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
 }
 
-var compiler = webpack(config);
+var compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
 	// historyApiFallback: false,
@@ -23,7 +24,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.use('/homework/features/', proxy('http://localhost:' + port));
+app.use(config.hostDirectory, proxy('http://localhost:' + port));
 
 app.use('/api/', proxy('http://localhost:3000'));
 
