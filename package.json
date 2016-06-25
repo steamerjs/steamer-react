@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "gulp&&node ./webpack.server.js",
         "pub-mac": "gulp sprites&&export NODE_ENV=production&&webpack",
-        "pub": "gulp sprites&&set NODE_ENV=production&&webpack"
+        "pub": "gulp sprites&&set NODE_ENV=production&&webpack",
+        "node": "set NODE_ENV=node&&webpack"
     },
     "repository": {
         "type": "git",
@@ -82,6 +83,7 @@
         "webpack-dev-server": "^1.14.1",
         "webpack-hot-middleware": "^2.10.0",
         "webpack-md5-hash": "^0.0.5",
-        "yargs": "^4.7.0"
+        "yargs": "^4.7.0",
+        "ignore-loader": "^0.1.1"
     }
 }

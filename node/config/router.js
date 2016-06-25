@@ -8,6 +8,7 @@ API.get('/', view.index)
    .get('/getQQNewsDetail/', view.detail)
    .post('/getQQNewsDetail/', view.detail)
    .get('/getQQNewsIndexAndItems/', view.list)
-   .post('/getQQNewsIndexAndItems/', view.list);
+   .post('/getQQNewsIndexAndItems/', view.list)
+   .get('/newslist/', view.newsList);
 
 exports.RULE  = API.middleware();

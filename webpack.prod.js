@@ -166,7 +166,8 @@ prodConfig.addPlugins(webpack.optimize.UglifyJsPlugin, {
 prodConfig.addPlugins(webpack.DefinePlugin, {
     "process.env": {
         NODE_ENV: JSON.stringify("production")
-    }
+    },
+    "isNode": false
 });
 
 prodConfig.addPlugins(webpack.optimize.DedupePlugin);

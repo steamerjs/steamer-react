@@ -1,11 +1,13 @@
 "use strict";
 
 var data = require('../model/model');
-var hw = require('../model/db');
+// var hw = require('../model/db');
 var requestSync = require('../common/requestSync').requestSync;
 var htmlparser = require("htmlparser");
 var htmlToText = require('html-to-text');
 var CGI_PATH = require('../config/cgiPath');
+var nodeUtils = require('../common/nodeUtils');
+var ReactRender = require('../../pub/node/app.js');
 
 exports.index = function* () {
     yield* this.render('index', {content: 'tencent news'});
@@ -93,4 +95,19 @@ exports.detail = function* () {
 		ret: 0,
 		content: text
 	};
+};
+
+// function* rd(req, res) {
+
+// 	console.log(req.query);
+
+// 	res.set('Content-Type','text/html');
+// 	res.body = "hello world";
+// }
+
+exports.newsList = function* () {
+
+	yield ReactRender(this.request, this.response);
+
+	this.body = this.response.body;
 };

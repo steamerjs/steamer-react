@@ -1,8 +1,9 @@
 'use strict';
 
 const path = require('path'),
-      utils = require('./utils'),
-      __basename = path.dirname(__dirname);
+      __basename = path.dirname(__dirname),
+      isProduction = process.env.NODE_ENV === 'production',
+      isNode = process.env.NODE_ENV === 'node';
 
 /**
  * [config basic configuration]
@@ -14,22 +15,27 @@ var config = {
         src: path.resolve(__basename, "src"),
         dist: path.resolve(__basename, "dist"),
         pub: path.resolve(__basename, "pub"),
+        node: path.resolve(__basename, "node"),
     },
     gulpPath: {
         src: './src/',
         dist: './dist/',
         pub: './pub/',
         offline: './offline/',
+        node: './node/',
     },
-    chunkhash: (process.env.NODE_ENV) ? "-[chunkhash:6]" : "",
-    hash: (process.env.NODE_ENV) ? "-[hash:6]" : "",
+    chunkhash: (isProduction) ? "-[chunkhash:6]" : "",
+    hash: (isProduction) ? "-[hash:6]" : "",
     defaultPath: "//localhost:9000/",
     cdn: "//localhost:8000/",
     serverPort: 9000,        // port for local server
     hostDirectory: "/news/"  // http://host/hostDirectory/
 };
 
-config.html = utils.getHtmlFile(config.path.src);
+if (!isNode) {
+    const utils = require('./utils');
+    config.html = utils.getHtmlFile(config.path.src);
+}
 
 config.sprites = {
     // imgPath: '../../../css/sprites/sprites.png',

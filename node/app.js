@@ -1,4 +1,5 @@
-'use strong';
+'use strict';
+
 
 const koa = require('koa');
 const mount = require('koa-mount');
@@ -11,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const app = koa();
 
-//指向静态文件夹
+// 指向静态文件夹
 console.log(path.resolve(path.resolve('view/')));
 app.context.render = render({
 	root: path.resolve(path.resolve('view/')),

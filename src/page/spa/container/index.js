@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import merge from 'lodash.merge';
 import { render } from 'react-dom';
-import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
 import { GET_NEWS_LIST, GET_TOP_NEWS, GET_NEWS_DETAIL } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
@@ -39,7 +38,7 @@ class Wrapper extends Component {
 	}
 
 	componentWillMount() {
-		if (this.props.news.ids.length === 0) {
+		if (this.props.news.ids.length === 0 && !isNode) {
 			this.loadTopNews();
 		}
 	}

@@ -1,8 +1,9 @@
 var type = ["Boolean", "Number", "String", "Function", "Array", "Date", "RegExp", "Object", "Error"];
 
+var is = {};
 for (var i = 0; i < type.length; i++) {
 	(function(k) {
-			window['is' + type[k]] = function(obj) {
+			is[type[k]] = function(obj) {
 				return Object.prototype.toString.call(obj) === '[object ' + type[k] + ']';
 			};
 		}
@@ -10,13 +11,13 @@ for (var i = 0; i < type.length; i++) {
 }
 
 export function _stringify(val) {
-	var returnVal = isObject(val) ? JSON.stringify(val) : val;
+	var returnVal = is.Object(val) ? JSON.stringify(val) : val;
 	return returnVal;
 }
 
 export function _parse(val) {
 	var returnVal = JSON.parse(val);
-	returnVal = isObject(returnVal) ? returnVal : val;
+	returnVal = is.Object(returnVal) ? returnVal : val;
 	return returnVal;
 }
 
@@ -238,8 +239,8 @@ export {formatDate};
 export function extend(src, des, d) {
 	var depth = (d) ? d : 0;
 	for (var key in src) {
-		var isObject = isObject(src[key]);
-		var isArray = isArray(src[key]);
+		var isObject = is.Object(src[key]);
+		var isArray = is.Array(src[key]);
 		if (isObject || isArray) {
 			if (depth) {
 				if (isObject) {

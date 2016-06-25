@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import merge from 'lodash.merge';
 import { render } from 'react-dom';
-import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
 import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
