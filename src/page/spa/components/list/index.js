@@ -39,7 +39,6 @@ export default class List extends Component {
 
 	jumpToDetail(item) {
 		return (e) => {
-			console.log("!!!");
 			if (!this.isClickOnBtn) {
 				console.log(item.articletype);
 				if (item.articletype === '100') {
@@ -127,7 +126,7 @@ export default class List extends Component {
 		};
 		
 		this.listData = news;
-		
+
 		let list = news.map((item, index) => {
 			return (
 				<li key={index + tabsType} className={classnames('item ui-border-1px', {'active-like': this.state.activeNewsId === item.id})}>

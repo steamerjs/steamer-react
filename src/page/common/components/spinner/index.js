@@ -47,7 +47,7 @@ export default class Spinner extends Component {
 
 	render() {
 
-		console.log('render spinner');
+		console.dev('render spinner');
 
 		var isShow = this.props.isShow || false;
 		var spinStyle = {

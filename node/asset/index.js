@@ -1,4 +1,5 @@
-const React = require('react'),
+const vm = require('vm'),
+	  React = require('react'),
 	  ReactDOMServer = require('react-dom/server'),
 	  Root = React.createFactory(require('Root').default);
 
@@ -26,11 +27,18 @@ module.exports = function* (req, res) {
 		method: 'GET'
 	});
 
-	 const store = configureStore();
+	// console.log(JSON.stringify(response.body));
 
-	 yield store.dispatch({
-        type: 'GET_NEWS_LIST_SUCCESS',
-        data: response.body,
+	let jsonpSandbox = vm.createContext({getNewsIndexOutput: function(r){return r;}});
+	let jsonData = vm.runInContext(response.body, jsonpSandbox);
+
+	// console.log(jsonData);
+
+	const store = configureStore();
+
+	yield store.dispatch({
+        type: 'GET_TOP_NEWS_SUCCESS',
+        data: jsonData,
         param:{
             chlid: chlid,
             refer: refer,
@@ -40,11 +48,16 @@ module.exports = function* (req, res) {
         }
     });
 
-	console.log(__dirname);
+    // let state = store.getState();
+
 	let fileContent = require('../../pub/spa.html');
 
 	let reactHtml = ReactDOMServer.renderToString(Root({store}));
 
+	fileContent = fileContent
+				  .replace("window.isNode=false;", "window.isNode=true;")
+				  .replace('<div id="pages" class="cm-page-wrap"></div>', 
+				 		   '<div id="pages" class="cm-page-wrap">' + reactHtml + '</div>');
 
 	res.body = fileContent;
 };

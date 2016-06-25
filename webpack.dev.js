@@ -143,8 +143,4 @@ config.html.forEach(function(page) {
 
 devConfig.addPlugins(webpack.HotModuleReplacementPlugin);
 
-devConfig.addPlugins(webpack.DefinePlugin, {
-    "isNode": false
-});
-
 module.exports = devConfig;

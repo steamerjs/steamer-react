@@ -19,8 +19,9 @@ export default class Root extends Component {
     }
 
     render() {
+        let state = (this.props.store) ? this.props.store : store;
         return (
-            <Provider store={store}>
+            <Provider store={state}>
                 <div>
                     <IndexWrapper />
                 </div>

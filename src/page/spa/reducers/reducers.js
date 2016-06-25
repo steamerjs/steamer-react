@@ -27,7 +27,7 @@ var news = function(state = initialState.news, action) {
 			
 			newState.ids = merge([], idlist[0].ids);
 			newState.listLatest = merge([], newState.listLatest.concat(idlist[0].newslist));
-
+			
 			return newState;
 
 

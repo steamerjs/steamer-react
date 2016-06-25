@@ -39,6 +39,7 @@ class Wrapper extends Component {
 
 	componentWillMount() {
 		if (this.props.news.ids.length === 0 && !isNode) {
+			console.log(isNode);
 			this.loadTopNews();
 		}
 	}
@@ -54,6 +55,7 @@ class Wrapper extends Component {
 	}
 
 	loadTopNews() {
+
 		var url = GET_TOP_NEWS,
 			opts = {};
 
@@ -164,7 +166,7 @@ class Wrapper extends Component {
 	}
 
 	render() {
-		console.log(this.state.lock);
+		// console.log(this.state.lock);
 		console.dev('render container!!!');
 		let tabStyle = this.props.tabs,
 			isEnd = this.props.news.listInfo['listLatest']['isEnd'],

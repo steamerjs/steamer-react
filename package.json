@@ -7,7 +7,8 @@
         "dev": "gulp&&node ./webpack.server.js",
         "pub-mac": "gulp sprites&&export NODE_ENV=production&&webpack",
         "pub": "gulp sprites&&set NODE_ENV=production&&webpack",
-        "node": "set NODE_ENV=node&&webpack"
+        "node": "set NODE_ENV=node&&webpack",
+        "node-mac": "export NODE_ENV=node&&webpack"
     },
     "repository": {
         "type": "git",
