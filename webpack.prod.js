@@ -128,6 +128,7 @@ var prodConfig = {
     },
     // disable watch mode
     watch: false, //  watch mode
+    devtool: "#inline-source-map",
 };
 
 prodConfig.addPlugins = function(plugin, opt) {
@@ -165,8 +166,10 @@ prodConfig.addPlugins(webpack.optimize.UglifyJsPlugin, {
 // inject process.env.NODE_ENV so that it will recognize if (process.env.NODE_ENV === "production")
 prodConfig.addPlugins(webpack.DefinePlugin, {
     "process.env": {
-        NODE_ENV: JSON.stringify("production")
-    }
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    },
+    "isNode": false,
+    "console.dev": function(msg) {}
 });
 
 prodConfig.addPlugins(webpack.optimize.DedupePlugin);

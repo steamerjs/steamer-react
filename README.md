@@ -1,21 +1,66 @@
-# 开发
-npm run dev
+# web开发
 
-# 编译
-npm run pub
+## 端口占用
+* 9000 webpack开发时占用，用于hot reload，以及做proxy，可指向服务端
+* 3001 koa服务器端占用
 
-# 打开页面
-* 腾讯新闻主页
-localhost:9000/index.html
-或
-localhost:9000/news/index.html
+## 命令环境
+package.json中的scripts，若是Windows，设置环境请用set，若是Mac，设置环境请使用export，如：
+* Mac => export NODE_ENV=__DEV__
+* Window => set NODE_ENV=__DEV__
 
-* 腾讯新闻spa页
-localhost:9000/spa.html
-或
-localhost:9000/news/spa.html
+## 开发环境
+* react文件夹下启动：npm run dev
+* react/node文件夹下启动: npm start
 
-由于我们在webpack.server.js中，使用proxy映射路径到news，因此也可以带上路径news来访问
+腾讯新闻主页:
+* localhost:9000/index.html 
+* localhost:9000/news/index.html (webpack.server.js里映射路径到news)
+
+腾讯新闻spa页:
+* localhost:9000/spa.html
+* localhost:9000/news/spa.html
+
+## 生产环境
+* react文件夹下启动: npm run pub
+* react/node文件夹下启动npm start
+
+使用Fiddler(Window) / Charles(Mac) 配置以下代理
+
+### Charles:
+### Map Local: 
+* localhost:9000 => /react/pub/ 匹配本地html资源
+* localhost:8000 => /react/pub/ 匹配本地除cdn资源 
+
+### Map Remote: 
+* localhost:9000/api/* => localhost:3000/api/
+
+### Fiddler:
+### Rule
+
+### Host/Extension
+
+
+# 直出
+## 开发环境
+* react文件夹下启动: npm run dev-node => 后台服务相关
+* react文件夹下启动: npm run dev-node-static  => cdn资源
+* recat/node文件夹下启动: npm run start
+* react直出后台逻辑主要在react/node/asset/index.js中，生成文件在react/pub/node/app.js。
+cdn资源生成在react/dist/中。
+* 列表页、详情页、留言页都可以以spa或者直出的形式访问
+
+腾讯新闻spa页:
+* http://localhost:3001/spa
+
+使用Fiddler(Window) / Charles(Mac) 配置以下代理
+* localhost:3001 => /react/dist/ 匹配本地除cdn资源 
+
+## 生产环境
+* react文件夹下启动: npm run pub-node
+* react/node文件夹下启动: npm run start
+* 生成内容都在react/pub/中
+* 列表页、详情页、留言页都可以以spa或者直出的形式访问
 
 
 # 多个页面的开发

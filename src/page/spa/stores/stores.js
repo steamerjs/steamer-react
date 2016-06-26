@@ -1,16 +1,24 @@
-import { getItem, getHash } from 'utils';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+
+let src = null,
+	listLike = [];
+
+if (!isNode) {
+	var { getHash, getItem } = require('utils');
+	src = getHash('src');
+	listLike = JSON.parse(getItem('like-list')) || [];
+}
 
 /** other const **/
 const initialState = {
 	args: {
-		src: getHash('src'),
+		src: src,
 	},
 	tabs: LATEST_NEWS,
 	news: {
 		ids: [], // 新闻id
 	    listLatest: [],    // 最新新闻
-	    listLike: JSON.parse(getItem('like-list')) || [], // 收藏新闻
+	    listLike: listLike, // 收藏新闻
 	    listInfo: {
 	        listLatest:{
 	            isEnd: false,

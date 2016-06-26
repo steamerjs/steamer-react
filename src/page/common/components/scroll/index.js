@@ -2,6 +2,22 @@ import React, { Component, PropTypes } from 'react';
 import pureRender from 'pure-render-decorator';
 import { HW_MINE, HW_ALL } from '../../constants/constants';
 
+let ua = '';
+if (!isNode) {
+	ua = navigator.userAgent.toLowerCase();
+}
+
+let _platform = function(os) {
+    let ver = ('' + (new RegExp(os + '(\\d+((\\.|_)\\d+)*)').exec(ua) || [,0])[1]).replace(/_/g, '.');
+    // undefined < 3 === false, but null < 3 === true
+    return parseFloat(ver) || undefined;
+};
+let os = {
+    ios: _platform('os '),
+    android: _platform('android[/ ]'),
+    pc : !_platform('os ') && !_platform('android[/ ]')
+};
+
 require('./index.scss');
 
 /**
@@ -66,11 +82,13 @@ export default class Scroll extends Component {
 	}
 
 	bindScroll() {
-		this.scrollContainer = (window.mqq && mqq.iOS) ? document.querySelector(this.wrapper) : window;
+		this.scrollContainer = (os.ios) ? document.querySelector(this.wrapper) : window;
+
 		this.scrollContainer.addEventListener('scroll', this.scrollEvt);
 	}
 
 	scrollEvt(evt) {
+
 		var isWindow = (this.scrollContainer === window);
 
 		// 延迟计算

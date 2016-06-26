@@ -8,6 +8,14 @@ import Touch from 'touch';
 
 require('./index.scss');
 
+let spaPath = "";
+if ("__DEV__" === process.env.NODE_ENV || "__PROD__" === process.env.NODE_ENV) {
+	spaPath = "spa.html";
+}
+else {
+	spaPath = "spa";
+}
+
 @pureRender
 export default class List extends Component {
 
@@ -39,18 +47,17 @@ export default class List extends Component {
 
 	jumpToDetail(item) {
 		return (e) => {
-			console.log("!!!");
 			if (!this.isClickOnBtn) {
-				console.log(item.articletype);
+				// console.log(item.articletype);
 				if (item.articletype === '100') {
 					var win = window.open(item.url, '_blank');
 					win.focus();
 				}
 				else {
 					if (!this.props.details.hasOwnProperty(item.id)) {
-						this.props.getNewsDetail(item);
+						this.props.getNewsDetail(item.id);
 					}
-					this.context.router.push('detail/' + item.id + '/' + item.commentid);
+					this.context.router.push('/' + spaPath + '/detail/' + item.id + '/' + item.commentid);
 				}
 				
 			}
@@ -127,7 +134,7 @@ export default class List extends Component {
 		};
 		
 		this.listData = news;
-		
+
 		let list = news.map((item, index) => {
 			return (
 				<li key={index + tabsType} className={classnames('item ui-border-1px', {'active-like': this.state.activeNewsId === item.id})}>

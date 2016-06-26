@@ -4,9 +4,11 @@
     "description": "react-redux-webpack-boilerplate",
     "main": "index.js",
     "scripts": {
-        "dev": "gulp&&node ./webpack.server.js",
-        "pub-mac": "gulp sprites&&export NODE_ENV=production&&webpack",
-        "pub": "gulp sprites&&set NODE_ENV=production&&webpack"
+        "dev": "export NODE_ENV=__DEV__&&gulp&&node ./webpack.server.js",
+        "pub": "gulp sprites&&export NODE_ENV=__PROD__&&webpack",
+        "dev-node": "export NODE_ENV=__NODE_DEV__&&webpack",
+        "dev-node-static": "export NODE_ENV=__DEV_NODE__&&webpack",
+        "pub-node": "export NODE_ENV=__PROD_NODE__&&webpack&&export NODE_ENV=__NODE_PROD__&&webpack"
     },
     "repository": {
         "type": "git",
@@ -24,9 +26,7 @@
         "url": "https://github.com/lcxfs1991/steamer-react/issues"
     },
     "homepage": "https://github.com/lcxfs1991/steamer-react#readme",
-    "dependencies": {},
-    "devDependencies": {},
-    "dependenciesBk": {
+    "dependencies": {
         "react": "^15.1.0",
         "react-dom": "^15.1.0",
         "react-redux": "^4.0.6",
@@ -41,7 +41,7 @@
         "immutable": "^3.7.6",
         "lodash.merge": "^4.4.0"
     },
-    "devDependenciesBk": {
+    "devDependencies": {
         "babel-core": "^6.1.4",
         "babel-loader": "^6.1.0",
         "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -61,7 +61,7 @@
         "gulp-zip": "^3.0.2",
         "gulp.spritesmith-multi": "^3.0.0",
         "html-loader": "^0.3.0",
-        "html-res-webpack-plugin": "^0.0.6",
+        "html-res-webpack-plugin": "github:lcxfs1991/html-res-webpack-plugin",
         "http-proxy": "^1.12.0",
         "image-webpack-loader": "^1.8.0",
         "imports-loader": "^0.6.3",
@@ -82,6 +82,7 @@
         "webpack-dev-server": "^1.14.1",
         "webpack-hot-middleware": "^2.10.0",
         "webpack-md5-hash": "^0.0.5",
-        "yargs": "^4.7.0"
+        "yargs": "^4.7.0",
+        "ignore-loader": "^0.1.1"
     }
 }
