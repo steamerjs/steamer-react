@@ -3,3 +3,4 @@ node_modules
 pub
 dist
 4.6.85.31.flags.json
+npm-debug.log
