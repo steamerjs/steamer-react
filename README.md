@@ -6,14 +6,14 @@ npm run pub
 
 # 打开页面
 * 腾讯新闻主页
-127.0.0.1:9000/index.html
+localhost:9000/index.html
 或
-127.0.0.1:9000/news/index.html
+localhost:9000/news/index.html
 
 * 腾讯新闻spa页
-127.0.0.1:9000/spa.html
+localhost:9000/spa.html
 或
-127.0.0.1:9000/news/spa.html
+localhost:9000/news/spa.html
 
 由于我们在webpack.server.js中，使用proxy映射路径到news，因此也可以带上路径news来访问
 
