@@ -1,8 +1,10 @@
-# web开发
+# 简介
+steam-react是快速启动React项目，并进行React同构直出的starter kit。
 
-## 端口占用
-* 9000 webpack开发时占用，用于hot reload，以及做proxy，可指向服务端
-* 3001 koa服务器端占用
+# 纯前端React Starter Kit
+[react分支](https://github.com/SteamerTeam/steamer-react/tree/react)
+
+# web开发
 
 ## 命令环境
 package.json中的scripts，若是Windows，设置环境请用set，若是Mac，设置环境请使用export，如：
@@ -62,10 +64,12 @@ cdn资源生成在react/dist/中。
 * 生成内容都在react/pub/中
 * 列表页、详情页、留言页都可以以spa或者直出的形式访问
 
+# 端口占用
+* 9000 webpack开发时占用，用于hot reload，以及做proxy，可指向服务端
+* 3001 koa服务器端占用
 
 # 多个页面的开发
 添加html到src/目录下就可以了，现在steamer-react会自动识别
-
 
 # Devtools
 * ctrl + h进行切换
