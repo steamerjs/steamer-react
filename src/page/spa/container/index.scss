@@ -12,8 +12,30 @@ body {
     background-color: #f8f9fb;
 }
 
-.content-wrap {
-    position: absolute;
-    height: 100%;
-    width: 100%;
+.ios .cm-page-wrap {
+	height: 100%;
+
+	> div {
+		height: 100%;
+
+		> div {
+			height: 100%;
+		}
+	}
+
+	.cm-page {
+		height: 100%;
+	}
+
+	.cm-content {
+		position: relative;
+		height: 100%;
+	}
+
+	.content-wrap {
+	    position: absolute;
+	    height: 100%;
+	    width: 100%;
+	    overflow: auto;
+	}
 }

@@ -1,6 +1,16 @@
 'use strict';
+var config = require('./config/config');
 
-var config = require('./config/config'),
-    webpackConfigPath = (config.env === 'production') ? './webpack.prod.js' : './webpack.dev.js';
+let configMapping = {
+	'__DEV__': './webpack.dev.js',
+	'__DEV_NODE__': './webpack.dev.js',
+	'__PROD__': './webpack.prod.js',
+	'__PROD_NODE__': './webpack.prod.js',
+	'__NODE_DEV__': './webpack.node.js',
+	'__NODE_PROD__': './webpack.node.js'
+};
 
-module.exports = require(webpackConfigPath);
+var webpackConfigPath = configMapping[config.env],
+	webpackConfig = require(webpackConfigPath);
+
+module.exports = webpackConfig;

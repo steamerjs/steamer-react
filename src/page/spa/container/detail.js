@@ -3,15 +3,21 @@ import merge from 'lodash.merge';
 import { render } from 'react-dom';
 import { formatDate } from 'utils';
 import Connect from '../connect/connect';
-import { GET_COMMENT_LIST } from '../../common/constants/constants';
+import { GET_COMMENT_LIST, GET_NEWS_DETAIL } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
 import Spinner from 'spinner';
 import Touch from 'touch';
 
-
 require('./detail.scss');
 
+let spaPath = "";
+if ("__DEV__" === process.env.NODE_ENV || "__PROD__" === process.env.NODE_ENV) {
+	spaPath = "spa.html";
+}
+else {
+	spaPath = "spa";
+}
 
 class Detail extends Component {
 
@@ -22,22 +28,48 @@ class Detail extends Component {
 		};
 		this.newsId = this.props.params.id;
 		this.commentId = this.props.params.commentid;
-
+		this.getNewsDetail = this.getNewsDetail.bind(this);
 	}
 
 	componentDidMount() {
-		
+		if (!this.props.details.hasOwnProperty(this.newsId)) {
+			this.getNewsDetail(this.newsId);
+		}
 	}
 
 	componentWillMount() {
 		
 	}
 
+	getNewsDetail(newsId) {
+		let url = GET_NEWS_DETAIL,
+			opts = {};
+
+		var pa = merge({}, {
+			// url: item.url,
+			news_id: newsId,//item.id,
+			v: (new Date()).getTime(),
+		}, pa);
+
+		var param = {
+			param: pa,
+			ajaxType: 'POST',
+			onSuccess: function(data) {
+				
+			},
+			onError: function(res) {
+				console.log("err");
+			}
+		};
+
+		this.props.request(url, param, opts);
+	}
+
 	render() {
 		var details = this.props.details || {},
 			detailStr = details.hasOwnProperty(this.newsId) ? details[this.newsId] : ''; 
 
-		console.log(detailStr);
+		// console.dev(detailStr);
 		var detailContent = detailStr.split('\n\n').map((item, index) => {
 			// console.log(item);
 			switch (index) {
@@ -75,11 +107,12 @@ class Detail extends Component {
 	        	{detailContent}
 	        	<div className="btns">
 	        		<Touch onTap={() => {
-        				this.context.router.goBack();
+        				// this.context.router.goBack();
+        				this.context.router.push('/' + spaPath);
         				// this.context.router
         			}}>首页</Touch>
         			<Touch onTap={() => {
-        				this.context.router.push('comment/' + this.commentId);
+        				this.context.router.push('/' + spaPath + '/comment/' + this.commentId);
         			}}>精彩评论</Touch>
 	        	</div>
 	        	<Spinner isShow={this.props.spinLoading}/>

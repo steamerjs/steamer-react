@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import merge from 'lodash.merge';
 import { render } from 'react-dom';
-import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
 import { GET_NEWS_LIST, GET_TOP_NEWS, GET_NEWS_DETAIL } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { platform } from 'utils';
+
+require('./index.scss');
 
 import Scroll from 'scroll';
 import Spinner from 'spinner';
@@ -12,7 +14,9 @@ import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
 
-require('./index.scss');
+if (platform().ios) {
+	document.body.className = "ios";
+}
 
 
 class Wrapper extends Component {
@@ -36,16 +40,17 @@ class Wrapper extends Component {
 				lock: false,
 			});
 		}, 100);
+
+		this.props.toggleSpinLoading(false);
 	}
 
 	componentWillMount() {
-		if (this.props.news.ids.length === 0) {
+		if (this.props.news.ids.length === 0 && !isNode) {
 			this.loadTopNews();
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.props.toggleSpinLoading(false);
 		
 		return true;
 	}
@@ -55,6 +60,7 @@ class Wrapper extends Component {
 	}
 
 	loadTopNews() {
+
 		var url = GET_TOP_NEWS,
 			opts = {};
 
@@ -140,13 +146,13 @@ class Wrapper extends Component {
 		this.props.request(url, param, opts);
 	}
 
-	getNewsDetail(item) {
+	getNewsDetail(newsId) {
 		let url = GET_NEWS_DETAIL,
 			opts = {};
 
 		var pa = merge({}, {
-			url: item.url,
-			news_id: item.id,
+			// url: item.url,
+			news_id: newsId,//item.id,
 			v: (new Date()).getTime(),
 		}, pa);
 
@@ -165,7 +171,7 @@ class Wrapper extends Component {
 	}
 
 	render() {
-		console.log(this.state.lock);
+		// console.log(this.state.lock);
 		console.dev('render container!!!');
 		let tabStyle = this.props.tabs,
 			isEnd = this.props.news.listInfo['listLatest']['isEnd'],

@@ -9,6 +9,7 @@ var config = require('./config/config'),
     parentNodeModulePath = path.join(path.dirname(__dirname), 'node_modules');
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 /**
  * [devConfig config for development mode]
@@ -36,7 +37,7 @@ var devConfig = {
                 test: /\.js?$/,
                 loader: 'babel',
                 query: {
-                    cacheDirectory: '/webpack_cache/',
+                    cacheDirectory: false,//'/webpack_cache/',
                     plugins: ['transform-decorators-legacy'],
                     presets: [
                         'es2015-loose', 
@@ -104,7 +105,13 @@ var devConfig = {
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new CopyWebpackPlugin([
+            {
+                from: 'src/libs/',
+                to: 'libs/'
+            }
+        ]),
     ],
     watch: true, //  watch mode
     // devtool: "#inline-source-map",
@@ -142,5 +149,13 @@ config.html.forEach(function(page) {
 }); 
 
 devConfig.addPlugins(webpack.HotModuleReplacementPlugin);
+
+devConfig.addPlugins(webpack.DefinePlugin, {
+    "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    },
+    "isNode": false,
+    "console.dev": function(msg) { console.log(msg); }
+});
 
 module.exports = devConfig;

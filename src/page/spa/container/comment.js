@@ -87,7 +87,7 @@ class Comment extends Component {
 			)
 		});
 
-		commentList = (!commentList.length) ? <div>暂时评论</div> : commentList;
+		commentList = (!commentList.length) ? <div>暂无评论</div> : commentList;
 
 		return (
 	        <div className="comment-wrapper">
