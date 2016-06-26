@@ -258,3 +258,25 @@ export function extend(src, des, d) {
 		}
 	} 
 }
+
+export function platform() {
+
+    let ua = '';
+
+    if (!isNode) {
+        ua = navigator.userAgent.toLowerCase();
+    }
+    let _platform = function(os) {
+        let ver = ('' + (new RegExp(os + '(\\d+((\\.|_)\\d+)*)').exec(ua) || [,0])[1]).replace(/_/g, '.');
+        // undefined < 3 === false, but null < 3 === true
+        return parseFloat(ver) || undefined;
+    };
+
+    let os = {
+        ios: _platform('os '),
+        android: _platform('android[/ ]'),
+        pc : !_platform('os ') && !_platform('android[/ ]')
+    };
+
+    return os;
+}

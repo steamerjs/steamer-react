@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { browserHistory } from 'react-router';
+import { Router, Route, browserHistory, useRouterHistory, hashHistory } from 'react-router';
+import { createHashHistory } from 'history';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers/reducers';
 import thunk from 'redux-thunk';
@@ -10,7 +11,7 @@ import api from '../../common/middleware/api';
 import { DEBUG } from '../constants/constants';
 
 
-const reduxRouterMiddleware = routerMiddleware(browserHistory);
+const reduxRouterMiddleware = routerMiddleware(hashHistory);
 
 function getDebugSessionKey() {
     // You can write custom logic here!

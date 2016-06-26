@@ -1,4 +1,3 @@
-import {  } from 'utils';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
 let src = null,

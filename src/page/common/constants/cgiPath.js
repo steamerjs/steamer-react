@@ -1,6 +1,6 @@
 const baseUrl = 'http://openapi.inews.qq.com/',
 	  baseUrl1 = 'http://view.inews.qq.com/',
-	  baseUrl2 = 'http://localhost:9000/api/'
+	  baseUrl2 = 'http://localhost:3001/api/'
 
 const CGI_PATH = {
 	// 'GET_TOP_NEWS': baseUrl + 'getQQNewsIndexAndItems',

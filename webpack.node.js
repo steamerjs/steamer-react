@@ -80,8 +80,9 @@ var nodeConfig = {
         moduledirectories:['node_modules', config.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
         alias: {
-            'Root': path.join(config.path.src, '/page/spa/root/Root.prod'),
-            'configureStore': path.join(config.path.src, '/page/spa/stores/configureStore.prod.js'),
+            'Root': path.join(config.path.src, '/page/spa/root/Root'),
+            'routes': path.join(config.path.src, '/page/spa/root/route_server'),
+            'configureStore': path.join(config.path.src, '/page/spa/stores/configureStore.js'),
             'redux': 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
             'classnames': 'classnames',
@@ -99,9 +100,12 @@ var nodeConfig = {
     plugins: [
         new webpack.DefinePlugin({
             "process.env": {
-                NODE_ENV: JSON.stringify("production")
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             },
             "isNode": true,
+            "console.dev": (process.env.NODE_ENV === "__NODE_DEV__") ? 
+                            function(msg) { console.log(msg); } :
+                            function(msg) {}
         }),
         new webpack.BannerPlugin("module.exports = ", {entryOnly : true, raw: true}),
         // new webpack.IgnorePlugin(/\.(css|less|scss)$/)

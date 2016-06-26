@@ -7,7 +7,9 @@ var htmlparser = require("htmlparser");
 var htmlToText = require('html-to-text');
 var CGI_PATH = require('../config/cgiPath');
 var nodeUtils = require('../common/nodeUtils');
-var ReactRender = require('../../pub/node/app.js');
+
+const fs = require('fs'),
+	  path = require('path');
 
 exports.index = function* () {
     yield* this.render('index', {content: 'tencent news'});
@@ -74,6 +76,9 @@ exports.list = function* () {
 		method: 'GET'
 	});
 	
+	this.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+	this.set('Access-Control-Allow-Credentials', true);
+
 	this.body = res.body;
 };
 
@@ -88,8 +93,8 @@ exports.detail = function* () {
 	    ignoreHref: false,
 	});
 
-	// this.set('Access-Control-Allow-Origin', 'http://localhost:9000');
-	// this.set('Access-Control-Allow-Credentials', true);
+	this.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+	this.set('Access-Control-Allow-Credentials', true);
 	
 	this.body = {
 		ret: 0,
@@ -105,9 +110,17 @@ exports.detail = function* () {
 // 	res.body = "hello world";
 // }
 
-exports.newsList = function* () {
+exports.spa = function* () {
+	let dir = path.dirname(path.resolve()),
+		appPath = path.join(dir, '/pub/node/app.js');
 
-	yield ReactRender(this.request, this.response);
 
-	this.body = this.response.body;
+	if (fs.existsSync(appPath)) {
+		var ReactRender = require(appPath);
+		yield ReactRender(this.request, this.response);
+		this.body = this.response.body;
+	}
+	else {
+		this.body = "newsList";
+	}
 };

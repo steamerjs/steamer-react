@@ -168,6 +168,8 @@ var spinLoading = function(state = initialState.spinLoading, action) {
 		case GET_NEWS_DETAIL + '_ON':
 			return true;
 
+		case GET_TOP_NEWS + '_SUCCESS':
+		case GET_NEWS_LIST + '_SUCCESS':
 		case GET_COMMENT_LIST + '_SUCCESS':
 		case GET_COMMENT_LIST + '_ERROR':
 		case GET_NEWS_DETAIL + '_SUCCESS':

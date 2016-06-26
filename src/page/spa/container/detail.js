@@ -9,9 +9,15 @@ import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 import Spinner from 'spinner';
 import Touch from 'touch';
 
-
 require('./detail.scss');
 
+let spaPath = "";
+if ("__DEV__" === process.env.NODE_ENV || "__PROD__" === process.env.NODE_ENV) {
+	spaPath = "spa.html";
+}
+else {
+	spaPath = "spa";
+}
 
 class Detail extends Component {
 
@@ -79,7 +85,7 @@ class Detail extends Component {
         				// this.context.router
         			}}>首页</Touch>
         			<Touch onTap={() => {
-        				this.context.router.push('comment/' + this.commentId);
+        				this.context.router.push('/' + spaPath + '/comment/' + this.commentId);
         			}}>精彩评论</Touch>
 	        	</div>
 	        	<Spinner isShow={this.props.spinLoading}/>

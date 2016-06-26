@@ -2,15 +2,14 @@
 var config = require('./config/config');
 
 let configMapping = {
-	'dev': './webpack.dev.js',
-	'production': './webpack.prod.js',
-	'node': './webpack.node.js'
+	'__DEV__': './webpack.dev.js',
+	'__DEV_NODE__': './webpack.dev.js',
+	'__PROD__': './webpack.prod.js',
+	'__NODE_DEV__': './webpack.node.js',
+	'__PROD_NODE__': './webpack.node.js'
 };
 
-config.env = (!config.env) ? 'dev' : config.env;
+var webpackConfigPath = configMapping[config.env],
+	webpackConfig = require(webpackConfigPath);
 
-
-
-var webpackConfigPath = configMapping[config.env];
-
-module.exports = require(webpackConfigPath);
+module.exports = webpackConfig;

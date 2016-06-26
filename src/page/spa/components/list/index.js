@@ -8,6 +8,14 @@ import Touch from 'touch';
 
 require('./index.scss');
 
+let spaPath = "";
+if ("__DEV__" === process.env.NODE_ENV || "__PROD__" === process.env.NODE_ENV) {
+	spaPath = "spa.html";
+}
+else {
+	spaPath = "spa";
+}
+
 @pureRender
 export default class List extends Component {
 
@@ -49,7 +57,7 @@ export default class List extends Component {
 					if (!this.props.details.hasOwnProperty(item.id)) {
 						this.props.getNewsDetail(item);
 					}
-					this.context.router.push('detail/' + item.id + '/' + item.commentid);
+					this.context.router.push('/' + spaPath + '/detail/' + item.id + '/' + item.commentid);
 				}
 				
 			}

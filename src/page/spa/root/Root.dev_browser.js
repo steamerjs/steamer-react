@@ -10,7 +10,8 @@ import CommentWrapper from '../container/comment';
 import DetailWrapper from '../container/detail';
 
 import App from '../container/app';
-
+import DevTools from '../../common/devtools/DevTools';
+import { DEBUG } from '../constants/constants';
 import { routeConfig } from './route';
 
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -22,6 +23,8 @@ var globalVar = (isNode) ? global : window;
 let store = configureStore(globalVar.__REDUX_STATE__ || {});
 
 let  history = syncHistoryWithStore(browserHistory, store);
+
+var DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
 
 export default class Root extends Component {
 
@@ -40,6 +43,8 @@ export default class Root extends Component {
                             <Route path="/spa.html/detail/:id/:commentid" component={DetailWrapper}/>
                         </Route>
                     </Router>
+                    {/* <Router history={history} routes={routeConfig} /> */}
+                    {DevToolsWrapper}
                 </div>
             </Provider>
         );
@@ -47,7 +52,8 @@ export default class Root extends Component {
 }
 
 render(
-    <Root />,
+    <Root store={store}/>,
     document.getElementById('pages')
 );
+
 

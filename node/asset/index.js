@@ -1,16 +1,17 @@
 const vm = require('vm'),
-	  React = require('react'),
-	  ReactDOMServer = require('react-dom/server'),
-	  Root = React.createFactory(require('Root').default);
-
-import { configureStore } from 'configureStore';
-	  
+	  React = require('react');
+	  // Root = React.createFactory(require('Root').default);
 
 var CGI_PATH = require('../config/cgiPath');
 var requestSync = plugin('requestSync');
 
-module.exports = function* (req, res) {
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
+import { configureStore } from 'configureStore';
+import { match, RouterContext } from 'react-router';
+import { routeConfig } from 'routes';
 
+module.exports = function* (req, res) {
 	let chlid = 'news_news_top',
 		refer = 'mobilewwwqqcom',
 		otype = 'jsonp',
@@ -48,16 +49,43 @@ module.exports = function* (req, res) {
         }
     });
 
-    // let state = store.getState();
+    let path = (process.env.NODE_ENV === '__NODE_DEV__') ? 'src' : 'pub';
+    let finalState = store.getState();
+	let fileContent = require('../../' + path + '/spa.html');
 
-	let fileContent = require('../../pub/spa.html');
-
-	let reactHtml = ReactDOMServer.renderToString(Root({store}));
+	// let reactHtml = renderToString(
+	// 	<Provider store={store}>
+ //            <div>
+ //                <Router history={history}>
+ //                    <RouterContext />
+ //                </Router>
+ //            </div>
+ //        </Provider>
+	// );
+	// console.log(req.url);
+	// console.log(routeConfig);
+	let reactHtml = "";
+	match({ routes: routeConfig, location: req.url }, (error, redirectLocation, renderProps) => {
+		// console.log(error);
+		// console.log(redirectLocation);
+		// console.log(renderProps);
+	    if (renderProps) {
+	    	reactHtml = renderToString(
+				<Provider store={store}>
+		            <RouterContext {...renderProps} />
+		        </Provider>
+			);
+	    } 
+	    else {
+	      res.body = "404";
+	    }
+	});
 
 	fileContent = fileContent
 				  .replace("window.isNode=false;", "window.isNode=true;")
 				  .replace('<div id="pages" class="cm-page-wrap"></div>', 
-				 		   '<div id="pages" class="cm-page-wrap">' + reactHtml + '</div>');
+				 		   '<div id="pages" class="cm-page-wrap"><div>' + reactHtml + '</div></div>'
+				 		   + '<script>window.__REDUX_STATE__=' + JSON.stringify(finalState) + ';</script>');
 
 	res.body = fileContent;
 };

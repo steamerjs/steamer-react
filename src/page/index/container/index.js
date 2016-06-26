@@ -4,15 +4,19 @@ import { render } from 'react-dom';
 import Connect from '../connect/connect';
 import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { platform } from 'utils';
 
+require('./index.scss');
 import Scroll from 'scroll';
 import Spinner from 'spinner';
 import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
 
-require('./index.scss');
 
+if (platform().ios) {
+	document.body.className = "ios";
+}
 
 class Wrapper extends Component {
 
