@@ -110,7 +110,13 @@ var nodeConfig = {
                             function(msg) {}
         }),
         new webpack.BannerPlugin("module.exports = ", {entryOnly : true, raw: true}),
-        // new webpack.IgnorePlugin(/\.(css|less|scss)$/)
+        // new webpack.optimize.UglifyJsPlugin(
+        //     {
+        //         compress: {
+        //             warnings: false
+        //         }
+        //     }
+        // )
         // new webpack.optimize.OccurrenceOrderPlugin(),
         // new webpack.NoErrorsPlugin()
     ],

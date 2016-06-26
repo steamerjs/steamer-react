@@ -48,12 +48,20 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 * recat/node文件夹下启动: npm run start
 * react直出后台逻辑主要在react/node/asset/index.js中，生成文件在react/pub/node/app.js。
 cdn资源生成在react/dist/中。
+* 列表页、详情页、留言页都可以以spa或者直出的形式访问
 
 腾讯新闻spa页:
 * http://localhost:3001/spa
 
 使用Fiddler(Window) / Charles(Mac) 配置以下代理
 * localhost:3001 => /react/dist/ 匹配本地除cdn资源 
+
+## 生产环境
+* react文件夹下启动: npm run pub-node
+* react/node文件夹下启动: npm run start
+* 生成内容都在react/pub/中
+* 列表页、详情页、留言页都可以以spa或者直出的形式访问
+
 
 # 多个页面的开发
 添加html到src/目录下就可以了，现在steamer-react会自动识别

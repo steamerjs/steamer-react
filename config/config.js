@@ -2,8 +2,8 @@
 
 const path = require('path'),
       __basename = path.dirname(__dirname),
-      isProduction = process.env.NODE_ENV === '__PROD__',
-      isNode = process.env.NODE_ENV === 'dev-node';
+      isProduction = process.env.NODE_ENV === '__PROD__' || process.env.NODE_ENV === '__PROD_NODE__',
+      isNode = process.env.NODE_ENV === '__NODE_DEV__' || process.env.NODE_ENV === '__NODE_PROD__';
 
 /**
  * [config basic configuration]

@@ -11,10 +11,10 @@ import DetailWrapper from '../container/detail';
 
 import App from '../container/app';
 
-import { routeConfig } from './route_server';
+import { routeConfig } from './route';
 
 import { syncHistoryWithStore } from 'react-router-redux';
-import { Router, IndexRoute, Route, browserHistory, useRouterHistory, hashHistory, match } from 'react-router';
+import { Router, IndexRoute, Route, browserHistory, useRouterHistory, hashHistory } from 'react-router';
 import { createHashHistory } from 'history';
 
 var globalVar = (isNode) ? global : window;
@@ -22,9 +22,6 @@ var globalVar = (isNode) ? global : window;
 let store = configureStore(globalVar.__REDUX_STATE__ || {});
 
 let  history = syncHistoryWithStore(browserHistory, store);
-
-const { pathname, search, hash } = window.location;
-const location = `${pathname}${search}${hash}`;
 
 export default class Root extends Component {
 
@@ -49,19 +46,8 @@ export default class Root extends Component {
     }
 }
 
-match({ routes: routeConfig, location: location }, () => {
-    render(
-        <Provider store={store}>
-            <div>
-                <Router routes={routeConfig} history={history} />
-            </div>
-        </Provider>,
-        document.getElementById('pages')
-    )
-});
-
-// render(
-//     <Root />,
-//     document.getElementById('pages')
-// );
+render(
+    <Root />,
+    document.getElementById('pages')
+);
 

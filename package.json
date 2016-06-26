@@ -8,7 +8,7 @@
         "pub": "gulp sprites&&export NODE_ENV=__PROD__&&webpack",
         "dev-node": "export NODE_ENV=__NODE_DEV__&&webpack",
         "dev-node-static": "export NODE_ENV=__DEV_NODE__&&webpack",
-        "pub-node": "export NODE_ENV=__PROD__&&webpack&&export NODE_ENV=__PROD_NODE__&&webpack"
+        "pub-node": "export NODE_ENV=__PROD_NODE__&&webpack&&export NODE_ENV=__NODE_PROD__&&webpack"
     },
     "repository": {
         "type": "git",
