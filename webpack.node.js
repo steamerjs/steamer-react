@@ -18,7 +18,9 @@ var config = require('./config/config'),
  */
 var nodeConfig = {
     entry: {
-        app: [path.join(config.path.node, "/asset/index.js")],
+        index: [path.join(config.path.node, "/asset/index.js")],
+        detail: [path.join(config.path.node, "/asset/detail.js")],
+        comment: [path.join(config.path.node, "/asset/comment.js")],
     },
     output: {
         publicPath: config.defaultPath,

@@ -146,13 +146,13 @@ class Wrapper extends Component {
 		this.props.request(url, param, opts);
 	}
 
-	getNewsDetail(item) {
+	getNewsDetail(newsId) {
 		let url = GET_NEWS_DETAIL,
 			opts = {};
 
 		var pa = merge({}, {
-			url: item.url,
-			news_id: item.id,
+			// url: item.url,
+			news_id: newsId,//item.id,
 			v: (new Date()).getTime(),
 		}, pa);
 

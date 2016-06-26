@@ -9,6 +9,10 @@ API.get('/api/', view.index)
    .post('/api/getQQNewsDetail/', view.detail)
    .get('/api/getQQNewsIndexAndItems/', view.list)
    .post('/api/getQQNewsIndexAndItems/', view.list)
-   .get('/spa', view.spa);
+   .get('/api/GET_COMMENT_LIST/', view.comment)
+   .post('/api/GET_COMMENT_LIST/', view.comment)
+   .get('/spa', view.spa)
+   .get('/spa/detail/:newsid/:commentid', view.spaDetail)
+   .get('/spa/comment/:commentid', view.spaComment);
 
 exports.RULE  = API.middleware();

@@ -83,9 +83,8 @@ exports.list = function* () {
 };
 
 exports.detail = function* () {
-
 	var res = yield requestSync({
-		uri: this.request.body.url
+		uri: "http://view.inews.qq.com/a/" + this.request.body.news_id //this.request.body.url
 	});
 
 	var text = htmlToText.fromString(res.body, {
@@ -102,17 +101,29 @@ exports.detail = function* () {
 	};
 };
 
-// function* rd(req, res) {
+exports.comment = function* () {
+		
+	let query = this.request.query,
+		urlParam = '?chlid=' + query.chlid + '&refer=' + query.refer 
+					+ '&otype=' + query.otype + '&callback=' + query.callback
+					+ '&=t' + query.t;
 
-// 	console.log(req.query);
 
-// 	res.set('Content-Type','text/html');
-// 	res.body = "hello world";
-// }
+	var res = yield requestSync({
+		uri: CGI_PATH['GET_TOP_NEWS'] + urlParam,
+		method: 'GET'
+	});
+	
+	this.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+	this.set('Access-Control-Allow-Credentials', true);
+
+	this.body = res.body;
+};
+
 
 exports.spa = function* () {
 	let dir = path.dirname(path.resolve()),
-		appPath = path.join(dir, '/pub/node/app.js');
+		appPath = path.join(dir, '/pub/node/index.js');
 
 
 	if (fs.existsSync(appPath)) {
@@ -121,6 +132,38 @@ exports.spa = function* () {
 		this.body = this.response.body;
 	}
 	else {
-		this.body = "newsList";
+		this.body = "spa list";
+	}
+};
+
+exports.spaDetail = function* () {
+	let dir = path.dirname(path.resolve()),
+		appPath = path.join(dir, '/pub/node/detail.js');
+
+
+	if (fs.existsSync(appPath)) {
+		var ReactRender = require(appPath);
+		this.request.params = this.params;
+		yield ReactRender(this.request, this.response);
+		this.body = this.response.body;
+	}
+	else {
+		this.body = "spa detail";
+	}
+};
+
+exports.spaComment = function* () {
+	let dir = path.dirname(path.resolve()),
+		appPath = path.join(dir, '/pub/node/comment.js');
+
+
+	if (fs.existsSync(appPath)) {
+		var ReactRender = require(appPath);
+		this.request.params = this.params;
+		yield ReactRender(this.request, this.response);
+		this.body = this.response.body;
+	}
+	else {
+		this.body = "spa comment";
 	}
 };

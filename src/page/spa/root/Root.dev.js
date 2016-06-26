@@ -54,8 +54,6 @@ export default class Root extends Component {
     }
 }
 
-console.log(location);
-
 match({ routes: routeConfig, location: location }, () => {
     render(
         <Provider store={store}>
