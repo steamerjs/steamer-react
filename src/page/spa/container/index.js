@@ -35,16 +35,22 @@ class Wrapper extends Component {
 	}
 
 	componentDidMount() {
+		console.log("=======componentDidMount=====");
 		setTimeout(() => {
 			this.setState({
 				lock: false,
 			});
 		}, 100);
 
-		this.props.toggleSpinLoading(false);
+		console.log(process.env.NODE_ENV);
+		if ("__NODE_DEV__" === process.env.NODE_ENV || "__NODE_PROD__" === process.env.NODE_ENV) {
+			alert('!!!');
+			this.props.getLocalLikeData();
+		}
 	}
 
 	componentWillMount() {
+		console.log("=======componentWillMount=====");
 		if (this.props.news.ids.length === 0 && !isNode) {
 			this.loadTopNews();
 		}

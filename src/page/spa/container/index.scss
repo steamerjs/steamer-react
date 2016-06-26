@@ -39,3 +39,9 @@ body {
 	    overflow: auto;
 	}
 }
+
+.logo_news {
+	width: 119px;
+	height: 15px;
+	@include sprite($logo_news);
+}

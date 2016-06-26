@@ -1,11 +1,24 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux'
 import merge from 'lodash.merge';
-import { setItem } from 'utils';
+import { getItem, setItem } from 'utils';
 import initialState from '../stores/stores';
-import { GET_NEWS_LIST, GET_TOP_NEWS, GET_COMMENT_LIST, GET_NEWS_DETAIL } from '../../common/constants/constants';
-import { GET_ARGS, TABS_UPDATE, TOGGLE_CONTENT,
-		 TOGGLE_LIST_LOADING, TOGGLE_SPIN_LOADING, LIKE_NEWS, DISLIKE_NEWS } from '../actions/actions';
+import { 
+	GET_NEWS_LIST, 
+	GET_TOP_NEWS, 
+	GET_COMMENT_LIST, 
+	GET_NEWS_DETAIL, 
+} from '../../common/constants/constants';
+import { 
+	GET_ARGS, 
+	TABS_UPDATE, 
+	TOGGLE_CONTENT,
+	TOGGLE_LIST_LOADING, 
+	TOGGLE_SPIN_LOADING, 
+	LIKE_NEWS, 
+	DISLIKE_NEWS,
+	GET_LOCAL_LIKE,
+} from '../actions/actions';
 
 
 var news = function(state = initialState.news, action) {
@@ -96,6 +109,12 @@ var news = function(state = initialState.news, action) {
 
 			return newState;
 
+		case GET_LOCAL_LIKE:
+			console.log("!!!!");
+			var newState = merge({}, state);
+			newState['listLike'] = JSON.parse(getItem('like-list')) || [];
+
+			return state;
 		default:
 			return state;
 	}

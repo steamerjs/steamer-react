@@ -125,7 +125,6 @@ exports.spa = function* () {
 	let dir = path.resolve(),
 		appPath = path.join(dir, '/pub/node/index.js');
 
-	console.log(appPath);
 	if (fs.existsSync(appPath)) {
 		var ReactRender = require(appPath);
 		yield ReactRender(this.request, this.response);

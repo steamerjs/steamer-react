@@ -1,7 +1,15 @@
 import { connect } from 'react-redux';
 import { request } from '../../common/actions/actions';
-import { getArgs, updateActiveTab, toggleContent,
-         toggleListLoading, toggleSpinLoading, toggleDialog, likeNews, dislikeNews } from '../actions/actions';
+import { getArgs, 
+         updateActiveTab, 
+         toggleContent,
+         toggleListLoading, 
+         toggleSpinLoading, 
+         toggleDialog, 
+         likeNews, 
+         dislikeNews, 
+         getLocalLikeData 
+} from '../actions/actions';
 
 // Map Redux state to component props
 // ownProps stores react-router-redux props
@@ -27,6 +35,7 @@ function mapDispatchToProps(dispatch) {
         updateActiveTab: (value) => dispatch(updateActiveTab(value)),
         likeNews: (value) => dispatch(likeNews(value)),
         dislikeNews: (value) => dispatch(dislikeNews(value)),
+        getLocalLikeData: (value) => dispatch(dislikeNews(value)),
     };
 }
 
