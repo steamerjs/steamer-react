@@ -11,7 +11,7 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 
 ## 开发环境
 * react文件夹下启动：npm run dev
-* react/node文件夹下启动: npm start
+* react文件夹下启动: npm start
 
 腾讯新闻主页:
 * localhost:9000/index.html 
@@ -23,7 +23,7 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 
 ## 生产环境
 * react文件夹下启动: npm run pub
-* react/node文件夹下启动npm start
+* react文件夹下启动npm start
 
 使用Fiddler(Window) / Charles(Mac) 配置以下代理
 
@@ -45,7 +45,7 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 ## 开发环境
 * react文件夹下启动: npm run dev-node => 后台服务相关
 * react文件夹下启动: npm run dev-node-static  => cdn资源
-* recat/node文件夹下启动: npm run start
+* recat文件夹下启动: npm run start
 * react直出后台逻辑主要在react/node/asset/index.js中，生成文件在react/pub/node/app.js。
 cdn资源生成在react/dist/中。
 * 列表页、详情页、留言页都可以以spa或者直出的形式访问
@@ -58,7 +58,7 @@ cdn资源生成在react/dist/中。
 
 ## 生产环境
 * react文件夹下启动: npm run pub-node
-* react/node文件夹下启动: npm run start
+* react文件夹下启动: npm run start
 * 生成内容都在react/pub/中
 * 列表页、详情页、留言页都可以以spa或者直出的形式访问
 

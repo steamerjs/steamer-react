@@ -122,10 +122,10 @@ exports.comment = function* () {
 
 
 exports.spa = function* () {
-	let dir = path.dirname(path.resolve()),
+	let dir = path.resolve(),
 		appPath = path.join(dir, '/pub/node/index.js');
 
-
+	console.log(appPath);
 	if (fs.existsSync(appPath)) {
 		var ReactRender = require(appPath);
 		yield ReactRender(this.request, this.response);
@@ -137,7 +137,7 @@ exports.spa = function* () {
 };
 
 exports.spaDetail = function* () {
-	let dir = path.dirname(path.resolve()),
+	let dir = path.resolve(),
 		appPath = path.join(dir, '/pub/node/detail.js');
 
 
@@ -153,7 +153,7 @@ exports.spaDetail = function* () {
 };
 
 exports.spaComment = function* () {
-	let dir = path.dirname(path.resolve()),
+	let dir = path.resolve(),
 		appPath = path.join(dir, '/pub/node/comment.js');
 
 
