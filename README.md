@@ -4,12 +4,16 @@ steam-react是快速启动React项目，并进行React同构直出的starter kit
 # 纯前端React Starter Kit
 [react分支](https://github.com/SteamerTeam/steamer-react/tree/react)
 
+# 文章参考
+[腾讯新闻React同构直出优化实践](https://github.com/lcxfs1991/blog/issues/10)
+
 # web开发
 
 ## 命令环境
 package.json中的scripts，若是Windows，设置环境请用set，若是Mac，设置环境请使用export，如：
 * Mac => export NODE_ENV=__DEV__
 * Window => set NODE_ENV=__DEV__
+目前在package.json里多添加了一个win-scripts项目方便直接修改成scripts使用
 
 ## 开发环境
 * react文件夹下启动：npm run dev
@@ -23,24 +27,25 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 * localhost:9000/spa.html
 * localhost:9000/news/spa.html
 
+
 ## 生产环境
 * react文件夹下启动: npm run pub
 * react文件夹下启动npm start
 
-使用Fiddler(Window) / Charles(Mac) 配置以下代理
-
-### Charles:
-### Map Local: 
+### 代理配置
+#### Charles:
+#### Map Local: 
 * localhost:9000 => /react/pub/ 匹配本地html资源
 * localhost:8000 => /react/pub/ 匹配本地除cdn资源 
 
-### Map Remote: 
+#### Map Remote: 
 * localhost:9000/api/* => localhost:3000/api/
 
-### Fiddler:
-### Rule
-
-### Host/Extension
+#### Fiddler:
+#### Rule
+rule:
+regex:^https?:\/\/localhost:9000\/(.*)$    \local path\pub\$1
+regex:^https?:\/\/localhost:8000\/(.*)$    \local path\pub\$1
 
 
 # 直出
@@ -55,14 +60,35 @@ cdn资源生成在react/dist/中。
 腾讯新闻spa页:
 * http://localhost:3001/spa
 
-使用Fiddler(Window) / Charles(Mac) 配置以下代理
+### 代理配置
+#### Charles:
+#### Map Local
 * localhost:3001 => /react/dist/ 匹配本地除cdn资源 
+
+#### Fiddler:
+#### Rule
+rule:
+regex:^https?:\/\/localhost:3001\/(.*[.js|.css])$    \local path\dist\$1
+
 
 ## 生产环境
 * react文件夹下启动: npm run pub-node
 * react文件夹下启动: npm run start
 * 生成内容都在react/pub/中
 * 列表页、详情页、留言页都可以以spa或者直出的形式访问
+
+### 代理配置
+#### Charles:
+#### Map Local: 
+* localhost:8000 => /react/pub/ 匹配本地除cdn资源 
+
+#### Map Remote: 
+* localhost:9000/api/* => localhost:3000/api/
+
+#### Fiddler:
+#### Rule
+rule:
+regex:^https?:\/\/localhost:8000\/(.*)$    \local path\pub\$1
 
 # 端口占用
 * 9000 webpack开发时占用，用于hot reload，以及做proxy，可指向服务端

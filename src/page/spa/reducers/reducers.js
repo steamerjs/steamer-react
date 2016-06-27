@@ -110,11 +110,10 @@ var news = function(state = initialState.news, action) {
 			return newState;
 
 		case GET_LOCAL_LIKE:
-			console.log("!!!!");
 			var newState = merge({}, state);
 			newState['listLike'] = JSON.parse(getItem('like-list')) || [];
-
-			return state;
+			
+			return newState;
 		default:
 			return state;
 	}

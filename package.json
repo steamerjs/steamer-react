@@ -11,6 +11,14 @@
         "dev-node-static": "export NODE_ENV=__DEV_NODE__&&webpack",
         "pub-node": "export NODE_ENV=__PROD_NODE__&&webpack&&export NODE_ENV=__NODE_PROD__&&webpack"
     },
+    "win-scripts": {
+        "start": "node-dev ./node/app.js",
+        "dev": "set NODE_ENV=__DEV__&&gulp&&node ./webpack.server.js",
+        "pub": "gulp sprites&&set NODE_ENV=__PROD__&&webpack",
+        "dev-node": "set NODE_ENV=__NODE_DEV__&&webpack",
+        "dev-node-static": "set NODE_ENV=__DEV_NODE__&&webpack",
+        "pub-node": "set NODE_ENV=__PROD_NODE__&&webpack&&set NODE_ENV=__NODE_PROD__&&webpack"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lcxfs1991/steamer-react.git"
