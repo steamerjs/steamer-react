@@ -25,7 +25,7 @@ module.exports = function* (req, res) {
 					+ '&from=' + from + '&v=' + v;
 
 
-	var response = yield requestSync.requestSync({
+	var response = yield requestSync.ajax({
 		uri: CGI_PATH['GET_COMMENT_LIST'] + urlParam,
 		method: 'GET'
 	});

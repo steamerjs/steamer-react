@@ -12,8 +12,10 @@ import { match, RouterContext } from 'react-router';
 import { routeConfig } from 'routes';
 
 module.exports = function* (req, res) {
+	let hey = "!";
 
-	var response = yield requestSync.requestSync({
+	console.log(requestSync);
+	var response = yield requestSync.ajax({
 		uri: CGI_PATH['GET_NEWS_DETAIL'],
 		method: 'POST',
 		form: {
