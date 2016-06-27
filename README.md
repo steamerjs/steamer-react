@@ -37,6 +37,7 @@ localhost:9000/news/spa.html
 # 文件目录
 * 单页面文件可参考 src/page/index
 * 单页应用可参考 src/page/spa
+* npm run pub最终文件生成在pub文件夹下
 
 
 # 合图代码
