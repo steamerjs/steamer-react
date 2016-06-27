@@ -1,5 +1,5 @@
 # 简介
-steam-react是快速启动React项目，并进行React同构直出的starter kit。腾讯[AlloyTeam](https://github.com/AlloyTeam)家校群出品。
+steam-react是快速启动React项目，并进行React同构直出的starter kit。腾讯[AlloyTeam](https://github.com/AlloyTeam)家校群小分队出品。
 
 # 纯前端React Starter Kit
 [react分支](https://github.com/SteamerTeam/steamer-react/tree/react)
