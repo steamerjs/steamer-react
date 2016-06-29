@@ -130,7 +130,7 @@ https://github.com/nodejs/node-gyp/wiki/Visual-Studio-2010-Setup
 * [webpack使用优化（react篇）](https://github.com/lcxfs1991/blog/issues/7)
 
 #### Credit To
-weberpan
-polarjiang
-joeyguo
-yajiex
+* weberpan
+* polarjiang
+* joeyguo
+* yajiex
