@@ -80,7 +80,7 @@ regex:`^https?:\/\/localhost:3001\/(.*[.js|.css])$`    `\local path\dist\$1`
 ### 代理配置
 #### Charles:
 #### Map Local: 
-* `ocalhost:8000` => `/react/pub/` 匹配本地除cdn资源 
+* `localhost:8000` => `/react/pub/` 匹配本地除cdn资源 
 
 #### Map Remote: 
 * `localhost:9000/api/*` => `localhost:3000/api/`
@@ -133,3 +133,4 @@ https://github.com/nodejs/node-gyp/wiki/Visual-Studio-2010-Setup
 weberpan
 polarjiang
 joeyguo
+yajiex
