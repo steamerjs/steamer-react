@@ -128,7 +128,6 @@ var prodConfig = {
     },
     // disable watch mode
     watch: false, //  watch mode
-    devtool: "#inline-source-map",
 };
 
 prodConfig.addPlugins = function(plugin, opt) {
