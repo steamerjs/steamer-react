@@ -56,7 +56,8 @@ cdn资源生成在react/dist/中。
 * http://localhost:3001/spa
 
 使用Fiddler(Window) / Charles(Mac) 配置以下代理
-* localhost:3001 => /react/dist/ 匹配本地除cdn资源 
+* localhost:3001 => /react/dist/ 匹配本地除html资源 
+* localhost:9000/*.js => /react/dist 匹配本地除cdn资源 
 
 ## 生产环境
 * react文件夹下启动: npm run pub-node

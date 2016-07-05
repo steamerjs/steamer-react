@@ -126,7 +126,7 @@ let pageMapping = {
         'js/spa': {
             attr:{
                 js: "",
-                css: "",
+                css: "offline",
             }
         },
     },
@@ -134,7 +134,7 @@ let pageMapping = {
         'js/index': {
             attr:{
                 js: "",
-                css: "",
+                css: "offline",
             }
         },
     }
