@@ -41,10 +41,8 @@ class Wrapper extends Component {
 				lock: false,
 			});
 		}, 100);
-
-		console.log(process.env.NODE_ENV);
-		if ("__NODE_DEV__" === process.env.NODE_ENV || "__NODE_PROD__" === process.env.NODE_ENV) {
-			alert('!!!');
+		
+		if ("__DEV_NODE__" === process.env.NODE_ENV || "__PROD_NODE__" === process.env.NODE_ENV) {
 			this.props.getLocalLikeData();
 		}
 	}

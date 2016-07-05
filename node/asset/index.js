@@ -23,7 +23,7 @@ module.exports = function* (req, res) {
 					+ '&=t' + t;
 
 
-	var response = yield requestSync.requestSync({
+	var response = yield requestSync.ajax({
 		uri: CGI_PATH['GET_TOP_NEWS'] + urlParam,
 		method: 'GET'
 	});

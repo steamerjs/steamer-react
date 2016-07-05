@@ -35,7 +35,7 @@ function mapDispatchToProps(dispatch) {
         updateActiveTab: (value) => dispatch(updateActiveTab(value)),
         likeNews: (value) => dispatch(likeNews(value)),
         dislikeNews: (value) => dispatch(dislikeNews(value)),
-        getLocalLikeData: (value) => dispatch(dislikeNews(value)),
+        getLocalLikeData: (value) => dispatch(getLocalLikeData(value)),
     };
 }
 

@@ -2,7 +2,7 @@
 
 var data = require('../model/model');
 // var hw = require('../model/db');
-var requestSync = require('../common/requestSync').requestSync;
+var requestSync = require('../common/requestSync');
 var htmlparser = require("htmlparser");
 var htmlToText = require('html-to-text');
 var CGI_PATH = require('../config/cgiPath');
@@ -71,7 +71,7 @@ exports.list = function* () {
 					+ '&=t' + query.t;
 
 
-	var res = yield requestSync({
+	var res = yield requestSync.ajax({
 		uri: CGI_PATH['GET_TOP_NEWS'] + urlParam,
 		method: 'GET'
 	});
@@ -83,7 +83,7 @@ exports.list = function* () {
 };
 
 exports.detail = function* () {
-	var res = yield requestSync({
+	var res = yield requestSync.ajax({
 		uri: "http://view.inews.qq.com/a/" + this.request.body.news_id //this.request.body.url
 	});
 
@@ -109,7 +109,7 @@ exports.comment = function* () {
 					+ '&=t' + query.t;
 
 
-	var res = yield requestSync({
+	var res = yield requestSync.ajax({
 		uri: CGI_PATH['GET_TOP_NEWS'] + urlParam,
 		method: 'GET'
 	});
