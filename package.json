@@ -59,7 +59,6 @@
         "babel-preset-react": "^6.1.4",
         "clean-webpack-plugin": "^0.1.4",
         "banner-webpack-plugin": "^0.1.3",
-        "copy-webpack-plugin": "github:lcxfs1991/copy-webpack-plugin",
         "css-loader": "^0.22.0",
         "exports-loader": "^0.6.2",
         "expose-loader": "^0.7.1",
