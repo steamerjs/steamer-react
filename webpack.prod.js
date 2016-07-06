@@ -11,7 +11,6 @@ var config = require('./config/config'),
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
 var WebpackMd5Hash = require('webpack-md5-hash');
 var BannerWebpackPlugin = require('banner-webpack-plugin');
 
@@ -116,12 +115,6 @@ var prodConfig = {
     },
     plugins: [
         new WebpackMd5Hash(),
-  //       new CopyWebpackPlugin([
-        //     {
-        //         from: 'src/libs/',
-        //         to: 'libs/'
-        //     }
-        // ]),
         new webpack.optimize.OccurrenceOrderPlugin(),
         // make css file standalone
         new ExtractTextPlugin("./css/[name]-[contenthash:6].css", {filenamefilter: function(filename) {
@@ -133,9 +126,15 @@ var prodConfig = {
             chunks: {
                 'libs/react': {
                     beforeContent: 'var React = ',
+                    afterContent: ');/**heyman*/',
+                    removeBefore: "!",
+                    removeAfter: "\\);"
                 },
                 'libs/react-dom': {
                     beforeContent: 'var ReactDOM = ',
+                    afterContent: ');/**heyman*/',
+                    removeBefore: "!",
+                    removeAfter: "\\);"
                 }
             }
         })
@@ -147,6 +146,7 @@ var prodConfig = {
     },
     // disable watch mode
     watch: false, //  watch mode
+    // devtool: "#inline-source-map",
 };
 
 prodConfig.addPlugins = function(plugin, opt) {
@@ -211,11 +211,11 @@ config.html.forEach(function(page) {
 prodConfig.addPlugins(Clean, ['pub']); 
 
 // file compression
-// prodConfig.addPlugins(webpack.optimize.UglifyJsPlugin, {
-//     compress: {
-//         warnings: false
-//     }
-// });
+prodConfig.addPlugins(webpack.optimize.UglifyJsPlugin, {
+    compress: {
+        warnings: false
+    }
+});
 
 // inject process.env.NODE_ENV so that it will recognize if (process.env.NODE_ENV === "production")
 prodConfig.addPlugins(webpack.DefinePlugin, {

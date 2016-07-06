@@ -1,6 +1,6 @@
 {
     "name": "steamer-react",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "react-redux-webpack-boilerplate",
     "main": "index.js",
     "scripts": {
@@ -11,7 +11,7 @@
         "dev-node-static": "export NODE_ENV=__DEV_NODE__&&webpack",
         "pub-node": "export NODE_ENV=__PROD_NODE__&&webpack&&export NODE_ENV=__NODE_PROD__&&webpack"
     },
-    "scripts": {
+    "win-scripts": {
         "start": "node-dev ./node/app.js",
         "dev": "set NODE_ENV=__DEV__&&gulp&&node ./webpack.server.js",
         "pub": "gulp sprites&&set NODE_ENV=__PROD__&&webpack",
@@ -58,7 +58,8 @@
         "babel-preset-es2015-loose": "^7.0.0",
         "babel-preset-react": "^6.1.4",
         "clean-webpack-plugin": "^0.1.4",
-        "copy-webpack-plugin": "^1.1.1",
+        "banner-webpack-plugin": "^0.1.3",
+        "copy-webpack-plugin": "github:lcxfs1991/copy-webpack-plugin",
         "css-loader": "^0.22.0",
         "exports-loader": "^0.6.2",
         "expose-loader": "^0.7.1",

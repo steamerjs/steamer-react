@@ -26,6 +26,7 @@ var nodeConfig = {
         publicPath: config.defaultPath,
         path: path.join(config.path.pub),
         filename: "node/[name].js",
+        libraryTarget: "commonjs2",
     },
     target: 'node',
     node: {
@@ -109,7 +110,6 @@ var nodeConfig = {
                             function(msg) { console.log(msg); } :
                             function(msg) {}
         }),
-        new webpack.BannerPlugin("module.exports = ", {entryOnly : true, raw: true}),
         // new webpack.optimize.UglifyJsPlugin(
         //     {
         //         compress: {

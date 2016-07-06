@@ -5,6 +5,8 @@ else if ("__DEV__" === process.env.NODE_ENV) {
 	module.exports = require('./Root.dev_browser');
 }
 else if ("__PROD__" === process.env.NODE_ENV) {
+	// console.log("======heyman======");
+	// console.log(React);
 	module.exports = require('./Root.prod_browser');
 }
 else if ("__NODE_PROD__") {

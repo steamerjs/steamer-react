@@ -9,7 +9,6 @@ var config = require('./config/config'),
     parentNodeModulePath = path.join(path.dirname(__dirname), 'node_modules');
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
-var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 /**
  * [devConfig config for development mode]
@@ -106,12 +105,6 @@ var devConfig = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),
-        // new CopyWebpackPlugin([
-        //     {
-        //         from: 'src/libs/',
-        //         to: 'libs/'
-        //     }
-        // ]),
     ],
     watch: true, //  watch mode
     // devtool: "#inline-source-map",
