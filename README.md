@@ -129,9 +129,3 @@ rule:
 * 可参考webpack的官方文档
 * [webpack使用优化（基本篇）](https://github.com/lcxfs1991/blog/issues/2)
 * [webpack使用优化（react篇）](https://github.com/lcxfs1991/blog/issues/7)
-
-#### Credit To
-* weberpan
-* polarjiang
-* joeyguo
-* yajiex
