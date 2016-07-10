@@ -10,7 +10,7 @@ var config = require('./config/config'),
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
 var WebpackMd5Hash = require('webpack-md5-hash');
 var BannerWebpackPlugin = require('banner-webpack-plugin');
 
@@ -178,7 +178,7 @@ let pageMapping = {
         'js/spa': {
             attr:{
                 js: "",
-                css: "",
+                css: "offline",
             }
         },
     },
