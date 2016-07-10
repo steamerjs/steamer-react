@@ -49,6 +49,9 @@ regex:`^https?:\/\/localhost:8000\/(.*)$`    `\local path\pub\$1`
 
 
 # 直出
+## 建议全局安装node-dev
+[node-dev](https://www.npmjs.com/package/node-dev)用于后台服务启动，具体命令写在`pacakge.json`的`scripts`中
+
 ## 开发环境
 * react文件夹下启动: `npm run dev-node` => 后台服务相关
 * react文件夹下启动: `npm run dev-node-static`  => cdn资源
