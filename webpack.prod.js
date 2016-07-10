@@ -12,8 +12,8 @@ var config = require('./config/config'),
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
+var CopyWebpackPlugin = require("copy-webpack-plugin-hash");
 var WebpackMd5Hash = require('webpack-md5-hash');
 
 /**
@@ -22,14 +22,14 @@ var WebpackMd5Hash = require('webpack-md5-hash');
  */
 var prodConfig = {
     entry: {
-        index: [path.join(config.path.src, "/page/index/main.js")],
-        spa: [path.join(config.path.src, "/page/spa/main.js")],
+        'js/index': [path.join(config.path.src, "/page/index/main.js")],
+        'js/spa': [path.join(config.path.src, "/page/spa/main.js")],
     },
     output: {
         publicPath: config.cdn,
         path: path.join(config.path.pub),
-        filename: "js/[name]" + config.chunkhash + ".js",
-        chunkFilename: "js/chunk/[name]" + config.chunkhash + ".js",
+        filename: "[name]" + config.chunkhash + ".js",
+        chunkFilename: "chunk/[name]" + config.chunkhash + ".js",
     },
     module: {
         loaders: [
@@ -115,10 +115,16 @@ var prodConfig = {
 		        from: 'src/libs/',
 		        to: 'libs/'
 		    }
-		]),
+		], {
+            namePattern: "[name]-[contenthash:6].js"
+        }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         // make css file standalone
-        new ExtractTextPlugin("./css/[name]" + config.chunkhash + ".css"),
+        new ExtractTextPlugin("./css/[name]-[contenthash:6].css", {filenamefilter: function(filename) {
+            // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
+            // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
+            return filename.replace('/js', '');
+        }}),
         new webpack.NoErrorsPlugin()
     ],
     // use external react library
@@ -134,15 +140,49 @@ prodConfig.addPlugins = function(plugin, opt) {
     prodConfig.plugins.push(new plugin(opt));
 };
 
+let pageMapping = {
+    'spa': {
+        'libs/react': null,
+        'libs/react-dom': null,
+        'js/spa': {
+            attr:{
+                js: "",
+                css: "",
+            }
+        },
+    },
+    'index': {
+        'libs/react': null,
+        'libs/react-dom': null,
+        'js/index': {
+            attr:{
+                js: "",
+                css: "",
+            }
+        },
+    }
+};
+
 config.html.forEach(function(page) {
     prodConfig.addPlugins(HtmlResWebpackPlugin, {
         filename: page + ".html",
         template: "src/" + page + ".html",
-        // favicon: "src/favicon.ico",
-        jsHash: "[name]" + config.chunkhash + ".js",
-        cssHash:  "[name]" + config.chunkhash + ".css",
-        isHotReload: false,
+        favicon: "src/favicon.ico",
+        chunks: pageMapping[page],
         templateContent: function(tpl) {
+            // 生产环境不作处理
+            if (!this.webpackOptions.watch) {
+                return tpl;
+            }
+            // 开发环境先去掉外链react.js和react-dom.js
+            var regex = new RegExp("<script.*src=[\"|\']*(.+).*?[\"|\']><\/script>", "ig");
+            tpl = tpl.replace(regex, function(script, route) {
+                if (!!~script.indexOf('react.js') || !!~script.indexOf('react-dom.js')) {
+                    return '';
+                }
+                return script;
+            });
+            
             return tpl;
         }, 
         htmlMinify: {

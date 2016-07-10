@@ -6,8 +6,19 @@ import { configureStore } from '../stores/configureStore';
 import initialStore from '../stores/stores';
 
 import IndexWrapper from '../container/index';
+import CommentWrapper from '../container/comment';
+import DetailWrapper from '../container/detail';
+
+import App from '../container/app';
+
+import { syncHistoryWithStore } from 'react-router-redux';
+
+import { Router, IndexRoute, Route, browserHistory, useRouterHistory, hashHistory } from 'react-router';
+import { createHashHistory } from 'history';
 
 let store = configureStore();
+
+const history = syncHistoryWithStore(hashHistory, store);
 
 export default class Root extends Component {
 
@@ -19,7 +30,13 @@ export default class Root extends Component {
         return (
             <Provider store={store}>
                 <div>
-                    <IndexWrapper />
+                    <Router history={history}>
+                        <Route path="/" component={App}>
+                            <IndexRoute component={IndexWrapper}/>
+                            <Route path="comment/:id" component={CommentWrapper}/>
+                            <Route path="detail/:id/:commentid" component={DetailWrapper}/>
+                        </Route>
+                    </Router>
                 </div>
             </Provider>
         );

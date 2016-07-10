@@ -3,6 +3,7 @@ import objectAssign from 'object-assign';
 import pureRender from 'pure-render-decorator';
 
 let ua = navigator.userAgent.toLowerCase();
+
 let _platform = function(os) {
     let ver = ('' + (new RegExp(os + '(\\d+((\\.|_)\\d+)*)').exec(ua) || [,0])[1]).replace(/_/g, '.');
     // undefined < 3 === false, but null < 3 === true
@@ -35,7 +36,8 @@ export default class Touch extends Component {
 			longTapTimeout: null
 		};
 
-		this.devicePixelRatio = window.devicePixelRatio || 1;
+        this.devicePixelRatio = window.devicePixelRatio || 1;
+
 		this.longTapDelay = 750;
 		this.maxTapAbsX = 30;
 		this.maxTapAbsY = os.android ? 5 : 30;

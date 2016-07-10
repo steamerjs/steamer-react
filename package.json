@@ -1,11 +1,14 @@
 {
     "name": "steamer-react",
-    "version": "0.0.1",
+    "version": "0.2.0",
     "description": "react-redux-webpack-boilerplate",
     "main": "index.js",
     "scripts": {
         "dev": "gulp&&node ./webpack.server.js",
-        "pub-mac": "gulp sprites&&export NODE_ENV=production&&webpack",
+        "pub": "gulp sprites&&export NODE_ENV=production&&webpack"
+    },
+    "win-scripts": {
+        "dev": "gulp&&node ./webpack.server.js",
         "pub": "gulp sprites&&set NODE_ENV=production&&webpack"
     },
     "repository": {
@@ -24,9 +27,7 @@
         "url": "https://github.com/lcxfs1991/steamer-react/issues"
     },
     "homepage": "https://github.com/lcxfs1991/steamer-react#readme",
-    "dependencies": {},
-    "devDependencies": {},
-    "dependenciesBk": {
+    "dependencies": {
         "react": "^15.1.0",
         "react-dom": "^15.1.0",
         "react-redux": "^4.0.6",
@@ -41,7 +42,7 @@
         "immutable": "^3.7.6",
         "lodash.merge": "^4.4.0"
     },
-    "devDependenciesBk": {
+    "devDependencies": {
         "babel-core": "^6.1.4",
         "babel-loader": "^6.1.0",
         "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -49,19 +50,19 @@
         "babel-preset-es2015-loose": "^7.0.0",
         "babel-preset-react": "^6.1.4",
         "clean-webpack-plugin": "^0.1.4",
-        "copy-webpack-plugin": "^1.1.1",
+        "copy-webpack-plugin-hash": "^3.0.1",
         "css-loader": "^0.22.0",
         "exports-loader": "^0.6.2",
         "expose-loader": "^0.7.1",
         "express": "^4.13.4",
-        "extract-text-webpack-plugin": "^1.0.1",
+        "extract-text-webpack-plugin-steamer": "^1.0.1",
         "file-loader": "^0.8.4",
         "gulp": "^3.9.0",
         "gulp-replace": "^0.5.4",
         "gulp-zip": "^3.0.2",
         "gulp.spritesmith-multi": "^3.0.0",
         "html-loader": "^0.3.0",
-        "html-res-webpack-plugin": "github:lcxfs1991/html-res-webpack-plugin",
+        "html-res-webpack-plugin": "^1.0.0",
         "http-proxy": "^1.12.0",
         "image-webpack-loader": "^1.8.0",
         "imports-loader": "^0.6.3",
@@ -81,7 +82,6 @@
         "webpack-dev-middleware": "^1.6.1",
         "webpack-dev-server": "^1.14.1",
         "webpack-hot-middleware": "^2.10.0",
-        "webpack-md5-hash": "^0.0.5",
-        "yargs": "^4.7.0"
+        "webpack-md5-hash": "^0.0.5"
     }
 }
