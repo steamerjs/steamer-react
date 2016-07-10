@@ -118,8 +118,9 @@ var prodConfig = {
         new webpack.optimize.OccurrenceOrderPlugin(),
         // make css file standalone
         new ExtractTextPlugin("./css/[name]-[contenthash:6].css", {filenamefilter: function(filename) {
-            // console.log(filename);
-            return filename.replace('./js', '');
+            // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
+            // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
+            return filename.replace('/js', '');
         }}),
         new webpack.NoErrorsPlugin(),
         new BannerWebpackPlugin({
