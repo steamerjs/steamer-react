@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 const path = require('path'),
       utils = require('./config/utils'),
       webpack = require('webpack');
@@ -12,9 +10,9 @@ var config = require('./config/config'),
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
 var WebpackMd5Hash = require('webpack-md5-hash');
+var BannerWebpackPlugin = require('banner-webpack-plugin');
 
 /**
  * [prodConfig config for production mode]
@@ -22,14 +20,16 @@ var WebpackMd5Hash = require('webpack-md5-hash');
  */
 var prodConfig = {
     entry: {
-        index: [path.join(config.path.src, "/page/index/main.js")],
-        spa: [path.join(config.path.src, "/page/spa/main.js")],
+        "js/index": [path.join(config.path.src, "/page/index/main.js")],
+        "js/spa": [path.join(config.path.src, "/page/spa/main.js")],
+        "libs/react": [path.join(config.path.src, "/libs/react.js")],
+        "libs/react-dom": [path.join(config.path.src, "/libs/react-dom.js")],
     },
     output: {
         publicPath: config.cdn,
         path: path.join(config.path.pub),
-        filename: "js/[name]" + config.chunkhash + ".js",
-        chunkFilename: "js/chunk/[name]" + config.chunkhash + ".js",
+        filename: "[name]" + config.chunkhash + ".js",
+        chunkFilename: "chunk/[name]" + config.chunkhash + ".js",
     },
     module: {
         loaders: [
@@ -87,14 +87,19 @@ var prodConfig = {
             },
         ],
         noParse: [
-            
+            './libs/react',
+            './libs/react-dom',
+            path.join(config.path.src, "/libs/react.js"),
+            path.join(config.path.src, "/libs/react-dom.js")
+            // path.join(config.path.src, "/libs/react.js")
         ]
     },
     resolve: {
-    	moduledirectories:['node_modules', config.path.src],
+        moduledirectories:['node_modules', config.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
         alias: {
-        	// use production version of redux
+            // use production version of redux
+            // 'react': path.join(config.path.src, "/libs/react.js"),
             'redux': 'redux/dist/redux.min',
             'react-redux': 'react-redux/dist/react-redux',
             'classnames': 'classnames',
@@ -110,24 +115,38 @@ var prodConfig = {
     },
     plugins: [
         new WebpackMd5Hash(),
-        new CopyWebpackPlugin([
-		    {
-		        from: 'src/libs/',
-		        to: 'libs/'
-		    }
-		]),
         new webpack.optimize.OccurrenceOrderPlugin(),
         // make css file standalone
-        new ExtractTextPlugin("./css/[name]" + config.chunkhash + ".css"),
-        new webpack.NoErrorsPlugin()
+        new ExtractTextPlugin("./css/[name]-[contenthash:6].css", {filenamefilter: function(filename) {
+            // console.log(filename);
+            return filename.replace('./js', '');
+        }}),
+        new webpack.NoErrorsPlugin(),
+        new BannerWebpackPlugin({
+            chunks: {
+                'libs/react': {
+                    beforeContent: 'var React = ',
+                    afterContent: ');/**heyman*/',
+                    removeBefore: "!",
+                    removeAfter: "\\);"
+                },
+                'libs/react-dom': {
+                    beforeContent: 'var ReactDOM = ',
+                    afterContent: ');/**heyman*/',
+                    removeBefore: "!",
+                    removeAfter: "\\);"
+                }
+            }
+        })
     ],
     // use external react library
     externals: {
-    	'react': "React",
+        'react': "React",
         'react-dom': "ReactDOM",
     },
     // disable watch mode
     watch: false, //  watch mode
+    // devtool: "#inline-source-map",
 };
 
 prodConfig.addPlugins = function(plugin, opt) {
@@ -149,6 +168,42 @@ config.html.forEach(function(page) {
             removeComments: true,
             collapseWhitespace: true,
         }
+    });
+}); 
+
+let pageMapping = {
+    'spa': {
+        'libs/react': {},
+        'libs/react-dom': {},
+        'js/spa': {
+            attr:{
+                js: "",
+                css: "offline",
+            }
+        },
+    },
+    'index': {
+        'libs/react': {},
+        'libs/react-dom': {},
+        'js/index': {
+            attr:{
+                js: "",
+                css: "",
+            }
+        },
+    }
+};
+
+config.html.forEach(function(page) {
+    prodConfig.addPlugins(HtmlResWebpackPlugin, {
+        filename: page + ".html",
+        template: "src/" + page + ".html",
+        favicon: "src/favicon.ico",
+        chunks: pageMapping[page],
+        templateContent: function(tpl) {
+            return tpl;
+        }, 
+        htmlMinify: null
     });
 }); 
 

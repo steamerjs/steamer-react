@@ -9,7 +9,6 @@ var config = require('./config/config'),
     parentNodeModulePath = path.join(path.dirname(__dirname), 'node_modules');
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
-var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 /**
  * [devConfig config for development mode]
@@ -17,14 +16,14 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
  */
 var devConfig = {
     entry: {
-        index: [path.join(config.path.src, "/page/index/main.js")],
-        spa: [path.join(config.path.src, "/page/spa/main.js")],
+        "js/index": [path.join(config.path.src, "/page/index/main.js")],
+        "js/spa": [path.join(config.path.src, "/page/spa/main.js")],
     },
     output: {
         publicPath: config.defaultPath,
         path: path.join(config.path.dist),
-        filename: "js/[name]" + config.chunkhash + ".js",
-        chunkFilename: "js/chunk/[name]" + config.chunkhash + ".js",
+        filename: "[name]" + config.chunkhash + ".js",
+        chunkFilename: "chunk/[name]" + config.chunkhash + ".js",
     },
     module: {
         loaders: [
@@ -106,12 +105,6 @@ var devConfig = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),
-        new CopyWebpackPlugin([
-            {
-                from: 'src/libs/',
-                to: 'libs/'
-            }
-        ]),
     ],
     watch: true, //  watch mode
     // devtool: "#inline-source-map",
@@ -121,17 +114,34 @@ devConfig.addPlugins = function(plugin, opt) {
     devConfig.plugins.push(new plugin(opt));
 };
 
+let pageMapping = {
+    'spa': {
+        'js/spa': {
+            attr:{
+                js: "",
+                css: "",
+            }
+        },
+    },
+    'index': {
+        'js/index': {
+            attr:{
+                js: "",
+                css: "",
+            }
+        },
+    }
+};
+
 config.html.forEach(function(page) {
     devConfig.addPlugins(HtmlResWebpackPlugin, {
         filename: page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
-        jsHash: "[name]" + config.chunkhash + ".js",
-        cssHash:  "[name]" + config.chunkhash + ".css",
-        isHotReload: true,
+        chunks: pageMapping[page],
         templateContent: function(tpl) {
             // 生产环境不作处理
-            if (!this.options.isWatch) {
+            if (!this.webpackOptions.watch) {
                 return tpl;
             }
             // 开发环境先去掉外链react.js

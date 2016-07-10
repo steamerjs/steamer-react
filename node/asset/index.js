@@ -49,10 +49,11 @@ module.exports = function* (req, res) {
         }
     });
 
-    let path = (process.env.NODE_ENV === '__NODE_DEV__') ? 'src' : 'pub';
+    let path = (process.env.NODE_ENV === '__NODE_DEV__') ? 'dist' : 'pub';
     let finalState = store.getState();
 	let fileContent = require('../../' + path + '/spa.html');
-
+	console.log("===========spa======", path);
+	console.log(fileContent);
 	// let reactHtml = renderToString(
 	// 	<Provider store={store}>
  //            <div>
