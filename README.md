@@ -1,7 +1,7 @@
-### steamer-react
+### Steamer-React
 [AlloyTeam](http://alloyteam.github.io/) React Stater Kit
 
-### template
+### Template
 We create seperate branches for different templates which have different features
 * [react](https://github.com/SteamerTeam/steamer-react/tree/react)
 	- react web starter kit
@@ -16,7 +16,7 @@ We create seperate branches for different templates which have different feature
 	- without sprites
 	- still well-performed
 
-### how to start
+### How to start
 You can use git command to clone the branches you want. For example, if you wanna get react-isomorphic, you can type the following command.
 
 ```
