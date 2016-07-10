@@ -1,5 +1,6 @@
-# 同构直出分支
-[react-isomorphic](https://github.com/SteamerTeam/steamer-react/tree/react-isomorphic)
+# React Web Starter Kit
+此分支是react web的快速启动分支。
+直出分支: [react-isomorphic](https://github.com/SteamerTeam/steamer-react/tree/react-isomorphic)
 
 # 文章参考
 [React移动web极致优化](https://github.com/lcxfs1991/blog/issues/8)
