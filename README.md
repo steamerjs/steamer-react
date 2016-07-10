@@ -17,8 +17,14 @@ We create seperate branches for different templates which have different feature
 	- still well-performed
 
 ### How to start
-You can use git command to clone the branches you want. For example, if you wanna get react-isomorphic, you can type the following command.
+You can use git command to clone the branches you want. For example, if you wanna get react-isomorphic, you can type the following command:
 
 ```
 git clone https://github.com/SteamerTeam/steamer-react.git -b react-isomorphic
+```
+
+If you only needs the latest files with git function, you can add `--depth` option for your command:
+
+```
+git clone https://github.com/SteamerTeam/steamer-react.git -b react-isomorphic --depth=1
 ```
