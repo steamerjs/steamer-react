@@ -60,8 +60,3 @@ match({ routes: routeConfig, location: location }, () => {
     )
 });
 
-// render(
-//     <Root />,
-//     document.getElementById('pages')
-// );
-

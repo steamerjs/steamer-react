@@ -21,11 +21,3 @@ export const routeConfig = [
         ]
     }
 ];
-
-// export const routeConfig = {
-//     path: '/spa/',
-//     component: App,
-//     indexRoute: {
-//         component: IndexWrapper
-//     }
-// };
