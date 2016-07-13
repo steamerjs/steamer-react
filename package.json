@@ -1,6 +1,6 @@
 {
     "name": "steamer-react",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "react-redux-webpack-boilerplate",
     "main": "index.js",
     "scripts": {
@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/lcxfs1991/steamer-react.git"
+        "url": "git+https://github.com/SteamerTeam/steamer-react.git"
     },
     "keywords": [
         "react",
@@ -21,12 +21,12 @@
         "webpack",
         "boilerplate"
     ],
-    "author": "lcxfs1991",
+    "author": "SteamerTeam",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/lcxfs1991/steamer-react/issues"
+        "url": "https://github.com/SteamerTeam/steamer-react/issues"
     },
-    "homepage": "https://github.com/lcxfs1991/steamer-react#readme",
+    "homepage": "https://github.com/SteamerTeam/steamer-react#readme",
     "dependencies": {
         "react": "^15.1.0",
         "react-dom": "^15.1.0",
