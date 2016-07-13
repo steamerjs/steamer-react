@@ -1,0 +1,165 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.8.3
+3 info using node@v5.10.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/lcxfs1991/web/steamer-react',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /var/root/.npm/steamer-react/0.2.1/package.tgz not in flight; packing
+9 verbose correctMkdir /var/root/.npm correctMkdir not in flight; initializing
+10 info lifecycle steamer-react@0.2.1~prepublish: steamer-react@0.2.1
+11 silly lifecycle steamer-react@0.2.1~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/var/root/.npm/steamer-react/0.2.1/package.tgz',
+12 verbose tar pack   '/Users/lcxfs1991/web/steamer-react' ]
+13 verbose tarball /var/root/.npm/steamer-react/0.2.1/package.tgz
+14 verbose folder /Users/lcxfs1991/web/steamer-react
+15 verbose addLocalTarball adding from inside cache /var/root/.npm/steamer-react/0.2.1/package.tgz
+16 verbose correctMkdir /var/root/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd steamer-react@0.2.1
+18 verbose afterAdd /var/root/.npm/steamer-react/0.2.1/package/package.json not in flight; writing
+19 verbose correctMkdir /var/root/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /var/root/.npm/steamer-react/0.2.1/package/package.json written
+21 silly publish { name: 'steamer-react',
+21 silly publish   version: '0.2.1',
+21 silly publish   description: 'react-redux-webpack-boilerplate',
+21 silly publish   main: 'index.js',
+21 silly publish   scripts:
+21 silly publish    { dev: 'gulp&&node ./webpack.server.js',
+21 silly publish      pub: 'gulp sprites&&export NODE_ENV=production&&webpack' },
+21 silly publish   'win-scripts':
+21 silly publish    { dev: 'gulp&&node ./webpack.server.js',
+21 silly publish      pub: 'gulp sprites&&set NODE_ENV=production&&webpack' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/SteamerTeam/steamer-react.git' },
+21 silly publish   keywords: [ 'react', 'redux', 'webpack', 'boilerplate' ],
+21 silly publish   author: { name: 'SteamerTeam' },
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/SteamerTeam/steamer-react/issues' },
+21 silly publish   homepage: 'https://github.com/SteamerTeam/steamer-react#readme',
+21 silly publish   dependencies:
+21 silly publish    { react: '^15.1.0',
+21 silly publish      'react-dom': '^15.1.0',
+21 silly publish      'react-redux': '^4.0.6',
+21 silly publish      'react-router': '^2.4.1',
+21 silly publish      'react-router-redux': '^4.0.5',
+21 silly publish      'react-immutable-render-mixin': '^0.9.5',
+21 silly publish      redux: '^3.2.0',
+21 silly publish      classnames: '^2.2.3',
+21 silly publish      'redux-immutable': '^3.0.6',
+21 silly publish      'redux-thunk': '^1.0.3',
+21 silly publish      history: '^3.0.0',
+21 silly publish      immutable: '^3.7.6',
+21 silly publish      'lodash.merge': '^4.4.0',
+21 silly publish      'babel-core': '^6.1.4',
+21 silly publish      'babel-loader': '^6.1.0',
+21 silly publish      'babel-plugin-transform-decorators-legacy': '^1.3.4',
+21 silly publish      'babel-preset-es2015': '^6.1.4',
+21 silly publish      'babel-preset-es2015-loose': '^7.0.0',
+21 silly publish      'babel-preset-react': '^6.1.4',
+21 silly publish      'clean-webpack-plugin': '^0.1.4',
+21 silly publish      'copy-webpack-plugin-hash': '^3.0.1',
+21 silly publish      'css-loader': '^0.22.0',
+21 silly publish      'exports-loader': '^0.6.2',
+21 silly publish      'expose-loader': '^0.7.1',
+21 silly publish      express: '^4.13.4',
+21 silly publish      'extract-text-webpack-plugin-steamer': '^1.0.1',
+21 silly publish      'file-loader': '^0.8.4',
+21 silly publish      gulp: '^3.9.0',
+21 silly publish      'gulp-replace': '^0.5.4',
+21 silly publish      'gulp-zip': '^3.0.2',
+21 silly publish      'gulp.spritesmith-multi': '^3.0.0',
+21 silly publish      'html-loader': '^0.3.0',
+21 silly publish      'html-res-webpack-plugin': '^1.0.0',
+21 silly publish      'http-proxy': '^1.12.0',
+21 silly publish      'image-webpack-loader': '^1.8.0',
+21 silly publish      'imports-loader': '^0.6.3',
+21 silly publish      'merge-stream': '^1.0.0',
+21 silly publish      'node-sass': '^3.4.1',
+21 silly publish      'proxy-middleware': '^0.15.0',
+21 silly publish      'react-addons-perf': '^15.1.0',
+21 silly publish      'react-hot-loader': '^1.3.0',
+21 silly publish      'redux-devtools': '^3.0.1',
+21 silly publish      'redux-devtools-dock-monitor': '^1.0.1',
+21 silly publish      'redux-devtools-log-monitor': '^1.0.2',
+21 silly publish      'run-sequence': '^1.1.5',
+21 silly publish      'sass-loader': '^3.1.1',
+21 silly publish      'style-loader': '^0.13.0',
+21 silly publish      'url-loader': '^0.5.6',
+21 silly publish      webpack: '^1.13.0',
+21 silly publish      'webpack-dev-middleware': '^1.6.1',
+21 silly publish      'webpack-dev-server': '^1.14.1',
+21 silly publish      'webpack-hot-middleware': '^2.10.0',
+21 silly publish      'webpack-md5-hash': '^0.0.5' },
+21 silly publish   devDependencies: {},
+21 silly publish   readme: '# React Web Starter Kit\n此分支是react web的快速启动分支。\n直出分支: [react-isomorphic](https://github.com/SteamerTeam/steamer-react/tree/react-isomorphic)\n\n# 文章参考\n[React移动web极致优化](https://github.com/lcxfs1991/blog/issues/8)\n\n# web开发\n\n## 命令环境\npackage.json中的scripts，若是Windows，设置环境请用set，若是Mac，设置环境请使用export，如：\n* Mac => `export NODE_ENV=production`\n* Window => `set NODE_ENV=production`\n目前在`package.json`里多添加了一个win-scripts项目方便直接修改成scripts使用\n\n## 开发环境\n* react文件夹下启动：`npm run dev`\n* react文件夹下启动: `npm start`\n\n腾讯新闻主页:\n* `localhost:9000/index.html` \n* `localhost:9000/news/index.html` (`webpack.server.js`里映射路径到news)\n\n腾讯新闻spa页:\n* `localhost:9000/spa.html`\n* `localhost:9000/news/spa.html`\n\n\n## 生产环境\n* react文件夹下启动: `npm run pub`\n* react文件夹下启动: `npm start`\n\n### 代理配置\n#### Charles:\n#### Map Local: \n* `localhost:9000` => `/react/pub/` 匹配本地html资源\n* `localhost:8000` => `/react/pub/` 匹配本地除cdn资源 \n\n#### Map Remote: \n* `localhost:9000/api/*` => `localhost:3000/api/`\n\n#### Fiddler:\n#### Rule\nrule:\nregex:`^https?:\\/\\/localhost:9000\\/(.*)$`    `\\local path\\pub\\$1`\nregex:`^https?:\\/\\/localhost:8000\\/(.*)$`    `\\local path\\pub\\$1`\n\n\n## 后台服务\n由于详情页需要后台数据，因此如果你需要查看完整的spa.html的demo，需要使用后台服务。\n我们使用[steamer-koa](https://github.com/SteamerTeam/steamer-koa)。\n* 先全局安装[node-dev](https://www.npmjs.com/package/node-dev)\n* 在`steamer-koa`下使用npm start启动\n\n\n# 多个页面的开发\n添加html到src/目录下就可以了，现在steamer-react会自动识别\n\n\n# Devtools\n* <kbd>ctrl</kbd> <kbd>+</kbd> h进行切换\n* <kbd>ctrl</kbd> <kbd>+</kbd> q切换位置\n\n其它命令可以参考src/page/common/DevTools。可以调defaultSize设置自己喜欢的大小。目前默认设置在底部，占30%的屏幕大小。\n\n# 文件目录\n* 单页文件可参考 src/page/index\n* 单页应用可参考 src/page/spa\n* npm run pub最终文件生成在pub文件夹下\n\n\n# 合图代码\n请统一放在 src/page/xxx/container/xxx.scss中，可参考src/page/index里面的做法。\n这里的问题囿于插件局限性，之后建议找更好的插件，或者我们自己写一个。\n\n目前构建已经支持多个合图。只需要在src/img/sprites/下面新建文件夹，然后放在需要合的图，就会自动在src/css/文件夹下生成sprites/文件夹，里面包含了对应的合图和scss。\n\n# Windows下node-sass的安装\n在node版本大于或等于4.0的环境下，调用`npm rebuild node-sass` 时会自动安装“node-gyp”模块。window下的“node-gyp”模块需要以下配置：\n\n* [Python(v2.7)](https://www.python.org/ftp/python/2.7.9/python-2.7.9.amd64.msi)\n* [Microsoft Visual Studio C++ 2013](https://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop)\n* 如果Visual Studio 2013不行，可尝试[Visual Studio 2010](https://github.com/nodejs/node-gyp/wiki/Visual-Studio-2010-Setup)\n\n# 更多使用办法\n* 可参考webpack的官方文档\n* [webpack使用优化（基本篇）](https://github.com/lcxfs1991/blog/issues/2)\n* [webpack使用优化（react篇）](https://github.com/lcxfs1991/blog/issues/7)\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '9efe1e843bd7261439244023d07cc9139b8676e0',
+21 silly publish   _id: 'steamer-react@0.2.1',
+21 silly publish   _shasum: '15af0b6696bb7d45650a80e176b45049ed2f6899',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name steamer-react
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.com/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'steamer-react',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   name: 'steamer-react',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.com/steamer-react
+28 verbose publish registryBase https://registry.npmjs.com/
+29 silly publish uploading /var/root/.npm/steamer-react/0.2.1/package.tgz
+30 verbose request uri https://registry.npmjs.com/steamer-react
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 12:47:28 AM
+33 verbose request using bearer token for auth
+34 verbose request id df25a69615f97760
+35 http request PUT https://registry.npmjs.com/steamer-react
+36 http 403 https://registry.npmjs.com/steamer-react
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Wed, 13 Jul 2016 16:47:39 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-hkg6824-HKG',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1468428453.578014,VS0,VE6167',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /var/root/.npm/registry.npmjs.com/steamer-react on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 0.2.1." : steamer-react
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+40 verbose stack     at emitTwo (events.js:100:13)
+40 verbose stack     at Request.emit (events.js:185:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+40 verbose stack     at emitOne (events.js:95:20)
+40 verbose stack     at Request.emit (events.js:182:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+41 verbose statusCode 403
+42 verbose pkgid steamer-react
+43 verbose cwd /Users/lcxfs1991/web/steamer-react
+44 error Darwin 14.5.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v5.10.0
+47 error npm  v3.8.3
+48 error code E403
+49 error "You cannot publish over the previously published version 0.2.1." : steamer-react
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
