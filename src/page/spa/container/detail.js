@@ -10,7 +10,7 @@ import Spinner from 'spinner';
 import Touch from 'touch';
 
 
-require('./detail.scss');
+require('./detail.less');
 
 
 class Detail extends Component {

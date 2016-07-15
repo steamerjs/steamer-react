@@ -59,11 +59,6 @@ var prodConfig = {
                 include: [parentNodeModulePath, nodeModulesPath, path.resolve(config.path.src)]
             },
             {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader"),
-                include: [parentNodeModulePath, nodeModulesPath, path.resolve(config.path.src)]
-            },
-            {
                 test: /\.html$/,
                 loader: 'html-loader'
             },
@@ -72,7 +67,7 @@ var prodConfig = {
                 loaders: [
                     "url-loader?limit=1000&name=img/[name]" + config.hash + ".[ext]",
                     // 压缩png图片
-                    'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+                    // 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ],
                 include: path.resolve(config.path.src)
             },
@@ -104,7 +99,6 @@ var prodConfig = {
             'report': path.join(config.path.src, '/js/common/report'),
             'touch': path.join(config.path.src, '/page/common/components/touch/'),
             'scroll':path.join(config.path.src, '/page/common/components/scroll/'),
-            'immutable-pure-render-decorator': path.join(config.path.src, '/js/common/immutable-pure-render-decorator'),
             'pure-render-decorator': path.join(config.path.src, '/js/common/pure-render-decorator'),
         }
     },

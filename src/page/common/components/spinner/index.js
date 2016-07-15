@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import pureRender from 'pure-render-decorator';
 var spin = require('spin');
 
-require('./index.scss');
+require('./index.less');
 
 @pureRender
 export default class Spinner extends Component {

@@ -33,7 +33,7 @@ config.html = utils.getHtmlFile(config.path.src);
 
 config.sprites = {
     // imgPath: '../../../css/sprites/sprites.png',
-    imgPath: '../../../css/sprites/',
+    imgPath: '../../css/sprites/',
     imgName: 'sprites.png',
     cssName: 'sprites.scss',
     imgDest: config.gulpPath.src + 'css/sprites/',

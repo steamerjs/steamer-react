@@ -12,7 +12,7 @@ import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
 
-require('./index.scss');
+require('./index.less');
 
 
 class Wrapper extends Component {
@@ -141,6 +141,7 @@ class Wrapper extends Component {
 
 		return (
 	        <article className="cm-page">
+	        	<div className="logo_news"></div>
 	        	<Tab
 	        		tabs={this.props.tabs}
 	        		updateActiveTab={this.props.updateActiveTab}

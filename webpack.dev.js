@@ -56,11 +56,6 @@ var devConfig = {
                 include: [parentNodeModulePath, nodeModulesPath, path.resolve(config.path.src)]
             },
             {
-                test: /\.scss$/,
-                loader: "style-loader!css-loader!sass-loader",
-                include: [parentNodeModulePath, nodeModulesPath, path.resolve(config.path.src)]
-            },
-            {
                 test: /\.html$/,
                 loader: 'html-loader'
             },
@@ -98,7 +93,6 @@ var devConfig = {
             'report': path.join(config.path.src, '/js/common/report'),
             'touch': path.join(config.path.src, '/page/common/components/touch/'),
             'scroll':path.join(config.path.src, '/page/common/components/scroll/'),
-            'immutable-pure-render-decorator': path.join(config.path.src, '/js/common/immutable-pure-render-decorator'),
             'pure-render-decorator': path.join(config.path.src, '/js/common/pure-render-decorator'),
         }
     },
@@ -107,7 +101,7 @@ var devConfig = {
         new webpack.NoErrorsPlugin()
     ],
     watch: true, //  watch mode
-    devtool: "#inline-source-map",
+    // devtool: "#inline-source-map",
 };
 
 devConfig.addPlugins = function(plugin, opt) {

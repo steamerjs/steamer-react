@@ -4,9 +4,6 @@ import Connect from '../connect/connect';
 import { Link, browserHistory } from 'react-router';
 
 
-require('./index.scss');
-
-
 function App(props) {
 
 	return (

@@ -15,9 +15,9 @@ gulp.task('sprites', function (cb) {
                             spritesmith: function(options) {
                                 options.imgPath = config.sprites.imgPath + options.imgName;
 
-                                options.cssName = options.cssName.replace('.css', '.scss');
+                                options.cssName = options.cssName.replace('.css', '.less');
                                 // customized generated css template
-                                options.cssTemplate = './config/scss.template.handlebars';
+                                options.cssTemplate = './config/less.template.handlebars';
                             }
                       	}));
 	

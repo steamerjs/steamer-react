@@ -4,7 +4,7 @@ import { LATEST_NEWS, LIKE_NEWS } from '../../constants/constants';
 
 import Touch from 'touch';
 import classNames from 'classnames';
-require('./index.scss');
+require('./index.less');
 
 
 function TabItem(item, key) {

@@ -10,7 +10,7 @@ import Spinner from 'spinner';
 import Touch from 'touch';
 
 
-require('./comment.scss');
+require('./comment.less');
 
 
 class Comment extends Component {

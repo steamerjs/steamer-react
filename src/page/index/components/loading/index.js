@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
 
-require('./index.scss');
+require('./index.less');
 
 @pureRender
 export default class List extends Component {

@@ -6,7 +6,7 @@ import { LATEST_NEWS, LIKE_NEWS} from '../../constants/constants';
 
 import Touch from 'touch';
 
-require('./index.scss');
+require('./index.less');
 
 @pureRender
 export default class List extends Component {
