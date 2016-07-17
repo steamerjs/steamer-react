@@ -65,17 +65,19 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 <i class="icon icon-home"></i>
 */
 .sprite-width(@sprite) {
-  width: extract(@sprite, 5);
+  width: extract(@sprite, 5) / 2;
 }
 
 .sprite-height(@sprite) {
-  height: extract(@sprite, 6);
+  height: extract(@sprite, 6) / 2;
 }
 
+//  nth是指#block "sprites"第几个参数，可以输出$sprite来查看,
 .sprite-position(@sprite) {
   @sprite-offset-x: extract(@sprite, 3);
   @sprite-offset-y: extract(@sprite, 4);
   background-position: @sprite-offset-x @sprite-offset-y;
+  background-size: extract(@sprite, 7) / 2 auto;
 }
 
 .sprite-image(@sprite) {
