@@ -85,7 +85,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 .sprite-position(@sprite) {
   @sprite-offset-x: extract(@sprite, 3);
   @sprite-offset-y: extract(@sprite, 4);
-  background-position: @sprite-offset-x @sprite-offset-y;
+  background-position: @sprite-offset-x / 2 @sprite-offset-y / 2;
   background-size: extract(@sprite, 7) / 2 auto;
 }
 
