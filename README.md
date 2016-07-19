@@ -54,7 +54,8 @@ regex:`^https?:\/\/localhost:8000\/(.*)$`    `\local path\pub\$1`
 
 
 # 多个页面的开发
-添加html到src/目录下就可以了，现在steamer-react会自动识别
+添加html到src/目录下就可以了，现在steamer-react会自动识别。
+html里的css， js, 以及ico的注入，采用了[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin/blob/master/README_ZH.md)插件新版，可以参考一下webpack配置里注入的写法，看看如何写才能正确注入资源。
 
 
 # Devtools
