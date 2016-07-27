@@ -8,8 +8,8 @@
         "pub": "node ./tools/gulpfile.js&&export NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
     },
     "win-scripts": {
-        "dev": "node ./tools/gulpfile.js&&node ./tools/webpack.server.js",
-        "pub": "node ./tools/gulpfile.js&&set NODE_ENV=__PROD__&&webpack"
+        "dev": "node ./tools/gulpfile.js&&node ./tools/webpack.config.js",
+        "pub": "node ./tools/gulpfile.js&&set NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
     },
     "repository": {
         "type": "git",

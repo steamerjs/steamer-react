@@ -49,7 +49,6 @@ var prodConfig = {
             {
                 test: /\.css$/,
                 // extract style and make it stand-alone css file
-                // for dev environment, inline style can be hot reload
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
                 include: path.resolve(configWebpack.path.src)
             },

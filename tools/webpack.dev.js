@@ -7,7 +7,8 @@ const path = require('path'),
 var config = require('./config'),
     nodeModulesPath = path.join(__dirname, 'node_modules');
 
-var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
+var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
 
 var configWebpack = config.webpack;
 
@@ -48,12 +49,13 @@ var devConfig = {
             },
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader",
+                // extract style and make it stand-alone css file
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
                 include: path.resolve(configWebpack.path.src)
             },
             {
                 test: /\.less$/,
-                loader: "style-loader!css-loader!less-loader",
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
                 include: path.resolve(configWebpack.path.src)
             },
             {
@@ -93,9 +95,16 @@ var devConfig = {
         }
     },
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.NoErrorsPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.optimize.OccurrenceOrderPlugin(true),
+        new webpack.optimize.DedupePlugin(),
+        // make css file standalone
+        new ExtractTextPlugin("./css/[name].css", {filenamefilter: function(filename) {
+            // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
+            // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
+            return filename.replace('/js', '');
+        }, disable: true}),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ],
     watch: true, //  watch mode
     // devtool: "#inline-source-map",
