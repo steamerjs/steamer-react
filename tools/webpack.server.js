@@ -5,9 +5,9 @@ var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackHotMiddleware = require("webpack-hot-middleware");
 var proxy = require('proxy-middleware');
 
-var webpackConfig = require("./webpack.config.js"),
-	config = require("./config/config.js");
-var port = config.serverPort;
+var webpackConfig = require("./webpack.dev.js"),
+	config = require("./config.js");
+var port = config.server.port;
 
 for (var key in webpackConfig.entry) {
 	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
@@ -24,7 +24,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.use(config.hostDirectory, proxy('http://localhost:' + port));
+app.use(config.server.hostDirectory, proxy('http://localhost:' + port));
 
 app.use('/api/', proxy('http://localhost:3001'));
 

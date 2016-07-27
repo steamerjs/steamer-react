@@ -14,7 +14,6 @@ import Loading from '../components/loading/index';
 
 require('./index.less');
 
-
 class Wrapper extends Component {
 
 	constructor(props, context) {

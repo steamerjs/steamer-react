@@ -1,15 +1,15 @@
 {
-    "name": "steamer-react",
-    "version": "0.2.2",
+    "name": "steamer-react-simple",
+    "version": "1.0.0",
     "description": "react-redux-webpack-boilerplate",
     "main": "index.js",
     "scripts": {
-        "dev": "gulp&&node ./webpack.server.js",
-        "pub": "gulp sprites&&export NODE_ENV=production&&webpack"
+        "dev": "node ./tools/gulpfile.js&&node ./tools/webpack.config.js",
+        "pub": "node ./tools/gulpfile.js&&export NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
     },
-    "scripts": {
-        "dev": "gulp&&node ./webpack.server.js",
-        "pub": "gulp sprites&&set NODE_ENV=production&&webpack"
+    "win-scripts": {
+        "dev": "node ./tools/gulpfile.js&&node ./tools/webpack.server.js",
+        "pub": "node ./tools/gulpfile.js&&set NODE_ENV=__PROD__&&webpack"
     },
     "repository": {
         "type": "git",
@@ -19,7 +19,8 @@
         "react",
         "redux",
         "webpack",
-        "boilerplate"
+        "boilerplate",
+        "starter-kit"
     ],
     "author": "SteamerTeam",
     "license": "MIT",
@@ -54,10 +55,10 @@
         "express": "^4.13.4",
         "extract-text-webpack-plugin-steamer": "^1.0.1",
         "file-loader": "^0.8.4",
-        "gulp": "^3.9.0",
+        "gulp": "^3.9.1",
         "gulp-replace": "^0.5.4",
-        "gulp-zip": "^3.0.2",
         "gulp.spritesmith-multi": "^3.0.0",
+        "gulp-util": "^3.0.7",
         "html-loader": "^0.3.0",
         "html-res-webpack-plugin": "^1.0.1",
         "http-proxy": "^1.12.0",
@@ -73,7 +74,7 @@
         "run-sequence": "^1.1.5",
         "style-loader": "^0.13.0",
         "url-loader": "^0.5.6",
-        "webpack": "^1.13.0",
+        "webpack": "^1.13.1",
         "webpack-dev-middleware": "^1.6.1",
         "webpack-dev-server": "^1.14.1",
         "webpack-hot-middleware": "^2.10.0",
