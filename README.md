@@ -1,21 +1,24 @@
 # React Web Starter Kit
-此分支是react web的快速启动分支。
+
+## 简介
+此分支是react web快速启动分支
 直出分支: [react-isomorphic](https://github.com/SteamerTeam/steamer-react/tree/react-isomorphic)
 
-# 文章参考
-[React移动web极致优化](https://github.com/lcxfs1991/blog/issues/8)
 
-# web开发
+## 文章参考
+* [React移动web极致优化](https://github.com/lcxfs1991/blog/issues/8)
+* [webpack使用优化（基本篇）](https://github.com/lcxfs1991/blog/issues/2)
+* [webpack使用优化（react篇）](https://github.com/lcxfs1991/blog/issues/7)
+
 
 ## 命令环境
 package.json中的scripts，若是Windows，设置环境请用set，若是Mac，设置环境请使用export，如：
-* Mac => `export NODE_ENV=production`
-* Window => `set NODE_ENV=production`
+* Mac => `export NODE_ENV=__PROD__`
+* Window => `set NODE_ENV=__PROD__`
 目前在`package.json`里多添加了一个win-scripts项目方便直接修改成scripts使用
 
 ## 开发环境
 * react文件夹下启动：`npm run dev`
-* react文件夹下启动: `npm start`
 
 腾讯新闻主页:
 * `localhost:9000/index.html` 
@@ -28,7 +31,6 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 
 ## 生产环境
 * react文件夹下启动: `npm run pub`
-* react文件夹下启动: `npm start`
 
 ### 代理配置
 #### Charles:

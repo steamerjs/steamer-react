@@ -133,7 +133,6 @@ var prodConfig = {
     	'react': "React",
         'react-dom': "ReactDOM",
     },
-    // disable watch mode
     watch: false, //  watch mode
 };
 
