@@ -2,8 +2,11 @@
 
 ## 简介
 此分支是react web快速启动分支
+
 目前用于QQ家校群、QQ群视频、QQ花样直播
+
 直出分支: [react-isomorphic](https://github.com/SteamerTeam/steamer-react/tree/react-isomorphic)
+
 
 ## 文章参考
 * [React移动web极致优化](https://github.com/lcxfs1991/blog/issues/8)
@@ -12,16 +15,16 @@
 
 ## 配置介绍
 目前主要的构建配置都放在tools文件夹下，它们的作用分别如下：
-* sprite-template     合图时使用的样式模板，提供了sass和less两种
-* config.js           构建自身的一些配置，例如路径、服务器端口等
-* gupfile.js          合图的配置
-* utils.js            构建自身使用的一些util函数
-* webpack.config.js   webpack配置总入口，用于区分开发与生产环境
-* webpack.dev.js      webpack开发环境配置
-* webpack.pub.js 	  webpack生产环境配置
-* webpack.server.js   webpack开发环境服务器，会引用开发环境配置
+* `sprite-template`     合图时使用的样式模板，提供了sass和less两种
+* `config.js`           构建自身的一些配置，例如路径、服务器端口等
+* `gupfile.js`          合图的配置
+* `utils.js`            构建自身使用的一些util函数
+* `webpack.config.js`   `webpack`配置总入口，用于区分开发与生产环境
+* `webpack.dev.js`      `webpack`开发环境配置
+* `webpack.pub.js` 	    `webpack`生产环境配置
+* `webpack.server.js`   `webpack`开发环境服务器，会引用开发环境配置
 
-配合package.json的scripts命令，可以方便用简单命令启动开发及生产环境。
+配合`package.json`的`scripts`命令，可以方便用简单命令启动开发及生产环境。
 
 ## 特性
 ### 支持多页面开发
@@ -29,19 +32,19 @@
 
 
 ### 默认支持Less而非Sass
-之前使用scss进行合图，以及样式的编写，但由于在windows下安装Node实际太麻烦，因此使用了更轻量的Less进行替换。
-若想使用Sass，可自行添加[sass-loader](https://github.com/jtangelder/sass-loader)和[node-sass](https://github.com/sass/node-sass)及进行相关配置
+之前使用Sass进行合图，以及样式的编写，但由于在windows下安装`node-sass`实际太麻烦，因此使用了更轻量的Less进行替换。
+若想使用Sass，可自行添加[sass-loader](https://github.com/jtangelder/sass-loader)和[node-sass](https://github.com/sass/node-sass)及进行相关配置。
 
 
 ### 支持多幅合图
-请统一将合图样式放在`src/page/xxx/container/xxx.less`中，可参考src/page/index里面的做法。由于路径问题，如果放在其它地方会发生报错，因此强制约定（确实不太好）。
-
 目前构建已经支持多个合图。只需要在src/img/sprites/下面新建文件夹，然后放在需要合的图，就会自动在src/css/文件夹下生成sprites/文件夹，里面包含了对应的合图和less文件。
 
-### 开发环境支持转发
-为了方便调，在`webpack.server.js`中有使用代理模块。
+请统一将合图样式放在`src/page/xxx/container/xxx.less`中，可参考`src/page/index`里面的做法。由于路径问题，如果放在其它地方会发生报错，因此强制约定（后续想办法优化）。
 
-例如如果想转发前端的资源到`/news/`目录下，可以这样写：
+### 开发环境支持转发
+为了方便调试，在`webpack.server.js`中有使用代理模块。
+
+如果想转发前端的资源到`/news/`目录下，可以这样写：
 `app.use('/news/', proxy('http://localhost:' + port));`
 
 如果想转发后代的接口，使之置于同域之下，可以这么写：
@@ -49,7 +52,7 @@
 
 
 ### [Redux Devtools](https://github.com/gaearon/redux-devtools)
-目前在开发环境可以使用Redux Devtools。可以在`src/page/xxx/constatns/constants.js`中的DEBUG里控制开关。
+目前在开发环境可以使用Redux Devtools。可以在`src/page/xxx/constatns/constants.js`中的DEBUG里控制开关，`true`表示开启，`false`表示关闭。
 
 * <kbd>ctrl</kbd> <kbd>+</kbd> h进行切换
 * <kbd>ctrl</kbd> <kbd>+</kbd> q切换位置
@@ -105,3 +108,9 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 // 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 * Fiddler Willow Extension:
  - `localhost:9000/api/` => `localhost:3000/api/`
+
+ * 腾讯新闻主页:
+  - `localhost:9000/index.html` 
+
+* 腾讯新闻主页spa:
+  - `localhost:9000/spa.html`

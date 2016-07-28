@@ -93,7 +93,7 @@ var prodConfig = {
         // inject process.env.NODE_ENV so that it will recognize if (process.env.NODE_ENV === "__PROD__")
         new webpack.DefinePlugin({
             "process.env": {
-                NODE_ENV: JSON.stringify("__PROD__")
+                NODE_ENV: JSON.stringify(config.env)
             }
         }),
         new CopyWebpackPlugin([
