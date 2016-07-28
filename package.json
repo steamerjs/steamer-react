@@ -1,6 +1,6 @@
 {
     "name": "steamer-react-simple",
-    "version": "0.8.0",
+    "version": "1.0.0-alpha.1",
     "description": "react-redux-webpack-boilerplate",
     "main": "index.js",
     "scripts": {

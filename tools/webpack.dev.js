@@ -5,17 +5,12 @@ const path = require('path'),
       webpack = require('webpack');
 
 var config = require('./config'),
-    nodeModulesPath = path.join(__dirname, 'node_modules');
+    configWebpack = config.webpack;
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
+    ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
+    CopyWebpackPlugin = require("copy-webpack-plugin-hash");
 
-var configWebpack = config.webpack;
-
-/**
- * [devConfig config for development mode]
- * @type {Object}
- */
 var devConfig = {
     entry: {
         'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
@@ -38,7 +33,7 @@ var devConfig = {
                 test: /\.js?$/,
                 loader: 'babel',
                 query: {
-                    cacheDirectory: '/webpack_cache/',
+                    // cacheDirectory: './webpack_cache/',
                     plugins: ['transform-decorators-legacy'],
                     presets: [
                         'es2015-loose', 
@@ -49,7 +44,7 @@ var devConfig = {
             },
             {
                 test: /\.css$/,
-                // extract style and make it stand-alone css file
+                // 单独抽出样式文件
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
                 include: path.resolve(configWebpack.path.src)
             },
@@ -88,7 +83,7 @@ var devConfig = {
             'utils': path.join(configWebpack.path.src, '/js/common/utils'),
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
-            'report': path.join(configWebpack.path.src, '/js/common/report'),
+            'net': path.join(configWebpack.path.src, '/js/common/net'),
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/'),
             'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/'),
             'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
@@ -97,7 +92,12 @@ var devConfig = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.optimize.DedupePlugin(),
-        // make css file standalone
+        new CopyWebpackPlugin([
+            {
+                from: 'src/libs/',
+                to: 'libs/'
+            }
+        ]),
         new ExtractTextPlugin("./css/[name].css", {filenamefilter: function(filename) {
             // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
@@ -107,6 +107,7 @@ var devConfig = {
         new webpack.NoErrorsPlugin()
     ],
     watch: true, //  watch mode
+    // 是否添加source-map，可去掉注释开启
     // devtool: "#inline-source-map",
 };
 

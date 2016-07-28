@@ -1,5 +1,5 @@
 // ajax 
-import net from '../../../js/common/net';
+import net from 'net';
 import merge from 'lodash.merge';
 import CGI_PATH from '../constants/cgiPath';
 

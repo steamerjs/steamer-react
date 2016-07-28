@@ -23,9 +23,9 @@ app.use(webpackDevMiddleware(compiler, {
 	},
 }));
 app.use(webpackHotMiddleware(compiler));
-
+// 前端转发
 app.use(config.server.hostDirectory, proxy('http://localhost:' + port));
-
+//后台转发
 app.use('/api/', proxy('http://localhost:3001'));
 
 app.listen(port, function(err) {

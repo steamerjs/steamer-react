@@ -22,8 +22,8 @@ var config = {
         cdn: "//localhost:8000/",
         hash: (__env) ? "-[hash:6]" : "",
         chunkhash: (__env) ? "-[chunkhash:6]" : "",
-        htmlres: {
-            dev: {
+        htmlres: {    // html-res-webpack-plugin资源注入配置
+            dev: {    // 开发环境
                 'spa': {
                     'js/spa': {
                         attr:{
@@ -41,7 +41,7 @@ var config = {
                     },
                 }
             },
-            pub: {
+            pub: {  // 生产环境
                 'spa': {
                     'libs/react': null,
                     'libs/react-dom': null,
@@ -66,21 +66,23 @@ var config = {
         }
     },
     gulp: {
-        path: {
+        path: { 
             src: path.resolve(__basename, "src"),
             dev: path.resolve(__basename, "dev"),
             pub: path.resolve(__basename, "pub"),
             offline: path.resolve(__basename, "offline"),
         },
     },
-    server: {
-        port: 9000,               // port for local server
+    server: {                    // webpack开发环境服务器配置  
+        port: 9000,              // port for local server
         hostDirectory: "/news/"  // http://host/hostDirectory/
     },
 };
 
+// 自动扫描html
 config.webpack.html = utils.getHtmlFile(config.webpack.path.src);
 
+// 合图配置
 config.gulp.sprites = {
     tplpath: path.resolve(__basename, "tools/sprite-template/less.template.handlebars"),
     imgPath: '../../css/sprites/',
