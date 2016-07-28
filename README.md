@@ -97,17 +97,17 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
   - `localhost:9000` => `/react/pub/` 匹配本地html资源
   - `localhost:8000` => `/react/pub/` 匹配本地除cdn资源 
 
-// 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 * Charles Map Remote: 
   - `localhost:9000/api/*` => `localhost:3000/api/`
+  - 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 
 * Fiddler Willow Rule:
  - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\pub\$1`
  - `regex:^https?:\/\/localhost:8000\/(.*)$`    `\local path\pub\$1`
 
-// 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 * Fiddler Willow Extension:
  - `localhost:9000/api/` => `localhost:3000/api/`
+ - 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 
  * 腾讯新闻主页:
   - `localhost:9000/index.html` 
