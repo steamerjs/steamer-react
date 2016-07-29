@@ -41,6 +41,7 @@
 
 请统一将合图样式放在`src/page/xxx/container/xxx.less`中，可参考`src/page/index`里面的做法。由于路径问题，如果放在其它地方会发生报错，因此强制约定（后续想办法优化）。
 
+
 ### 开发环境支持转发
 为了方便调试，在`webpack.server.js`中有使用代理模块。
 
@@ -59,6 +60,11 @@
 
 其它命令可以参考`src/page/common/devtools/DevTools.js`可以调defaultSize设置自己喜欢的大小。目前默认设置在底部，占30%的屏幕大小。
 
+
+### 特殊插件
+为了更好地生产的部署，将使用的一些插件做了修改，并且发到npm上，可参考相应文档：
+[copy-webpack-plugin-hash](https://www.npmjs.com/package/copy-webpack-plugin-hash)
+[extract-text-webpack-plugin-steamer](https://www.npmjs.com/package/extract-text-webpack-plugin-steamer)
 
 ### 支持开发环境与生产环境分离
 #### 文件目录
