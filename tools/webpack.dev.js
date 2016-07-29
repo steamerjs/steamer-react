@@ -19,8 +19,8 @@ var devConfig = {
     output: {
         publicPath: configWebpack.defaultPath,
         path: path.join(configWebpack.path.dev),
-        filename: "[name]" + configWebpack.chunkhash + ".js",
-        chunkFilename: "chunk/[name]" + configWebpack.chunkhash + ".js",
+        filename: "[name].js",
+        chunkFilename: "chunk/[name].js",
     },
     module: {
         loaders: [
@@ -60,7 +60,7 @@ var devConfig = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
-                    "url-loader?limit=1000&name=img/[name]" + configWebpack.hash + ".[ext]",
+                    "url-loader?limit=1000&name=img/[name].[ext]",
                 ],
                 include: path.resolve(configWebpack.path.src)
             },

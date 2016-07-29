@@ -20,8 +20,10 @@ var config = {
         },
         defaultPath: "//localhost:9000/",
         cdn: "//localhost:8000/",
-        hash: (__env) ? "-[hash:6]" : "",
-        chunkhash: (__env) ? "-[chunkhash:6]" : "",
+        hash: "[hash:6]",
+        chunkhash: "[chunkhash:6]",
+        imghash: "",
+        contenthash: "[contenthash:6]",
         htmlres: {    // html-res-webpack-plugin资源注入配置
             dev: {    // 开发环境
                 'spa': {
