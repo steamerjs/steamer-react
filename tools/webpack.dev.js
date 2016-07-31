@@ -91,7 +91,6 @@ var devConfig = {
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(true),
-        new webpack.optimize.DedupePlugin(),
         new CopyWebpackPlugin([
             {
                 from: 'src/libs/',

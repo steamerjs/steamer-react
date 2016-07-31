@@ -78,7 +78,8 @@
         "webpack-dev-middleware": "^1.6.1",
         "webpack-dev-server": "^1.14.1",
         "webpack-hot-middleware": "^2.10.0",
-        "webpack-md5-hash": "^0.0.5"
+        "webpack-md5-hash": "^0.0.5",
+        "steamer-browserutils": "^0.5.0"
     },
     "devDependencies": {
         

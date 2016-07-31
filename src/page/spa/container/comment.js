@@ -41,7 +41,7 @@ class Comment extends Component {
 		var pa = merge({}, {
 			comment_id: this.props.params.id,
 			otype: "jsonp",
-			callback: "renderComment",
+			jsonCbName: "renderComment",
 			lcount: 20,
 			from: 'share',
 			v: (new Date()).getTime(),

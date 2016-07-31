@@ -33,7 +33,7 @@ export default store => next => action => {
 
     net.ajax({
         url: CGI_PATH[cgiName],
-        type: ajaxType,
+        ajaxType: ajaxType,
         param,
         localData,
         success: data => {
@@ -43,7 +43,6 @@ export default store => next => action => {
             return next(nextAction(cgiName + '_SUCCESS', params, opts));
         },
         error: data => {
-            
             onError && onError(data);
             //  触发请求失败的action
             return next(nextAction(cgiName + '_ERROR', params, opts));

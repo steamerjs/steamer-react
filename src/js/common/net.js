@@ -12,103 +12,178 @@
 
 **/
 
-function ajax(options) {
-    let xhr = new XMLHttpRequest(),
-        url = options.url,
-        paramObj = options.param,
-        success_cb = options.success,
-        error_cb = options.error,
-        uploadProgress = options.uploadProgress,
-        method = options.type || 'GET';
-        method = method.toUpperCase();
+var xhr = new XMLHttpRequest();
 
-    let cgiSt = Date.now();
+// global config for whole plugin
+var config = {
+    dataReturnSuccessCondition: function(data) {
+        return !data.errCode;
+    }
+};
 
-    let onDataReturn = data => {
-        if(data.ret === 0 || data.ret === -1) {
-            success_cb && success_cb(data);
-        } 
-        else {
-            error_cb && error_cb(data);
-        }
+var opts = null;
+
+// readyState const
+const DONE = 4;
+
+// status code
+const STATE_200 = 200;
+
+// empty function
+function emptyFunc() {};
+
+function makeOpts(options) {
+
+    opts = {};
+    opts.url = options.url,
+    opts.paramObj = options.param || {},
+    opts.successCb = options.success || emptyFunc,
+    opts.errorCb = options.error || emptyFunc,
+    opts.method = options.ajaxType || 'GET';
+    opts.method = opts.method.toUpperCase();
+    return opts;
+}
+
+/**
+ * make url/request param
+ * @param  {Object} paramObj [param object passed by user]
+ * @return {String}          [return param string]
+ */
+function makeParam(paramObj) {
+    let paramArray = [], 
+        paramString = '';
+
+    for(let key in paramObj){
+        paramArray.push(key + '=' + encodeURIComponent(paramObj[key]));
+    }
+
+    return  paramArray.join('&');
+}
+
+/**
+ * make url with param
+ * @param  {String} url        [original url]
+ * @param  {Array}  paramArray [param array]
+ * @return {String}            [final url]
+ */
+function makeUrl(url, paramString) {
+    url += (!!~url.indexOf('?') ? '&' : '?') + paramString;
+    return url;
+}
+
+
+export function ajaxGet(options) {
+    let opts = makeOpts(options),
+        paramString = makeParam(opts.paramObj),
+        url = makeUrl(opts.url, opts.paramString);
+
+
+    xhr.open(opts.method, url, true);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+export function ajaxPost(options) {
+    let opts = makeOpts(options),
+        paramString = makeParam(opts.paramObj),
+        url = opts.url;
+
+    xhr.open(opts.method, url, true);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send(paramString);
+}
+
+/**
+ * jsonp
+ * @param  {[type]} options [description]
+ * @return {[type]}         [description]
+ */
+export function ajaxJsonp(options) {
+
+    let opts = makeOpts(options);
+
+    if (!opts.paramObj || !opts.paramObj.jsonCbName) {
+        throw new Error("Please provide a callback function name for jsonp");
+    }
+
+    opts.paramObj.callback = opts.paramObj.jsonCbName;
+    delete opts.paramObj['jsonCbName'];
+
+    window[opts.paramObj.callback] = function(data) {
+        onDataReturn(data);
+        removeScript(script);
     };
 
+    function removeScript(st) {
+        setTimeout(function() {
+            st.parentNode.removeChild(st);
+            st = null;
+        }, 200);
+    }
+
+    let paramString = makeParam(opts.paramObj),
+        url = makeUrl(opts.url, paramString),
+        script = document.createElement("script"),
+        head = document.getElementsByTagName("head")[0];
+    
+    script.src = url;
+    head.appendChild(script);
+
+    script.onerror = function(err) {
+        opts.errorCb({errCode: err});
+        removeScript(script);
+    };
+}
+
+function onDataReturn(data) {
+    let isSuccess = config.dataReturnSuccessCondition(data);
+    isSuccess ? opts.successCb(data) : opts.errorCb(data);
+}
+
+function ajax(options) {
+    let opts = makeOpts(options);
+
     // 如果本地已经从别的地方获取到数据，就不用请求了
-    if(options.localData) {
-        onDataReturn(options.localData);
+    if(opts.localData) {
+        onDataReturn(opts.localData);
         return;
     }
 
-    try{
-        xhr.onreadystatechange=function() {
-            if (xhr.readyState==4) {
-                if(xhr.status==200) {
-                    let data = JSON.parse(xhr.responseText);
-                    onDataReturn(data);
-                    
-                }
-                else {
-                    error_cb && error_cb({
-                        retcode: xhr.status
-                    });
-
-                }
-            }
-        };
-
-        let paramArray = [], paramString = '';
-        for(let key in paramObj){
-            paramArray.push(key + '=' + encodeURIComponent(paramObj[key]));
-        }
-
-        if (method === 'FORM') {
-            let formData = new FormData();
-    　　　　formData.append('file', paramObj['file']);
-    　　　　formData.append('bkn', bkn);
-            xhr.upload.onprogress = function(e) {
-                if (e.lengthComputable) {
-                    uploadProgress(e.loaded, e.total);
-                }
-            };
-            xhr.open('POST', url);
-            xhr.withCredentials = true;
-    　　　　 xhr.send(formData);
-        } 
-        else if (method === 'JSONP') {
-            method = 'GET';
-
-            if (!paramObj['callback']) {
-                error_cb && error_cb({ret: -1});
-            }
-
-            window[paramObj['callback']] = function(data) {
+    xhr.onreadystatechange=function() {
+        if (xhr.readyState === DONE) {
+            if(xhr.status === STATE_200) {
+                let data = JSON.parse(xhr.responseText);
                 onDataReturn(data);
-            };
-            url += (url.indexOf('?') > -1 ? '&' : '?') + paramArray.join('&');
-            var script = document.createElement("script");
-            var head = document.getElementsByTagName("head")[0];
-            script.src = url;
-            head.appendChild(script);
-        }
-        else {
-            
-            if(method === 'GET'){
-                url += (url.indexOf('?') > -1 ? '&' : '?') + paramArray.join('&');
             }
-
-            xhr.open(method,url,true);
-            xhr.withCredentials = true;
-            xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-            xhr.send(method === 'POST' ? paramArray.join('&') : '');
+            else {
+                opts.errorCb({
+                    errCode: xhr.status
+                });
+            }
         }
-       
-    } catch (e){
-        console.error(e);
+    };
+
+    switch(opts.method) {
+        case 'JSONP':
+            ajaxJsonp(options);
+            break;
+        case 'GET':
+            ajaxGet(options);
+            break;
+        case 'POST':
+            ajaxPost(options);
+            break;
     }
+
 }
 
 let net = {
-    ajax   
+    ajax,
+    ajaxGet,
+    ajaxPost,
+    ajaxJsonp,   
 };
 
 export default net;

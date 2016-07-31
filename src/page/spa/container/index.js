@@ -62,7 +62,7 @@ class Wrapper extends Component {
 			chlid: 'news_news_top',
 			refer: 'mobilewwwqqcom',
 			otype: 'jsonp',
-			callback: 'getNewsIndexOutput',
+			jsonCbName: 'getNewsIndexOutput',
 			t: (new Date()).getTime()
 		}, pa);
 
@@ -120,7 +120,7 @@ class Wrapper extends Component {
 			ids: newIdArray.join(','),
 			refer: "mobilewwwqqcom",
 			otype: "jsonp",
-			callback: "getNewsContentOnlyOutput",
+			jsonCbName: "getNewsContentOnlyOutput",
 			t: (new Date()).getTime(),
 		}, pa);
 

@@ -39,9 +39,7 @@ export default class List extends Component {
 
 	jumpToDetail(item) {
 		return (e) => {
-			console.log("!!!");
 			if (!this.isClickOnBtn) {
-				console.log(item.articletype);
 				if (item.articletype === '100') {
 					var win = window.open(item.url, '_blank');
 					win.focus();
