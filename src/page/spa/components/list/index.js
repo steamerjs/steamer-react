@@ -42,7 +42,7 @@ export default class List extends Component {
 			if (!this.isClickOnBtn) {
 				if (item.articletype === '100') {
 					var win = window.open(item.url, '_blank');
-					win.focus();
+					win && win.focus();
 				}
 				else {
 					if (!this.props.details.hasOwnProperty(item.id)) {

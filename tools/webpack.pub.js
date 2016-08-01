@@ -106,7 +106,6 @@ var prodConfig = {
             namePattern: "[name]-" + configWebpack.contenthash + ".js"
         }),
         new webpack.optimize.OccurrenceOrderPlugin(true),
-        new webpack.optimize.DedupePlugin(),
         new ExtractTextPlugin("./css/[name]-" + configWebpack.contenthash + ".css", {filenamefilter: function(filename) {
             // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
