@@ -7,10 +7,11 @@ const path = require('path'),
 var config = require('./config'),
     configWebpack = config.webpack;
 
-var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
-var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
-var CopyWebpackPlugin = require("copy-webpack-plugin-hash");
+var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
+    Clean = require('clean-webpack-plugin'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
+    CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
+    WebpackMd5Hash = require('webpack-md5-hash');
 
 var prodConfig = {
     entry: {
@@ -116,6 +117,7 @@ var prodConfig = {
                 warnings: false
             }
         }),
+        new WebpackMd5Hash(),
         new webpack.NoErrorsPlugin()
     ],
     // 使用外链
