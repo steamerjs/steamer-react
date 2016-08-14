@@ -7,7 +7,7 @@ import { GET_ARGS, TABS_UPDATE, TOGGLE_CONTENT,
 		 TOGGLE_LIST_LOADING, TOGGLE_SPIN_LOADING, LIKE_NEWS, DISLIKE_NEWS } from '../actions/actions';
 
 
-const news = function(state = initialState.news, action) {
+var news = function(state = initialState.news, action) {
 	let listInfoMap = {
 		10: 'listLatest',  // 最新新闻
 		11: 'listLike', //  收藏新闻

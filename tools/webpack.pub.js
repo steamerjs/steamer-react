@@ -14,10 +14,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     WebpackMd5Hash = require('webpack-md5-hash');
 
 var prodConfig = {
-    entry: {
-        'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
-        'js/spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
-    },
+    entry: configWebpack.entry,
     output: {
         publicPath: configWebpack.cdn,
         path: path.join(configWebpack.path.pub),
@@ -27,10 +24,24 @@ var prodConfig = {
     module: {
         loaders: [
             { 
-                test: /\.js?$/,
+                test: /\.jsx$/,
                 loader: 'babel',
                 query: {
-                    cacheDirectory: '/webpack_cache/',
+                    "plugins": [
+                        ["transform-decorators-legacy"],
+                        ["transform-react-jsx", { "pragma":"preact.h" }]
+                    ],
+                    presets: [
+                        'es2015-loose', 
+                    ]
+                },
+                exclude: /node_modules/,
+            },
+            { 
+                test: /\.js$/,
+                loader: 'babel',
+                query: {
+                    // cacheDirectory: './webpack_cache/',
                     plugins: ['transform-decorators-legacy'],
                     presets: [
                         'es2015-loose', 
@@ -84,8 +95,10 @@ var prodConfig = {
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
             'net': path.join(configWebpack.path.src, '/js/common/net'),
-            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/'),
-            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/'),
+            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
+            'touch-jsx': path.join(configWebpack.path.src, '/page/common/components/touch/index.jsx'),
+            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),
+            'scroll-jsx':path.join(configWebpack.path.src, '/page/common/components/scroll/index.jsx'),
             'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
         }
     },
@@ -124,6 +137,7 @@ var prodConfig = {
     externals: {
     	'react': "React",
         'react-dom': "ReactDOM",
+        'preact': 'preact',
     },
     watch: false, //  watch mode
 };

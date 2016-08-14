@@ -41,6 +41,14 @@ var config = {
                             css: "",
                         }
                     },
+                },
+                'pindex': {
+                    'js/pindex': {
+                        attr:{
+                            js: "",
+                            css: "",
+                        }
+                    },
                 }
             },
             pub: {  // 生产环境
@@ -58,6 +66,15 @@ var config = {
                     'libs/react': null,
                     'libs/react-dom': null,
                     'js/index': {
+                        attr:{
+                            js: "",
+                            css: "",
+                        }
+                    },
+                },
+                'pindex': {
+                    'libs/preact': null,
+                    'js/pindex': {
                         attr:{
                             js: "",
                             css: "",
@@ -83,6 +100,16 @@ var config = {
 
 // 自动扫描html
 config.webpack.html = utils.getHtmlFile(config.webpack.path.src);
+// 根据约定，自动扫描js entry，约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx
+/** 
+    当前获取结果
+    {
+        'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
+        'js/spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
+        'js/pindex': [path.join(configWebpack.path.src, "/page/pindex/main.jsx")],
+    }
+ */
+config.webpack.entry = utils.getJsFile(config.webpack.path.src, 'page', 'main', ['js', 'jsx']);
 
 // 合图配置
 config.gulp.sprites = {
