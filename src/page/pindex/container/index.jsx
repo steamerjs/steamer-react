@@ -61,7 +61,6 @@ class Wrapper extends Component {
 			param: pa,
 			ajaxType: 'JSONP',
 			onSuccess: function(res) {
-				console.log(res);
 				// console.log(res);
 			},
 			onError: function(res) {
