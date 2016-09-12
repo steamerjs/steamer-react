@@ -1,11 +1,12 @@
 'use strict';
 
 const path = require('path'),
-      utils = require('./utils'),
-      webpack = require('webpack');
+      webpack = require('webpack'),
+      merge = require('webpack-merge');
 
 var config = require('./config'),
-    configWebpack = config.webpack;
+    configWebpack = config.webpack,
+    baseConfig = require('./webpack.base.js');
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
 var Clean = require('clean-webpack-plugin');
@@ -13,10 +14,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
 var CopyWebpackPlugin = require("copy-webpack-plugin-hash");
 
 var prodConfig = {
-    entry: {
-        'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
-        'js/spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
-    },
     output: {
         publicPath: configWebpack.cdn,
         path: path.join(configWebpack.path.pub),
@@ -39,21 +36,6 @@ var prodConfig = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.css$/,
-                // 单独抽出样式文件
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-                include: path.resolve(configWebpack.path.src)
-            },
-            {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
-                include: path.resolve(configWebpack.path.src)
-            },
-            {
-                test: /\.html$/,
-                loader: 'html-loader'
-            },
-            {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
                     "url-loader?limit=1000&name=img/[name]" + configWebpack.hash + ".[ext]",
@@ -61,31 +43,16 @@ var prodConfig = {
                     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ],
                 include: path.resolve(configWebpack.path.src)
-            },
-            {
-                test: /\.ico$/,
-                loader: "url-loader?name=[name].[ext]",
-                include: path.resolve(configWebpack.path.src)
-            },
+            }
         ],
         noParse: [
             
         ]
     },
     resolve: {
-    	moduledirectories:['node_modules', configWebpack.path.src],
-        extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
         alias: {
         	// 使用压缩版本redux
-            'redux': 'redux/dist/redux.min',
-            'react-redux': 'react-redux/dist/react-redux',
-            'utils': path.join(configWebpack.path.src, '/js/common/utils'),
-            'spin': path.join(configWebpack.path.src, '/js/common/spin'),
-            'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
-            'net': path.join(configWebpack.path.src, '/js/common/net'),
-            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/'),
-            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/'),
-            'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
+            'redux': 'redux/dist/redux.min'
         }
     },
     plugins: [
@@ -116,8 +83,7 @@ var prodConfig = {
             compress: {
                 warnings: false
             }
-        }),
-        new webpack.NoErrorsPlugin()
+        })
     ],
     // 使用外链
     externals: {
@@ -144,4 +110,5 @@ configWebpack.html.forEach(function(page) {
     });
 }); 
 
-module.exports = prodConfig;
+
+module.exports = merge(baseConfig, prodConfig);
