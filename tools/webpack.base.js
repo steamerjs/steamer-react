@@ -21,20 +21,6 @@ var baseConfig = {
     },
     module: {
     	loaders: [
-    		// cacheDirectory: webpack_cache 是啥？
-    		// { 
-      //           test: /\.js?$/,
-      //           loader: 'babel',
-      //           query: {
-      //               // cacheDirectory: './webpack_cache/',
-      //               plugins: ['transform-decorators-legacy'],
-      //               presets: [
-      //                   'es2015-loose', 
-      //                   'react',
-      //               ]
-      //           },
-      //           exclude: /node_modules/,
-      //       },
       		{
                 test: /\.css$/,
                 // 单独抽出样式文件
@@ -71,7 +57,7 @@ var baseConfig = {
             'net': path.join(configWebpack.path.src, '/js/common/net'),
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/'),
             'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/'),
-            'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
+            'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator')
         }
     },
     plugins: [
