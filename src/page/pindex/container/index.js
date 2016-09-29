@@ -1,3 +1,4 @@
+/** @jsx h */
 import preact, { h, render, Component } from 'preact';
 import merge from 'lodash.merge';
 import { getHash, isHttps } from 'utils';
@@ -5,7 +6,7 @@ import Connect from '../connect/connect';
 import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
-import Scroll from 'scroll-jsx';
+import Scroll from 'scroll-p';
 import Spinner from 'spinner';
 import List from '../components/list/index';
 import Tab from '../components/tab/index';

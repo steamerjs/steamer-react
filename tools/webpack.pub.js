@@ -96,9 +96,9 @@ var prodConfig = {
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
             'net': path.join(configWebpack.path.src, '/js/common/net'),
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
-            'touch-jsx': path.join(configWebpack.path.src, '/page/common/components/touch/index.jsx'),
+            'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
             'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),
-            'scroll-jsx':path.join(configWebpack.path.src, '/page/common/components/scroll/index.jsx'),
+            'scroll-p':path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
             'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
         }
     },

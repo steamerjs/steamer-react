@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import pureRender from 'pure-render-decorator';
 import { HW_MINE, HW_ALL } from '../../constants/constants';
 
-require('./index.scss');
+require('./index.less');
 
 /**
  * 使用方法

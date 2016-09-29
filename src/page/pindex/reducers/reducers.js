@@ -1,3 +1,4 @@
+/** @jsx h */
 import { combineReducers } from 'redux';
 import merge from 'lodash.merge';
 import { setItem } from 'utils';

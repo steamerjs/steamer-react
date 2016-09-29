@@ -1,3 +1,4 @@
+/** @jsx h */
 import preact, { h, render, Component } from 'preact';
 import merge from 'lodash.merge';
 import pureRender from 'pure-render-decorator';

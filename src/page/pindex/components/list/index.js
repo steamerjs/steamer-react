@@ -1,10 +1,11 @@
+/** @jsx h */
 import preact, { h, render, Component } from 'preact';
 // import pureRender from 'pure-render-decorator';
 import classnames from 'classnames';
 import { formatDate } from 'utils';
 import { LATEST_NEWS, LIKE_NEWS} from '../../constants/constants';
 
-import Touch from 'touch-jsx';
+import Touch from 'touch-p';
 
 require('./index.less');
 

@@ -1,3 +1,4 @@
+/** @jsx h */
 import { connect } from 'preact-redux';
 import { request } from '../../common/actions/actions';
 import { getArgs, updateActiveTab, toggleContent,
