@@ -129,11 +129,22 @@ devConfig.addPlugins = function(plugin, opt) {
 
 configWebpack.html.forEach(function(page) {
     devConfig.addPlugins(HtmlResWebpackPlugin, {
+        mode: "html",
         filename: page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
-        chunks: configWebpack.htmlres.dev[page],
-        htmlMinify: null
+        // chunks: configWebpack.htmlres.dev[page],
+        htmlMinify: null,
+        templateContent: function(tpl) {
+            var regex = new RegExp("<script.*src=[\"|\']*(.+).*?[\"|\']><\/script>", "ig");
+            tpl = tpl.replace(regex, function(script, route) {
+                if (!!~script.indexOf('react.js') || !!~script.indexOf('react-dom.js')) {
+                    return '';
+                }
+                return script;
+            });
+            return tpl;
+        }
     });
 }); 
 

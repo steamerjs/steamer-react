@@ -24,65 +24,6 @@ var config = {
         chunkhash: "[chunkhash:6]",
         imghash: "",
         contenthash: "[contenthash:6]",
-        htmlres: {    // html-res-webpack-plugin资源注入配置
-            dev: {    // 开发环境
-                'spa': {
-                    'js/spa': {
-                        attr:{
-                            js: "",
-                            css: "",
-                        }
-                    },
-                },
-                'index': {
-                    'js/index': {
-                        attr:{
-                            js: "",
-                            css: "",
-                        }
-                    },
-                },
-                'pindex': {
-                    'js/pindex': {
-                        attr:{
-                            js: "",
-                            css: "",
-                        }
-                    },
-                }
-            },
-            pub: {  // 生产环境
-                'spa': {
-                    'libs/react': null,
-                    'libs/react-dom': null,
-                    'js/spa': {
-                        attr:{
-                            js: "",
-                            css: "",
-                        }
-                    },
-                },
-                'index': {
-                    'libs/react': null,
-                    'libs/react-dom': null,
-                    'js/index': {
-                        attr:{
-                            js: "",
-                            css: "",
-                        }
-                    },
-                },
-                'pindex': {
-                    'libs/preact': null,
-                    'js/pindex': {
-                        attr:{
-                            js: "",
-                            css: "",
-                        }
-                    },
-                }
-            }
-        }
     },
     gulp: {
         path: { 

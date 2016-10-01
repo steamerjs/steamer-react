@@ -148,10 +148,11 @@ prodConfig.addPlugins = function(plugin, opt) {
 
 configWebpack.html.forEach(function(page) {
     prodConfig.addPlugins(HtmlResWebpackPlugin, {
+        mode: "html",
         filename: page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
-        chunks: configWebpack.htmlres.pub[page],
+        // chunks: configWebpack.htmlres.pub[page],
         htmlMinify: {
             removeComments: true,
             collapseWhitespace: true,

@@ -49,6 +49,7 @@ module.exports = {
 			});
 		});
 
+		// console.log(jsFileArray);
 		return jsFileArray;
 	}
 };
