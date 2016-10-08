@@ -1,14 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import pureRender from 'pure-render-decorator';
+/** @jsx h */
+import preact, { h, render, Component } from 'preact';
+// import pureRender from 'pure-render-decorator';
 import classnames from 'classnames';
 import { formatDate } from 'utils';
 import { LATEST_NEWS, LIKE_NEWS} from '../../constants/constants';
 
-import Touch from 'touch';
+import Touch from 'touch-p';
 
 require('./index.less');
 
-@pureRender
+// @pureRender
 export default class List extends Component {
 
 	constructor(props, context) {
@@ -40,17 +41,7 @@ export default class List extends Component {
 	jumpToDetail(item) {
 		return (e) => {
 			if (!this.isClickOnBtn) {
-				if (item.articletype === '100') {
-					var win = window.open(item.url, '_blank');
-					win && win.focus();
-				}
-				else {
-					if (!this.props.details.hasOwnProperty(item.id)) {
-						this.props.getNewsDetail(item);
-					}
-					this.context.router.push('detail/' + item.id + '/' + item.commentid);
-				}
-				
+            	window.location.href = item.url;
 			}
 		}
 	}
@@ -164,7 +155,3 @@ export default class List extends Component {
 		)
 	}
 }
-
-List.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};

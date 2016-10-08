@@ -1,114 +1,186 @@
-/* @example
-    net.ajax({
-        url: baseUrl + "get_material_info.fcg",
-        param: data,
-        type: 'GET',
-        success: function(data){
-            // alert(data);
-        },
-        error: function(xhr){
-        }
-    });
+/**
+ * steamer-net
+ * github: https://github.com/SteamerTeam/steamer-net
+ * npm: https://www.npmjs.com/package/steamer-net
+ * version: 0.2.0
+ * date: 2016.07.30
+ */
 
-**/
+var xhr = new XMLHttpRequest();
 
-function ajax(options) {
-    let xhr = new XMLHttpRequest(),
-        url = options.url,
-        paramObj = options.param,
-        success_cb = options.success,
-        error_cb = options.error,
-        uploadProgress = options.uploadProgress,
-        method = options.type || 'GET';
-        method = method.toUpperCase();
+// global config for whole plugin
+var config = {
+    dataReturnSuccessCondition: function() {
+        return true;
+    }
+};
 
-    let cgiSt = Date.now();
+// readyState const
+const DONE = 4;
 
-    let onDataReturn = data => {
-        if(data.ret === 0 || data.ret === -1) {
-            success_cb && success_cb(data);
-        } 
-        else {
-            error_cb && error_cb(data);
-        }
+// status code
+const STATE_200 = 200;
+
+// empty function
+function emptyFunc() {};
+
+function makeOpts(options) {
+
+    let opts = {};
+    opts.url = options.url,
+    opts.paramObj = options.param || {},
+    opts.successCb = options.success || emptyFunc,
+    opts.errorCb = options.error || emptyFunc,
+    opts.method = options.ajaxType || 'GET';
+    opts.method = opts.method.toUpperCase();
+    return opts;
+}
+
+/**
+ * make url/request param
+ * @param  {Object} paramObj [param object passed by user]
+ * @return {String}          [return param string]
+ */
+function makeParam(paramObj) {
+    let paramArray = [], 
+        paramString = '';
+
+    for(let key in paramObj){
+        paramArray.push(key + '=' + encodeURIComponent(paramObj[key]));
+    }
+
+    return  paramArray.join('&');
+}
+
+/**
+ * make url with param
+ * @param  {String} url        [original url]
+ * @param  {Array}  paramArray [param array]
+ * @return {String}            [final url]
+ */
+function makeUrl(url, paramString) {
+    url += (!!~url.indexOf('?') ? '&' : '?') + paramString;
+    return url;
+}
+
+
+export function ajaxInit(cf) {
+    config.dataReturnSuccessCondition = cf.dataReturnSuccessCondition || config.dataReturnSuccessCondition;
+}
+
+export function ajaxGet(options) {
+    let opts = makeOpts(options),
+        paramString = makeParam(opts.paramObj),
+        url = makeUrl(opts.url, opts.paramString);
+
+
+    xhr.open(opts.method, url, true);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send();
+}
+
+export function ajaxPost(options) {
+    let opts = makeOpts(options),
+        paramString = makeParam(opts.paramObj),
+        url = opts.url;
+
+    xhr.open(opts.method, url, true);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.send(paramString);
+}
+
+/**
+ * jsonp
+ * @param  {[type]} options [description]
+ * @return {[type]}         [description]
+ */
+export function ajaxJsonp(options) {
+
+    let opts = makeOpts(options);
+
+    if (!opts.paramObj || !opts.paramObj.jsonCbName) {
+        throw new Error("Please provide a callback function name for jsonp");
+    }
+
+    opts.paramObj.callback = opts.paramObj.jsonCbName;
+    delete opts.paramObj['jsonCbName'];
+
+    window[opts.paramObj.callback] = function(data) {
+        onDataReturn(data, opts);
+        removeScript(script);
     };
 
+    function removeScript(st) {
+        setTimeout(function() {
+            st.parentNode.removeChild(st);
+            st = null;
+        }, 200);
+    }
+
+    let paramString = makeParam(opts.paramObj),
+        url = makeUrl(opts.url, paramString),
+        script = document.createElement("script"),
+        head = document.getElementsByTagName("head")[0];
+    
+    script.src = url;
+    head.appendChild(script);
+
+    script.onerror = function(err) {
+        opts.errorCb({errCode: err});
+        removeScript(script);
+    };
+}
+
+function onDataReturn(data, opts) {
+    let isSuccess = config.dataReturnSuccessCondition(data);
+    isSuccess ? opts.successCb(data) : opts.errorCb(data);
+}
+
+function ajax(options) {
+    let opts = makeOpts(options);
+
     // 如果本地已经从别的地方获取到数据，就不用请求了
-    if(options.localData) {
-        onDataReturn(options.localData);
+    if(opts.localData) {
+        onDataReturn(opts.localData, opts);
         return;
     }
 
-    try{
-        xhr.onreadystatechange=function() {
-            if (xhr.readyState==4) {
-                if(xhr.status==200) {
-                    let data = JSON.parse(xhr.responseText);
-                    onDataReturn(data);
-                    
-                }
-                else {
-                    error_cb && error_cb({
-                        retcode: xhr.status
-                    });
-
-                }
+    xhr.onreadystatechange=function() {
+        if (xhr.readyState === DONE) {
+            if(xhr.status === STATE_200) {
+                let data = JSON.parse(xhr.responseText);
+                onDataReturn(data, opts);
             }
-        };
-
-        let paramArray = [], paramString = '';
-        for(let key in paramObj){
-            paramArray.push(key + '=' + encodeURIComponent(paramObj[key]));
-        }
-
-        if (method === 'FORM') {
-            let formData = new FormData();
-    　　　　formData.append('file', paramObj['file']);
-    　　　　formData.append('bkn', bkn);
-            xhr.upload.onprogress = function(e) {
-                if (e.lengthComputable) {
-                    uploadProgress(e.loaded, e.total);
-                }
-            };
-            xhr.open('POST', url);
-            xhr.withCredentials = true;
-    　　　　 xhr.send(formData);
-        } 
-        else if (method === 'JSONP') {
-            method = 'GET';
-
-            if (!paramObj['callback']) {
-                error_cb && error_cb({ret: -1});
+            else {
+                opts.errorCb({
+                    errCode: xhr.status
+                });
             }
-
-            window[paramObj['callback']] = function(data) {
-                onDataReturn(data);
-            };
-            url += (url.indexOf('?') > -1 ? '&' : '?') + paramArray.join('&');
-            var script = document.createElement("script");
-            var head = document.getElementsByTagName("head")[0];
-            script.src = url;
-            head.appendChild(script);
         }
-        else {
-            
-            if(method === 'GET'){
-                url += (url.indexOf('?') > -1 ? '&' : '?') + paramArray.join('&');
-            }
+    };
 
-            xhr.open(method,url,true);
-            xhr.withCredentials = true;
-            xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-            xhr.send(method === 'POST' ? paramArray.join('&') : '');
-        }
-       
-    } catch (e){
-        console.error(e);
+    switch(opts.method) {
+        case 'JSONP':
+            ajaxJsonp(options);
+            break;
+        case 'GET':
+            ajaxGet(options);
+            break;
+        case 'POST':
+            ajaxPost(options);
+            break;
     }
+
 }
 
 let net = {
-    ajax   
+    ajax,
+    ajaxGet,
+    ajaxPost,
+    ajaxJsonp,  
+    ajaxInit, 
 };
 
 export default net;

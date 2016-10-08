@@ -31,9 +31,15 @@ export default store => next => action => {
     // 触发正在请求的action
     let result = next(nextAction(cgiName + '_ON', params, opts));
 
+    net.ajaxInit({
+        dataReturnSuccessCondition: function(data) {
+            return !data.ret || data.ret === -1;
+        }
+    });
+
     net.ajax({
         url: CGI_PATH[cgiName],
-        type: ajaxType,
+        ajaxType: ajaxType,
         param,
         localData,
         success: data => {
@@ -43,7 +49,6 @@ export default store => next => action => {
             return next(nextAction(cgiName + '_SUCCESS', params, opts));
         },
         error: data => {
-            
             onError && onError(data);
             //  触发请求失败的action
             return next(nextAction(cgiName + '_ERROR', params, opts));

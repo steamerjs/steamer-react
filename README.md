@@ -30,6 +30,14 @@
 ### 支持多页面开发
 基于灵活性的考虑，我们采用了自研的[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件。目前借助`utils.getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，需要在`config.webpack.htmlres`分别写入开发与生产环境的资源注入配置。更多配置可参考插件文档。
 
+### 支持多js entry
+starter-kit已支持多个入口js文件，并借助`utils.getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx两类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.pub.js`中设定。
+
+### 支持preact轻量类react框架
+由于某些需求如运营活动可能需要比较轻量的框架，因此starter-kit也支持`preact`。目前，默认有`preact`相关引入的文件，都需要用`.jsx`文件后缀才能正常编译，而`react`的相关文件则用`.js`。具体可参考`src/page/pindex`文件夹，或到`preact`[官方网站](https://preactjs.com/)参考文档。
+
+### 支持路由管理
+starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路由管理，可参考`src/page/spa`文件夹。
 
 ### 默认支持Less而非Sass
 之前使用Sass进行合图，以及样式的编写，但由于在windows下安装`node-sass`实际太麻烦，因此使用了更轻量的Less进行替换。

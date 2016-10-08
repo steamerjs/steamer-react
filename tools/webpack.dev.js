@@ -12,10 +12,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash");
 
 var devConfig = {
-    entry: {
-        'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
-        'js/spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
-    },
+    entry: configWebpack.entry,
     output: {
         publicPath: configWebpack.defaultPath,
         path: path.join(configWebpack.path.dev),
@@ -25,12 +22,26 @@ var devConfig = {
     module: {
         loaders: [
             { 
-                test: /\.js?$/,
+                test: /\.js$/,
                 loaders: ['react-hot'],
                 exclude: /node_modules/,
             },
             { 
-                test: /\.js?$/,
+                test: /\.jsx$/,
+                loader: 'babel',
+                query: {
+                    "plugins": [
+                        ["transform-decorators-legacy"],
+                        ["transform-react-jsx", { "pragma":"preact.h" }]
+                    ],
+                    presets: [
+                        'es2015-loose', 
+                    ]
+                },
+                exclude: /node_modules/,
+            },
+            { 
+                test: /\.js$/,
                 loader: 'babel',
                 query: {
                     // cacheDirectory: './webpack_cache/',
@@ -84,14 +95,15 @@ var devConfig = {
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
             'net': path.join(configWebpack.path.src, '/js/common/net'),
-            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/'),
-            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/'),
+            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
+            'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
+            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),
+            'scroll-p':path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
             'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
         }
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(true),
-        new webpack.optimize.DedupePlugin(),
         new CopyWebpackPlugin([
             {
                 from: 'src/libs/',
@@ -117,11 +129,22 @@ devConfig.addPlugins = function(plugin, opt) {
 
 configWebpack.html.forEach(function(page) {
     devConfig.addPlugins(HtmlResWebpackPlugin, {
+        mode: "html",
         filename: page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
-        chunks: configWebpack.htmlres.dev[page],
-        htmlMinify: null
+        // chunks: configWebpack.htmlres.dev[page],
+        htmlMinify: null,
+        templateContent: function(tpl) {
+            var regex = new RegExp("<script.*src=[\"|\']*(.+).*?[\"|\']><\/script>", "ig");
+            tpl = tpl.replace(regex, function(script, route) {
+                if (!!~script.indexOf('react.js') || !!~script.indexOf('react-dom.js')) {
+                    return '';
+                }
+                return script;
+            });
+            return tpl;
+        }
     });
 }); 
 

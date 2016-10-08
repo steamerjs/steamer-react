@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+/** @jsx h */
+import preact, { h, render, Component } from 'preact';
 import pureRender from 'pure-render-decorator';
 import { HW_MINE, HW_ALL } from '../../constants/constants';
 

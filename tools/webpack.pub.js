@@ -7,16 +7,14 @@ const path = require('path'),
 var config = require('./config'),
     configWebpack = config.webpack;
 
-var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
-var Clean = require('clean-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin-steamer");
-var CopyWebpackPlugin = require("copy-webpack-plugin-hash");
+var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
+    Clean = require('clean-webpack-plugin'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
+    CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
+    WebpackMd5Hash = require('webpack-md5-hash');
 
 var prodConfig = {
-    entry: {
-        'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
-        'js/spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
-    },
+    entry: configWebpack.entry,
     output: {
         publicPath: configWebpack.cdn,
         path: path.join(configWebpack.path.pub),
@@ -26,10 +24,24 @@ var prodConfig = {
     module: {
         loaders: [
             { 
-                test: /\.js?$/,
+                test: /\.jsx$/,
                 loader: 'babel',
                 query: {
-                    cacheDirectory: '/webpack_cache/',
+                    "plugins": [
+                        ["transform-decorators-legacy"],
+                        ["transform-react-jsx", { "pragma":"preact.h" }]
+                    ],
+                    presets: [
+                        'es2015-loose', 
+                    ]
+                },
+                exclude: /node_modules/,
+            },
+            { 
+                test: /\.js$/,
+                loader: 'babel',
+                query: {
+                    // cacheDirectory: './webpack_cache/',
                     plugins: ['transform-decorators-legacy'],
                     presets: [
                         'es2015-loose', 
@@ -83,8 +95,10 @@ var prodConfig = {
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
             'net': path.join(configWebpack.path.src, '/js/common/net'),
-            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/'),
-            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/'),
+            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
+            'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
+            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),
+            'scroll-p':path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
             'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
         }
     },
@@ -106,7 +120,6 @@ var prodConfig = {
             namePattern: "[name]-" + configWebpack.contenthash + ".js"
         }),
         new webpack.optimize.OccurrenceOrderPlugin(true),
-        new webpack.optimize.DedupePlugin(),
         new ExtractTextPlugin("./css/[name]-" + configWebpack.contenthash + ".css", {filenamefilter: function(filename) {
             // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
@@ -117,12 +130,14 @@ var prodConfig = {
                 warnings: false
             }
         }),
+        new WebpackMd5Hash(),
         new webpack.NoErrorsPlugin()
     ],
     // 使用外链
     externals: {
     	'react': "React",
         'react-dom': "ReactDOM",
+        'preact': 'preact',
     },
     watch: false, //  watch mode
 };
@@ -133,10 +148,11 @@ prodConfig.addPlugins = function(plugin, opt) {
 
 configWebpack.html.forEach(function(page) {
     prodConfig.addPlugins(HtmlResWebpackPlugin, {
+        mode: "html",
         filename: page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
-        chunks: configWebpack.htmlres.pub[page],
+        // chunks: configWebpack.htmlres.pub[page],
         htmlMinify: {
             removeComments: true,
             collapseWhitespace: true,
