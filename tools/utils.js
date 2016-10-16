@@ -51,5 +51,15 @@ module.exports = {
 
 		// console.log(jsFileArray);
 		return jsFileArray;
+	},
+
+	/**
+	 * add plugin for webpack config
+	 * @param {Object} conf   [webpack config]
+	 * @param {Object} plugin [webpack plugin]
+	 * @param {Object} opt    [plugin config]
+	 */
+	addPlugins: function(conf, plugin, opt) {
+		conf.plugins.push(new plugin(opt));
 	}
 };

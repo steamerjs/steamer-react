@@ -6,3 +6,4 @@ dev
 .DS_Store
 webpack_cache
 node_modules1
+node_modules2

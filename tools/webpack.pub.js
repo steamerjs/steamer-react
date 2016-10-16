@@ -2,6 +2,7 @@
 
 const path = require('path'),
       utils = require('./utils'),
+      os = require('os'),
       webpack = require('webpack');
 
 var config = require('./config'),
@@ -11,7 +12,8 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     Clean = require('clean-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
-    WebpackMd5Hash = require('webpack-md5-hash');
+    WebpackMd5Hash = require('webpack-md5-hash'),
+    UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 
 var prodConfig = {
     entry: configWebpack.entry,
@@ -93,7 +95,8 @@ var prodConfig = {
             'react-redux': 'react-redux/dist/react-redux',
             'utils': path.join(configWebpack.path.src, '/js/common/utils'),
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
-            'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
+            'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/index.js'),
+            'spinner-p': path.join(configWebpack.path.src, '/page/common/components/spinner/index-p.js'),
             'net': path.join(configWebpack.path.src, '/js/common/net'),
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
             'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
@@ -125,10 +128,17 @@ var prodConfig = {
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
             return filename.replace('/js', '');
         }}),
-        new webpack.optimize.UglifyJsPlugin({
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     }
+        // }),
+        new UglifyJsParallelPlugin({
+            workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
+            // other uglify options 
             compress: {
-                warnings: false
-            }
+                warnings: false,
+            },
         }),
         new WebpackMd5Hash(),
         new webpack.NoErrorsPlugin()
@@ -142,12 +152,8 @@ var prodConfig = {
     watch: false, //  watch mode
 };
 
-prodConfig.addPlugins = function(plugin, opt) {
-    prodConfig.plugins.push(new plugin(opt));
-};
-
 configWebpack.html.forEach(function(page) {
-    prodConfig.addPlugins(HtmlResWebpackPlugin, {
+    utils.addPlugins(prodConfig, HtmlResWebpackPlugin, {
         mode: "html",
         filename: page + ".html",
         template: "src/" + page + ".html",

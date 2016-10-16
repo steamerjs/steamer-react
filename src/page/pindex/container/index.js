@@ -7,7 +7,7 @@ import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
 import Scroll from 'scroll-p';
-import Spinner from 'spinner';
+import Spinner from 'spinner-p';
 import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';

@@ -1,6 +1,6 @@
 {
-  "name": "steamer-react-simple",
-  "version": "1.0.0-alpha.3",
+  "name": "steamer-react",
+  "version": "1.0.1",
   "description": "react-redux-webpack-boilerplate",
   "main": "index.js",
   "scripts": {
@@ -83,7 +83,8 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0",
-    "webpack-md5-hash": "^0.0.5"
+    "webpack-md5-hash": "^0.0.5",
+    "webpack-uglify-parallel": "^0.1.2"
   },
   "devDependencies": {}
 }

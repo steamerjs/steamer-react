@@ -44,7 +44,7 @@ var devConfig = {
                 test: /\.js$/,
                 loader: 'babel',
                 query: {
-                    // cacheDirectory: './webpack_cache/',
+                    cacheDirectory: './webpack_cache/',
                     plugins: ['transform-decorators-legacy'],
                     presets: [
                         'es2015-loose', 
@@ -93,7 +93,8 @@ var devConfig = {
             'react-redux': 'react-redux/dist/react-redux',
             'utils': path.join(configWebpack.path.src, '/js/common/utils'),
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
-            'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/'),
+            'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/index.js'),
+            'spinner-p': path.join(configWebpack.path.src, '/page/common/components/spinner/index-p.js'),
             'net': path.join(configWebpack.path.src, '/js/common/net'),
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
             'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
@@ -123,12 +124,8 @@ var devConfig = {
     // devtool: "#inline-source-map",
 };
 
-devConfig.addPlugins = function(plugin, opt) {
-    devConfig.plugins.push(new plugin(opt));
-};
-
 configWebpack.html.forEach(function(page) {
-    devConfig.addPlugins(HtmlResWebpackPlugin, {
+    utils.addPlugins(devConfig, HtmlResWebpackPlugin, {
         mode: "html",
         filename: page + ".html",
         template: "src/" + page + ".html",
