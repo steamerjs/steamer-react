@@ -4,3 +4,5 @@ node_modules.7z
 pub
 dev
 .DS_Store
+webpack_cache
+node_modules1
