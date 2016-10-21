@@ -13,7 +13,8 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
     WebpackMd5Hash = require('webpack-md5-hash'),
-    UglifyJsParallelPlugin = require('webpack-uglify-parallel');
+    UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
+    HappyPack = require('happypack');
 
 var prodConfig = {
     entry: configWebpack.entry,
@@ -27,31 +28,59 @@ var prodConfig = {
         loaders: [
             { 
                 test: /\.jsx$/,
-                loader: 'babel',
-                query: {
-                    "plugins": [
-                        ["transform-decorators-legacy"],
-                        ["transform-react-jsx", { "pragma":"preact.h" }]
-                    ],
-                    presets: [
-                        'es2015-loose', 
-                    ]
-                },
+                 loader: 'happypack/loader?id=jsxHappy',
+                // loader: 'babel',
+                // query: {
+                //     cacheDirectory: './webpack_cache/',
+                //     plugins: ['transform-decorators-legacy'],
+                //     presets: [
+                //         'es2015-loose', 
+                //         'react',
+                //     ]
+                // },
                 exclude: /node_modules/,
             },
+            // { 
+            //     test: /\.jsx$/,
+            //     loader: 'babel',
+            //     query: {
+            //         "plugins": [
+            //             ["transform-decorators-legacy"],
+            //             ["transform-react-jsx", { "pragma":"preact.h" }]
+            //         ],
+            //         presets: [
+            //             'es2015-loose', 
+            //         ]
+            //     },
+            //     exclude: /node_modules/,
+            // },
             { 
                 test: /\.js$/,
-                loader: 'babel',
-                query: {
-                    // cacheDirectory: './webpack_cache/',
-                    plugins: ['transform-decorators-legacy'],
-                    presets: [
-                        'es2015-loose', 
-                        'react',
-                    ]
-                },
+                 loader: 'happypack/loader?id=jsHappy',
+                // loader: 'babel',
+                // query: {
+                //     cacheDirectory: './webpack_cache/',
+                //     plugins: ['transform-decorators-legacy'],
+                //     presets: [
+                //         'es2015-loose', 
+                //         'react',
+                //     ]
+                // },
                 exclude: /node_modules/,
             },
+            // { 
+            //     test: /\.js$/,
+            //     loader: 'babel',
+            //     query: {
+            //         // cacheDirectory: './webpack_cache/',
+            //         plugins: ['transform-decorators-legacy'],
+            //         presets: [
+            //             'es2015-loose', 
+            //             'react',
+            //         ]
+            //     },
+            //     exclude: /node_modules/,
+            // },
             {
                 test: /\.css$/,
                 // 单独抽出样式文件
@@ -121,6 +150,36 @@ var prodConfig = {
 		    }
 		], {
             namePattern: "[name]-" + configWebpack.contenthash + ".js"
+        }),
+        new HappyPack({
+            id: 'jsHappy',
+            loaders: [{
+                path: 'babel',
+                query: {
+                    cacheDirectory: './webpack_cache/',
+                    plugins: ['transform-decorators-legacy'],
+                    presets: [
+                        'es2015-loose', 
+                        'react',
+                    ]
+                },
+            }],
+        }),
+        new HappyPack({
+            id: 'jsxHappy',
+            loaders: [{
+                path: 'babel',
+                query: {
+                    cacheDirectory: './webpack_cache/',
+                    "plugins": [
+                        ["transform-decorators-legacy"],
+                        ["transform-react-jsx", { "pragma":"preact.h" }]
+                    ],
+                    presets: [
+                        'es2015-loose', 
+                    ]
+                },
+            }],
         }),
         new webpack.optimize.OccurrenceOrderPlugin(true),
         new ExtractTextPlugin("./css/[name]-" + configWebpack.contenthash + ".css", {filenamefilter: function(filename) {
