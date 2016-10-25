@@ -9,7 +9,8 @@ var config = require('./config'),
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
-    CopyWebpackPlugin = require("copy-webpack-plugin-hash");
+    CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
+    HappyPack = require('happypack');
 
 var devConfig = {
     entry: configWebpack.entry,
@@ -28,29 +29,32 @@ var devConfig = {
             },
             { 
                 test: /\.jsx$/,
-                loader: 'babel',
-                query: {
-                    "plugins": [
-                        ["transform-decorators-legacy"],
-                        ["transform-react-jsx", { "pragma":"preact.h" }]
-                    ],
-                    presets: [
-                        'es2015-loose', 
-                    ]
-                },
+                loader: 'happypack/loader?id=jsxHappy',
+                // loader: 'babel',
+                // query: {
+                //     cacheDirectory: './webpack_cache/',
+                //     "plugins": [
+                //         ["transform-decorators-legacy"],
+                //         ["transform-react-jsx", { "pragma":"preact.h" }]
+                //     ],
+                //     presets: [
+                //         'es2015-loose', 
+                //     ]
+                // },
                 exclude: /node_modules/,
             },
             { 
                 test: /\.js$/,
-                loader: 'babel',
-                query: {
-                    cacheDirectory: './webpack_cache/',
-                    plugins: ['transform-decorators-legacy'],
-                    presets: [
-                        'es2015-loose', 
-                        'react',
-                    ]
-                },
+                loader: 'happypack/loader?id=jsHappy',
+                // loader: 'babel',
+                // query: {
+                //     cacheDirectory: './webpack_cache/',
+                //     plugins: ['transform-decorators-legacy'],
+                //     presets: [
+                //         'es2015-loose', 
+                //         'react',
+                //     ]
+                // },
                 exclude: /node_modules/,
             },
             {
@@ -61,7 +65,8 @@ var devConfig = {
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+                loader: "happypack/loader?id=lessHappy",         
+                //ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
                 include: path.resolve(configWebpack.path.src)
             },
             {
@@ -111,6 +116,40 @@ var devConfig = {
                 to: 'libs/'
             }
         ]),
+        new HappyPack({
+            id: 'lessHappy',
+            loaders: ['style', 'css', 'less'],
+        }),
+        new HappyPack({
+            id: 'jsxHappy',
+            loaders: [{
+                path: 'babel',
+                query: {
+                    cacheDirectory: './webpack_cache/',
+                    "plugins": [
+                        ["transform-decorators-legacy"],
+                        ["transform-react-jsx", { "pragma":"preact.h" }]
+                    ],
+                    presets: [
+                        'es2015-loose', 
+                    ]
+                },
+            }]
+        }),
+        new HappyPack({
+            id: 'jsHappy',
+            loaders: [{
+                path: 'babel',
+                query: {
+                    cacheDirectory: './webpack_cache/',
+                    plugins: ['transform-decorators-legacy'],
+                    presets: [
+                        'es2015-loose', 
+                        'react',
+                    ]
+                },
+            }],
+        }),
         new ExtractTextPlugin("./css/[name].css", {filenamefilter: function(filename) {
             // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css

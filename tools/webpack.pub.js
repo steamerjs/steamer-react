@@ -152,20 +152,6 @@ var prodConfig = {
             namePattern: "[name]-" + configWebpack.contenthash + ".js"
         }),
         new HappyPack({
-            id: 'jsHappy',
-            loaders: [{
-                path: 'babel',
-                query: {
-                    cacheDirectory: './webpack_cache/',
-                    plugins: ['transform-decorators-legacy'],
-                    presets: [
-                        'es2015-loose', 
-                        'react',
-                    ]
-                },
-            }],
-        }),
-        new HappyPack({
             id: 'jsxHappy',
             loaders: [{
                 path: 'babel',
@@ -177,6 +163,20 @@ var prodConfig = {
                     ],
                     presets: [
                         'es2015-loose', 
+                    ]
+                },
+            }],
+        }),
+        new HappyPack({
+            id: 'jsHappy',
+            loaders: [{
+                path: 'babel',
+                query: {
+                    cacheDirectory: './webpack_cache/',
+                    plugins: ['transform-decorators-legacy'],
+                    presets: [
+                        'es2015-loose', 
+                        'react',
                     ]
                 },
             }],
