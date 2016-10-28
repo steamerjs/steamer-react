@@ -22,11 +22,11 @@ var devConfig = {
     },
     module: {
         loaders: [
-            { 
-                test: /\.js$/,
-                loaders: ['react-hot'],
-                exclude: /node_modules/,
-            },
+            // { 
+            //     test: /\.js$/,
+            //     loaders: ['react-hot'],
+            //     exclude: /node_modules/,
+            // },
             { 
                 test: /\.jsx$/,
                 loader: 'happypack/loader?id=jsxHappy',
@@ -109,7 +109,6 @@ var devConfig = {
         }
     },
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(true),
         new CopyWebpackPlugin([
             {
                 from: 'src/libs/',
@@ -142,7 +141,10 @@ var devConfig = {
                 path: 'babel',
                 query: {
                     cacheDirectory: './webpack_cache/',
-                    plugins: ['transform-decorators-legacy'],
+                    plugins: [
+                        'react-hot-loader/babel',
+                        'transform-decorators-legacy'
+                    ],
                     presets: [
                         'es2015-loose', 
                         'react',
@@ -155,6 +157,7 @@ var devConfig = {
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
             return filename.replace('/js', '');
         }, disable: true}),
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ],

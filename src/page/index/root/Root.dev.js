@@ -9,8 +9,12 @@ import IndexWrapper from '../container/index';
 import DevTools from '../../common/devtools/DevTools';
 import { DEBUG } from '../constants/constants';
 
-let store = configureStore();
+// for hot reload
+if (module.hot) {
+    module.hot.accept();
+}
 
+let store = configureStore();
 
 var DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
 

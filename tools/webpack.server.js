@@ -16,7 +16,7 @@ for (var key in webpackConfig.entry) {
 var compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
-	// historyApiFallback: false,
+	historyApiFallback: true,
 	noInfo: true,
 	stats: { 
 		colors: true 

@@ -19,6 +19,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Router, IndexRoute, Route, browserHistory, useRouterHistory, hashHistory } from 'react-router';
 import { createHashHistory } from 'history';
 
+// for hot reload
+if (module.hot) {
+    module.hot.accept();
+}
+
 let store = configureStore();
 
 const history = syncHistoryWithStore(hashHistory, store);
