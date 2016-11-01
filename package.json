@@ -85,6 +85,8 @@
     "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.13.0",
     "webpack-md5-hash": "^0.0.5",
-    "webpack-uglify-parallel": "^0.1.2"
+    "webpack-uglify-parallel": "^0.1.2",
+    "immutable": "^3.7.6",
+    "redux-immutable": "^3.0.6"
   }
 }
