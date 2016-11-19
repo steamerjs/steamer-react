@@ -126,7 +126,7 @@ var prodConfig = {
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/index.js'),
             'spinner-p': path.join(configWebpack.path.src, '/page/common/components/spinner/index-p.js'),
-            'net': path.join(configWebpack.path.src, '/js/common/net'),
+            'net': 'steamer-net/index',
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
             'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
             'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),

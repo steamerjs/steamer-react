@@ -140,7 +140,6 @@ class Wrapper extends Component {
 
 		return (
 	        <article className="cm-page">
-	        	<div>abc</div>
 	        	<Tab
 	        		tabs={this.props.tabs}
 	        		updateActiveTab={this.props.updateActiveTab}
