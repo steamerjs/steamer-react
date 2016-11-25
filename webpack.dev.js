@@ -89,6 +89,7 @@ var devConfig = {
         moduledirectories:['node_modules', config.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
         alias: {
+            'react/lib/ReactMount': 'react-dom/lib/ReactMount',
             'redux': 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
             'classnames': 'classnames',
