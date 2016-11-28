@@ -94,6 +94,7 @@ var devConfig = {
         moduledirectories:['node_modules', configWebpack.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
         alias: {
+            'react/lib/ReactMount': 'react-dom/lib/ReactMount',
             'redux': 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
             'utils': path.join(configWebpack.path.src, '/js/common/utils'),
@@ -115,6 +116,8 @@ var devConfig = {
                 to: 'libs/'
             }
         ]),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         new HappyPack({
             id: 'lessHappy',
             loaders: ['style', 'css', 'less'],
@@ -157,8 +160,6 @@ var devConfig = {
             // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
             return filename.replace('/js', '');
         }, disable: true}),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ],
     watch: true, //  watch mode

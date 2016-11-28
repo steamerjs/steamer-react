@@ -10,7 +10,7 @@ var webpackConfig = require("./webpack.dev.js"),
 var port = config.server.port;
 
 for (var key in webpackConfig.entry) {
-	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
+	webpackConfig.entry[key].push('webpack-hot-middleware/client?reload=true');
 }
 
 var compiler = webpack(webpackConfig);
