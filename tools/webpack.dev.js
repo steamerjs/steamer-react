@@ -10,7 +10,8 @@ var config = require('./config'),
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
-    HappyPack = require('happypack');
+    HappyPack = require('happypack'),
+    SpritesmithPlugin = require('webpack-spritesmith');
 
 var devConfig = {
     entry: configWebpack.entry,
@@ -187,5 +188,27 @@ configWebpack.html.forEach(function(page) {
         }
     });
 }); 
+
+configWebpack.sprites.forEach(function(folder) {
+    utils.addPlugins(devConfig, SpritesmithPlugin, {
+        src: {
+            cwd: path.join(configWebpack.path.src, "img/sprites/" + folder),
+            glob: '*.png'
+        },
+        target: {
+            image: path.join(configWebpack.path.src, "css/sprites/sprite-" + folder + ".png"),
+            css: path.join(configWebpack.path.src, "css/sprites/sprite-" + folder + ".less")
+        },
+        spritesmithOptions: {
+            padding: 10
+        },
+        customTemplates: {
+            'less': path.resolve(__dirname, './sprite-template/less.template.handlebars'),
+        },
+        apiOptions: {
+            cssImageRef: "sprite-" + folder + ".png"
+        }
+    });
+});
 
 module.exports = devConfig;

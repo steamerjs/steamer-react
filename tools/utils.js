@@ -23,6 +23,16 @@ module.exports = {
 
 		return srcFiles;
 	},
+
+	getSpriteFolder: function(spritePath) {
+		let srcFiles = fs.readdirSync(spritePath);
+
+		srcFiles = srcFiles.filter((item, index) => {
+		    return !~item.indexOf('.');
+		});
+
+		return srcFiles;
+	},
 	/**
 	 *  get js files automatically
 	 * @param  {String} srcPath [directory contains js files]

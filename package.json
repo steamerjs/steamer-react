@@ -1,15 +1,15 @@
 {
   "name": "steamer-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "react-redux-webpack-boilerplate",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./tools/gulpfile.js&&node ./tools/webpack.config.js",
-    "pub": "node ./tools/gulpfile.js&&export NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
+    "dev": "node ./tools/webpack.config.js",
+    "pub": "export NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
   },
   "win-scripts": {
-    "dev": "node ./tools/gulpfile.js&&node ./tools/webpack.config.js",
-    "pub": "node ./tools/gulpfile.js&&set NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
+    "dev": "node ./tools/webpack.config.js",
+    "pub": "set NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -45,10 +45,6 @@
     "express": "^4.13.4",
     "extract-text-webpack-plugin-steamer": "^1.0.1",
     "file-loader": "^0.8.4",
-    "gulp": "^3.9.1",
-    "gulp-replace": "^0.5.4",
-    "gulp-util": "^3.0.7",
-    "gulp.spritesmith-multi": "^3.0.0",
     "happypack": "^2.2.1",
     "history": "^3.0.0",
     "html-loader": "^0.3.0",
@@ -60,7 +56,6 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash.merge": "^4.4.0",
-    "merge-stream": "^1.0.0",
     "preact": "^6.3.0",
     "preact-redux": "^1.2.0",
     "proxy-middleware": "^0.15.0",
@@ -78,7 +73,6 @@
     "redux-immutable": "^3.0.6",
     "redux-thunk": "^1.0.3",
     "reselect": "^2.5.2",
-    "run-sequence": "^1.1.5",
     "steamer-browserutils": "^0.5.0",
     "steamer-net": "^0.2.3",
     "style-loader": "^0.13.0",
@@ -88,6 +82,7 @@
     "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.13.2",
     "webpack-md5-hash": "^0.0.5",
+    "webpack-spritesmith": "^0.3.0",
     "webpack-uglify-parallel": "^0.1.2"
   }
 }

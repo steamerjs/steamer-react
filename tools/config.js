@@ -17,6 +17,7 @@ var config = {
             src: path.resolve(__basename, "src"),
             dev: path.resolve(__basename, "dev"),
             pub: path.resolve(__basename, "pub"),
+            sprite: path.resolve(__basename, "src/img/sprites"),
         },
         defaultPath: "//localhost:9000/",
         cdn: "//localhost:8000/",
@@ -52,14 +53,6 @@ config.webpack.html = utils.getHtmlFile(config.webpack.path.src);
  */
 config.webpack.entry = utils.getJsFile(config.webpack.path.src, 'page', 'main', ['js', 'jsx']);
 
-// 合图配置
-config.gulp.sprites = {
-    tplpath: path.resolve(__basename, "tools/sprite-template/less.template.handlebars"),
-    imgPath: '../../css/sprites/',
-    imgName: 'sprites.png',
-    cssName: 'sprites.scss',
-    imgDest: config.gulp.path.src + '/css/sprites/',
-    cssDest: config.gulp.path.src + '/css/sprites/',
-};
+config.webpack.sprites = utils.getSpriteFolder(config.webpack.path.sprite);
 
 module.exports = config;

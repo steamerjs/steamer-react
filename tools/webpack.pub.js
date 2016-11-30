@@ -14,13 +14,14 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
     WebpackMd5Hash = require('webpack-md5-hash'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
-    HappyPack = require('happypack');
+    HappyPack = require('happypack'),
+    SpritesmithPlugin = require('webpack-spritesmith');
 
 var prodConfig = {
     entry: configWebpack.entry,
     output: {
         publicPath: configWebpack.cdn,
-        path: path.join(configWebpack.path.pub),
+        path: path.join(configWebpack.path.pub, "cdn"),
         filename: "[name]-" + configWebpack.chunkhash + ".js",
         chunkFilename: "chunk/[name]-" + configWebpack.chunkhash + ".js",
     },
@@ -99,7 +100,7 @@ var prodConfig = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
-                    "url-loader?limit=1000&name=img/[name]" + configWebpack.hash + ".[ext]",
+                    "url-loader?limit=1000&name=img/[name]-" + configWebpack.hash + ".[ext]",
                     // 压缩png图片
                     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ],
@@ -214,7 +215,7 @@ var prodConfig = {
 configWebpack.html.forEach(function(page) {
     utils.addPlugins(prodConfig, HtmlResWebpackPlugin, {
         mode: "html",
-        filename: page + ".html",
+        filename: "../webserver/" + page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
         // chunks: configWebpack.htmlres.pub[page],
@@ -224,5 +225,27 @@ configWebpack.html.forEach(function(page) {
         }
     });
 }); 
+
+configWebpack.sprites.forEach(function(folder) {
+    utils.addPlugins(prodConfig, SpritesmithPlugin, {
+        src: {
+            cwd: path.join(configWebpack.path.src, "img/sprites/" + folder),
+            glob: '*.png'
+        },
+        target: {
+            image: path.join(configWebpack.path.src, "css/sprites/sprite-" + folder + ".png"),
+            css: path.join(configWebpack.path.src, "css/sprites/sprite-" + folder + ".less")
+        },
+        spritesmithOptions: {
+            padding: 10
+        },
+        customTemplates: {
+            'less': path.resolve(__dirname, './sprite-template/less.template.handlebars'),
+        },
+        apiOptions: {
+            cssImageRef: "sprite-" + folder + ".png"
+        }
+    });
+});
 
 module.exports = prodConfig;
