@@ -58,12 +58,12 @@ var devConfig = {
                 // },
                 exclude: /node_modules/,
             },
-            {
-                test: /\.css$/,
-                // 单独抽出样式文件
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-                include: path.resolve(configWebpack.path.src)
-            },
+            // {
+            //     test: /\.css$/,
+            //     // 单独抽出样式文件
+            //     loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+            //     include: path.resolve(configWebpack.path.src)
+            // },
             {
                 test: /\.less$/,
                 loader: "happypack/loader?id=lessHappy",         
@@ -77,7 +77,7 @@ var devConfig = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
-                    "url-loader?limit=1000&name=img/[name].[ext]",
+                    "url-loader?limit=1000&name=img/[folder]/[name].[ext]",
                 ],
                 include: path.resolve(configWebpack.path.src)
             },
@@ -121,7 +121,7 @@ var devConfig = {
         new webpack.HotModuleReplacementPlugin(),
         new HappyPack({
             id: 'lessHappy',
-            loaders: ['style', 'css', 'less'],
+            loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!less'],
         }),
         new HappyPack({
             id: 'jsxHappy',

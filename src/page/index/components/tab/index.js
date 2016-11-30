@@ -4,7 +4,7 @@ import { LATEST_NEWS, LIKE_NEWS } from '../../constants/constants';
 
 import Touch from 'touch';
 import classNames from 'classnames';
-require('./index.less');
+import t from './index.less';
 
 
 function TabItem(item, key) {
@@ -65,6 +65,7 @@ export default class Tab extends Component {
 
 		return (
 			<div id="cm-tab">
+				<div className={t.fb}></div>
 				<div className="cm-tabs">
 				    <nav className="nav ui-border-1px">
 				        <ul className="title-list">
