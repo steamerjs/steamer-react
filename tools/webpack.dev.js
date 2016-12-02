@@ -77,7 +77,7 @@ var devConfig = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
-                    "url-loader?limit=1000&name=img/[folder]/[name].[ext]",
+                    "url-loader?limit=1000&name=img/[path]/[name].[ext]",
                 ],
                 include: path.resolve(configWebpack.path.src)
             },
