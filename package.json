@@ -1,8 +1,8 @@
 {
   "name": "steamer-react",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "react-redux-webpack-boilerplate",
-  "main": "index.js",
+  "main": "./steamer/index.js",
   "scripts": {
     "dev": "node ./tools/webpack.config.js",
     "pub": "export NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
@@ -75,6 +75,7 @@
     "reselect": "^2.5.2",
     "steamer-browserutils": "^0.5.0",
     "steamer-net": "^0.2.3",
+    "steamer-webpack-utils": "^0.1.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.13.3",

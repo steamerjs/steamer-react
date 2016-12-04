@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path'),
-      utils = require('./utils'),
+      utils = require('steamer-webpack-utils'),
       os = require('os'),
       webpack = require('webpack');
 
