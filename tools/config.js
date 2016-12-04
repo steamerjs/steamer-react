@@ -26,14 +26,6 @@ var config = {
         imghash: "",
         contenthash: "[contenthash:6]",
     },
-    gulp: {
-        path: { 
-            src: path.resolve(__basename, "src"),
-            dev: path.resolve(__basename, "dev"),
-            pub: path.resolve(__basename, "pub"),
-            offline: path.resolve(__basename, "offline"),
-        },
-    },
     server: {                    // webpack开发环境服务器配置  
         port: 9000,              // port for local server
         hostDirectory: "/news/"  // http://host/hostDirectory/
