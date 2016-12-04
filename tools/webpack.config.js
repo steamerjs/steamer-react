@@ -3,8 +3,6 @@
 var webpack = require('webpack'),
 	config = require('./config'),
 	isProduction = (config.env === '__PROD__');
-	// gutil = require('gulp-util');
-
 
 if (isProduction) {
 	var compiler = webpack(require('./webpack.pub'));
