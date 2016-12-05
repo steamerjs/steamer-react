@@ -19,7 +19,7 @@ var config = {
             pub: path.resolve(__basename, "pub"),
             sprite: path.resolve(__basename, "src/img/sprites"),
         },
-        defaultPath: "//localhost:9000/",
+        webserver: "//localhost:9000/",
         cdn: "//localhost:8000/",
         hash: "[hash:6]",
         chunkhash: "[chunkhash:6]",
@@ -28,7 +28,7 @@ var config = {
     },
     server: {                    // webpack开发环境服务器配置  
         port: 9000,              // port for local server
-        hostDirectory: "/news/"  // http://host/hostDirectory/
+        route: "/news/"  // http://host/route/
     },
 };
 

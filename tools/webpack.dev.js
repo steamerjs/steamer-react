@@ -16,7 +16,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
 var devConfig = {
     entry: configWebpack.entry,
     output: {
-        publicPath: configWebpack.defaultPath,
+        publicPath: configWebpack.webserver,
         path: path.join(configWebpack.path.dev),
         filename: "[name].js",
         chunkFilename: "chunk/[name].js",
