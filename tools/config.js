@@ -16,7 +16,7 @@ var config = {
         path: {
             src: path.resolve(__basename, "src"),
             dev: path.resolve(__basename, "dev"),
-            pub: path.resolve(__basename, "pub"),
+            build: path.resolve(__basename, "build"),
             sprite: path.resolve(__basename, "src/img/sprites"),
         },
         webserver: "//localhost:9000/",

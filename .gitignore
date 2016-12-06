@@ -1,7 +1,7 @@
 node_modules
 node_modules.7z
 .svn
-pub
+build
 dev
 .DS_Store
 webpack_cache

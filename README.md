@@ -19,9 +19,10 @@
 * `config.js`           构建自身的一些配置，例如路径、服务器端口等
 * `gupfile.js`          合图的配置
 * `utils.js`            构建自身使用的一些util函数
-* `webpack.config.js`   `webpack`配置总入口，用于区分开发与生产环境
+* `build.js`            npm run build
+* `start.js`            npm run start
 * `webpack.dev.js`      `webpack`开发环境配置
-* `webpack.pub.js` 	    `webpack`生产环境配置
+* `webpack.prod.js` 	    `webpack`生产环境配置
 * `webpack.server.js`   `webpack`开发环境服务器，会引用开发环境配置
 
 配合`package.json`的`scripts`命令，可以方便用简单命令启动开发及生产环境。
@@ -31,7 +32,7 @@
 基于灵活性的考虑，我们采用了自研的[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件。目前借助`utils.getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，需要在`config.webpack.htmlres`分别写入开发与生产环境的资源注入配置。更多配置可参考插件文档。
 
 ### 支持多js entry
-starter-kit已支持多个入口js文件，并借助`utils.getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx两类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.pub.js`中设定。
+starter-kit已支持多个入口js文件，并借助`utils.getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx两类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.prod.js`中设定。
 
 ### 支持preact轻量类react框架
 由于某些需求如运营活动可能需要比较轻量的框架，因此starter-kit也支持`preact`。目前，默认有`preact`相关引入的文件，都需要用`.jsx`文件后缀才能正常编译，而`react`的相关文件则用`.js`。具体可参考`src/page/pindex`文件夹，或到`preact`[官方网站](https://preactjs.com/)参考文档。
@@ -79,20 +80,15 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 * 单页文件可参考 src/page/index
 * 单页应用可参考 src/page/spa
 * 开发环境一般都写在内存，如果生产文件，会放到dev文件夹下
-* 生产环境最终文件生成在pub文件夹下
+* 生产环境最终文件生成在build文件夹下
 
-#### 命令使用
-package.json中的scripts，若是Windows，设置环境请用set，若是Mac，设置环境请使用export，如：
-* Mac => `export NODE_ENV=__PROD__`
-* Window => `set NODE_ENV=__PROD__`
-目前在`package.json`里多添加了一个win-scripts项目方便直接修改成scripts使用
 
 #### 后台服务
 由于spa的详情页需要后台数据，因此如果你需要查看完整的spa.html的demo，需要使用后台服务。
 我们使用[steamer-koa](https://github.com/SteamerTeam/steamer-koa)。
 
 #### 开发环境
-* react文件夹下启动：`npm run dev`
+* react文件夹下启动：`npm start`
 
 * 腾讯新闻主页:
   - `localhost:9000/index.html` 
@@ -104,20 +100,20 @@ package.json中的scripts，若是Windows，设置环境请用set，若是Mac，
 
 
 #### 生产环境
-* react文件夹下启动: `npm run pub`
+* react文件夹下启动: `npm run build`
 
 * 代理配置
 * Charles Map Local: 
-  - `localhost:9000` => `/react/pub/` 匹配本地html资源
-  - `localhost:8000` => `/react/pub/` 匹配本地除cdn资源 
+  - `localhost:9000` => `/react/build/` 匹配本地html资源
+  - `localhost:8000` => `/react/build/` 匹配本地除cdn资源 
 
 * Charles Map Remote: 
   - `localhost:9000/api/*` => `localhost:3000/api/`
   - 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 
 * Fiddler Willow Rule:
- - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\pub\$1`
- - `regex:^https?:\/\/localhost:8000\/(.*)$`    `\local path\pub\$1`
+ - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\build\$1`
+ - `regex:^https?:\/\/localhost:8000\/(.*)$`    `\local path\build\$1`
 
 * Fiddler Willow Extension:
  - `localhost:9000/api/` => `localhost:3000/api/`

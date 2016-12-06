@@ -1,16 +1,12 @@
 {
   "name": "steamer-react",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "react-redux-webpack-boilerplate",
   "main": "./steamer/index.js",
   "bin": "./steamer/index.js",
   "scripts": {
-    "dev": "node ./tools/webpack.config.js",
-    "pub": "export NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
-  },
-  "win-scripts": {
-    "dev": "node ./tools/webpack.config.js",
-    "pub": "set NODE_ENV=__PROD__&&node ./tools/webpack.config.js"
+    "start": "node ./tools/start.js",
+    "build": "node ./tools/build.js"
   },
   "repository": {
     "type": "git",

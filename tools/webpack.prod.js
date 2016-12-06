@@ -21,7 +21,7 @@ var prodConfig = {
     entry: configWebpack.entry,
     output: {
         publicPath: configWebpack.cdn,
-        path: path.join(configWebpack.path.pub, "cdn"),
+        path: path.join(configWebpack.path.build, "cdn"),
         filename: "[name]-" + configWebpack.chunkhash + ".js",
         chunkFilename: "chunk/[name]-" + configWebpack.chunkhash + ".js",
     },
@@ -136,8 +136,8 @@ var prodConfig = {
         }
     },
     plugins: [
-        // remove previous pub folder
-        new Clean(['pub'], {root: path.resolve()}),
+        // remove previous build folder
+        new Clean(['build'], {root: path.resolve()}),
         // inject process.env.NODE_ENV so that it will recognize if (process.env.NODE_ENV === "__PROD__")
         new webpack.DefinePlugin({
             "process.env": {
@@ -218,7 +218,6 @@ configWebpack.html.forEach(function(page) {
         filename: "../webserver/" + page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
-        // chunks: configWebpack.htmlres.pub[page],
         htmlMinify: {
             removeComments: true,
             collapseWhitespace: true,
