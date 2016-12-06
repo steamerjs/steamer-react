@@ -82,5 +82,8 @@
     "webpack-md5-hash": "^0.0.5",
     "webpack-spritesmith": "^0.3.0",
     "webpack-uglify-parallel": "^0.1.2"
+  },
+  "engines" : { 
+    "node" : ">=5.0.0" 
   }
 }
