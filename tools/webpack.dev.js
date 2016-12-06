@@ -33,7 +33,7 @@ var devConfig = {
                 loader: 'happypack/loader?id=jsxHappy',
                 // loader: 'babel',
                 // query: {
-                //     cacheDirectory: './webpack_cache/',
+                //     cacheDirectory: './.webpack_cache/',
                 //     "plugins": [
                 //         ["transform-decorators-legacy"],
                 //         ["transform-react-jsx", { "pragma":"preact.h" }]
@@ -49,7 +49,7 @@ var devConfig = {
                 loader: 'happypack/loader?id=jsHappy',
                 // loader: 'babel',
                 // query: {
-                //     cacheDirectory: './webpack_cache/',
+                //     cacheDirectory: './.webpack_cache/',
                 //     plugins: ['transform-decorators-legacy'],
                 //     presets: [
                 //         'es2015-loose', 
@@ -128,7 +128,7 @@ var devConfig = {
             loaders: [{
                 path: 'babel',
                 query: {
-                    cacheDirectory: './webpack_cache/',
+                    cacheDirectory: './.webpack_cache/',
                     "plugins": [
                         ["transform-decorators-legacy"],
                         ["transform-react-jsx", { "pragma":"preact.h" }]
@@ -144,7 +144,7 @@ var devConfig = {
             loaders: [{
                 path: 'babel',
                 query: {
-                    cacheDirectory: './webpack_cache/',
+                    cacheDirectory: './.webpack_cache/',
                     plugins: [
                         'react-hot-loader/babel',
                         'transform-decorators-legacy'
