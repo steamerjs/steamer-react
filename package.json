@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "react-redux-webpack-boilerplate",
   "main": "./steamer/index.js",
   "bin": "./steamer/index.js",
@@ -75,7 +75,7 @@
     "redux-thunk": "^1.0.3",
     "reselect": "^2.5.2",
     "steamer-browserutils": "^0.5.0",
-    "steamer-net": "^0.2.3",
+    "steamer-net": "^0.2.5",
     "steamer-webpack-utils": "^0.1.1",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
