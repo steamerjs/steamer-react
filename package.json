@@ -5,7 +5,11 @@
   "main": "./steamer/index.js",
   "scripts": {
     "start": "node ./tools/start.js",
-    "build": "node ./tools/build.js"
+    "build": "node ./tools/build.js",
+    "dev": "node ./tools/start.js",
+    "pub": "node ./tools/build.js",
+    "test": "",
+    "lint": "",
   },
   "repository": {
     "type": "git",

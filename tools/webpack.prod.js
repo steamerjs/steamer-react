@@ -90,7 +90,7 @@ var prodConfig = {
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader?localIdentName=[name]-[local]-[hash:base64:5]!less-loader"),
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader?-autoprefixer&localIdentName=[name]-[local]-[hash:base64:5]!less-loader"),
                 include: path.resolve(configWebpack.path.src)
             },
             {
