@@ -11,7 +11,8 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
     HappyPack = require('happypack'),
-    SpritesmithPlugin = require('webpack-spritesmith');
+    SpritesmithPlugin = require('webpack-spritesmith'),
+    Autoprefixer = require('autoprefixer');
 
 var devConfig = {
     entry: configWebpack.entry,
@@ -68,7 +69,7 @@ var devConfig = {
                 test: /\.less$/,
                 loader: "happypack/loader?id=lessHappy",         
                 //ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
-                include: path.resolve(configWebpack.path.src)
+                include: path.resolve(configWebpack.path.src),
             },
             {
                 test: /\.html$/,
@@ -91,9 +92,10 @@ var devConfig = {
             
         ]
     },
+    postcss: [ Autoprefixer({ browsers: ['last 8 versions'] }) ],
     resolve: {
         moduledirectories:['node_modules', configWebpack.path.src],
-        extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
+        extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "less", "png", "jpg", "jpeg", "ico"],
         alias: {
             'react/lib/ReactMount': 'react-dom/lib/ReactMount',
             'redux': 'redux/dist/redux',
@@ -121,7 +123,7 @@ var devConfig = {
         new webpack.HotModuleReplacementPlugin(),
         new HappyPack({
             id: 'lessHappy',
-            loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!less'],
+            loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve()],
         }),
         new HappyPack({
             id: 'jsxHappy',

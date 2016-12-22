@@ -15,7 +15,8 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     WebpackMd5Hash = require('webpack-md5-hash'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
     HappyPack = require('happypack'),
-    SpritesmithPlugin = require('webpack-spritesmith');
+    SpritesmithPlugin = require('webpack-spritesmith'),
+    Autoprefixer = require('autoprefixer');
 
 var prodConfig = {
     entry: configWebpack.entry,
@@ -85,12 +86,12 @@ var prodConfig = {
             {
                 test: /\.css$/,
                 // 单独抽出样式文件
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+                loader: ExtractTextPlugin.extract('style', 'css'),
                 include: path.resolve(configWebpack.path.src)
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader?-autoprefixer&localIdentName=[name]-[local]-[hash:base64:5]!less-loader"),
+                loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer&localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve()),
                 include: path.resolve(configWebpack.path.src)
             },
             {
@@ -116,9 +117,10 @@ var prodConfig = {
             
         ]
     },
+    postcss: [ Autoprefixer({ browsers: ['last 8 versions'] }) ],
     resolve: {
     	moduledirectories:['node_modules', configWebpack.path.src],
-        extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "png", "jpg", "jpeg", "ico"],
+        extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "less", "png", "jpg", "jpeg", "ico"],
         alias: {
         	// 使用压缩版本redux
             'redux': 'redux/dist/redux.min',
