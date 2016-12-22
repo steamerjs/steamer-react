@@ -29,7 +29,7 @@
 
 ## 特性
 ### 支持多页面开发
-基于灵活性的考虑，我们采用了自研的[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件。目前借助`utils.getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，需要在`config.webpack.htmlres`分别写入开发与生产环境的资源注入配置。更多配置可参考插件文档。
+基于灵活性的考虑，我们采用了自研的[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件。目前借助`utils.getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，可借助[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件的能力，既可以使用以前的替换匹配的方式，也可以进行配置。更多配置可参考插件文档。
 
 ### 支持多js entry
 starter-kit已支持多个入口js文件，并借助`utils.getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx两类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.prod.js`中设定。
