@@ -44,9 +44,9 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 之前使用Sass进行合图，以及样式的编写，但由于在windows下安装`node-sass`实际太麻烦，因此使用了更轻量的Less进行替换。
 若想使用Sass，可自行添加[sass-loader](https://github.com/jtangelder/sass-loader)和[node-sass](https://github.com/sass/node-sass)及进行相关配置。
 
-若想引入在组件中引用src/css/中的样式文件，可以使用:
+由于在`less-loader`处设置了`root=path.resolve("src")`的`query`，因此若想引入在组件中引用src/css/中的样式文件，可以使用:
 ```
-@import "/src/css/common/common.less";
+@import "/css/common/common.less";
 ```
 
 若想引入node_modules中的样式文件，可以使用：

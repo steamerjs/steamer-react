@@ -91,7 +91,7 @@ var prodConfig = {
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer&localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve()),
+                loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer&localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve('src')),
                 include: path.resolve(configWebpack.path.src)
             },
             {
@@ -119,7 +119,10 @@ var prodConfig = {
     },
     postcss: [ Autoprefixer({ browsers: ['last 8 versions'] }) ],
     resolve: {
-    	moduledirectories:['node_modules', configWebpack.path.src],
+    	root: [
+            path.resolve(configWebpack.path.src)
+        ],
+        moduledirectories:['node_modules', configWebpack.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "less", "png", "jpg", "jpeg", "ico"],
         alias: {
         	// 使用压缩版本redux

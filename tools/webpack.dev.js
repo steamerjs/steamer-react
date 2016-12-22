@@ -94,6 +94,9 @@ var devConfig = {
     },
     postcss: [ Autoprefixer({ browsers: ['last 8 versions'] }) ],
     resolve: {
+        root: [
+            path.resolve(configWebpack.path.src)
+        ],
         moduledirectories:['node_modules', configWebpack.path.src],
         extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "less", "png", "jpg", "jpeg", "ico"],
         alias: {
@@ -123,7 +126,7 @@ var devConfig = {
         new webpack.HotModuleReplacementPlugin(),
         new HappyPack({
             id: 'lessHappy',
-            loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve()],
+            loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve('src')],
         }),
         new HappyPack({
             id: 'jsxHappy',

@@ -4,9 +4,9 @@ import { syncHistory } from 'react-router-redux';
 import rootReducer from '../reducers/reducers';
 import thunk from 'redux-thunk';
 import { persistState } from 'redux-devtools';
-import DevTools from '../../common/devtools/DevTools';
+import DevTools from 'page/common/devtools/DevTools';
 // import logger from '../../common/middleware/logger';
-import api from '../../common/middleware/api';
+import api from 'page/common/middleware/api';
 import { DEBUG } from '../constants/constants';
 
 function getDebugSessionKey() {

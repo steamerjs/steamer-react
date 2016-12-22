@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { request } from '../../common/actions/actions';
+import { request } from 'page/common/actions/actions';
 import { getArgs, updateActiveTab, toggleContent,
          toggleListLoading, toggleSpinLoading, toggleDialog, likeNews, dislikeNews } from '../actions/actions';
 

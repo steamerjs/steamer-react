@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import merge from 'lodash.merge';
 import { setItem } from 'utils';
 import initialState from '../stores/stores';
-import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
+import { GET_NEWS_LIST, GET_TOP_NEWS } from 'page/common/constants/constants';
 import { GET_ARGS, TABS_UPDATE, TOGGLE_CONTENT,
 		 TOGGLE_LIST_LOADING, TOGGLE_SPIN_LOADING, LIKE_NEWS, DISLIKE_NEWS } from '../actions/actions';
 
