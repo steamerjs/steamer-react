@@ -19,16 +19,16 @@ var config = {
             build: path.resolve(__basename, "build"),
             sprite: path.resolve(__basename, "src/img/sprites"),
         },
-        webserver: "//localhost:9000/",
-        cdn: "//localhost:8000/",
+        webserver: "{{webserver}}",
+        cdn: "{{cdn}}",
         hash: "[hash:6]",
         chunkhash: "[chunkhash:6]",
         imghash: "",
         contenthash: "[contenthash:6]",
     },
     server: {                    // webpack开发环境服务器配置  
-        port: "9000",              // port for local server
-        route: "/news/"  // http://host/route/
+        port: "{{port}}",              // port for local server
+        route: "{{route}}"  // http://host/route/
     },
 };
 

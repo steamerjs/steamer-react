@@ -11,6 +11,11 @@
     "test": "",
     "lint": ""
   },
+  "files": [
+    "src",
+    "tools",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SteamerTeam/steamer-react.git"
