@@ -24,6 +24,7 @@
     "react",
     "redux",
     "webpack",
+    "steamerjs",
     "boilerplate",
     "starter-kit"
   ],
