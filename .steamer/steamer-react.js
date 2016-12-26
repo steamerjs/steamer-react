@@ -1,4 +1,9 @@
 module.exports = {
+    files: [
+        "src",
+        "tools",
+        "README.md"
+    ],
     options: [
         {
             type: 'input',
