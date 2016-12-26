@@ -1,5 +1,29 @@
 # React Web Starter Kit
 
+## 安装
+
+```
+npm i -g steamerjs
+
+npm i -g steamer-react
+
+// install starter kit, react below is short for steamer-react
+steamer kit --install react --path str-react 
+// or
+steamer kit -i react -p str-react
+
+// update starter kit
+cd str-react
+ 
+steamer kit --update react
+// or 
+steamer kit -u react
+
+```
+
+关于更多安装详情，请参考：
+[steamer-plugin-kit](https://github.com/SteamerTeam/steamer-plugin-kit)
+
 ## 简介
 此分支是react web快速启动分支
 
