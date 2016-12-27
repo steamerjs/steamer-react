@@ -29,9 +29,7 @@
     "url": "https://github.com/SteamerTeam/steamer-react/issues"
   },
   "homepage": "https://github.com/SteamerTeam/steamer-react#readme",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
