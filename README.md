@@ -2,6 +2,7 @@
 
 ## 安装
 
+你可选择通过`git clone`或者，通过`steamerjs`进行安装
 ```
 npm i -g steamerjs
 
