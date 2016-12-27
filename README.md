@@ -15,9 +15,9 @@ steamer kit -i react -p str-react
 // update starter kit
 cd str-react
  
-steamer kit --update react
+steamer kit --update
 // or 
-steamer kit -u react
+steamer kit -u
 
 ```
 
@@ -40,6 +40,7 @@ steamer kit -u react
 ## 配置介绍
 目前主要的构建配置都放在tools文件夹下，它们的作用分别如下：
 * `sprite-template`     合图时使用的样式模板，提供了sass和less两种
+* `config-template`     `config.js`的模板，用于steamer安装时候进行替换的模板
 * `config.js`           构建自身的一些配置，例如路径、服务器端口等
 * `gupfile.js`          合图的配置
 * `utils.js`            构建自身使用的一些util函数
