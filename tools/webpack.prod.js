@@ -16,6 +16,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
     HappyPack = require('happypack'),
     SpritesmithPlugin = require('webpack-spritesmith'),
+    PostcssImport = require('postcss-import'),
     Autoprefixer = require('autoprefixer');
 
 var prodConfig = {
@@ -103,7 +104,7 @@ var prodConfig = {
                 loaders: [
                     "url-loader?limit=1000&name=img/[path]/[name]-" + configWebpack.hash + ".[ext]",
                     // 压缩png图片
-                    'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+                    // 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ],
                 include: path.resolve(configWebpack.path.src)
             },
@@ -117,7 +118,12 @@ var prodConfig = {
             
         ]
     },
-    postcss: [ Autoprefixer({ browsers: ['last 8 versions'] }) ],
+    postcss: function(webpack) { 
+        return [
+            PostcssImport(),
+            Autoprefixer() 
+        ]
+    },
     resolve: {
     	root: [
             path.resolve(configWebpack.path.src)

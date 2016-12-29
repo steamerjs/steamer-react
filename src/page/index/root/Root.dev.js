@@ -9,10 +9,6 @@ import IndexWrapper from '../container/index';
 import DevTools from '../../common/devtools/DevTools';
 import { DEBUG } from '../constants/constants';
 
-// for hot reload
-if (module.hot) {
-    module.hot.accept();
-}
 
 let store = configureStore();
 
@@ -36,9 +32,8 @@ export default class Root extends Component {
     }
 }
 
-render(
-    <Root />,
-    document.getElementById('pages')
-);
-
+// render(
+//     <Root />,
+//     document.getElementById('pages')
+// );
 

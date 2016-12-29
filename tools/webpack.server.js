@@ -10,7 +10,8 @@ var webpackConfig = require("./webpack.dev.js"),
 var port = config.server.port;
 
 for (var key in webpackConfig.entry) {
-	webpackConfig.entry[key].push('webpack-hot-middleware/client?reload=true');
+	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
+	webpackConfig.entry[key].unshift('react-hot-loader/patch');
 }
 
 var compiler = webpack(webpackConfig);

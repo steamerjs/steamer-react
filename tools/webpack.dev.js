@@ -12,6 +12,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
     HappyPack = require('happypack'),
     SpritesmithPlugin = require('webpack-spritesmith'),
+    PostcssImport = require('postcss-import'),
     Autoprefixer = require('autoprefixer');
 
 var devConfig = {
@@ -92,7 +93,12 @@ var devConfig = {
             
         ]
     },
-    postcss: [ Autoprefixer({ browsers: ['last 8 versions'] }) ],
+    postcss: function(webpack) { 
+        return [
+            PostcssImport(),
+            Autoprefixer() 
+        ]
+    },
     resolve: {
         root: [
             path.resolve(configWebpack.path.src)
