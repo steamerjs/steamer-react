@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "1.5.0-beta.10",
+  "version": "1.5.0-beta.11",
   "description": "react-redux-webpack-boilerplate",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
@@ -29,6 +29,9 @@
     "url": "https://github.com/SteamerTeam/steamer-react/issues"
   },
   "homepage": "https://github.com/SteamerTeam/steamer-react#readme",
+  "browserslist": [
+    "last 5 versions"
+  ],
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.5.4",
@@ -39,6 +42,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-react": "^6.1.4",
+    "browserslist": "^1.5.1",
     "caniuse-db": "^1.0.30000602",
     "classnames": "^2.2.3",
     "clean-webpack-plugin": "^0.1.14",
@@ -60,6 +64,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash.merge": "^4.4.0",
+    "postcss-import": "^9.0.0",
     "postcss-loader": "^1.2.1",
     "preact": "^6.3.0",
     "preact-redux": "^1.2.0",

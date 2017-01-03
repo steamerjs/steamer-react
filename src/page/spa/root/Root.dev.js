@@ -20,9 +20,9 @@ import { Router, IndexRoute, Route, browserHistory, useRouterHistory, hashHistor
 import { createHashHistory } from 'history';
 
 // for hot reload
-if (module.hot) {
-    module.hot.accept();
-}
+// if (module.hot) {
+//     module.hot.accept();
+// }
 
 let store = configureStore();
 
@@ -55,9 +55,9 @@ export default class Root extends Component {
     }
 }
 
-render(
-    <Root />,
-    document.getElementById('pages')
-);
+// render(
+//     <Root />,
+//     document.getElementById('pages')
+// );
 
 

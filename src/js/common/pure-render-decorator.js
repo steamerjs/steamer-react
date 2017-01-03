@@ -100,8 +100,8 @@ function deepEqual(objA, objB, depth) {
         }
     }
 
-    var keysA = Object.keys(objA);
-    var keysB = Object.keys(objB);
+    var keysA = Object.keys(objA || {});
+    var keysB = Object.keys(objB || {});
 
     if (keysA.length !== keysB.length) {
         return false;
