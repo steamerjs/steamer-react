@@ -1,9 +1,9 @@
-import { Component, PropTypes } from 'react';
+import { 
+    Component 
+} from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { configureStore } from '../stores/configureStore';
-import initialStore from '../stores/stores';
 
 import IndexWrapper from '../container/index';
 import CommentWrapper from '../container/comment';
@@ -13,8 +13,12 @@ import App from '../container/app';
 
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import { Router, IndexRoute, Route, browserHistory, useRouterHistory, hashHistory } from 'react-router';
-import { createHashHistory } from 'history';
+import { 
+    Router, 
+    IndexRoute, 
+    Route, 
+    hashHistory 
+} from 'react-router';
 
 let store = configureStore();
 

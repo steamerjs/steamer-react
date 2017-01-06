@@ -1,5 +1,5 @@
 /** @jsx h */
-import preact, { h, render, Component } from 'preact';
+import Preact, { h, Component } from 'preact';
 // import pureRender from 'pure-render-decorator';
 import { LATEST_NEWS, LIKE_NEWS } from '../../constants/constants';
 
@@ -15,7 +15,7 @@ function TabItem(item, key) {
 		>
 			<Touch data-tab={item.label} onTap={this.switchTab}>{item.text}</Touch>
 		</li>
-	)
+	);
 }
 
 function TabHighlight(props) {
@@ -23,7 +23,7 @@ function TabHighlight(props) {
 	var isActive = (props.active === LIKE_NEWS);
 	return (
 		<i className={classNames('icon-active', {'pull-right': isActive})}></i>
-	)
+	);
 }
 
 // @pureRender
@@ -75,6 +75,6 @@ export default class Tab extends Component {
 				    </nav>
 				</div>
 			</div>
-		)
+		);
 	}
 }

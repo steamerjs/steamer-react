@@ -1,5 +1,5 @@
 /** @jsx h */
-import preact, { h, render, Component } from 'preact';
+import Preact, { h, Component } from 'preact';
 import merge from 'lodash.merge';
 import pureRender from 'pure-render-decorator';
 
@@ -115,7 +115,7 @@ export default class Touch extends Component {
 		        deltaY: 0,
 		        absX: 0,
 		        absY: 0
-		    }
+		    };
 	    }
 	 
 	    var xd = this.touchInfo.x - x;
@@ -266,7 +266,7 @@ export default class Touch extends Component {
 				onTouchCancel={this.cancelAll} >
 				  {this.props.children}
 			</div>
-		)
+		);
 	}
 }
 

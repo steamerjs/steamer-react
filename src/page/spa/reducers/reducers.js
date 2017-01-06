@@ -1,18 +1,24 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux'
+import { routerReducer } from 'react-router-redux';
 import merge from 'lodash.merge';
 import { setItem } from 'utils';
 import initialState from '../stores/stores';
-import { GET_NEWS_LIST, GET_TOP_NEWS, GET_COMMENT_LIST, GET_NEWS_DETAIL } from '../../common/constants/constants';
-import { GET_ARGS, TABS_UPDATE, TOGGLE_CONTENT,
-		 TOGGLE_LIST_LOADING, TOGGLE_SPIN_LOADING, LIKE_NEWS, DISLIKE_NEWS } from '../actions/actions';
+import { 
+	GET_NEWS_LIST, 
+	GET_TOP_NEWS, 
+	GET_COMMENT_LIST, 
+	GET_NEWS_DETAIL 
+} from '../../common/constants/constants';
+import { 
+	GET_ARGS, TABS_UPDATE,
+	TOGGLE_LIST_LOADING, 
+	TOGGLE_SPIN_LOADING, 
+	LIKE_NEWS, 
+	DISLIKE_NEWS 
+} from '../actions/actions';
 
 
 var news = function(state = initialState.news, action) {
-	let listInfoMap = {
-		10: 'listLatest',  // 最新新闻
-		11: 'listLike', //  收藏新闻
-	};
 
 	switch(action.type) {
 
@@ -68,7 +74,7 @@ var news = function(state = initialState.news, action) {
 			var newState = merge({}, state),
 				isDuplicate = false;
 
-			newState['listLike'].map((item, index) => {
+			newState['listLike'].map((item) => {
 				if (item.id === action.value.id) {
 					isDuplicate = true;
 				}
@@ -89,7 +95,7 @@ var news = function(state = initialState.news, action) {
 			}
 
 			var newState = merge({}, state);
-			newState['listLike'] = newState['listLike'].filter((item, index) => {
+			newState['listLike'] = newState['listLike'].filter((item) => {
 				return (item.id !== action.value.id);
 			});
 			setItem('like-list', JSON.stringify(newState['listLike']));
@@ -113,7 +119,7 @@ var details = function(state = initialState.details, action) {
 		default:
 			return state;
 	}
-}
+};
 
 var comments = function(state = initialState.comments, action) {
 	switch (action.type) {

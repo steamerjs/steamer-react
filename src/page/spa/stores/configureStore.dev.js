@@ -1,7 +1,10 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { Router, Route, browserHistory, hashHistory, useRouterHistory } from 'react-router';
-import { createHashHistory } from 'history';
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
+import { 
+    browserHistory,
+} from 'react-router';
+import { 
+    routerMiddleware 
+} from 'react-router-redux';
 import rootReducer from '../reducers/reducers';
 import thunk from 'redux-thunk';
 import { persistState } from 'redux-devtools';

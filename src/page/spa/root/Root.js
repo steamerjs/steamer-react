@@ -9,6 +9,6 @@ if ("__PROD__" !== process.env.NODE_ENV) {
 	// module.exports = require('./Root.dev');
 }
 else {
-	window.console.dev = function(msg) {};
+	window.console.dev = function() {};
 	module.exports = require('./Root.prod');
 }

@@ -1,5 +1,5 @@
 /** @jsx h */
-import preact, { h, render, Component } from 'preact';
+import Preact, { h, Component } from 'preact';
 // import pureRender from 'pure-render-decorator';
 
 require('./index.less');
@@ -38,6 +38,6 @@ export default class List extends Component {
 			<div className="loading" style={loadingStyle}>
 			    <p>{loadingText}</p>
 			</div>
-		)
+		);
 	}
 }

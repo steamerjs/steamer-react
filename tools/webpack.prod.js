@@ -165,6 +165,7 @@ var prodConfig = {
         }),
         new HappyPack({
             id: 'jsxHappy',
+            verbose: false,
             loaders: [{
                 path: 'babel',
                 query: {
@@ -174,20 +175,21 @@ var prodConfig = {
                         ["transform-react-jsx", { "pragma":"preact.h" }]
                     ],
                     presets: [
-                        'es2015-loose', 
+                        ["es2015", {"loose": true}]
                     ]
                 },
             }],
         }),
         new HappyPack({
             id: 'jsHappy',
+            verbose: false,
             loaders: [{
                 path: 'babel',
                 query: {
                     cacheDirectory: './.webpack_cache/',
                     plugins: ['transform-decorators-legacy'],
                     presets: [
-                        'es2015-loose', 
+                        ["es2015", {"loose": true}],
                         'react',
                     ]
                 },

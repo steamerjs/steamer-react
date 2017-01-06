@@ -37,6 +37,6 @@ export default class List extends Component {
 			<div className="loading" style={loadingStyle}>
 			    <p>{loadingText}</p>
 			</div>
-		)
+		);
 	}
 }

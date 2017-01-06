@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
 import classnames from 'classnames';
-import { formatDate } from 'utils';
-import { LATEST_NEWS, LIKE_NEWS} from '../../constants/constants';
+import { LATEST_NEWS} from '../../constants/constants';
 
 import Touch from 'touch';
 
@@ -52,14 +51,14 @@ export default class List extends Component {
 				}
 				
 			}
-		}
+		};
 	}
 
 	renderNewsIcon(pic) {
 		return {
 			"backgroundImage": "url(" + pic + ")",
             "backgroundSize": "100%"
-		}
+		};
 	}
 
 	showLikeBtn(item, e) {
@@ -69,13 +68,11 @@ export default class List extends Component {
 	        this.setState({
 	        	activeNewsId: item.id
 	        });
-	    }
+	    };
 	}
 
     hideLikeBtn(e) {
     	return (e) => {
-	    	let target = e.target,
-				classname = target.className;
 
 			if (this.state.activeNewsId === null) {
 				return;
@@ -84,7 +81,7 @@ export default class List extends Component {
 			this.setState({
 				activeNewsId: null,
 			});
-		}
+		};
     }
 
     like(item) {
@@ -95,7 +92,7 @@ export default class List extends Component {
 	    		this.hideLikeBtn(e);
 	    		this.isClickOnBtn = false;
 	    	}, 20);
-	    }
+	    };
     }
 
     dislike(item) {
@@ -106,23 +103,15 @@ export default class List extends Component {
 	    		this.hideLikeBtn(e);
 	    		this.isClickOnBtn = false;
 	    	}, 20);
-	    }
+	    };
     }
 
 	render() {
 
 		console.dev('render List!!');
 
-		let _this = this;
-		let prevCreateTime = null;
-
 		let news = this.props.news;
 		let tabsType = this.props.tabsType;
-
-		let listDataMap = {
-			[LATEST_NEWS]: 'listLatest',
-			[LIKE_NEWS] : 'listLike'
-		};
 		
 		this.listData = news;
 		
@@ -145,7 +134,7 @@ export default class List extends Component {
 		                </Touch>
 	                </Touch>
 			    </li>
-			)
+			);
 		});
 
 		let wrapperStyle = {
@@ -161,7 +150,7 @@ export default class List extends Component {
 					</ul>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 

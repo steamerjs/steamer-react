@@ -1,5 +1,7 @@
 import { getItem, getHash } from 'utils';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { 
+	LATEST_NEWS 
+} from '../constants/constants';
 
 /** other const **/
 const initialState = {
@@ -12,8 +14,8 @@ const initialState = {
 	    listLatest: [],    // 最新新闻
 	    listLike: JSON.parse(getItem('like-list')) || [], // 收藏新闻
 	    listInfo: {
-	        listLatest:{
-	            isEnd: false,
+	    	listLatest: {
+	        	isEnd: false,
 				pageSize: 20,
 				curPage: 1,
 				isLoading: false,
@@ -35,6 +37,5 @@ const initialState = {
 	listLoading: false,
 	spinLoading: true
 };
-
 
 export default initialState;

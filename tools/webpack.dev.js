@@ -132,10 +132,12 @@ var devConfig = {
         new webpack.HotModuleReplacementPlugin(),
         new HappyPack({
             id: 'lessHappy',
+            verbose: false,
             loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve('src')],
         }),
         new HappyPack({
             id: 'jsxHappy',
+            verbose: false,
             loaders: [{
                 path: 'babel',
                 query: {
@@ -145,13 +147,14 @@ var devConfig = {
                         ["transform-react-jsx", { "pragma":"preact.h" }]
                     ],
                     presets: [
-                        'es2015-loose', 
+                        ["es2015", {"loose": true}]
                     ]
                 },
             }]
         }),
         new HappyPack({
             id: 'jsHappy',
+            verbose: false,
             loaders: [{
                 path: 'babel',
                 query: {
@@ -161,7 +164,7 @@ var devConfig = {
                         'transform-decorators-legacy'
                     ],
                     presets: [
-                        'es2015-loose', 
+                        ["es2015", {"loose": true}],
                         'react',
                     ]
                 },

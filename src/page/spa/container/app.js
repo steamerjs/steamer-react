@@ -1,8 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import Connect from '../connect/connect';
-import { Link, browserHistory } from 'react-router';
-
 
 function App(props) {
 
@@ -10,7 +7,7 @@ function App(props) {
         <div>
         	{props.children}
         </div>
-	)
+	);
 }
 
 App.contextTypes = {

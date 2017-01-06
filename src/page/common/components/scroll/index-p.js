@@ -1,7 +1,6 @@
 /** @jsx h */
-import preact, { h, render, Component } from 'preact';
+import Preact, { h, Component } from 'preact';
 import pureRender from 'pure-render-decorator';
-import { HW_MINE, HW_ALL } from '../../constants/constants';
 
 require('./index.less');
 
@@ -67,7 +66,7 @@ export default class Scroll extends Component {
 	}
 
 	bindScroll() {
-		this.scrollContainer = (window.mqq && mqq.iOS) ? document.querySelector(this.wrapper) : window;
+		this.scrollContainer = (window.mqq && window.mqq.iOS) ? document.querySelector(this.wrapper) : window;
 		this.scrollContainer.addEventListener('scroll', this.scrollEvt);
 	}
 
@@ -117,6 +116,6 @@ export default class Scroll extends Component {
 			<div className="content-wrap" style={scrollStyle}>
 			   {this.props.children}
 			</div>
-		)
+		);
 	}
 }

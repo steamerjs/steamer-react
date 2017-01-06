@@ -10,7 +10,7 @@ const finalCreateStore = compose(
 
 export function configureStore(initialState) {
 
-    const store = finalCreateStore(rootReducer, initialState);
+	const store = finalCreateStore(rootReducer, initialState);
     
   	return store;
 }

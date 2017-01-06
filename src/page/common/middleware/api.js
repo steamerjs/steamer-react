@@ -11,7 +11,7 @@ export default store => next => action => {
         return next(action);
     }
 
-    let ACTION_TYPE = action['type'];
+    // let ACTION_TYPE = action['type'];
     let { cgiName, params, opts = {} } = API_OPT;
     let { localData } = opts;
 
