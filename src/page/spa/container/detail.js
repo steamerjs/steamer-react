@@ -1,10 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import merge from 'lodash.merge';
-import { render } from 'react-dom';
-import { formatDate } from 'utils';
+import React, { Component } from 'react';
 import Connect from '../connect/connect';
-import { GET_COMMENT_LIST } from '../../common/constants/constants';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
 import Spinner from 'spinner';
 import Touch from 'touch';
@@ -60,7 +55,7 @@ class Detail extends Component {
 							<p key={index} className="imgNode">
 								<img src={item.replace("\[", "").replace("\]", "")} />
 							</p>
-						)
+						);
 					}
 					else {
 						return (
@@ -84,7 +79,7 @@ class Detail extends Component {
 	        	</div>
 	        	<Spinner isShow={this.props.spinLoading}/>
 	        </div>
-		)
+		);
 	}
 }
 

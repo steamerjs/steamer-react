@@ -8,11 +8,9 @@ else {
 	window.console.dev = function(msg) {};
 }
 
-import preact, { h, render, Component } from 'preact';
-import { createStore } from 'redux';
+import Preact, { h, render, Component } from 'preact';
 import { Provider } from 'preact-redux';
 import { configureStore } from '../stores/configureStore';
-import initialStore from '../stores/stores';
 
 import IndexWrapper from '../container/index';
 

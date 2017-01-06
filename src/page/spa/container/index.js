@@ -1,7 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import merge from 'lodash.merge';
-import { render } from 'react-dom';
-import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
 import { GET_NEWS_LIST, GET_TOP_NEWS, GET_NEWS_DETAIL } from '../../common/constants/constants';
 import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
@@ -44,7 +42,7 @@ class Wrapper extends Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps() {
 		this.props.toggleSpinLoading(false);
 		
 		return true;
@@ -90,12 +88,10 @@ class Wrapper extends Component {
 	//http://mat1.gtimg.com/www/mobi/image/loadimg.png
 
 	loadData(listType, pa = {}, opts = {}) {
-		var _this = this;
 		var url = GET_NEWS_LIST;
 
 		var listInfoParam = this.props.news.listInfo['listLatest'],
-			ids = this.props.news.ids,
-			args = this.props.args;
+			ids = this.props.news.ids;
 
 		// 防止重复拉取
 		if (listInfoParam.isLoading) {
@@ -111,7 +107,7 @@ class Wrapper extends Component {
 			newIdArray = [];
 
 
-		newIds.forEach((item, index) => {
+		newIds.forEach((item) => {
 			newIdArray.push(item.id);
 		});
 
@@ -130,7 +126,7 @@ class Wrapper extends Component {
 			onSuccess: function(data) {
 				console.log(data);
 			},
-			onError: function(res) {
+			onError: function() {
 				console.log("err");
 				// console.log(res);
 				// alert(res.errMsg || '加载新闻列表失败，请稍后重试');
@@ -209,7 +205,7 @@ class Wrapper extends Component {
 	            </div>
 	            <Spinner isShow={this.props.spinLoading}/>
 	        </article>
-		)
+		);
 	}
 }
 

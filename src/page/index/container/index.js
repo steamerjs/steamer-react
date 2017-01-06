@@ -1,10 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import merge from 'lodash.merge';
-import { render } from 'react-dom';
-import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
-import { GET_NEWS_LIST, GET_TOP_NEWS } from 'page/common/constants/constants';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { 
+	GET_NEWS_LIST, 
+	GET_TOP_NEWS 
+} from 'page/common/constants/constants';
+import { 
+	LATEST_NEWS, 
+	LIKE_NEWS 
+} from '../constants/constants';
 
 import Scroll from 'scroll';
 import Spinner from 'spinner';
@@ -86,8 +90,7 @@ class Wrapper extends Component {
 		var url = GET_NEWS_LIST;
 
 		var listInfoParam = this.props.news.listInfo['listLatest'],
-			ids = this.props.news.ids,
-			args = this.props.args;
+			ids = this.props.news.ids;
 
 		// 防止重复拉取
 		if (listInfoParam.isLoading) {
@@ -173,7 +176,7 @@ class Wrapper extends Component {
 	            </div>
 	            <Spinner isShow={this.props.spinLoading}/>
 	        </article>
-		)
+		);
 	}
 }
 

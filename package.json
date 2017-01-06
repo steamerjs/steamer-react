@@ -9,7 +9,10 @@
     "dev": "node ./tools/start.js",
     "pub": "node ./tools/build.js",
     "test": "",
-    "lint": ""
+    "lint": "eslint src"
+  },
+  "eslintConfig": {
+    "extends": "./tools/config/eslint-config.js"
   },
   "repository": {
     "type": "git",
@@ -36,18 +39,22 @@
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.8",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-jsx": "^2.0.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-es2015-loose": "^8.0.0",
-    "babel-preset-react": "^6.1.4",
+    "babel-preset-react": "^6.16.0",
     "browserslist": "^1.5.1",
     "caniuse-db": "^1.0.30000602",
     "classnames": "^2.2.3",
     "clean-webpack-plugin": "^0.1.14",
     "copy-webpack-plugin-hash": "^3.0.2",
     "css-loader": "^0.22.0",
+    "eslint": "^3.12.2",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-react": "^6.8.0",
     "exports-loader": "^0.6.2",
     "expose-loader": "^0.7.1",
     "express": "^4.13.4",

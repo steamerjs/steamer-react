@@ -1,7 +1,7 @@
 /** @jsx h */
-import preact, { h, render, Component } from 'preact';
+import Preact, { h, Component } from 'preact';
 import pureRender from 'pure-render-decorator';
-var spin = require('spin');
+var Spin = require('spin');
 
 require('./index.less');
 
@@ -43,7 +43,7 @@ export default class Spinner extends Component {
 			, position: 'absolute'  // Element positioning
 		};
 		var target = document.getElementById('spin');
-		var spinner = new spin(opts).spin(target);
+		var spinner = new Spin(opts).spin(target);
 	}
 
 	render() {
@@ -57,6 +57,6 @@ export default class Spinner extends Component {
 
 		return (
 			<div id="spin" style={spinStyle}></div>
-		)
+		);
 	}
 }

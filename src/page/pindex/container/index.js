@@ -1,10 +1,15 @@
 /** @jsx h */
-import preact, { h, render, Component } from 'preact';
+import Preact, { h, Component } from 'preact';
 import merge from 'lodash.merge';
-import { getHash, isHttps } from 'utils';
 import Connect from '../connect/connect';
-import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/constants';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { 
+	GET_NEWS_LIST, 
+	GET_TOP_NEWS 
+} from '../../common/constants/constants';
+import { 
+	LATEST_NEWS, 
+	LIKE_NEWS 
+} from '../constants/constants';
 
 import Scroll from 'scroll-p';
 import Spinner from 'spinner-p';
@@ -82,12 +87,10 @@ class Wrapper extends Component {
 	//http://mat1.gtimg.com/www/mobi/image/loadimg.png
 
 	loadData(listType, pa = {}, opts = {}) {
-		var _this = this;
 		var url = GET_NEWS_LIST;
 
 		var listInfoParam = this.props.news.listInfo['listLatest'],
-			ids = this.props.news.ids,
-			args = this.props.args;
+			ids = this.props.news.ids;
 
 		// 防止重复拉取
 		if (listInfoParam.isLoading) {
@@ -172,7 +175,7 @@ class Wrapper extends Component {
 	            </div>
 	            <Spinner isShow={this.props.spinLoading}/>
 	        </article>
-		)
+		);
 	}
 }
 

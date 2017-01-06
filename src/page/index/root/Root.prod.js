@@ -1,9 +1,7 @@
-import { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { configureStore } from '../stores/configureStore';
-import initialStore from '../stores/stores';
 
 import IndexWrapper from '../container/index';
 

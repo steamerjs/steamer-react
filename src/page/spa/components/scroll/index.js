@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
 
 @pureRender
@@ -79,6 +79,6 @@ export default class Scroll extends Component {
 			<div className="content-wrap">
 			   {this.props.children}
 			</div>
-		)
+		);
 	}
 }

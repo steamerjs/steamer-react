@@ -1,10 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import merge from 'lodash.merge';
-import { render } from 'react-dom';
 import { formatDate } from 'utils';
 import Connect from '../connect/connect';
 import { GET_COMMENT_LIST } from '../../common/constants/constants';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
 
 import Spinner from 'spinner';
 import Touch from 'touch';
@@ -84,7 +82,7 @@ class Comment extends Component {
         				</div>
         			</div>
         		</div>
-			)
+			);
 		});
 
 		commentList = (!commentList.length) ? <div>暂无评论</div> : commentList;
@@ -106,7 +104,7 @@ class Comment extends Component {
 	        	</div>
 	        	<Spinner isShow={this.props.spinLoading}/>
 	        </div>
-		)
+		);
 	}
 }
 

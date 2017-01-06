@@ -1,5 +1,5 @@
 import { getItem, getHash } from 'utils';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { LATEST_NEWS } from '../constants/constants';
 
 /** other const **/
 const initialState = {

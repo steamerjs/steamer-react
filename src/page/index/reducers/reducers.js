@@ -2,16 +2,21 @@ import { combineReducers } from 'redux';
 import merge from 'lodash.merge';
 import { setItem } from 'utils';
 import initialState from '../stores/stores';
-import { GET_NEWS_LIST, GET_TOP_NEWS } from 'page/common/constants/constants';
-import { GET_ARGS, TABS_UPDATE, TOGGLE_CONTENT,
-		 TOGGLE_LIST_LOADING, TOGGLE_SPIN_LOADING, LIKE_NEWS, DISLIKE_NEWS } from '../actions/actions';
+import { 
+	GET_NEWS_LIST,
+	 GET_TOP_NEWS 
+} from 'page/common/constants/constants';
+import { 
+	GET_ARGS, 
+	TABS_UPDATE, 
+	TOGGLE_LIST_LOADING, 
+	TOGGLE_SPIN_LOADING, 
+	LIKE_NEWS, 
+	DISLIKE_NEWS 
+} from '../actions/actions';
 
 
 const news = function(state = initialState.news, action) {
-	let listInfoMap = {
-		10: 'listLatest',  // 最新新闻
-		11: 'listLike', //  收藏新闻
-	};
 
 	switch(action.type) {
 
@@ -122,7 +127,6 @@ var listLoading = function(state = initialState.listLoading, action) {
 	switch(action.type) {
 		case TOGGLE_LIST_LOADING:
 			return action.value;
-			break;
 		default:
 			return state;
 	}
@@ -132,7 +136,6 @@ var spinLoading = function(state = initialState.spinLoading, action) {
 	switch(action.type) {
 		case TOGGLE_SPIN_LOADING:
 			return action.value;
-			break;
 		default:
 			return state;
 	}
