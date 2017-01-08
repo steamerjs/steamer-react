@@ -134,7 +134,7 @@ var prodConfig = {
         	// 使用压缩版本redux
             'redux': 'redux/dist/redux.min',
             'react-redux': 'react-redux/dist/react-redux',
-            'utils': path.join(configWebpack.path.src, '/js/common/utils'),
+            'utils': 'steamer-browserutils/index',
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/index.js'),
             'spinner-p': path.join(configWebpack.path.src, '/page/common/components/spinner/index-p.js'),

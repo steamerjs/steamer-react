@@ -36,6 +36,7 @@
     "last 5 versions"
   ],
   "dependencies": {
+    "steamer-browserutils": "^1.0.0",
     "steamer-net": "^1.1.0"
   },
   "devDependencies": {
@@ -92,7 +93,7 @@
     "redux-immutable": "^3.0.6",
     "redux-thunk": "^1.0.3",
     "reselect": "^2.5.2",
-    "steamer-browserutils": "^0.6.1",
+    "steamer-browserutils": "^1.0.0",
     "steamer-net": "^1.1.0",
     "steamer-responsive": "^0.2.0",
     "steamer-webpack-utils": "^0.1.1",
