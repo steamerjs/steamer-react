@@ -163,3 +163,15 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 
 * 腾讯新闻主页spa:
   - `localhost:9000/spa.html`
+
+#### 规范代码
+我们使用`eslint`和`stylelint`分别对代码进行扫描并进行规范，使用前先全局安装`eslint`和`stylelint`：
+```javascript
+npm i -g eslint
+npm i -g stylelint
+```
+
+然后再使用：
+```javascript
+npm run lint
+```
