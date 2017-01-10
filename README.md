@@ -27,12 +27,11 @@ npm run build
 
 ## 基本配置
 打开 tools/config.js进行以下基本配置:
-
+```
 * `webpack.webserver`  html的链接
 * `webpack.cdn`  cdn的链接
 * `server.port`  开发环境服务器端口
 * `server.route` 开发环境访问的路径
-
 ```
 
 
