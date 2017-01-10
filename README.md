@@ -79,9 +79,9 @@ tools  -- 构建工具
 
 
 ## 新建页面和页面相关逻辑
-starter-kit已支持多个入口js文件，并借助`getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx两类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.prod.js`中设定。
+starter-kit已支持多个入口js文件，并借助`getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是`src/page/xxx/main.js`此类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.prod.js`中设定。
 
-新建`html`文件，则直接在`src`目录下新建即可。
+新建`html`文件，则直接在`src`目录下新建即可，注意html文件名和主逻辑js所在文件夹名相同。如`index.html`和`src/page/index`
 
 
 ## 多页面开发
@@ -150,10 +150,10 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 
 
 ## 支持preact轻量类react框架
-由于某些需求如运营活动可能需要比较轻量的框架，因此starter-kit也支持`preact`。目前，默认有`preact`相关引入的文件，都需要用`.jsx`文件后缀才能正常编译，而`react`的相关文件则用`.js`。具体可参考`src/page/pindex`文件夹，或到`preact`[官方网站](https://preactjs.com/)参考文档。
+由于某些需求如运营活动可能需要比较轻量的框架，因此starter-kit也支持`preact`。目前，默认有`preact`相关引入的文件，都需要在文件顶部加上`/** @jsx h */`才能正常编译。具体可参考`src/page/pindex`文件夹，或到`preact`[官方网站](https://preactjs.com/)参考文档。
 
 
-### 开发环境支持转发
+## 开发环境支持转发
 为了方便调试，在`webpack.server.js`中有使用代理模块。
 
 如果想转发前端的资源到`/news/`目录下，可以这样写：
