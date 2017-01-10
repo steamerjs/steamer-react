@@ -215,3 +215,4 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 * [React移动web极致优化](https://github.com/lcxfs1991/blog/issues/8)
 * [webpack使用优化（基本篇）](https://github.com/lcxfs1991/blog/issues/2)
 * [webpack使用优化（react篇）](https://github.com/lcxfs1991/blog/issues/7)
+* [webpack Performance: The Comprehensive Guide](https://github.com/lcxfs1991/blog/issues/15)
