@@ -110,6 +110,7 @@ var devConfig = {
             'redux': 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
             'utils': path.join(configWebpack.path.src, '/js/common/utils'),
+            'sutils': 'steamer-browserutils/index',
             'spin': path.join(configWebpack.path.src, '/js/common/spin'),
             'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/index.js'),
             'spinner-p': path.join(configWebpack.path.src, '/page/common/components/spinner/index-p.js'),
