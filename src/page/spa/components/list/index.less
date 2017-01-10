@@ -15,11 +15,11 @@
 
 .item {
     -webkit-tap-highlight-color: transparent;
-    &:after {
+    &::after {
         border-top: 1px solid #dedfe0;
         border-bottom: 1px solid #dedfe0;
     }
-    & + .item:after {
+    & + .item::after {
         border-top: 0 none;
     }
     .item-inner {
@@ -136,8 +136,8 @@
 }
 
 .item {
-    -webkit-transition: -webkit-transform .2s ease-out;
-            transition:         transform .2s ease-out;
+    -webkit-transition: -webkit-transform 0.2s ease-out;
+            transition: transform 0.2s ease-out;
 
     &.active-like {
         -webkit-transform: translate3d(-66px, 0, 0);

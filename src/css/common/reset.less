@@ -13,10 +13,8 @@
 -------------------------------------------------------------------------------*/
 html,
 body {
-    font-family: "Microsoft YaHei", -apple-system-font,"黑体", "Helvetica Neue",Helvetica,STHeiTi,sans-serif;
-
+    font-family: "Microsoft YaHei", -apple-system-font, "黑体", "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
     -webkit-user-select: none;
-
     -webkit-user-drag: none;
 }
 
@@ -134,8 +132,8 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
     box-sizing: inherit;
 }
 
@@ -166,10 +164,10 @@ q {
     quotes: none;
 }
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
     content: "";
     content: none;
 }
@@ -280,10 +278,10 @@ sup {
     line-height: 0;
 }
 sup {
-    top: -.5em;
+    top: -0.5em;
 }
 sub {
-    bottom: -.25em;
+    bottom: -0.25em;
 }
 
 /* standardize any monospaced elements */

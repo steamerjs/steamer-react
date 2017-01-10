@@ -1,10 +1,11 @@
 /* let's clear some floats */
-.clearfix:before,
-.clearfix:after {
+.clearfix::before,
+.clearfix::after {
     display: table;
     content: " ";
 }
-.clearfix:after {
+
+.clearfix::after {
     clear: both;
 }
 
@@ -27,8 +28,9 @@
 .border-1px {
     position: relative;
 }
-.border-1px:before,
-.border-1px:after {
+
+.border-1px::before,
+.border-1px::after {
     position: absolute;
     left: 0;
 
@@ -39,40 +41,45 @@
 
     border-top: 1px solid #c8c7cc;
 }
-.border-1px:before {
+
+.border-1px::before {
     top: 0;
 
     display: none;
 }
-.border-1px:after {
+
+.border-1px::after {
     bottom: 0;
 }
-@media (-webkit-min-device-pixel-ratio:1.5), (min-device-pixel-ratio: 1.5) {
-    .border-1px:after,
-    .border-1px:before {
-        -webkit-transform: scaleY(.7);
-                transform: scaleY(.7);
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+    .border-1px::after,
+    .border-1px::before {
+        -webkit-transform: scaleY(0.7);
+                transform: scaleY(0.7);
         -webkit-transform-origin: 0 0;
     }
-    .border-1px:after {
+    .border-1px::after {
         -webkit-transform-origin: left bottom;
     }
 }
 
-@media (-webkit-min-device-pixel-ratio:2), (min-device-pixel-ratio: 2) {
-    .border-1px:after,
-    .border-1px:before {
-        -webkit-transform: scaleY(.5);
-                transform: scaleY(.5);
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+    .border-1px::after,
+    .border-1px::before {
+        -webkit-transform: scaleY(0.5);
+                transform: scaleY(0.5);
     }
 }
 
 
-/** 1px border 四条边都可以指定 */
+// 1px border 四条边都可以指定
+
 .ui-border-1px {
     position: relative;
 }
-.ui-border-1px:after {
+
+.ui-border-1px::after {
     position: absolute;
     top: 0;
     right: 0;
@@ -88,8 +95,10 @@
             transform-origin: 0 0;
     pointer-events: none;
 }
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-    .ui-border-1px:after {
+
+    .ui-border-1px::after {
         position: absolute;
         top: 0;
         right: -100%;
@@ -99,8 +108,8 @@
         display: block;
 
         content: "";
-        -webkit-transform: scale(.5);
-                transform: scale(.5);
+        -webkit-transform: scale(0.5);
+                transform: scale(0.5);
         -webkit-transform-origin: 0 0;
                 transform-origin: 0 0;
         pointer-events: none;
