@@ -28,7 +28,7 @@ var config = {
     },
     server: {                    // webpack开发环境服务器配置  
         port: "9000",              // port for local server
-        route: "/news/"  // http://host/route/
+        route: "/news/"  // http://host/news/
     },
 };
 

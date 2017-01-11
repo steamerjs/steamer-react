@@ -8,7 +8,7 @@ import {
 	GET_TOP_NEWS, 
 	GET_COMMENT_LIST, 
 	GET_NEWS_DETAIL 
-} from '../../common/constants/constants';
+} from '../../common/constants/cgiPath';
 import { 
 	GET_ARGS, TABS_UPDATE,
 	TOGGLE_LIST_LOADING, 
