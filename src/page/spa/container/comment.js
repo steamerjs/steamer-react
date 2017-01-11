@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import merge from 'lodash.merge';
-import { formatDate } from 'utils';
+import { 
+	formatDate 
+} from 'utils';
 import Connect from '../connect/connect';
-import { GET_COMMENT_LIST } from '../../common/constants/constants';
+import { 
+	GET_COMMENT_LIST 
+} from '../../common/constants/cgiPath';
 
 import Spinner from 'spinner';
 import Touch from 'touch';

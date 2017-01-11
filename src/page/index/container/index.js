@@ -4,7 +4,7 @@ import Connect from '../connect/connect';
 import { 
 	GET_NEWS_LIST, 
 	GET_TOP_NEWS 
-} from 'page/common/constants/constants';
+} from 'page/common/constants/cgiPath';
 import { 
 	LATEST_NEWS, 
 	LIKE_NEWS 

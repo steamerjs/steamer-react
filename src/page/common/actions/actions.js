@@ -1,4 +1,4 @@
-import { API_REQUEST } from '../constants/constants';
+import { API_REQUEST } from '../constants/cgiPath';
 
 
 export function request(cgiName, params, opts = {}, requiredFields = []) {

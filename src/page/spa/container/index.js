@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import merge from 'lodash.merge';
 import Connect from '../connect/connect';
-import { GET_NEWS_LIST, GET_TOP_NEWS, GET_NEWS_DETAIL } from '../../common/constants/constants';
-import { LATEST_NEWS, LIKE_NEWS } from '../constants/constants';
+import { 
+	GET_NEWS_LIST, 
+	GET_TOP_NEWS, 
+	GET_NEWS_DETAIL 
+} from '../../common/constants/cgiPath';
+import { 
+	LATEST_NEWS, 
+	LIKE_NEWS 
+} from '../constants/constants';
 
 import Scroll from 'scroll';
 import Spinner from 'spinner';

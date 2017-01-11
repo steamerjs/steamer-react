@@ -4,8 +4,8 @@ import { setItem } from 'utils';
 import initialState from '../stores/stores';
 import { 
 	GET_NEWS_LIST,
-	 GET_TOP_NEWS 
-} from 'page/common/constants/constants';
+	GET_TOP_NEWS 
+} from 'page/common/constants/cgiPath';
 import { 
 	GET_ARGS, 
 	TABS_UPDATE, 
