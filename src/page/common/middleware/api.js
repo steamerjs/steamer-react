@@ -13,9 +13,8 @@ export default store => next => action => {
 
     // let ACTION_TYPE = action['type'];
     let { cgiName, params, opts = {} } = API_OPT;
-    let { localData } = opts;
 
-    let { onSuccess, onError, ajaxType = 'GET', param } = params;
+    let { onSuccess, onError, ajaxType = 'GET', param, localData } = params;
 
     // 触发下一个action
     let nextAction = function(type, param, opts) {
@@ -33,7 +32,7 @@ export default store => next => action => {
 
     net.ajaxInit({
         dataReturnSuccessCondition: function(data) {
-            return !data.ret || data.ret === -1;
+            return !data.ret || !data.retcode;
         }
     });
 
