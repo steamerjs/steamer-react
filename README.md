@@ -192,17 +192,9 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
   - `localhost:9000` => `/react/build/` 匹配本地html资源
   - `localhost:8000` => `/react/build/` 匹配本地除cdn资源 
 
-* Charles Map Remote: 
-  - `localhost:9000/api/*` => `localhost:3000/api/`
-  - 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
-
 * Fiddler Willow Rule:
  - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\build\$1`
  - `regex:^https?:\/\/localhost:8000\/(.*)$`    `\local path\build\$1`
-
-* Fiddler Willow Extension:
- - `localhost:9000/api/` => `localhost:3000/api/`
- - 此处是为了使spa的详情页能获得数据，如果不需要看详情页，可以不需要配置
 
  * 腾讯新闻主页:
   - `localhost:9000/index.html` 
