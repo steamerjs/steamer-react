@@ -226,12 +226,13 @@ var prodConfig = {
     watch: false, //  watch mode
 };
 
-configWebpack.html.forEach(function(page) {
+configWebpack.html.forEach(function(page, key) {
     utils.addPlugins(prodConfig, HtmlResWebpackPlugin, {
         mode: "html",
         filename: "../webserver/" + page + ".html",
         template: "src/" + page + ".html",
         favicon: "src/favicon.ico",
+        entryLog: !key ? true : false,
         htmlMinify: {
             removeComments: true,
             collapseWhitespace: true,

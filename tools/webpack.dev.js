@@ -183,7 +183,7 @@ var devConfig = {
     // devtool: "#inline-source-map",
 };
 
-configWebpack.html.forEach(function(page) {
+configWebpack.html.forEach(function(page, key) {
     utils.addPlugins(devConfig, HtmlResWebpackPlugin, {
         mode: "html",
         filename: page + ".html",
@@ -191,6 +191,7 @@ configWebpack.html.forEach(function(page) {
         favicon: "src/favicon.ico",
         // chunks: configWebpack.htmlres.dev[page],
         htmlMinify: null,
+        entryLog: !key ? true : false,
         templateContent: function(tpl) {
             var regex = new RegExp("<script.*src=[\"|\']*(.+).*?[\"|\']><\/script>", "ig");
             tpl = tpl.replace(regex, function(script, route) {
