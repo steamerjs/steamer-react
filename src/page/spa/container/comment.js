@@ -5,8 +5,8 @@ import {
 } from 'utils';
 import Connect from '../connect/connect';
 import { 
-	GET_COMMENT_LIST 
-} from '../../common/constants/cgiPath';
+	getCommentList
+} from '../../common/db';
 
 import Spinner from 'spinner';
 import Touch from 'touch';
@@ -24,6 +24,7 @@ class Comment extends Component {
 		};
 		this.commentId = this.props.params.id;
 
+		this.getCommentList = getCommentList.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,32 +37,7 @@ class Comment extends Component {
 		}
 	}
 
-	getCommentList() {
-		let url = GET_COMMENT_LIST,
-			opts = {};
-
-		var pa = merge({}, {
-			comment_id: this.props.params.id,
-			otype: "jsonp",
-			jsonCbName: "renderComment",
-			lcount: 20,
-			from: 'share',
-			v: (new Date()).getTime(),
-		}, pa);
-
-		var param = {
-			param: pa,
-			ajaxType: 'JSONP',
-			onSuccess: function(data) {
-				// console.log(data);
-			},
-			onError: function(res) {
-				console.log("err");
-			}
-		};
-
-		this.props.request(url, param, opts);
-	}
+	
 
 	render() {
 		var commentId = this.commentId;

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
 import classnames from 'classnames';
-import { LATEST_NEWS} from '../../constants/constants';
+import { 
+	LATEST_NEWS
+} from '../../../common/constants';
 
 import Touch from 'touch';
 
