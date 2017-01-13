@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
-import { LATEST_NEWS, LIKE_NEWS } from '../../constants/constants';
+import { 
+	LATEST_NEWS, 
+	LIKE_NEWS 
+} from '../../../common/constants';
 
 import Touch from 'touch';
 import classNames from 'classnames';
 require('./index.less');
-
 
 function TabItem(item, key) {
 	return (

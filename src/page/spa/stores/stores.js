@@ -1,7 +1,7 @@
 import { getItem, getHash } from 'utils';
 import { 
 	LATEST_NEWS 
-} from '../constants/constants';
+} from '../../common/constants';
 
 /** other const **/
 const initialState = {
