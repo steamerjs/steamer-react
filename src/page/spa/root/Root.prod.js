@@ -3,7 +3,7 @@ import {
 } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from '../stores/configureStore';
+import configureStore from '../stores/configureStore';
 
 import IndexWrapper from '../container/index';
 import CommentWrapper from '../container/comment';
