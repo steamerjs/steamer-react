@@ -10,7 +10,7 @@ else {
 
 import Preact, { h, render, Component } from 'preact';
 import { Provider } from 'preact-redux';
-import { configureStore } from '../stores/configureStore';
+import configureStore from '../stores/configureStore';
 
 import IndexWrapper from '../container/index';
 

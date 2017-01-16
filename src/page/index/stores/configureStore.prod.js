@@ -8,7 +8,7 @@ const finalCreateStore = compose(
   	applyMiddleware(thunk, api, logger)
 )(createStore);
 
-export function configureStore(initialState) {
+export default function configureStore(initialState) {
 
     const store = finalCreateStore(rootReducer, initialState);
     
