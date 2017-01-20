@@ -82,7 +82,7 @@
     "preact": "^6.3.0",
     "preact-redux": "^1.2.0",
     "proxy-middleware": "^0.15.0",
-    "pure-render-deepcompare-decorator": "^1.0.0",
+    "pure-render-deepcompare-decorator": "^1.0.1",
     "react": "^15.4.1",
     "react-addons-perf": "^15.4.1",
     "react-dom": "^15.4.1",
