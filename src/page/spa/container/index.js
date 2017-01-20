@@ -74,7 +74,6 @@ class Wrapper extends Component {
 	        	/>
 	            <div className="cm-content">
 	            	<Scroll 
-	            			wrapper={".content-wrap"}
 	            			ref="scroll"
 	            			loadDataForScroll={this.loadNewsList}
 	            			disable={this.state.lock}

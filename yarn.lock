@@ -2832,9 +2832,9 @@ html-minifier@^3.0.1:
     relateurl "0.2.x"
     uglify-js "2.7.x"
 
-html-res-webpack-plugin@^1.2.2:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/html-res-webpack-plugin/-/html-res-webpack-plugin-1.2.3.tgz#0fd9b91bd99b998dcec6a6f56b37a9db8b4f8c8d"
+html-res-webpack-plugin:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/html-res-webpack-plugin/-/html-res-webpack-plugin-1.2.4.tgz#c287f94ea85ae4c080749ae708f3b347d4280200"
   dependencies:
     html-minifier "^1.1.1"
     loader-utils "^0.2.15"

@@ -149,7 +149,6 @@ class Wrapper extends Component {
 	        	/>
 	            <div className="cm-content">
 	            	<Scroll 
-	            			wrapper={".content-wrap"}
 	            			ref="scroll"
 	            			loadDataForScroll={this.loadDataForScroll}
 	            	>
