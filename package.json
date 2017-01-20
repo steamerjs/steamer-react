@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "react-redux-webpack-boilerplate",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
@@ -82,6 +82,7 @@
     "preact": "^6.3.0",
     "preact-redux": "^1.2.0",
     "proxy-middleware": "^0.15.0",
+    "pure-render-deepcompare-decorator": "^1.0.0",
     "react": "^15.4.1",
     "react-addons-perf": "^15.4.1",
     "react-dom": "^15.4.1",
