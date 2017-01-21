@@ -93,7 +93,7 @@ var prodConfig = {
             {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer&localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve('src')),
-                include: path.resolve(configWebpack.path.src)
+                // include: path.resolve(configWebpack.path.src)
             },
             {
                 test: /\.html$/,
@@ -142,9 +142,9 @@ var prodConfig = {
             'net': 'steamer-net/index',
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
             'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
-            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),
+            'scroll': 'react-list-scroll/lib/',
             'scroll-p':path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
-            'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
+            'pure-render-decorator': 'pure-render-deepCompare-decorator/lib/',
         }
     },
     plugins: [

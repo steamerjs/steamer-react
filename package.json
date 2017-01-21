@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "react-redux-webpack-boilerplate",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
@@ -38,10 +38,7 @@
   "browserslist": [
     "last 5 versions"
   ],
-  "dependencies": {
-    "steamer-browserutils": "^1.0.0",
-    "steamer-net": "^1.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
@@ -69,7 +66,7 @@
     "happypack": "^3.0.0",
     "history": "^3.0.0",
     "html-loader": "^0.4.4",
-    "html-res-webpack-plugin": "^1.2.2",
+    "html-res-webpack-plugin": "^1.2.5",
     "http-proxy": "^1.12.0",
     "image-webpack-loader": "^1.8.0",
     "immutable": "^3.7.6",
@@ -82,10 +79,12 @@
     "preact": "^6.3.0",
     "preact-redux": "^1.2.0",
     "proxy-middleware": "^0.15.0",
+    "pure-render-deepcompare-decorator": "^1.0.1",
     "react": "^15.4.1",
     "react-addons-perf": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-list-scroll": "^0.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.7",

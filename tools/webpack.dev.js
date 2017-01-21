@@ -70,7 +70,7 @@ var devConfig = {
                 test: /\.less$/,
                 loader: "happypack/loader?id=lessHappy",         
                 //ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
-                include: path.resolve(configWebpack.path.src),
+                // include: [path.resolve(configWebpack.path.src), 'node_modules'],
             },
             {
                 test: /\.html$/,
@@ -117,9 +117,9 @@ var devConfig = {
             'net': 'steamer-net/index',
             'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
             'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
-            'scroll':path.join(configWebpack.path.src, '/page/common/components/scroll/index.js'),
-            'scroll-p':path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
-            'pure-render-decorator': path.join(configWebpack.path.src, '/js/common/pure-render-decorator'),
+            'scroll': 'react-list-scroll/lib/',
+            'scroll-p': path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
+            'pure-render-decorator': 'pure-render-deepCompare-decorator/lib/',
         }
     },
     plugins: [
