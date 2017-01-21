@@ -38,11 +38,7 @@
   "browserslist": [
     "last 5 versions"
   ],
-  "dependencies": {
-    "html-res-webpack-plugin": "^1.2.4",
-    "steamer-browserutils": "^1.0.0",
-    "steamer-net": "^1.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
@@ -70,7 +66,7 @@
     "happypack": "^3.0.0",
     "history": "^3.0.0",
     "html-loader": "^0.4.4",
-    "html-res-webpack-plugin": "^1.2.4",
+    "html-res-webpack-plugin": "^1.2.5",
     "http-proxy": "^1.12.0",
     "image-webpack-loader": "^1.8.0",
     "immutable": "^3.7.6",
