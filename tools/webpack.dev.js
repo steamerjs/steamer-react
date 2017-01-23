@@ -126,7 +126,7 @@ var devConfig = {
         new CopyWebpackPlugin([
             {
                 from: 'src/libs/',
-                to: 'libs/'
+                to: 'libs/[name].[ext]'
             }
         ]),
         new webpack.optimize.OccurenceOrderPlugin(),
