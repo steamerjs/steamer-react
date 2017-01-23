@@ -24,52 +24,46 @@ var devConfig = {
         chunkFilename: "chunk/[name].js",
     },
     module: {
-        loaders: [
-            // { 
-            //     test: /\.js$/,
-            //     loaders: ['react-hot'],
-            //     exclude: /node_modules/,
-            // },
+        rules: [
             { 
                 test: /\.jsx$/,
-                loader: 'happypack/loader?id=jsxHappy',
-                // loader: 'babel',
-                // query: {
-                //     cacheDirectory: './.webpack_cache/',
-                //     "plugins": [
-                //         ["transform-decorators-legacy"],
-                //         ["transform-react-jsx", { "pragma":"preact.h" }]
-                //     ],
-                //     presets: [
-                //         'es2015-loose', 
-                //     ]
-                // },
+                // loader: 'happypack/loader?id=jsxHappy',
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: './.webpack_cache/',
+                    "plugins": [
+                        ['react-hot-loader/babel', "transform-decorators-legacy"],
+                        ["transform-react-jsx", { "pragma":"preact.h" }]
+                    ],
+                    presets: [
+                        'es2015-loose', 
+                    ]
+                },
                 exclude: /node_modules/,
             },
             { 
                 test: /\.js$/,
-                loader: 'happypack/loader?id=jsHappy',
-                // loader: 'babel',
-                // query: {
-                //     cacheDirectory: './.webpack_cache/',
-                //     plugins: ['transform-decorators-legacy'],
-                //     presets: [
-                //         'es2015-loose', 
-                //         'react',
-                //     ]
-                // },
+                // loader: 'happypack/loader?id=jsHappy',
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: './.webpack_cache/',
+                    plugins: ['transform-decorators-legacy'],
+                    presets: [
+                        'es2015-loose', 
+                        'react',
+                    ]
+                },
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.css$/,
-            //     // 单独抽出样式文件
-            //     loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-            //     include: path.resolve(configWebpack.path.src)
-            // },
             {
                 test: /\.less$/,
-                loader: "happypack/loader?id=lessHappy",         
-                //ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+                // loader: "happypack/loader?id=lessHappy",         
+                use: [
+                    "style-loader",
+                    "css-loader?localIdentName=[name]-[local]-[hash:base64:5]", 
+                    // "postcss-loader",
+                    "less-loader?root=" + path.resolve('src'),
+                ]
                 // include: [path.resolve(configWebpack.path.src), 'node_modules'],
             },
             {
@@ -88,23 +82,14 @@ var devConfig = {
                 loader: "url-loader?name=[name].[ext]",
                 include: path.resolve(configWebpack.path.src)
             },
-        ],
-        noParse: [
-            
-        ]
-    },
-    postcss: function(webpack) { 
-        return [
-            PostcssImport(),
-            Autoprefixer() 
         ]
     },
     resolve: {
-        root: [
-            path.resolve(configWebpack.path.src)
+        modules: [
+            configWebpack.path.src,
+            'node_modules'
         ],
-        moduledirectories:['node_modules', configWebpack.path.src],
-        extensions: ["", ".js", ".jsx", ".es6", "css", "scss", "less", "png", "jpg", "jpeg", "ico"],
+        extensions: [".js", ".jsx", ".es6", "css", "scss", "less", "png", "jpg", "jpeg", "ico"],
         alias: {
             'react/lib/ReactMount': 'react-dom/lib/ReactMount',
             'redux': 'redux/dist/redux',
@@ -123,60 +108,68 @@ var devConfig = {
         }
     },
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: true
+        }),
         new CopyWebpackPlugin([
             {
                 from: 'src/libs/',
                 to: 'libs/[name].[ext]'
             }
         ]),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        // new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new HappyPack({
-            id: 'lessHappy',
-            verbose: false,
-            loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve('src')],
+        // new HappyPack({
+        //     id: 'lessHappy',
+        //     verbose: false,
+        //     loaders: ['style!css?localIdentName=[name]-[local]-[hash:base64:5]!postcss!less?root=' + path.resolve('src')],
+        // }),
+        // new HappyPack({
+        //     id: 'jsxHappy',
+        //     verbose: false,
+        //     loaders: [{
+        //         path: 'babel',
+        //         query: {
+        //             cacheDirectory: './.webpack_cache/',
+        //             "plugins": [
+        //                 ["transform-decorators-legacy"],
+        //                 ["transform-react-jsx", { "pragma":"preact.h" }]
+        //             ],
+        //             presets: [
+        //                 ["es2015", {"loose": true}]
+        //             ]
+        //         },
+        //     }]
+        // }),
+        // new HappyPack({
+        //     id: 'jsHappy',
+        //     verbose: false,
+        //     loaders: [{
+        //         path: 'babel',
+        //         query: {
+        //             cacheDirectory: './.webpack_cache/',
+        //             plugins: [
+        //                 'react-hot-loader/babel',
+        //                 'transform-decorators-legacy'
+        //             ],
+        //             presets: [
+        //                 ["es2015", {"loose": true}],
+        //                 'react',
+        //             ]
+        //         },
+        //     }],
+        // }),
+        new ExtractTextPlugin({
+            filename: "./css/[name].css", 
+                filenamefilter: function(filename) {
+                // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
+                // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
+                return filename.replace('/js', '');
+            }, 
+            disable: true
         }),
-        new HappyPack({
-            id: 'jsxHappy',
-            verbose: false,
-            loaders: [{
-                path: 'babel',
-                query: {
-                    cacheDirectory: './.webpack_cache/',
-                    "plugins": [
-                        ["transform-decorators-legacy"],
-                        ["transform-react-jsx", { "pragma":"preact.h" }]
-                    ],
-                    presets: [
-                        ["es2015", {"loose": true}]
-                    ]
-                },
-            }]
-        }),
-        new HappyPack({
-            id: 'jsHappy',
-            verbose: false,
-            loaders: [{
-                path: 'babel',
-                query: {
-                    cacheDirectory: './.webpack_cache/',
-                    plugins: [
-                        'react-hot-loader/babel',
-                        'transform-decorators-legacy'
-                    ],
-                    presets: [
-                        ["es2015", {"loose": true}],
-                        'react',
-                    ]
-                },
-            }],
-        }),
-        new ExtractTextPlugin("./css/[name].css", {filenamefilter: function(filename) {
-            // 由于entry里的chunk现在都带上了js/，因此，这些chunk require的css文件，前面也会带上./js的路径
-            // 因此要去掉才能生成到正确的路径/css/xxx.css，否则会变成/css/js/xxx.css
-            return filename.replace('/js', '');
-        }, disable: true}),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin()
     ],
     watch: true, //  watch mode
     // 是否添加source-map，可去掉注释开启
