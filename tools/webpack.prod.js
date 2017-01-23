@@ -159,11 +159,9 @@ var prodConfig = {
         new CopyWebpackPlugin([
 		    {
 		        from: 'src/libs/',
-		        to: 'libs/'
+		        to: 'libs/[name]-' + configWebpack.hash + '.[ext]'
 		    }
-		], {
-            namePattern: "[name]-" + configWebpack.contenthash + ".js"
-        }),
+		]),
         new HappyPack({
             id: 'jsxHappy',
             verbose: false,
