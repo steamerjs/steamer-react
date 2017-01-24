@@ -94,7 +94,7 @@ starter-kit已支持多个入口js文件，并借助`getJsFile`方法，根据�
 * [copy-webpack-plugin-hash](https://www.npmjs.com/package/copy-webpack-plugin-hash)
 * [extract-text-webpack-plugin-steamer](https://www.npmjs.com/package/extract-text-webpack-plugin-steamer)
 
-目前借助`getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，可借助[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件的能力，既可以使用以前的替换匹配的方式，也可以进行配置。更多配置可参考插件文档。
+目前借助[steamer-webpack-util](https://github.com/SteamerTeam/steamer-webpack-utils)中的 `getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，可借助[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件的能力，既可以使用以前的替换匹配的方式，也可以进行配置。更多配置可参考插件文档。
 
 如果entry是js/index：
 ```javascript
@@ -108,10 +108,28 @@ entry: {
 <link rel="stylesheet" href="js/index">
 <script src="js/index"></script>
 
-```
+```html
 如果你使用[copy-webpack-plugin-hash](https://www.npmjs.com/package/copy-webpack-plugin-hash)插件复制js库，那么你可以这样配置：
 ```html
 <script src="libs/react"></script>
+```
+
+
+## 自定义选择 entry chunk 和 html 文件
+借助[steamer-webpack-util](https://github.com/SteamerTeam/steamer-webpack-utils)中的 `filterHtmlFile` 和 `filterJsFile` 方法，可以对由 `getJsFile` 和 `getHtmlFile` 生成的 js 或 html 文件进行选择。
+
+如，选择 `index` 名称的 `html` 文件
+
+```javascript
+// configWebpack.html 是来自 config/project.js 中的配置
+utils.filterHtmlFile(configWebpack.html, ['index'])
+```
+
+如，选择 `js/index` chunk 名的 `js` 文件 
+
+```javascript
+// configWebpack.entry 是来自 config/project.js 中的配置
+utils.filterJsFile(configWebpack.entry, ["js/index"])
 ```
 
 
@@ -120,12 +138,12 @@ entry: {
 若想使用Sass，可自行添加[sass-loader](https://github.com/jtangelder/sass-loader)和[node-sass](https://github.com/sass/node-sass)及进行相关配置。
 
 由于在`less-loader`处设置了`root=path.resolve("src")`的`query`，因此若想引入在组件中引用src/css/中的样式文件，可以使用:
-```
+```css
 @import "/css/common/common.less";
 ```
 
 若想引入node_modules中的样式文件，可以使用：
-```
+```css
 @import "~steamer-responsive/index.less";
 ```
 
@@ -134,7 +152,7 @@ entry: {
 目前构建已经支持多个合图。只需要在src/img/sprites/下面新建文件夹，然后放在需要合的图，就会自动在src/css/文件夹下生成sprites/文件夹，里面包含了对应的合图和less文件。
 
 现在，你不用再统一将合图样式放在`src/page/xxx/container/xxx.less`中，你可以在需要的时候，在组件对应的less样式文件中引入便可，可参考`src/page/index`里面的做法。如下：
-```
+```css
 @import "/src/css/sprites/sprite-list.less";
 ```
 
