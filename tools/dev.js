@@ -6,7 +6,7 @@ var webpack = require('webpack');
 
     var fs = require('fs');
 
-var compiler = webpack(require('./webpack.prod'));
+var compiler = webpack(require('./webpack.dev'));
 compiler.run(function(err, stats) {
     if (!err) {
         const jsonStats = stats.toJson();

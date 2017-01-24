@@ -8,6 +8,7 @@ var config = require('../config/project'),
     configWebpack = config.webpack;
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
+    Clean = require('clean-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin-steamer"),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
     HappyPack = require('happypack'),
@@ -123,6 +124,8 @@ var devConfig = {
         }
     },
     plugins: [
+        // remove previous dev folder
+        new Clean(['dev'], {root: path.resolve()}),
         new CopyWebpackPlugin([
             {
                 from: 'src/libs/',
