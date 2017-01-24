@@ -4,7 +4,7 @@ efficient react starter kit
 
 ## 使用
 
-```
+```javascript
 // 安装依赖
 npm i
 
@@ -26,8 +26,10 @@ npm run dist
 
 
 ## 基本配置
+
 打开 config/project.js进行以下基本配置:
-```
+
+```javascript
 * `config.webserver`  html的链接
 * `config.cdn`  cdn的链接
 * `config.port`  开发环境服务器端口
@@ -37,7 +39,7 @@ npm run dist
 
 ## 目录结构
 
-```
+```javascript
 .steamer -- steamer配置
 dist    -- 生产环境代码
 |
@@ -97,6 +99,7 @@ starter-kit已支持多个入口js文件，并借助`getJsFile`方法，根据�
 目前借助[steamer-webpack-util](https://github.com/SteamerTeam/steamer-webpack-utils)中的 `getHtmlFile`方法，自动扫描html文件。除此以外，若需要注入js, css等资源，可借助[html-res-webpack-plugin](https://github.com/lcxfs1991/html-res-webpack-plugin)插件的能力，既可以使用以前的替换匹配的方式，也可以进行配置。更多配置可参考插件文档。
 
 如果entry是js/index：
+
 ```javascript
 entry: {
   "js/index": path.resolve("src/page/js/index")
@@ -104,12 +107,14 @@ entry: {
 ```
 
 那么你可以这样配置js和css文件：
+
 ```html
 <link rel="stylesheet" href="js/index">
 <script src="js/index"></script>
+```
 
-```html
 如果你使用[copy-webpack-plugin-hash](https://www.npmjs.com/package/copy-webpack-plugin-hash)插件复制js库，那么你可以这样配置：
+
 ```html
 <script src="libs/react"></script>
 ```
