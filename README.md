@@ -20,18 +20,18 @@ npm i -g stylelint
 npm lint
 
 // 生产代码生成
-npm run build
+npm run dist
 
 ```
 
 
 ## 基本配置
-打开 tools/config.js进行以下基本配置:
+打开 config/project.js进行以下基本配置:
 ```
-* `webpack.webserver`  html的链接
-* `webpack.cdn`  cdn的链接
-* `server.port`  开发环境服务器端口
-* `server.route` 开发环境访问的路径
+* `config.webserver`  html的链接
+* `config.cdn`  cdn的链接
+* `config.port`  开发环境服务器端口
+* `config.route` 开发环境访问的路径
 ```
 
 
@@ -39,8 +39,9 @@ npm run build
 
 ```
 .steamer -- steamer配置
-build    -- 生产环境代码
-src      -- 源代码
+dist    -- 生产环境代码
+|
+src     -- 源代码
 |——————css -- 公共样式
 |      |—— common 公共样式
 |      |—— sprites 生成的合图样式及图片
@@ -62,15 +63,18 @@ src      -- 源代码
 |      |—— index 首页逻辑
 |      |
 |      |
-favicon.ico
+|------favicon.ico
+|      |
+|      |
+config -- 项目配置
+|------project.js -- 项目配置，主要被webpack等使用
+|------steamer.config.js -- 可由steamer生成，包括webserver, cdn, port, route等
+|      |
 |      |
 tools  -- 构建工具
 |      |
-|——————config -- eslint和stylelint的配置
-|——————config-template -- webpack配置文件模板，用于steamer生成文件
 |——————sprite-template -- 用于合图生成样式的模板
-|——————build.js -- 生产环境执行命令
-|——————config.js -- webpack构建配置
+|——————dist.js -- 生产环境执行命令
 |——————start.js -- 开发环境执行命令
 |——————webpack.dev.js -- webpack开发环境配置
 |——————webpack.prod.js -- webpack生产环境配置
@@ -79,7 +83,7 @@ tools  -- 构建工具
 
 
 ## 新建页面和页面相关逻辑
-starter-kit已支持多个入口js文件，并借助`getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`tools/config.js`中，目前约定是`src/page/xxx/main.js`此类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.prod.js`中设定。
+starter-kit已支持多个入口js文件，并借助`getJsFile`方法，根据约定，自动扫描js相关文件。具体调用在`config/project.js`中，目前约定是`src/page/xxx/main.js`此类js文件。你也可以不借助这个能力，自己在`webpack.dev.js`和`webpack.prod.js`中设定。
 
 新建`html`文件，则直接在`src`目录下新建即可，注意html文件名和主逻辑js所在文件夹名相同。如`index.html`和`src/page/index`
 
@@ -169,7 +173,7 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 * 单页文件可参考 src/page/index
 * 单页应用可参考 src/page/spa
 * 开发环境一般都写在内存，如果生产文件，会放到dev文件夹下
-* 生产环境最终文件生成在build文件夹下
+* 生产环境最终文件生成在dist文件夹下
 
 
 ### 开发环境
@@ -185,16 +189,16 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 
 
 ### 生产环境
-* react文件夹下启动: `npm run build`
+* react文件夹下启动: `npm run dist`
 
 * 代理配置
 * Charles Map Local: 
-  - `localhost:9000` => `/react/build/` 匹配本地html资源
-  - `localhost:8000` => `/react/build/` 匹配本地除cdn资源 
+  - `localhost:9000` => `/react/dist/` 匹配本地html资源
+  - `localhost:8000` => `/react/dist/` 匹配本地除cdn资源 
 
 * Fiddler Willow Rule:
- - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\build\$1`
- - `regex:^https?:\/\/localhost:8000\/(.*)$`    `\local path\build\$1`
+ - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\dist\$1`
+ - `regex:^https?:\/\/localhost:8000\/(.*)$`    `\local path\dist\$1`
 
  * 腾讯新闻主页:
   - `localhost:9000/index.html` 
