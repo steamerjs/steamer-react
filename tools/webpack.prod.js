@@ -5,7 +5,7 @@ const path = require('path'),
       os = require('os'),
       webpack = require('webpack');
 
-var config = require('./config'),
+var config = require('../config/project'),
     configWebpack = config.webpack;
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
@@ -17,13 +17,14 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     HappyPack = require('happypack'),
     SpritesmithPlugin = require('webpack-spritesmith'),
     PostcssImport = require('postcss-import'),
-    Autoprefixer = require('autoprefixer');
+    Autoprefixer = require('autoprefixer'),
+    AkWebpackPlugin = require('ak-webpack-plugin');
 
 var prodConfig = {
     entry: configWebpack.entry,
     output: {
-        publicPath: configWebpack.cdn,
-        path: path.join(configWebpack.path.build, "cdn"),
+        publicPath: config.cdn,
+        path: path.join(configWebpack.path.dist, "cdn"),
         filename: "[name]-" + configWebpack.chunkhash + ".js",
         chunkFilename: "chunk/[name]-" + configWebpack.chunkhash + ".js",
     },
@@ -148,8 +149,8 @@ var prodConfig = {
         }
     },
     plugins: [
-        // remove previous build folder
-        new Clean(['build'], {root: path.resolve()}),
+        // remove previous dist folder
+        new Clean(['dist'], {root: path.resolve()}),
         // inject process.env.NODE_ENV so that it will recognize if (process.env.NODE_ENV === "__PROD__")
         new webpack.DefinePlugin({
             "process.env": {
@@ -205,15 +206,30 @@ var prodConfig = {
         //         warnings: false
         //     }
         // }),
-        new UglifyJsParallelPlugin({
-            workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
-            // other uglify options 
-            compress: {
-                warnings: false,
-            },
-        }),
+        // new UglifyJsParallelPlugin({
+        //     workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
+        //     // other uglify options 
+        //     compress: {
+        //         warnings: false,
+        //     },
+        // }),
         new WebpackMd5Hash(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new AkWebpackPlugin({
+            "zipFileName": "dist/offline",
+            "src": "dist",
+            "isSameOrigin": true,
+            "map": [
+                {
+                    "src": "webserver",
+                    "url": config.webserver
+                },
+                {
+                    "src": "cdn",
+                    "url": config.cdn
+                }
+            ]
+        })
     ],
     // 使用外链
     externals: {

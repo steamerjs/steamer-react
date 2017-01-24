@@ -1,21 +1,14 @@
 {
   "name": "steamer-react",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "react-redux-webpack-boilerplate",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
     "start": "node ./tools/start.js",
-    "build": "node ./tools/build.js",
-    "dev": "node ./tools/start.js",
-    "pub": "node ./tools/build.js",
+    "dist": "node ./tools/dist.js",
+    "dev": "node ./tools/dev.js",
     "test": "",
     "lint": "eslint src&&stylelint src/**/*.less"
-  },
-  "eslintConfig": {
-    "extends": "./tools/config/eslint-config.js"
-  },
-  "stylelint": {
-    "extends": "./tools/config/stylelint.config.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +33,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "ak-webpack-plugin": "^1.0.0",
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",

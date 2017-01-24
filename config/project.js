@@ -3,7 +3,8 @@
 const path = require('path'),
       utils = require('steamer-webpack-utils'),
       __basename = path.dirname(__dirname),
-      __env = process.env.NODE_ENV;
+      __env = process.env.NODE_ENV,
+      steamerConfig = require('./steamer.config');
 
 /**
  * [config basic configuration]
@@ -16,20 +17,18 @@ var config = {
         path: {
             src: path.resolve(__basename, "src"),
             dev: path.resolve(__basename, "dev"),
-            build: path.resolve(__basename, "build"),
+            dist: path.resolve(__basename, "dist"),
             sprite: path.resolve(__basename, "src/img/sprites"),
         },
-        webserver: "{{webserver}}",
-        cdn: "{{cdn}}",
         hash: "[hash:6]",
         chunkhash: "[chunkhash:6]",
         imghash: "",
         contenthash: "[contenthash:6]",
     },
-    server: {                    // webpack开发环境服务器配置  
-        port: "{{port}}",              // port for local server
-        route: "{{route}}"  // http://host/route/
-    },
+    webserver: steamerConfig.webserver,
+    cdn: steamerConfig.cdn,
+    port: steamerConfig.port,    // port for local server
+    route: steamerConfig.route  // http://host/news/
 };
 
 // 自动扫描html

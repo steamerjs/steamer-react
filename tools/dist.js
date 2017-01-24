@@ -3,7 +3,7 @@
 process.env.NODE_ENV = "__PROD__";
 
 var webpack = require('webpack'),
-	config = require('./config');
+	config = require('../config/project');
 
     var fs = require('fs');
 
@@ -16,7 +16,7 @@ compiler.run(function(err, stats) {
         
         console.log(stats.toString({
             cached: true,
-            chunks: false, // Makes the build much quieter
+            chunks: false, // Makes the dist much quieter
             colors: true,
             children: false, // supress some plugin output
         }));

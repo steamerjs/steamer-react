@@ -6,8 +6,8 @@ var webpackHotMiddleware = require("webpack-hot-middleware");
 var proxy = require('proxy-middleware');
 
 var webpackConfig = require("./webpack.dev.js"),
-	config = require("./config.js");
-var port = config.server.port;
+	config = require("../config/project");
+var port = config.port;
 
 for (var key in webpackConfig.entry) {
 	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
@@ -25,7 +25,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 // 前端转发
-app.use(config.server.route, proxy('http://localhost:' + port));
+app.use(config.route, proxy('http://localhost:' + port));
 // 后台转发
 app.use('/api/', proxy('http://localhost:3001'));
 

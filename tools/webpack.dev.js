@@ -4,7 +4,7 @@ const path = require('path'),
       utils = require('steamer-webpack-utils'),
       webpack = require('webpack');
 
-var config = require('./config'),
+var config = require('../config/project'),
     configWebpack = config.webpack;
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
@@ -18,7 +18,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
 var devConfig = {
     entry: configWebpack.entry,
     output: {
-        publicPath: configWebpack.webserver,
+        publicPath: config.webserver,
         path: path.join(configWebpack.path.dev),
         filename: "[name].js",
         chunkFilename: "chunk/[name].js",
