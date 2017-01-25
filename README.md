@@ -200,7 +200,7 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 
 
 ### 开发环境
-* react文件夹下启动：`npm start`
+* 启动：`npm start`
 
 * 腾讯新闻主页:
   - `localhost:9000/index.html` 
@@ -212,12 +212,12 @@ starter-kit使用官方推荐的`react-router-redux`和`react-router`进行路�
 
 
 ### 生产环境
-* react文件夹下启动: `npm run dist`
+* 启动: `npm run dist`
 
 * 代理配置
 * Charles Map Local: 
-  - `localhost:9000` => `/react/dist/` 匹配本地html资源
-  - `localhost:8000` => `/react/dist/` 匹配本地除cdn资源 
+  - `localhost:9000` => `/dist/` 匹配本地html资源
+  - `localhost:8000` => `/dist/` 匹配本地除cdn资源 
 
 * Fiddler Willow Rule:
  - `regex:^https?:\/\/localhost:9000\/(.*)$`    `\local path\dist\$1`
