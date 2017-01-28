@@ -2,7 +2,11 @@ module.exports = {
     files: [
         "src",
         "tools",
-        "README.md"
+        "config",
+        "README.md",
+        ".eslintrc.js",
+        ".stylelintrc.js",
+        ".gitignore",
     ],
     options: [
         {
