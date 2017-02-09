@@ -5,6 +5,7 @@ module.exports = {
         "config",
         "README.md",
         ".eslintrc.js",
+        ".eslintignore",
         ".stylelintrc.js",
         ".gitignore",
     ],
