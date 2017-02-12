@@ -17,8 +17,7 @@ var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     HappyPack = require('happypack'),
     SpritesmithPlugin = require('webpack-spritesmith'),
     PostcssImport = require('postcss-import'),
-    Autoprefixer = require('autoprefixer'),
-    AkWebpackPlugin = require('ak-webpack-plugin');
+    Autoprefixer = require('autoprefixer');
 
 var prodConfig = {
     entry: configWebpack.entry,
@@ -215,21 +214,6 @@ var prodConfig = {
         // }),
         new WebpackMd5Hash(),
         new webpack.NoErrorsPlugin(),
-        new AkWebpackPlugin({
-            "zipFileName": "dist/offline",
-            "src": "dist",
-            "isSameOrigin": true,
-            "map": [
-                {
-                    "src": "webserver",
-                    "url": config.webserver
-                },
-                {
-                    "src": "cdn",
-                    "url": config.cdn
-                }
-            ]
-        })
     ],
     // 使用外链
     externals: {

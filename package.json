@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "react-redux-webpack-boilerplate",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
@@ -33,7 +33,6 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "ak-webpack-plugin": "^1.0.0",
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
