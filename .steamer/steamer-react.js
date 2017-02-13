@@ -8,6 +8,7 @@ module.exports = {
         ".eslintignore",
         ".stylelintrc.js",
         ".gitignore",
+        ".babelrc",
     ],
     options: [
         {
