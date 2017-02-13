@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "react-redux-webpack-boilerplate",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
