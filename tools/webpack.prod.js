@@ -205,13 +205,13 @@ var prodConfig = {
         //         warnings: false
         //     }
         // }),
-        // new UglifyJsParallelPlugin({
-        //     workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
-        //     // other uglify options 
-        //     compress: {
-        //         warnings: false,
-        //     },
-        // }),
+        new UglifyJsParallelPlugin({
+            workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
+            // other uglify options 
+            compress: {
+                warnings: false,
+            },
+        }),
         new WebpackMd5Hash(),
         new webpack.NoErrorsPlugin(),
     ],
