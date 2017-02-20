@@ -26,7 +26,7 @@ compiler.run(function(err, stats) {
             // return reject(new Error('Webpack compiler encountered errors'))
         } else if (jsonStats.warnings.length > 0) {
             console.log('Webpack compiler encountered warnings.')
-            debug(jsonStats.warnings.join('\n'))
+            console.log(jsonStats.warnings.join('\n'))
         }
     }
     else {
