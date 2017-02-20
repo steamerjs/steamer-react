@@ -31,9 +31,7 @@
   "browserslist": [
     "last 5 versions"
   ],
-  "dependencies": {
-    "html-res-webpack-plugin": "^1.3.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-core": "^6.18.2",
@@ -71,8 +69,8 @@
     "lodash.merge": "^4.4.0",
     "postcss-import": "^9.0.0",
     "postcss-loader": "^1.2.1",
-    "preact": "^6.3.0",
-    "preact-redux": "^1.2.0",
+    "preact": "^7.2.0",
+    "preact-redux": "^2.0.0",
     "proxy-middleware": "^0.15.0",
     "pure-render-deepcompare-decorator": "^1.0.1",
     "react": "^15.4.2",
