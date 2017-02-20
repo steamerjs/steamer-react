@@ -5,8 +5,10 @@
   "main": "./.steamer/steamer-react.js",
   "scripts": {
     "start": "node ./tools/start.js",
+    "dev": "npm start",
     "dist": "node ./tools/dist.js",
-    "dev": "node ./tools/dev.js",
+    "pub": "npm run dist",
+    "dev:src": "node ./tools/dev.js",
     "test": "",
     "lint": "eslint src&&stylelint src/**/*.less"
   },
