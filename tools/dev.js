@@ -21,12 +21,11 @@ compiler.run(function(err, stats) {
         }));
 
         if (jsonStats.errors.length > 0) {
-            console.log('Webpack compiler encountered errors.')
-            console.log(jsonStats.errors.join('\n'))
-            // return reject(new Error('Webpack compiler encountered errors'))
+            console.log('Webpack compiler encountered errors.');
+            console.log(jsonStats.errors.join('\n'));
         } else if (jsonStats.warnings.length > 0) {
-            console.log('Webpack compiler encountered warnings.')
-            console.log(jsonStats.warnings.join('\n'))
+            console.log('Webpack compiler encountered warnings.');
+            console.log(jsonStats.warnings.join('\n'));
         }
     }
     else {
