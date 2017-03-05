@@ -120,7 +120,7 @@ var devConfig = {
             'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
             'scroll': 'react-list-scroll/lib/',
             'scroll-p': path.join(configWebpack.path.src, '/page/common/components/scroll/index-p.js'),
-            'pure-render-decorator': 'pure-render-deepCompare-decorator/lib/',
+            'pure-render-decorator': 'pure-render-deepCompare-decorator/dist/',
         }
     },
     plugins: [
