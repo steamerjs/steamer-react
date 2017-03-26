@@ -16,7 +16,7 @@ import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
 
-require('./index.less');
+import './index.less';
 
 class Wrapper extends Component {
 

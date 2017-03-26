@@ -9,7 +9,7 @@ import Spinner from 'spinner';
 import Touch from 'touch';
 
 
-require('./detail.less');
+import './detail.less';
 
 
 class Detail extends Component {

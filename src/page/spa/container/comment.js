@@ -12,7 +12,7 @@ import Spinner from 'spinner';
 import Touch from 'touch';
 
 
-require('./comment.less');
+import './comment.less';
 
 
 class Comment extends Component {

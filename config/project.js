@@ -4,8 +4,8 @@ const path = require('path'),
       utils = require('steamer-webpack-utils'),
       __basename = path.dirname(__dirname),
       __env = process.env.NODE_ENV,
+      isProduction = __env === 'production',
       steamerConfig = require('./steamer.config');
-
 /**
  * [config basic configuration]
  * @type {Object}
@@ -22,8 +22,10 @@ var config = {
         },
         hash: "[hash:6]",
         chunkhash: "[chunkhash:6]",
-        imghash: "",
         contenthash: "[contenthash:6]",
+        hashName: isProduction ? "[name]-[hash:6]" : "[name]",
+        chunkhashName: isProduction ? "[name]-[chunkhash:6]" : "[name]",
+        contenthashName: isProduction ? "[name]-[contenthash:6]" : "[name]"
     },
     webserver: steamerConfig.webserver,
     cdn: steamerConfig.cdn,
@@ -32,7 +34,10 @@ var config = {
 };
 
 // 自动扫描html
-config.webpack.html = utils.getHtmlFile(config.webpack.path.src);
+config.webpack.html = utils.getHtmlEntry({
+    srcPath: config.webpack.path.src
+});
+
 // 根据约定，自动扫描js entry，约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx
 /** 
     当前获取结果
@@ -42,8 +47,16 @@ config.webpack.html = utils.getHtmlFile(config.webpack.path.src);
         'js/pindex': [path.join(configWebpack.path.src, "/page/pindex/main.jsx")],
     }
  */
-config.webpack.entry = utils.getJsFile(config.webpack.path.src, 'page', 'main', ['js', 'jsx']);
-
-config.webpack.sprites = utils.getSpriteFolder(config.webpack.path.sprite);
+config.webpack.entry = utils.getJsEntry({
+    srcPath: path.join(config.webpack.path.src, "page"), 
+    fileName: "main",
+    extensions: ["js", "jsx"],
+    keyPrefix: "js/",
+    level: 1
+});
+// 自动扫描合图
+config.webpack.sprites = utils.getSpriteEntry({
+    srcPath: config.webpack.path.sprite
+});
 
 module.exports = config;
