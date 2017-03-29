@@ -4,6 +4,7 @@ module.exports = {
         "tools",
         "config",
         "README.md",
+        "postcss.config.js",
         ".eslintrc.js",
         ".eslintignore",
         ".stylelintrc.js",

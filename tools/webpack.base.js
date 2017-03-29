@@ -1,80 +1,47 @@
 'use strict';
 
 const path = require('path'),
+      os = require('os'),
       utils = require('steamer-webpack-utils'),
       webpack = require('webpack'),
-      webpackMerge = require('webpack-merge'),
-      customConfig = require('../config/webpack.custom');
+      webpackMerge = require('webpack-merge');
 
 var config = require('../config/project'),
-    configWebpack = config.webpack;
+    configWebpack = config.webpack,
+    configWebpackMerge = config.webpackMerge,
+    configCustom = config.custom,
+    env = process.env.NODE_ENV,
+    isProduction = env === 'production';
 
-var CopyWebpackPlugin = require("copy-webpack-plugin-hash");
+var Clean = require('clean-webpack-plugin'),
+    CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
+    SpritesmithPlugin = require('webpack-spritesmith'),
+    WebpackMd5Hash = require('webpack-md5-hash'),
+    UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 
-console.log(configWebpack.path.src);
 var baseConfig = {
-	context: configWebpack.path.src,
+    context: configWebpack.path.src,
     entry: configWebpack.entry,
     output: {
-        publicPath: config.webserver,
-        path: path.join(configWebpack.path.dev),
-        filename: "[name].js",
-        chunkFilename: "chunk/[name].js",
+        publicPath: isProduction ? configWebpack.cdn : configWebpack.webserver,
+        path: isProduction ? path.join(configWebpack.path.dist, "cdn") : configWebpack.path.dev,
+        filename: configWebpack.chunkhashName + ".js",
+        chunkFilename: "chunk/" + configWebpack.chunkhashName + ".js",
     },
     module: {
         rules: [
-            // { 
-            //     test: /\.js$/,
-            //     loader: 'babel-loader',
-            //     options: {
-            //         cacheDirectory: './.webpack_cache/',
-            //         presets: [
-            //             ["es2015", {"loose": true}],
-            //         ]
-            //     },
-            //     exclude: /node_modules/,
-            // },
-            {
-                test: /\.css$/,
-                use: [
-                    { loader: 'style-loader' },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            localIdentName: '[name]-[local]-[hash:base64:5]',
-                            // root: configWebpack.path.src
-                            // module: true
-                        }
-                    },
-                    { loader: 'postcss-loader' },
-                ]
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    { loader: 'style-loader' },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            localIdentName: '[name]-[local]-[hash:base64:5]',
-                            // module: true
-                        }
-                    },
-                    { loader: 'postcss-loader' },
-                    {
-                        loader:  'less-loader',
-                        options: {
-                            paths: [
-                            	configWebpack.path.src,
-                            	"node_modules"
-                            ]
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.html$/,
-                loader: 'html-loader'
+            { 
+                test: /\.js$/,
+                loader: 'babel-loader',
+                options: {
+                    // verbose: false,
+                    cacheDirectory: './.webpack_cache/',
+                    presets: [
+                        ["es2015", {"loose": true}],
+                        'react',
+                    ]
+                },
+                exclude: /node_modules/,
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
@@ -83,7 +50,6 @@ var baseConfig = {
                     limit: 1000,
                     name: "img/[path]/" + configWebpack.hashName + ".[ext]"
                 },
-                include: configWebpack.path.src
             },
             {
                 test: /\.ico$/,
@@ -91,49 +57,117 @@ var baseConfig = {
                 options: {
                     name: "[name].[ext]"
                 },
-                include: configWebpack.path.src
             },
         ],
     },
     resolve: {
         modules: [
             configWebpack.path.src,
-            "node_modules"
+            "node_modules",
+            path.join(configWebpack.path.src, "css/sprites")
         ],
-        extensions: [".js", ".jsx", ".css", ".scss", ".less", ".styl", ".png", ".jpg", ".jpeg", ".ico", ".ejs", ".pug", ".handlebars"],
-        alias: {
-            'react/lib/ReactMount': 'react-dom/lib/ReactMount',
-            'redux': 'redux/dist/redux',
-            'react-redux': 'react-redux/dist/react-redux',
-            'utils': path.join(configWebpack.path.src, '/js/common/utils'),
-            'sutils': 'steamer-browserutils/index',
-            'spin': path.join(configWebpack.path.src, '/js/common/spin'),
-            'spinner': path.join(configWebpack.path.src, '/page/common/components/spinner/index.js'),
-            'spinner-p': path.join(configWebpack.path.src, '/page/common/components/spinner/index-p.js'),
-            'net': 'steamer-net/index',
-            'touch': path.join(configWebpack.path.src, '/page/common/components/touch/index.js'),
-            'touch-p': path.join(configWebpack.path.src, '/page/common/components/touch/index-p.js'),
-            'scroll': 'react-list-scroll/dist/',
-            'scroll-p': 'react-list-scroll/dist/pindex',
-        	'pure-render-decorator': 'pure-render-deepCompare-decorator/dist/',
-        	'pure-render-immutable-decorator': 'pure-render-immutable-decorator/dist'
-        }
+        extensions: [".js", ".jsx", ".css", ".scss", ".less", ".styl", ".png", ".jpg", ".jpeg", ".ico", ".ejs", ".pug", ".handlebars", "swf"],
+        alias: {}
     },
     plugins: [
-    	new webpack.NoEmitOnErrorsPlugin(),
-        new CopyWebpackPlugin([
-            {
-                from: 'libs/',
-                to: 'libs/' + configWebpack.hashName + '.[ext]'
-            }
-        ]),
+        new webpack.NoEmitOnErrorsPlugin(),
     ],
+    watch: isProduction ? false : true,
+    devtool: isProduction ? configWebpack.sourceMap.production : configWebpack.sourceMap.development
 };
 
-var finalConfig = webpackMerge.smartStrategy({
-    "module.rules": "prepend"
-})(baseConfig, customConfig);
+if (isProduction) {
+    baseConfig.plugins.push(new webpack.DefinePlugin(configWebpack.injectVar));
+    baseConfig.plugins.push(new WebpackMd5Hash());
 
-// console.log(JSON.stringify(finalConfig, null, 2));
+    if (configWebpack.compress) {
+        baseConfig.plugins.push(new UglifyJsParallelPlugin({
+            workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
+            // other uglify options 
+            compress: {
+                warnings: false,
+            },
+        }));
+    }
+}
+else {
+    baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
 
-module.exports = finalConfig;
+if (configWebpack.clean) {
+    baseConfig.plugins.push(new Clean([isProduction ? configWebpack.path.dist : configWebpack.path.dev], {root: path.resolve()}));
+}
+
+configWebpack.static.forEach((item) => {
+    baseConfig.plugins.push(new CopyWebpackPlugin([{
+        from: item.src,
+        to: (item.dist || item.src) + (item.hash ? configWebpack.hashName : "[name]") + '.[ext]'
+    }]));
+});
+
+configWebpack.sprites.forEach(function(sprites) {
+    let style = configWebpack.spriteStyle,
+        extMap = {
+            stylus: "styl",
+            less: "less"
+        },
+        spriteMode = configWebpack.spriteMode,
+        retinaTpl = (spriteMode === "retinaonly")? "_retinaonly" : "";
+
+
+    let spritesConfig = {
+        src: {
+            cwd: sprites.path,
+            glob: '*.png'
+        },
+        target: {
+            image: path.join(configWebpack.path.src, "css/sprites/" + sprites.key + ".png"),
+            css: path.join(configWebpack.path.src, "css/sprites/" + sprites.key + "." + extMap[style]),
+        },
+        spritesmithOptions: {
+            padding: 10
+        },
+        apiOptions: {
+            cssImageRef: "~" + sprites.key + ".png"
+        }
+    };
+
+    if (spriteMode === "retinaonly") {
+        spritesConfig.customTemplates = {
+            [style]: path.join(__dirname, '../tools/', './sprite-template/' + style + retinaTpl + '.template.handlebars')
+        };
+    }
+    else {
+        spritesConfig.cssTemplate = style + retinaTpl + ".template.handlebars";
+    }
+
+    if (spriteMode === "retina") {
+        spritesConfig.retina = "@2x";
+    }
+
+    baseConfig.plugins.push(new SpritesmithPlugin(spritesConfig));
+});
+
+var userConfig = {
+    output: configCustom.getOutput(),
+    module: configCustom.getModule(),
+    resolve: configCustom.getResolve(),
+    externals: configCustom.getExternals(),
+    plugins: configCustom.getPlugins(),
+};
+
+var otherConfig = configCustom.getOtherOptions();
+
+for (let key in otherConfig) {
+    userConfig[key] = otherConfig[key];
+}
+
+baseConfig = configWebpackMerge.mergeProcess(baseConfig);
+
+var webpackConfig = webpackMerge.smartStrategy(
+    configWebpackMerge.smartStrategyOption
+)(baseConfig, userConfig);
+
+// console.log(JSON.stringify(webpackConfig, null, 4));
+
+module.exports = webpackConfig;

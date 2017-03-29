@@ -136,7 +136,7 @@ class Wrapper extends Component {
 
 	render() {
 
-		console.dev('render container!!!!');
+		console.dev('render container!!!');
 		let tabStyle = this.props.tabs,
 			isEnd = this.props.news.listInfo['listLatest']['isEnd'],
 			isLoadingShow = tabStyle === LATEST_NEWS;

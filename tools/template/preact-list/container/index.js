@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+/** @jsx h */
+import Preact, { h, Component } from 'preact';
 import merge from 'lodash.merge';
 import Connect from '../connect/connect';
 import { 
 	GET_NEWS_LIST, 
 	GET_TOP_NEWS 
-} from 'page/common/constants/cgiPath';
+} from '../../common/constants/cgiPath';
 import { 
 	LATEST_NEWS, 
 	LIKE_NEWS 
 } from '../constants/constants';
 
-import Scroll from 'scroll';
-import Spinner from 'spinner';
+import Scroll from 'scroll-p';
+import Spinner from 'spinner-p';
 import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
@@ -86,7 +87,6 @@ class Wrapper extends Component {
 	//http://mat1.gtimg.com/www/mobi/image/loadimg.png
 
 	loadData(listType, pa = {}, opts = {}) {
-		var _this = this;
 		var url = GET_NEWS_LIST;
 
 		var listInfoParam = this.props.news.listInfo['listLatest'],
@@ -136,7 +136,7 @@ class Wrapper extends Component {
 
 	render() {
 
-		console.dev('render container!!!!');
+		console.dev('render container!!!');
 		let tabStyle = this.props.tabs,
 			isEnd = this.props.news.listInfo['listLatest']['isEnd'],
 			isLoadingShow = tabStyle === LATEST_NEWS;
@@ -149,7 +149,7 @@ class Wrapper extends Component {
 	        	/>
 	            <div className="cm-content">
 	            	<Scroll 
-	            			ref="scroll"
+	            			wrapper={".content-wrap"}
 	            			loadDataForScroll={this.loadDataForScroll}
 	            	>
 	            		<List 

@@ -1,0 +1,54 @@
+.cm-tabs {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+
+    width: 100%;
+}
+
+.nav {
+    position: relative;
+    line-height: 45px;
+    background-color: #fff;
+
+    &::after {
+        border-bottom: 1px solid #dbdbdb;
+    }
+
+    .title-list {
+        display: table;
+        width: 100%;
+
+        table-layout: fixed;
+    }
+
+    .title-list li {
+        display: table-cell;
+        box-sizing: border-box;
+        font-size: 16px;
+        text-align: center;
+        color: #777;
+    }
+    
+    .title-list li.active {
+        color: #00a5e0;
+    }
+    
+    .icon-active {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 50%;
+        height: 4px;
+
+        transform: left 0.3s ease-in-out;
+
+        background-color: #00a5e0;
+    }
+    
+    .icon-active.pull-right {
+        right: 0;
+        left: initial;
+    }
+}
