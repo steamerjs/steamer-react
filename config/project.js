@@ -64,7 +64,7 @@ var config = {
         // 是否启用css模块化
         cssModule: false,
 
-        // 合图，normal (仅1倍图) , retinaonly (仅2倍图), retina (包括1倍及2倍图)
+        // 合图，normal (仅1倍图) , retinaonly (仅2倍图), retina (包括1倍及2倍图), none (不使用合图)
         spriteMode: "normal",
         // less, stylus
         spriteStyle: "stylus",
