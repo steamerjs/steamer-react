@@ -24,7 +24,7 @@ var baseConfig = {
     entry: configWebpack.entry,
     output: {
         publicPath: isProduction ? configWebpack.cdn : configWebpack.webserver,
-        path: isProduction ? path.join(configWebpack.path.dist, "cdn") : configWebpack.path.dev,
+        path: isProduction ? path.join(configWebpack.path.dist, configWebpack.path.distCdn) : configWebpack.path.dev,
         filename: configWebpack.chunkhashName + ".js",
         chunkFilename: "chunk/" + configWebpack.chunkhashName + ".js",
     },

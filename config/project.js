@@ -37,6 +37,8 @@ var config = {
             dev: devPath,
             dist: distPath,
             sprite: spritePath,
+            distCdn: "cdn", // 生成cdn的目录，dist/cdn
+            distWebserver: "../webserver" // 生成webserver的目录, dist/webserver， 目录相对于 distCdn
         },
 
         // ========================= webpack服务器及路由配置 =========================
@@ -378,7 +380,7 @@ config.custom = {
         config.webpack.html.forEach(function(page, key) {
             plugins.push(new HtmlResWebpackPlugin({
                 mode: "html",
-                filename: isProduction ? ("../webserver/" + page.key + ".html") : page.key + ".html",
+                filename: isProduction ? (config.webpack.path.distWebserver + "/" + page.key + ".html") : page.key + ".html",
                 template: page.path,
                 favicon: "src/favicon.ico",
                 htmlMinify: null,
