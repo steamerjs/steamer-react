@@ -49,6 +49,7 @@ export default store => next => action => {
         },
         error: data => {
             onError && onError(data);
+            params.data = data;
             //  触发请求失败的action
             return next(nextAction(cgiName + '_ERROR', params, opts));
         }
