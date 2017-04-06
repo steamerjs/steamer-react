@@ -114,7 +114,13 @@ configWebpack.sprites.forEach(function(sprites) {
             less: "less"
         },
         spriteMode = (!!~sprites.key.indexOf('_retina')) ? "retinaonly" : configWebpack.spriteMode,
-        retinaTpl = (spriteMode === "retinaonly")? "_retinaonly" : "";  
+        retinaTplMap = {
+            retinaonly: "_retinaonly",
+            "normal": "",
+            "retina": "_retina",
+        },
+        retinaTpl = retinaTplMap[spriteMode] || "";
+
 
     let spritesConfig = {
         src: {
@@ -123,20 +129,14 @@ configWebpack.sprites.forEach(function(sprites) {
         },
         target: {
             image: path.join(configWebpack.path.src, "css/sprites/" + sprites.key + ".png"),
-            css: [
-                [
-                    path.join(configWebpack.path.src, "css/sprites/" + sprites.key + "." + extMap[style]),
-                    {format: sprites.key}
-                ]
-            ]
+            css: path.join(configWebpack.path.src, "css/sprites/" + sprites.key + "." + extMap[style]),
         },
         spritesmithOptions: {
             padding: 10
         },
         apiOptions: {
             cssImageRef: "~" + sprites.key + ".png"
-        },
-        
+        }
     };
 
     if (spriteMode === "retinaonly") {
