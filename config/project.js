@@ -69,7 +69,7 @@ var config = {
         // 合图，normal (仅1倍图) , retinaonly (仅2倍图), retina (包括1倍及2倍图), none (不使用合图)
         spriteMode: "normal",
         // less, stylus
-        spriteStyle: "stylus",
+        spriteStyle: "less",
 
         // html模板
         template: [
@@ -97,7 +97,7 @@ var config = {
         // webpack resolve.alias 包别名
         alias: {
             'react/lib/ReactMount': 'react-dom/lib/ReactMount',
-            'redux': 'redux/dist/redux',
+            'redux': isProduction ? 'redux/dist/redux.min' : 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
             'utils': path.join(srcPath, '/js/common/utils'),
             'sutils': 'steamer-browserutils/index',

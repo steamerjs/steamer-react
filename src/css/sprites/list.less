@@ -20,8 +20,8 @@ At the bottom of this section, we provide information about the spritesheet itse
 @icon-height: 42px;
 @icon-total-width: 238px;
 @icon-total-height: 112px;
-@icon-image: 'list.png';
-@icon: 0px 70px 0px -70px 238px 42px 238px 112px 'list.png' 'icon';
+@icon-image: '~list.png';
+@icon: 0px 70px 0px -70px 238px 42px 238px 112px '~list.png' 'icon';
 @logo-news-name: 'logo-news';
 @logo-news-x: 0px;
 @logo-news-y: 0px;
@@ -31,13 +31,13 @@ At the bottom of this section, we provide information about the spritesheet itse
 @logo-news-height: 60px;
 @logo-news-total-width: 238px;
 @logo-news-total-height: 112px;
-@logo-news-image: 'list.png';
-@logo-news: 0px 0px 0px 0px 238px 60px 238px 112px 'list.png' 'logo-news';
+@logo-news-image: '~list.png';
+@logo-news: 0px 0px 0px 0px 238px 60px 238px 112px '~list.png' 'logo-news';
 @spritesheet-width: 238px;
 @spritesheet-height: 112px;
-@spritesheet-image: 'list.png';
+@spritesheet-image: '~list.png';
 @spritesheet-sprites: @icon @logo-news;
-@spritesheet: 238px 112px 'list.png' @spritesheet-sprites;
+@spritesheet: 238px 112px '~list.png' @spritesheet-sprites;
 
 /*
 The provided classes are intended to be used with the array-like variables
@@ -65,19 +65,17 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 <i class="icon icon-home"></i>
 */
 .sprite-width(@sprite) {
-  width: extract(@sprite, 5) / 2;
+  width: extract(@sprite, 5);
 }
 
 .sprite-height(@sprite) {
-  height: extract(@sprite, 6) / 2;
+  height: extract(@sprite, 6);
 }
 
-//  nth是指#block "sprites"第几个参数，可以输出$sprite来查看,
 .sprite-position(@sprite) {
   @sprite-offset-x: extract(@sprite, 3);
   @sprite-offset-y: extract(@sprite, 4);
-  background-position: @sprite-offset-x / 2 @sprite-offset-y / 2;
-  background-size: extract(@sprite, 7) / 2 auto;
+  background-position: @sprite-offset-x @sprite-offset-y;
 }
 
 .sprite-image(@sprite) {

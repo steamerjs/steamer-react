@@ -20,8 +20,8 @@ At the bottom of this section, we provide information about the spritesheet itse
 @facebook-height: 128px;
 @facebook-total-width: 266px;
 @facebook-total-height: 266px;
-@facebook-image: 'btn.png';
-@facebook: 0px 0px 0px 0px 128px 128px 266px 266px 'btn.png' 'facebook';
+@facebook-image: '~btn.png';
+@facebook: 0px 0px 0px 0px 128px 128px 266px 266px '~btn.png' 'facebook';
 @gmail-name: 'gmail';
 @gmail-x: 138px;
 @gmail-y: 0px;
@@ -31,8 +31,8 @@ At the bottom of this section, we provide information about the spritesheet itse
 @gmail-height: 128px;
 @gmail-total-width: 266px;
 @gmail-total-height: 266px;
-@gmail-image: 'btn.png';
-@gmail: 138px 0px -138px 0px 128px 128px 266px 266px 'btn.png' 'gmail';
+@gmail-image: '~btn.png';
+@gmail: 138px 0px -138px 0px 128px 128px 266px 266px '~btn.png' 'gmail';
 @phone-name: 'phone';
 @phone-x: 0px;
 @phone-y: 138px;
@@ -42,8 +42,8 @@ At the bottom of this section, we provide information about the spritesheet itse
 @phone-height: 128px;
 @phone-total-width: 266px;
 @phone-total-height: 266px;
-@phone-image: 'btn.png';
-@phone: 0px 138px 0px -138px 128px 128px 266px 266px 'btn.png' 'phone';
+@phone-image: '~btn.png';
+@phone: 0px 138px 0px -138px 128px 128px 266px 266px '~btn.png' 'phone';
 @player-name: 'player';
 @player-x: 138px;
 @player-y: 138px;
@@ -53,13 +53,13 @@ At the bottom of this section, we provide information about the spritesheet itse
 @player-height: 128px;
 @player-total-width: 266px;
 @player-total-height: 266px;
-@player-image: 'btn.png';
-@player: 138px 138px -138px -138px 128px 128px 266px 266px 'btn.png' 'player';
+@player-image: '~btn.png';
+@player: 138px 138px -138px -138px 128px 128px 266px 266px '~btn.png' 'player';
 @spritesheet-width: 266px;
 @spritesheet-height: 266px;
-@spritesheet-image: 'btn.png';
+@spritesheet-image: '~btn.png';
 @spritesheet-sprites: @facebook @gmail @phone @player;
-@spritesheet: 266px 266px 'btn.png' @spritesheet-sprites;
+@spritesheet: 266px 266px '~btn.png' @spritesheet-sprites;
 
 /*
 The provided classes are intended to be used with the array-like variables
@@ -87,19 +87,17 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 <i class="icon icon-home"></i>
 */
 .sprite-width(@sprite) {
-  width: extract(@sprite, 5) / 2;
+  width: extract(@sprite, 5);
 }
 
 .sprite-height(@sprite) {
-  height: extract(@sprite, 6) / 2;
+  height: extract(@sprite, 6);
 }
 
-//  nth是指#block "sprites"第几个参数，可以输出$sprite来查看,
 .sprite-position(@sprite) {
   @sprite-offset-x: extract(@sprite, 3);
   @sprite-offset-y: extract(@sprite, 4);
-  background-position: @sprite-offset-x / 2 @sprite-offset-y / 2;
-  background-size: extract(@sprite, 7) / 2 auto;
+  background-position: @sprite-offset-x @sprite-offset-y;
 }
 
 .sprite-image(@sprite) {
