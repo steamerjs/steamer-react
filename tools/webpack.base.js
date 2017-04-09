@@ -195,6 +195,16 @@ var templateRules = {
         test: /\.handlebars$/, 
         loader: "handlebars-loader" 
     },  
+    ejs: {
+        test: /\.ejs$/,
+        loader: "ejs-compiled-loader",
+        query: {
+            'htmlmin': true, // or enable here  
+            'htmlminOptions': {
+                removeComments: true
+            }
+        }
+    }
 };
 
 configWebpack.style.forEach((style) => {
