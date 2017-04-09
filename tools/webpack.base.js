@@ -17,7 +17,9 @@ var Clean = require('clean-webpack-plugin'),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
     SpritesmithPlugin = require('webpack-spritesmith'),
     WebpackMd5Hash = require('webpack-md5-hash'),
-    UglifyJsParallelPlugin = require('webpack-uglify-parallel');
+    UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    NpmInstallPlugin  = require('npm-install-webpack-plugin');
 
 var baseConfig = {
     context: configWebpack.path.src,
@@ -44,14 +46,6 @@ var baseConfig = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                loader: "url-loader",
-                options: {
-                    limit: 1000,
-                    name: "img/[path]/" + configWebpack.hashName + ".[ext]"
-                },
-            },
-            {
                 test: /\.ico$/,
                 loader: "url-loader",
                 options: {
@@ -71,11 +65,193 @@ var baseConfig = {
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
+        new NpmInstallPlugin({
+            // Use --save or --save-dev
+            dev: true,
+            // Install missing peerDependencies
+            peerDependencies: true,
+            // Reduce amount of console logging
+            quiet: false,
+        })
     ],
     watch: isProduction ? false : true,
     devtool: isProduction ? configWebpack.sourceMap.production : configWebpack.sourceMap.development
 };
 
+/************* loaders 处理 *************/
+// 样式loader
+var styleRules = {
+    css: {
+        test: /\.css$/,
+        // 单独抽出样式文件
+        loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader', 
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        localIdentName: '[name]-[local]-[hash:base64:5]',
+                        root: config.webpack.path.src,
+                        module: config.webpack.cssModule,
+                        autoprefixer: true,
+                    }
+                },
+                { loader: 'postcss-loader' },
+            ]
+        }),
+        include: path.resolve(config.webpack.path.src)
+    },
+    less: {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader', 
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        localIdentName: '[name]-[local]-[hash:base64:5]',
+                        module: config.webpack.cssModule,
+                        autoprefixer: true,
+                    }
+                },
+                { loader: 'postcss-loader' },
+                {
+                    loader:  'less-loader',
+                    options: {
+                        paths: [
+                            config.webpack.path.src,
+                            "node_modules"
+                        ]
+                    }
+                }
+            ]
+        }),
+    },
+    stylus: {
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader', 
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        localIdentName: '[name]-[local]-[hash:base64:5]',
+                        module: config.webpack.cssModule,
+                        autoprefixer: true,
+                    }
+                },
+                { loader: 'postcss-loader' },
+                { 
+                    loader:  'stylus-loader',
+                    options: {
+                        paths: [
+                            config.webpack.path.src,
+                            "node_modules"
+                        ]
+                    }
+                },
+            ]
+        }),
+    },
+    sass: {
+        test: /\.s(a|c)ss$/,
+        loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader', 
+            use: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        localIdentName: '[name]-[local]-[hash:base64:5]',
+                        module: config.webpack.cssModule,
+                        autoprefixer: true,
+                    }
+                },
+                { loader: 'postcss-loader' },
+                { 
+                    loader:  'sass-loader',
+                    options: {
+                        includePaths: [
+                            config.webpack.path.src,
+                            "node_modules"
+                        ]
+                    }
+                },
+            ]
+        }),
+    },
+};
+
+// 模板loader
+var templateRules = {
+    html: {
+        test: /\.html$/,
+        loader: 'html-loader'
+    },
+    pug: {
+        test: /\.pug$/, 
+        loader: 'pug-loader'
+    },
+    handlebars: { 
+        test: /\.handlebars$/, 
+        loader: "handlebars-loader" 
+    },  
+};
+
+configWebpack.style.forEach((style) => {
+    style = (style === 'scss') ? 'sass' : style;
+    let rule = styleRules[style] || '';
+    rule && baseConfig.module.rules.push(rule);
+});
+
+configWebpack.template.forEach((tpl) => {
+    let rule = templateRules[tpl] || '';
+    rule && baseConfig.module.rules.push(rule);
+});
+
+let imageLoader = {
+    test: /\.(jpe?g|png|gif|svg)$/i,
+    loaders: [
+        {
+            loader: "url-loader",
+            query: {
+                limit: 1000,
+                name: "img/[path]/" + configWebpack.hashName + ".[ext]"
+            },
+        },
+    ]
+};
+
+if (isProduction) {
+    // 生产环境下图片压缩
+    
+    if (configWebpack.imgCompress) {
+        imageLoader.loaders.push(
+            {
+                loader: 'image-webpack-loader',
+                options: {
+                    gifsicle: {
+                        interlaced: false,
+                    },
+                    optipng: {
+                        optimizationLevel: 7,
+                    },
+                    pngquant: {
+                        quality: '65-90',
+                        speed: 4
+                    },
+                    mozjpeg: {
+                        progressive: true,
+                        quality: 65
+                    }
+                }
+            }
+        );
+    }
+}
+
+baseConfig.module.rules.push(imageLoader);
+
+/************* plugins 处理 *************/
 if (isProduction) {
     baseConfig.plugins.push(new webpack.DefinePlugin(configWebpack.injectVar));
     baseConfig.plugins.push(new WebpackMd5Hash());
@@ -111,7 +287,9 @@ configWebpack.sprites.forEach(function(sprites) {
     let style = configWebpack.spriteStyle,
         extMap = {
             stylus: "styl",
-            less: "less"
+            less: "less",
+            sass: "sass",
+            scss: "scss"
         },
         spriteMode = (!!~sprites.key.indexOf('_retina')) ? "retinaonly" : configWebpack.spriteMode,
         retinaTplMap = {
@@ -139,16 +317,9 @@ configWebpack.sprites.forEach(function(sprites) {
         }
     };
 
-    if (spriteMode === "retinaonly") {
-        spritesConfig.customTemplates = {
-            [sprites.key]: path.join(__dirname, '../tools/', './sprite-template/' + style + retinaTpl + '.template.handlebars')
-        };
-    }
-    else {
-        spritesConfig.customTemplates = {
-            [sprites.key]: path.join(__dirname, '../node_modules/', './spritesheet-templates/lib/templates/' + style + retinaTpl + '.template.handlebars')
-        };
-    }
+    spritesConfig.customTemplates = {
+        [sprites.key]: path.join(__dirname, '../node_modules/', './spritesheet-templates-steamer/lib/templates/' + style + retinaTpl + '.template.handlebars')
+    };
 
     if (spriteMode === "retina") {
         spritesConfig.retina = "@2x";
@@ -157,6 +328,7 @@ configWebpack.sprites.forEach(function(sprites) {
     baseConfig.plugins.push(new SpritesmithPlugin(spritesConfig));
 });
 
+/************* base 与 user config 合并 *************/
 var userConfig = {
     output: configCustom.getOutput(),
     module: configCustom.getModule(),
