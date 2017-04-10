@@ -18,6 +18,7 @@
     "url": "git+https://github.com/SteamerTeam/steamer-react.git"
   },
   "keywords": [
+    "steamer starterkit",
     "react",
     "redux",
     "webpack",
