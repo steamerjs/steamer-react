@@ -19,7 +19,7 @@ var Clean = require('clean-webpack-plugin'),
     WebpackMd5Hash = require('webpack-md5-hash'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    NpmInstallPlugin  = require('npm-install-webpack-plugin');
+    NpmInstallPlugin  = require('npm-install-webpack-plugin-steamer');
 
 var baseConfig = {
     context: configWebpack.path.src,
@@ -36,12 +36,7 @@ var baseConfig = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 options: {
-                    // verbose: false,
                     cacheDirectory: './.webpack_cache/',
-                    presets: [
-                        ["es2015", {"loose": true}],
-                        'react',
-                    ]
                 },
                 exclude: /node_modules/,
             },

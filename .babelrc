@@ -1,0 +1,7 @@
+{
+  	"plugins": ["transform-decorators-legacy"],
+    "presets": [
+        ["es2015", {"loose": true}],
+        ["react"]
+    ]
+}

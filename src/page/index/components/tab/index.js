@@ -51,7 +51,7 @@ export default class Tab extends Component {
 	}
 
 	componentDidMount() {
-
+		
 	}
 
 	switchTab(e) {
