@@ -207,28 +207,28 @@ config.custom = {
 
         var jsRule = null;
 
-        // if (isProduction) {
+        if (isProduction) {
             // js 使用了 happypack 进行编译，具体 babel 配置参看 happypack 插件的配置
             jsRule = { 
                 test: /\.js$/,
                 loader: 'happypack/loader?id=1',
                 exclude: /node_modules/,
             };
-        // }
-        // else {
-        //     jsRule = { 
-        //         test: /\.js$/,
-        //         loader: 'babel-loader',
-        //         options: {
-        //             // verbose: false,
-        //             cacheDirectory: './.webpack_cache/',
-        //             plugins: [
-        //                 'react-hot-loader/babel',
-        //             ],
-        //         },
-        //         exclude: /node_modules/,
-        //     };
-        // }
+        }
+        else {
+            jsRule = { 
+                test: /\.js$/,
+                loader: 'babel-loader',
+                options: {
+                    // verbose: false,
+                    cacheDirectory: './.webpack_cache/',
+                    plugins: [
+                        'react-hot-loader/babel',
+                    ],
+                },
+                exclude: /node_modules/,
+            };
+        }
 
         module.rules.push(jsRule);
         
@@ -262,21 +262,6 @@ config.custom = {
                     path: 'babel-loader',
                     option: {
                         cacheDirectory: './.webpack_cache/',
-                    },
-                }],
-            }));
-        }
-        else {
-            plugins.push(new HappyPack({
-                id: '1',
-                verbose: false,
-                loaders: [{
-                    path: 'babel-loader',
-                    option: {
-                        cacheDirectory: './.webpack_cache/',
-                        plugins: [
-                            'react-hot-loader/babel',
-                        ],
                     },
                 }],
             }));
