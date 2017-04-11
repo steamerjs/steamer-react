@@ -260,7 +260,7 @@ config.custom = {
                 verbose: false,
                 loaders: [{
                     path: 'babel-loader',
-                    option: {
+                    options: {
                         cacheDirectory: './.webpack_cache/',
                     },
                 }],
