@@ -15,7 +15,7 @@ if (mode === 'development') {
 
 	require('./server');
 }
-else if (mode === 'production' || mode === 'source'){
+else if (mode === 'production' || mode === 'source') {
 	process.env.NODE_ENV = isProduction ? "production" : "development";
 
 	var compiler = webpack(require('./webpack.base'));
