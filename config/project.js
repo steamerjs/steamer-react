@@ -45,8 +45,8 @@ var config = {
         // 开发服务器配置
         webserver: steamerConfig.webserver,
         cdn: steamerConfig.cdn,
-        cssCdn: steamerConfig.cssCdn,
-        imgCdn: steamerConfig.imgCdn,
+        cssCdn: steamerConfig.cssCdn || steamerConfig.cdn,
+        imgCdn: steamerConfig.imgCdn || steamerConfig.cdn,
         port: steamerConfig.port,    // port for local server
         route: steamerConfig.route, // http://host/news/
 
@@ -80,7 +80,7 @@ var config = {
 
         // 生产环境下资源(js, css, html)是否压缩
         compress: true,
-        // 生产环境下图片是否压缩
+        // 非windows系统生产环境下图片是否压缩
         imgCompress: true,
 
         // 不经webpack打包的资源

@@ -10,8 +10,8 @@ var config = require('../config/project'),
     configWebpack = config.webpack,
     configWebpackMerge = config.webpackMerge,
     configCustom = config.custom,
-    env = process.env.NODE_ENV,
-    isProduction = env === 'production';
+    isProduction = config.env === 'production',
+    isWindows = (os.type() === "Windows_NT");
 
 var Clean = require('clean-webpack-plugin'),
     CopyWebpackPlugin = require("copy-webpack-plugin-hash"),
@@ -227,7 +227,7 @@ let imageLoader = {
     ]
 };
 
-if (isProduction) {
+if (isProduction && !isWindows) {
     // 生产环境下图片压缩
     
     if (configWebpack.imgCompress) {
