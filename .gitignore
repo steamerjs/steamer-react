@@ -9,3 +9,4 @@ webpack_cache
 .webpack_cache
 .happypack
 npm-debug.log
+.idea
