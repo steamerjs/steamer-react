@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/SteamerTeam/steamer-react#readme",
   "browserslist": [
-    "last 5 versions"
+    "last 8 versions"
   ],
   "dependencies": {},
   "devDependencies": {
@@ -98,7 +98,7 @@
     "steamer-browserutils": "^1.0.1",
     "steamer-net": "^1.1.2",
     "steamer-responsive": "^0.2.0",
-    "steamer-webpack-utils": "^1.0.1",
+    "steamer-webpack-utils": "^1.0.2",
     "style-loader": "^0.16.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
