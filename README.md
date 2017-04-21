@@ -7,8 +7,8 @@ react 高效快速启动脚手架
 
 ## 如何使用
 
+* 使用[steamerjs](https://steamerjs.github.io/steamerjs/docs/Steamer.html)安装
 * 直接从github clone 下来
-* 使用[steamerjs](https://github.com/SteamerTeam/steamerjs)安装
 
 ```javascript
 // 安装依赖
@@ -35,7 +35,7 @@ npm run dist 或 npm run pub
 
 
 ## 如何开始
-[详情文档](https://steamerjs.github.io/steamerjs/docs/How-To-Start.html)
+[参见文档-项目脚手架](https://steamerjs.github.io/steamerjs/docs/Starterkit.html)
 
 
 ## 文章参考
