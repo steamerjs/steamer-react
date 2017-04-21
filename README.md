@@ -5,7 +5,7 @@ react 高效快速启动脚手架
 [![Deps](https://david-dm.org/SteamerTeam/steamer-react.svg)](https://david-dm.org/SteamerTeam/steamer-react)
 
 
-## 如何启动
+## 快速启动
 
 * 推荐 >> 使用[steamerjs](https://steamerjs.github.io/steamerjs/docs/How-To-Start.html)安装
 * 直接从github clone 下来
