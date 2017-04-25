@@ -40,6 +40,17 @@ var baseConfig = {
                 },
                 exclude: /node_modules/,
             },
+            { 
+                test: /\.jsx$/,
+                loader: 'babel-loader',
+                options: {
+                    "plugins": [
+                        ["transform-react-jsx", { "pragma": "h" }]
+                    ],
+                    cacheDirectory: './.webpack_cache/',
+                },
+                exclude: /node_modules/,
+            },
             {
                 test: /\.ico$/,
                 loader: "url-loader",
