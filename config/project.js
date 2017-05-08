@@ -254,6 +254,9 @@ config.custom = {
                 allChunks: false,
                 disable: (isProduction || !config.webpack.extractCss) ? false : true,
             }),
+            new webpack.ProvidePlugin({
+                Promise: 'imports?this=>global!exports?global.Promise!es6-promise'
+            })
         ];
 
         if (isProduction) {
