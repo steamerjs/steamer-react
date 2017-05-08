@@ -77,7 +77,6 @@
     "postcss-loader": "^2.0.1",
     "preact": "^8.1.0",
     "preact-redux": "^2.0.1",
-    "proxy-middleware": "^0.15.0",
     "pug": "^2.0.0-rc.1",
     "pug-loader": "^2.3.0",
     "pure-render-deepcompare-decorator": "^1.0.3",
