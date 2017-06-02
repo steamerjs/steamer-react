@@ -4,6 +4,7 @@ const path = require('path'),
       os = require('os'),
       utils = require('steamer-webpack-utils'),
       webpack = require('webpack'),
+      merge = require('lodash.merge'),
       webpackMerge = require('webpack-merge');
 
 var config = require('../config/project'),
@@ -36,7 +37,7 @@ var baseConfig = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 options: {
-                    cacheDirectory: './.webpack_cache/',
+                    cacheDirectory: './.cache/',
                 },
                 exclude: /node_modules/,
             },
@@ -47,7 +48,7 @@ var baseConfig = {
                     "plugins": [
                         ["transform-react-jsx", { "pragma": "h" }]
                     ],
-                    cacheDirectory: './.webpack_cache/',
+                    cacheDirectory: './.cache/',
                 },
                 exclude: /node_modules/,
             },
@@ -66,7 +67,7 @@ var baseConfig = {
             "node_modules",
             path.join(configWebpack.path.src, "css/sprites")
         ],
-        extensions: [".js", ".jsx", ".css", ".scss", ".less", ".styl", ".png", ".jpg", ".jpeg", ".ico", ".ejs", ".pug", ".handlebars", "swf"],
+        extensions: [".js", ".jsx", ".css", ".scss", "sass", ".less", ".styl", ".png", ".jpg", ".jpeg", ".ico", ".ejs", ".pug", ".handlebars", "swf"],
         alias: {}
     },
     plugins: [
@@ -86,24 +87,34 @@ var baseConfig = {
 
 /************* loaders 处理 *************/
 // 样式loader
+var commonLoaders = [
+    {
+        loader: "cache-loader",
+        options: {
+            // provide a cache directory where cache items should be stored
+            cacheDirectory: path.resolve(".cache")
+        }
+    },
+    {
+        loader: 'css-loader',
+        options: {
+            localIdentName: '[name]-[local]-[hash:base64:5]',
+            module: config.webpack.cssModule,
+            autoprefixer: true,
+        }
+    },
+    { 
+        loader: 'postcss-loader' 
+    }
+];
+
 var styleRules = {
     css: {
         test: /\.css$/,
         // 单独抽出样式文件
         loader: ExtractTextPlugin.extract({
             fallback: 'style-loader', 
-            use: [
-                {
-                    loader: 'css-loader',
-                    options: {
-                        localIdentName: '[name]-[local]-[hash:base64:5]',
-                        root: config.webpack.path.src,
-                        module: config.webpack.cssModule,
-                        autoprefixer: true,
-                    }
-                },
-                { loader: 'postcss-loader' },
-            ]
+            use: commonLoaders
         }),
         include: path.resolve(config.webpack.path.src)
     },
@@ -111,78 +122,27 @@ var styleRules = {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract({
             fallback: 'style-loader', 
-            use: [
-                {
-                    loader: 'css-loader',
-                    options: {
-                        localIdentName: '[name]-[local]-[hash:base64:5]',
-                        module: config.webpack.cssModule,
-                        autoprefixer: true,
-                    }
-                },
-                { loader: 'postcss-loader' },
-                {
-                    loader:  'less-loader',
-                    // options: {
-                    //     paths: [
-                    //         config.webpack.path.src,
-                    //         "node_modules"
-                    //     ]
-                    // }
-                }
-            ]
+            use: merge([], commonLoaders).concat([{
+                loader: 'less-loader',
+            }])
         }),
     },
     stylus: {
         test: /\.styl$/,
         loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader', 
-            use: [
-                {
-                    loader: 'css-loader',
-                    options: {
-                        localIdentName: '[name]-[local]-[hash:base64:5]',
-                        module: config.webpack.cssModule,
-                        autoprefixer: true,
-                    }
-                },
-                { loader: 'postcss-loader' },
-                { 
-                    loader:  'stylus-loader',
-                    // options: {
-                    //     paths: [
-                    //         config.webpack.path.src,
-                    //         "node_modules"
-                    //     ]
-                    // }
-                },
-            ]
+            fallback: 'style-loader',
+            use: merge([], commonLoaders).concat([{
+                loader: 'stylus-loader',
+            }])
         }),
     },
     sass: {
         test: /\.s(a|c)ss$/,
         loader: ExtractTextPlugin.extract({
             fallback: 'style-loader', 
-            use: [
-                {
-                    loader: 'css-loader',
-                    options: {
-                        localIdentName: '[name]-[local]-[hash:base64:5]',
-                        module: config.webpack.cssModule,
-                        autoprefixer: true,
-                    }
-                },
-                { loader: 'postcss-loader' },
-                { 
-                    loader:  'sass-loader',
-                    // options: {
-                    //     includePaths: [
-                    //         config.webpack.path.src,
-                    //         "node_modules"
-                    //     ]
-                    // }
-                },
-            ]
+            use: merge([], commonLoaders).concat([{
+                loader: 'sass-loader',
+            }])
         }),
     },
 };
@@ -324,7 +284,12 @@ configWebpack.sprites.forEach(function(sprites) {
         },
         target: {
             image: path.join(configWebpack.path.src, "css/sprites/" + sprites.key + ".png"),
-            css: path.join(configWebpack.path.src, "css/sprites/" + sprites.key + "." + extMap[style]),
+            css: [
+                [
+                    path.join(configWebpack.path.src, "css/sprites/" + sprites.key + "." + extMap[style]),
+                    {format: sprites.key}
+                ]
+            ]
         },
         spritesmithOptions: {
             padding: 10

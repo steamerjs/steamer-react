@@ -220,14 +220,23 @@ config.custom = {
         else {
             jsRule = { 
                 test: /\.js$/,
-                loader: 'babel-loader',
-                options: {
-                    // verbose: false,
-                    cacheDirectory: './.webpack_cache/',
-                    plugins: [
-                        'react-hot-loader/babel',
-                    ],
-                },
+                use: [
+                    {
+                        loader: "cache-loader",
+                        options: {
+                            // provide a cache directory where cache items should be stored
+                            cacheDirectory: path.resolve(".cache")
+                        }
+                    },
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            plugins: [
+                                'react-hot-loader/babel',
+                            ],
+                        },
+                    },
+                ],
                 exclude: /node_modules/,
             };
         }
@@ -266,7 +275,7 @@ config.custom = {
                 loaders: [{
                     path: 'babel-loader',
                     options: {
-                        cacheDirectory: './.webpack_cache/',
+                        cacheDirectory: './.cache/',
                     },
                 }],
             }));

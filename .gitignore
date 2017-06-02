@@ -5,6 +5,7 @@ dist
 build
 dev
 .DS_Store
+.cache
 webpack_cache
 .webpack_cache
 .happypack
