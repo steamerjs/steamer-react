@@ -20,7 +20,8 @@ var Clean = require('clean-webpack-plugin'),
     WebpackMd5Hash = require('webpack-md5-hash'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    NpmInstallPlugin  = require('npm-install-webpack-plugin-steamer');
+    NpmInstallPlugin  = require('npm-install-webpack-plugin-steamer'),
+    NameAllModulesPlugin = require('name-all-modules-plugin');
 
 var baseConfig = {
     context: configWebpack.path.src,
@@ -79,7 +80,9 @@ var baseConfig = {
             peerDependencies: true,
             // Reduce amount of console logging
             quiet: false,
-        })
+        }),
+        new webpack.NamedModulesPlugin(),
+        new NameAllModulesPlugin()
     ],
     watch: isProduction ? false : true,
     devtool: isProduction ? configWebpack.sourceMap.production : configWebpack.sourceMap.development

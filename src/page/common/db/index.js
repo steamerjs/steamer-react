@@ -126,28 +126,28 @@ export function getNewsDetail(item) {
 }
 
 export function getCommentList() {
-		let url = GET_COMMENT_LIST,
-			opts = {};
+	let url = GET_COMMENT_LIST,
+		opts = {};
 
-		var pa = merge({}, {
-			comment_id: this.props.params.id,
-			otype: "jsonp",
-			jsonCbName: "renderComment",
-			lcount: 20,
-			from: 'share',
-			v: (new Date()).getTime(),
-		}, pa);
+	var pa = merge({}, {
+		comment_id: this.props.params.id,
+		otype: "jsonp",
+		jsonCbName: "renderComment",
+		lcount: 20,
+		from: 'share',
+		v: (new Date()).getTime(),
+	}, pa);
 
-		var param = {
-			param: pa,
-			ajaxType: 'JSONP',
-			onSuccess: function(data) {
-				// console.log(data);
-			},
-			onError: function(res) {
-				console.log("err");
-			}
-		};
+	var param = {
+		param: pa,
+		ajaxType: 'JSONP',
+		onSuccess: function(data) {
+			// console.log(data);
+		},
+		onError: function(res) {
+			console.log("err");
+		}
+	};
 
-		this.props.request(url, param, opts);
-	}
+	this.props.request(url, param, opts);
+}
