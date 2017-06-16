@@ -19,6 +19,7 @@
  */
 export function _stringify(val) {
 	var returnVal = isObject(val) ? JSON.stringify(val) : val;
+
 	return returnVal;
 }
 
@@ -29,6 +30,7 @@ export function _stringify(val) {
  */
 export function _parse(val) {
 	var returnVal = isObject(val) ? val : JSON.parse(val);
+
 	return returnVal;
 }
 /**
@@ -37,7 +39,6 @@ export function _parse(val) {
  * @date 2016.07.30
  */
 
-
 /**
  * [extend object]
  * @param  {Object} src [src object]
@@ -45,23 +46,23 @@ export function _parse(val) {
  * @param  {Integer} d   [depth]
  */
 export function extend(src, des, d) {
-	var depth = (d) ? d : 0;
+	var depth = (d) || 0;
+
 	for (var key in src) {
 		var isObjectVal = isObject(src[key]);
 		var isArrayVal = isArray(src[key]);
+
 		if (isObjectVal || isArrayVal) {
 			if (depth) {
 				if (isObjectVal) {
 	    			des[key] = {};
 	    			extend(src[key], des[key], depth - 1);
-	    		}
-	    		else if (isArrayVal) {
+	    		} else if (isArrayVal) {
 	    			des[key] = [];
 	    			extend(src[key], des[key], depth - 1);
 	    		}
     		}
-		}
-		else {
+		} else {
 			des[key] = src[key];
 		}
 	} 
@@ -83,8 +84,9 @@ export function extend(src, des, d) {
  */
 export function setCookie(key, val, days, path, domain) {
 	var expire = new Date();
+
 	expire.setTime(expire.getTime() + (days ? 3600000 * 24 * days : 30 * 24 * 60 * 60 * 1000)); // 默认1个月
-	document.cookie = key + '=' + encodeURIComponent(_stringify(val)) + ';expires=' + expire.toGMTString() + ';path=' + (path ? path : '/') + ';' + (domain ? ('domain=' + domain + ';') : '');
+	document.cookie = key + '=' + encodeURIComponent(_stringify(val)) + ';expires=' + expire.toGMTString() + ';path=' + (path || '/') + ';' + (domain ? ('domain=' + domain + ';') : '');
 }
 
 /**
@@ -95,7 +97,8 @@ export function setCookie(key, val, days, path, domain) {
  */
 export function delCookie(key, path, domain) {
 	var expires = new Date(0);
-	document.cookie = key + '=;expires=' + expires.toUTCString() + ';path=' + (path ? path : '/') + ';' + (domain ? ('domain=' + domain + ';') : '');
+
+	document.cookie = key + '=;expires=' + expires.toUTCString() + ';path=' + (path || '/') + ';' + (domain ? ('domain=' + domain + ';') : '');
 }
 
 /**
@@ -104,16 +107,16 @@ export function delCookie(key, path, domain) {
  * @return {String}     [cookie value]
  */
 export function getCookie(key) {
-	var r = new RegExp("(?:^|;+|\\s+)" + key + "=([^;]*)");
+	var r = new RegExp('(?:^|;+|\\s+)' + key + '=([^;]*)');
         var m = window.document.cookie.match(r);
-        return (!m ? "" : m[1]) || null;
+
+        return (!m ? '' : m[1]) || null;
 }
 /**
  * @date functions
  * @author heyli
  * @date 2016.07.30
  */
-
 
 /**      
  * 对Date的扩展，将 Date 转化为指定格式的String      
@@ -130,8 +133,7 @@ export function getCookie(key) {
  * formatDate(new Date(),'yyyy-M-d h:m:s.S') ==> 2006-7-2 8:9:4.18      
 */   
 
-var formatDate = function(dt, fmt) { 
-
+var formatDate = function(dt, fmt) {
     if (!dt) {
         return;
     }
@@ -139,37 +141,37 @@ var formatDate = function(dt, fmt) {
     var date = isDate(dt) ? dt : new Date(dt);
 
     var o = {         
-        "M+" : date.getMonth() + 1, //月份         
-        "d+" : date.getDate(), //日         
-        "h+" : date.getHours() % 12 === 0 ? 12 : date.getHours() % 12, //小时         
-        "H+" : date.getHours(), //小时         
-        "m+" : date.getMinutes(), //分         
-        "s+" : date.getSeconds(), //秒         
-        "q+" : Math.floor((date.getMonth() + 3) / 3), //季度         
-        "S" : date.getMilliseconds() //毫秒         
+        'M+': date.getMonth() + 1, // 月份         
+        'd+': date.getDate(), // 日         
+        'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12, // 小时         
+        'H+': date.getHours(), // 小时         
+        'm+': date.getMinutes(), // 分         
+        's+': date.getSeconds(), // 秒         
+        'q+': Math.floor((date.getMonth() + 3) / 3), // 季度         
+        'S': date.getMilliseconds() // 毫秒         
     };         
     
     var week = {         
-        "0" : "\u65e5",         
-        "1" : "\u4e00",         
-        "2" : "\u4e8c",         
-        "3" : "\u4e09",         
-        "4" : "\u56db",         
-        "5" : "\u4e94",         
-        "6" : "\u516d"        
+        '0': '\u65e5',         
+        '1': '\u4e00',         
+        '2': '\u4e8c',         
+        '3': '\u4e09',         
+        '4': '\u56db',         
+        '5': '\u4e94',         
+        '6': '\u516d'        
     };      
 
     if (/(y+)/.test(fmt)) {         
-        fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));   
     }         
 
     if (/(E+)/.test(fmt)) {    
-        fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "")+week[date.getDay()+""]);         
+        fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '\u661f\u671f' : '\u5468') : '') + week[date.getDay() + '']);         
     }         
     
     for (var k in o) {         
-        if (new RegExp("("+ k +")").test(fmt)) {         
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));         
+        if (new RegExp('(' + k + ')').test(fmt)) {         
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));         
         }         
     }         
     
@@ -188,13 +190,12 @@ export {formatDate};
  * @param {String} key [key]
  * @param {String} val [value]
  */
-export function setItem(key, val){
+export function setItem(key, val) {
     val = _stringify(val);
-    if (typeof(window.Storage) !== 'undefined') {
-        localStorage.setItem(key,val);
-    } 
-    else {
-        setCookie(key,val);
+    if (typeof (window.Storage) !== 'undefined') {
+        localStorage.setItem(key, val);
+    } else {
+        setCookie(key, val);
     }
 }
 
@@ -203,11 +204,10 @@ export function setItem(key, val){
  * @param  {String} key [key]
  * @return {String}     [value]
  */
-export function getItem(key){
-    if (typeof(window.Storage) !== 'undefined') {
+export function getItem(key) {
+    if (typeof (window.Storage) !== 'undefined') {
         return localStorage.getItem(key);
-    } 
-    else {
+    } else {
         return getCookie(key);
     }
 }
@@ -218,10 +218,9 @@ export function getItem(key){
  * @return {String}     [value]
  */
 export function delItem(key) {
-    if (typeof(window.Storage) !== 'undefined') {
+    if (typeof (window.Storage) !== 'undefined') {
         delete localStorage[key];
-    } 
-    else {
+    } else {
         delCookie(key);
     }
 }
@@ -233,10 +232,11 @@ export function delItem(key) {
 
 export function callApi(url) {
 	var iframe = document.createElement('iframe');
+
 	iframe.src = url;
 	iframe.height = 0;
 	iframe.width = 0;
-	iframe.style.cssText = "display: none";
+	iframe.style.cssText = 'display: none';
 
 	document.body.appendChild(iframe);
 	
@@ -245,7 +245,6 @@ export function callApi(url) {
 		iframe = null;
 	}, 2000);
 }
-
 
 /**
  * @browser safe functions
@@ -259,18 +258,19 @@ export function callApi(url) {
  * @return {String}     经html实体编码后的html文本
  */
 export function encodeHTML(str) {
-    //&gt; 实体标签
-    //&#34; Unicode 编码（可以用charCodeAt方法查看某字符对应的unicode编码）
-    var s = "";
-    if(!str || str.length == 0) return "";
-    s = str.replace(/&/g, "&#38;");
-    s = s.replace(/</g, "&lt;");
-    s = s.replace(/>/g, "&gt;");
-    s = s.replace(/\'/g, "&#39;");
-    s = s.replace(/\"/g, "&quot;");
-    //空格和换行其实可以不转
-    s = s.replace(/ /g, "&nbsp;");
-    s = s.replace(/\n/g, "<br>");
+    // &gt; 实体标签
+    // &#34; Unicode 编码（可以用charCodeAt方法查看某字符对应的unicode编码）
+    var s = '';
+
+    if (!str || str.length == 0) return '';
+    s = str.replace(/&/g, '&#38;');
+    s = s.replace(/</g, '&lt;');
+    s = s.replace(/>/g, '&gt;');
+    s = s.replace(/\'/g, '&#39;');
+    s = s.replace(/\"/g, '&quot;');
+    // 空格和换行其实可以不转
+    s = s.replace(/ /g, '&nbsp;');
+    s = s.replace(/\n/g, '<br>');
     return s;
 }
 
@@ -280,15 +280,16 @@ export function encodeHTML(str) {
  * @return {String}     经html实体编码转义后的html文本
  */
 export function decodeHTML(str) {
-    var s = "";
-    if (str.length == 0) return "";
-    s = str.replace(/&#38;/g, "&");
-    s = s.replace(/&lt;/g, "<");
-    s = s.replace(/&gt;/g, ">");
-    s = s.replace(/&#39;/g, "\'");
-    s = s.replace(/&quot;/g, "\"");
-    s = s.replace(/&nbsp;/g, " ");
-    s = s.replace(/<br>/g, "\n");
+    var s = '';
+
+    if (str.length == 0) return '';
+    s = str.replace(/&#38;/g, '&');
+    s = s.replace(/&lt;/g, '<');
+    s = s.replace(/&gt;/g, '>');
+    s = s.replace(/&#39;/g, '\'');
+    s = s.replace(/&quot;/g, '"');
+    s = s.replace(/&nbsp;/g, ' ');
+    s = s.replace(/<br>/g, '\n');
     return s;
 }
 /**
@@ -337,8 +338,6 @@ export function isError(obj) {
 	return isType('Error', obj);
 }
 
-
-
 /**
  * @description JS url processing
  * @author heyli
@@ -352,7 +351,8 @@ export function isError(obj) {
  */
 export function getHash(key) {
     var m = window.location.hash.match(new RegExp('(#|&)' + key + '=([^&#]*)(#|&|$)'));
-    return !m ? "" : decodeURIComponent(m[2]);
+
+    return !m ? '' : decodeURIComponent(m[2]);
 }
 
 /**
@@ -361,8 +361,9 @@ export function getHash(key) {
  * @return {String}     [value]
  */
 export function getQuery(key) {
-    var m = window.location.search.match(new RegExp('(\\?|&)'+ key + '=([^&]*)(#|&|$)'));
-    return !m ? "":decodeURIComponent(m[2]);
+    var m = window.location.search.match(new RegExp('(\\?|&)' + key + '=([^&]*)(#|&|$)'));
+
+    return !m ? '' : decodeURIComponent(m[2]);
 }
 
 /**
@@ -371,11 +372,11 @@ export function getQuery(key) {
  * @return {String}     [value]
  */
 export function getUrlParam(key) {
-	var m = window.location.search.match(new RegExp('(\\?|#|&)'+ key + '=([^&]*)(#|&|$)'));
+	var m = window.location.search.match(new RegExp('(\\?|#|&)' + key + '=([^&]*)(#|&|$)'));
     
     if (!m) {
     	m = window.location.hash.match(new RegExp('(#|&)' + key + '=([^&#]*)(#|&|$)'));
     }
 
-    return !m ? "":decodeURIComponent(m[2]);
+    return !m ? '' : decodeURIComponent(m[2]);
 }

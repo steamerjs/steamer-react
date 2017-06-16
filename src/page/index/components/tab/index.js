@@ -6,10 +6,10 @@ import Touch from 'touch';
 import classNames from 'classnames';
 import './index.less';
 
-
 function TabItem(item, key) {
 	return (
-		<li data-tab={item.label} 
+		<li
+			data-tab={item.label} 
 			key={key}
 		>
 			<Touch data-tab={item.label} onTap={this.switchTab}>{item.text}</Touch>
@@ -18,8 +18,8 @@ function TabItem(item, key) {
 }
 
 function TabHighlight(props) {
-
 	var isActive = (props.active === LIKE_NEWS);
+
 	return (
 		<i className={classNames('icon-active', {'pull-right': isActive})}></i>
 	);
@@ -27,7 +27,6 @@ function TabHighlight(props) {
 
 @pureRender
 export default class Tab extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -56,8 +55,8 @@ export default class Tab extends Component {
 
 	switchTab(e) {
 		let tab = parseInt(e.target.dataset.tab);
-		this.props.updateActiveTab(tab);
 
+		this.props.updateActiveTab(tab);
 	}
 
 	render() {

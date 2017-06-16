@@ -6,7 +6,6 @@ require('./index.less');
 
 // @pureRender
 export default class List extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -23,7 +22,6 @@ export default class List extends Component {
 	}
 
 	render() {
-
 		console.dev('render Loading');
 
 		var isShow = this.props.isShow || false;

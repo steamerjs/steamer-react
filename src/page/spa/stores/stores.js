@@ -6,27 +6,27 @@ import {
 /** other const **/
 const initialState = {
 	args: {
-		src: getHash('src'),
+		src: getHash('src')
 	},
 	tabs: LATEST_NEWS,
 	news: {
 		ids: [], // 新闻id
-	    listLatest: [],    // 最新新闻
+	    listLatest: [], // 最新新闻
 	    listLike: JSON.parse(getItem('like-list')) || [], // 收藏新闻
 	    listInfo: {
 	    	listLatest: {
 	        	isEnd: false,
 				pageSize: 20,
 				curPage: 1,
-				isLoading: false,
+				isLoading: false
 	        },
 	        listLike: {
 	        	isEnd: false,
 				pageSize: 20,
 				curPage: 1,
-				isLoading: false,
+				isLoading: false
 	        }
-	    },
+	    }
 	},
 	details: {
 

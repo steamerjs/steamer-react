@@ -1,10 +1,9 @@
 /** @jsx h */
-if ("production" !== process.env.NODE_ENV) {
+if (process.env.NODE_ENV !== 'production') {
 	window.console.dev = function(msg) {
 		console.log(msg);
 	};
-}
-else {
+} else {
 	window.console.dev = function(msg) {};
 }
 
@@ -17,11 +16,6 @@ import IndexWrapper from '../container/index';
 let store = configureStore();
 
 export default class Root extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
             <Provider store={store}>
@@ -37,5 +31,3 @@ render(
     <Root />,
     document.getElementById('pages')
 );
-
-

@@ -2,7 +2,6 @@ import React from 'react';
 import Connect from '../connect/connect';
 
 function App(props) {
-
 	return (
         <div>
         	{props.children}

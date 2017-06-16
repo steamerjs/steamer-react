@@ -8,12 +8,9 @@ import {
 import Spinner from 'spinner';
 import Touch from 'touch';
 
-
 import './detail.less';
 
-
 class Detail extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -23,6 +20,8 @@ class Detail extends Component {
 		this.commentId = this.props.params.commentid;
 
 		this.getNewsDetail = this.getNewsDetail.bind(this);
+		this.goBack = this.goBack.bind(this);
+		this.goToComment = this.goToComment.bind(this);
 	}
 
 	componentDidMount() {
@@ -46,24 +45,35 @@ class Detail extends Component {
 		var pa = merge({}, {
 			url: item.url,
 			news_id: item.id,
-			v: (new Date()).getTime(),
-		}, pa);
+			v: (new Date()).getTime()
+		});
 
 		var param = {
 			param: pa,
 			ajaxType: 'POST',
 			localData: {
-				content: '险企碰红线 监管将下手快下手狠\n\n2017-01-12 23:00:39 腾讯财经\n\n文/刘鹏\n\n进入2017年，保险业监管将保持高压状态。\n\n1月12日，2017年全国保险监管工作会议在京召开，保监会主席项俊波在会议上部署了2017年的保险业监管工作。他强调，要将“保险业姓保、保监会姓监”理念贯穿到监管工作各个方面。要打赢一场硬仗，坚决守住不发生系统性风险底线。\n\n'
+				content: '险企碰红线 监管将下手快下手狠\n\n2017-01-12 23:00:39 腾讯财经\n\n文/刘鹏\n\n进入2017年，'
+						 + '保险业监管将保持高压状态。\n\n1月12日，2017年全国保险监管工作会议在京召开，保监会主席项'
+						 + '俊波在会议上部署了2017年的保险业监管工作。他强调，要将“保险业姓保、保监会姓监”理念贯穿到'
+						 + '监管工作各个方面。要打赢一场硬仗，坚决守住不发生系统性风险底线。\n\n'
 			},
 			onSuccess: function(data) {
 				
 			},
 			onError: function(res) {
-				console.log("err");
+				console.log('err');
 			}
 		};
 
 		this.props.request(url, param, opts);
+	}
+
+	goBack() {
+		this.context.router.goBack();
+	}
+
+	goToComment() {
+		this.context.router.push('comment/' + this.commentId);
 	}
 
 	render() {
@@ -85,16 +95,16 @@ class Detail extends Component {
 
 					var regex = new RegExp('(\[http:\/\/(\w.+)\])', 'i');
 					var matches = item.match(regex);
+
 					// console.log(matches);
-					if (matches !== null && !!~matches.input.indexOf("\[http://")) {
+					if (matches !== null && !!~matches.input.indexOf('\[http://')) {
 						// console.log(item);
 						return (
 							<p key={index} className="imgNode">
-								<img src={item.replace("\[", "").replace("\]", "")} />
+								<img src={item.replace('\[', '').replace('\]', '')} />
 							</p>
 						);
-					}
-					else {
+					} else {
 						return (
 							<p key={index} className="text">{item}</p>
 						);
@@ -106,13 +116,12 @@ class Detail extends Component {
 	        <div className="detail-wrapper">
 	        	{detailContent}
 	        	<div className="btns">
-	        		<Touch onTap={() => {
-        				this.context.router.goBack();
-        				// this.context.router
-        			}}>首页</Touch>
-        			<Touch onTap={() => {
-        				this.context.router.push('comment/' + this.commentId);
-        			}}>精彩评论</Touch>
+					<Touch onTap={this.goBack}>
+						首页
+					</Touch>
+					<Touch onTap={this.goToComment}>
+						精彩评论
+					</Touch>
 	        	</div>
 	        	<Spinner isShow={this.props.spinLoading}/>
 	        </div>

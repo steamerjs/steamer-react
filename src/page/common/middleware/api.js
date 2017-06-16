@@ -4,7 +4,6 @@ import merge from 'lodash.merge';
 import CGI_PATH from '../constants/cgiPath';
 
 export default store => next => action => {
-
     let API_OPT = action['API'];
 
     if (!API_OPT) {
@@ -23,6 +22,7 @@ export default store => next => action => {
         delete param['onSuccess'];
         delete param['onError'];
         const nextRequestAction = merge({}, action, param);
+
         return nextRequestAction;
     };
 

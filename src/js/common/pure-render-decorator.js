@@ -10,7 +10,7 @@ var maxDep = 6; // 比较的最大深度
  * [type utils]
  * @type {Array}
  */
-var jsType = ["Boolean", "Number", "String", "Function", "Array", "Date", "RegExp", "Object", "Error"];
+var jsType = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object', 'Error'];
 var dUtil = {};
 
 for (var i = 0; i < jsType.length; i++) {
@@ -32,10 +32,9 @@ var hasOwnProperty = Object.prototype.hasOwnProperty;
  * @return {[type]}       [description]
  */
 function valCompare(valA, valB, depth) {
-    
     if (dUtil.isFunction(valA)) {
-        if (valA.hasOwnProperty('name') && valB.hasOwnProperty('name') 
-            && valA.name === valB.name) {
+        if (valA.hasOwnProperty('name') && valB.hasOwnProperty('name') && 
+            valA.name === valB.name) {
                 return true;
         }
         return false;
@@ -70,14 +69,13 @@ function skipKeys(key) {
         '_owner': 1,
         '_store': 1,
         '_self': 1,
-        '_source': 1,
+        '_source': 1
     };
 
     if (keyMaps[key]) {
         return true;
     }
 }
-
 
 /**
  * [test whether two values are equal]
@@ -87,7 +85,6 @@ function skipKeys(key) {
  * @return {[type]}       [description]
  */
 function deepEqual(objA, objB, depth) {
-
     if (depth > maxDep) {
         return false;
     }
@@ -108,18 +105,17 @@ function deepEqual(objA, objB, depth) {
     }
    
     for (var i = 0; i < keysA.length; i++) {
-        
         var comPareValA = objA[keysA[i]],
             comPareValB = objB[keysB[i]];
 
         if (keysA[0] === '$$typeof' && keysA[i] === 'children') {
             return true;
-        }
-        else if (keysA[0] === '$$typeof' && skipKeys(keysA[i])) {
+        } else if (keysA[0] === '$$typeof' && skipKeys(keysA[i])) {
             continue;
         }
 
         var bHasOwnProperty = hasOwnProperty.bind(objB);
+
         if (!bHasOwnProperty(keysA[i])) {
             return false;
         }
@@ -127,7 +123,6 @@ function deepEqual(objA, objB, depth) {
         if (!valCompare(comPareValA, comPareValB, depth)) {
             return false;
         }
-
     }
 
     return true;
@@ -142,6 +137,7 @@ function deepEqual(objA, objB, depth) {
  */
 function deepCompare(instance, nextProps, nextState) {
     var result = !deepEqual(instance.props, nextProps, 1) || !deepEqual(instance.state, nextState, 1);
+
     return result;
 }
 
@@ -163,6 +159,5 @@ function shouldComponentUpdate(nextProps, nextState) {
 function pureRenderDecorator(component) {
     component.prototype.shouldComponentUpdate = shouldComponentUpdate;
 }
-
 
 module.exports = pureRenderDecorator;

@@ -34,23 +34,32 @@ const history = syncHistoryWithStore(hashHistory, store);
 var DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
 
 export default class Root extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
-            <Provider store={store}>
+            <Provider 
+                store={store}
+            >
                 <div>
-                    <Router history={history}>
-                        <Route path="/" component={App}>
-                            <IndexRoute component={IndexWrapper}/>
-                            <Route path="comment/:id" component={CommentWrapper}/>
-                            <Route path="detail/:id/:commentid" component={DetailWrapper}/>
+                    <Router 
+                        history={history}
+                    >
+                        <Route 
+                            path="/" 
+                            component={App}
+                        >
+                            <IndexRoute 
+                                component={IndexWrapper}
+                            />
+                            <Route 
+                                path="comment/:id" 
+                                component={CommentWrapper}
+                            />
+                            <Route 
+                                path="detail/:id/:commentid" 
+                                component={DetailWrapper}
+                            />
                         </Route>
                     </Router>
-                    {/* <Router history={history} routes={routeConfig} /> */}
                     {DevToolsWrapper}
                 </div>
             </Provider>
@@ -62,5 +71,3 @@ export default class Root extends Component {
 //     <Root />,
 //     document.getElementById('pages')
 // );
-
-

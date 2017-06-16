@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import merge from 'lodash.merge';
 import { 
 	formatDate 
 } from 'utils';
@@ -11,12 +10,9 @@ import {
 import Spinner from 'spinner';
 import Touch from 'touch';
 
-
 import './comment.less';
 
-
 class Comment extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -25,6 +21,8 @@ class Comment extends Component {
 		this.commentId = this.props.params.id;
 
 		this.getCommentList = getCommentList.bind(this);
+
+		this.goBack = this.goBack.bind(this);
 	}
 
 	componentDidMount() {
@@ -37,12 +35,14 @@ class Comment extends Component {
 		}
 	}
 
-	
+	goBack() {
+		this.context.router.goBack();
+	}
 
 	render() {
 		var commentId = this.commentId;
-		var commentData = (this.props.comments.hasOwnProperty(commentId)) ? 
-						  this.props.comments[commentId] : [];
+		var commentData = (this.props.comments.hasOwnProperty(commentId)) 
+						  ? this.props.comments[commentId] : [];
 
 		var commentList = commentData.map((items, index) => {
 			let item = items[0];
@@ -61,7 +61,7 @@ class Comment extends Component {
         					<p>{item.reply_content}</p>
         				</div>
         			</div>
-        		</div>
+				</div>
 			);
 		});
 
@@ -70,19 +70,22 @@ class Comment extends Component {
 		return (
 	        <div className="comment-wrapper">
 	        	<div className="comment-list">
-	        		<h1>
+					<h1>
 	        			精选评论
-	        			<Touch onTap={() => {
-	        				this.context.router.goBack();
-	        				// this.context.router
-	        			}}><div className="back">返回</div></Touch>
-	        		</h1>
+						<Touch 
+		        			onTap={this.goBack}
+						>
+	        				<div className="back">返回</div>
+						</Touch>
+					</h1>
 	        		
 	        		<div className="comment-list_item">
 	        			{commentList}
 	        		</div>
 	        	</div>
-	        	<Spinner isShow={this.props.spinLoading}/>
+	        	<Spinner 
+	        		isShow={this.props.spinLoading}
+	        	/>
 	        </div>
 		);
 	}

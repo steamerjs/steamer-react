@@ -5,7 +5,6 @@
 // OTHERS
 export const GET_ARGS = 'GET_ARGS';
 
-
 export const TOGGLE_SPIN_LOADING = 'TOGGLE_SPIN_LOADING';
 export const TOGGLE_LIST_LOADING = 'TOGGLE_LIST_LOADING';
 
@@ -17,7 +16,6 @@ export const DISLIKE_NEWS = 'DISLIKE_NEWS';
 /*
  * other constants
  */
-
 
 /*
  * action creators
@@ -36,7 +34,7 @@ export function toggleSpinLoading(value) {
 }
 
 export function updateActiveTab(value) {
-	return { type: TABS_UPDATE, value};
+	return { type: TABS_UPDATE, value };
 }
 
 export function likeNews(value) {

@@ -30,6 +30,7 @@ function shallowEqual(objA, objB) {
 
     // Test for A's keys different from B.
     let bHasOwnProperty = hasOwnProperty.bind(objB);
+
     for (let i = 0; i < keysA.length; i++) {
         if (!bHasOwnProperty(keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
             return false;
@@ -66,6 +67,5 @@ function shouldComponentUpdate(nextProps, nextState) {
 function pureRenderDecorator(component) {
     component.prototype.shouldComponentUpdate = shouldComponentUpdate;
 }
-
 
 module.exports = pureRenderDecorator;

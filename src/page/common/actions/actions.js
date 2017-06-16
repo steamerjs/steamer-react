@@ -1,6 +1,5 @@
 import { API_REQUEST } from '../constants/cgiPath';
 
-
 export function request(cgiName, params, opts = {}, requiredFields = []) {
     return (dispatch, getState) => {
         var action = {
@@ -11,6 +10,7 @@ export function request(cgiName, params, opts = {}, requiredFields = []) {
             },
             type: API_REQUEST
         };
+
         return dispatch(action);
     };
 }

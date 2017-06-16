@@ -11,11 +11,6 @@ let store = configureStore();
 var DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
 
 export default class Root extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
             <Provider store={store}>
@@ -32,4 +27,3 @@ export default class Root extends Component {
 //     <Root />,
 //     document.getElementById('pages')
 // );
-

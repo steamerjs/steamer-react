@@ -12,7 +12,7 @@ const CGI_PATH = {
 	[GET_TOP_NEWS]: baseUrl + 'getQQNewsIndexAndItems',
 	[GET_NEWS_LIST]: baseUrl + 'getQQNewsNormalContent',
 	[GET_COMMENT_LIST]: baseUrl1 + 'getQQNewsComment',
-	[GET_NEWS_DETAIL]: baseUrl2 + 'getQQNewsDetail',
+	[GET_NEWS_DETAIL]: baseUrl2 + 'getQQNewsDetail'
 };
 
 export default CGI_PATH;

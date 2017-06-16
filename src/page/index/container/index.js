@@ -19,7 +19,6 @@ import Loading from '../components/loading/index';
 import './index.less';
 
 class Wrapper extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -60,7 +59,7 @@ class Wrapper extends Component {
 			otype: 'jsonp',
 			jsonCbName: 'getNewsIndexOutput',
 			t: (new Date()).getTime()
-		}, pa);
+		});
 
 		var param = {
 			param: pa,
@@ -83,10 +82,9 @@ class Wrapper extends Component {
 		this.loadData(LATEST_NEWS, {});
 	}
 
-	//http://mat1.gtimg.com/www/mobi/image/loadimg.png
+	// http://mat1.gtimg.com/www/mobi/image/loadimg.png
 
 	loadData(listType, pa = {}, opts = {}) {
-		var _this = this;
 		var url = GET_NEWS_LIST;
 
 		var listInfoParam = this.props.news.listInfo['listLatest'],
@@ -98,9 +96,9 @@ class Wrapper extends Component {
 		}
 
 		var curPage = listInfoParam.curPage,
-			page_size = listInfoParam.pageSize,
-			startIndex = 0 + (curPage - 1) * page_size,
-			endIndex = startIndex + page_size;
+			pageSize = listInfoParam.pageSize,
+			startIndex = 0 + (curPage - 1) * pageSize,
+			endIndex = startIndex + pageSize;
 
 		var newIds = ids.slice(startIndex, endIndex),
 			newIdArray = [];
@@ -112,10 +110,10 @@ class Wrapper extends Component {
 		var pa = merge({}, {
 			cmd: GET_NEWS_LIST,
 			ids: newIdArray.join(','),
-			refer: "mobilewwwqqcom",
-			otype: "jsonp",
-			jsonCbName: "getNewsContentOnlyOutput",
-			t: (new Date()).getTime(),
+			refer: 'mobilewwwqqcom',
+			otype: 'jsonp',
+			jsonCbName: 'getNewsContentOnlyOutput',
+			t: (new Date()).getTime()
 		}, pa);
 
 		var param = {
@@ -125,7 +123,7 @@ class Wrapper extends Component {
 				// console.log(data);
 			},
 			onError: function(res) {
-				console.log("err");
+				console.log('err');
 				// console.log(res);
 				// alert(res.errMsg || '加载新闻列表失败，请稍后重试');
 			}
@@ -135,7 +133,6 @@ class Wrapper extends Component {
 	}
 
 	render() {
-
 		console.dev('render container!!!!');
 		let tabStyle = this.props.tabs,
 			isEnd = this.props.news.listInfo['listLatest']['isEnd'],
@@ -160,7 +157,7 @@ class Wrapper extends Component {
 							  args={this.props.args}
 							  request={this.props.request}
 							  likeNews={this.props.likeNews}
-						/>
+	            		/>
 						<List 
 							  tabs={this.props.tabs}
 							  tabsType={LIKE_NEWS}

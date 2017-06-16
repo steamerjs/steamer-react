@@ -4,7 +4,6 @@ import Preact, { h, Component } from 'preact';
 
 // @pureRender
 export default class Scroll extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -26,13 +25,12 @@ export default class Scroll extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		console.log("==================componentDidUpdate==============");
+		console.log('==================componentDidUpdate==============');
 	}
 
 	refreshScroll() {
 		this.prvScrollTop = this.prvScrollTopCache[this.props.tabs.active] = 0;
 	}
-
 
 	bindScrollEvt() {
 		var _this = this;
@@ -42,7 +40,6 @@ export default class Scroll extends Component {
 			// 延迟计算
 			timer && clearTimeout(timer);
 			timer = setTimeout(function() {
-
 				var doc = window.document;
 				var scrollTop = doc.body.scrollTop;
 				var isEnd = _this.props.isEnd;
@@ -63,14 +60,11 @@ export default class Scroll extends Component {
 				if (scrollTop >= (clientHeight - winHeight) / 2 && !isEnd) {
 					_this.props.loadNewsList(null, false);
 				}
-
 			}, 50); 
 		});
-
 	}
 
 	render() {
-
 		console.dev('render Scroll!');
 
 		return (
