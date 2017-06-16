@@ -10,7 +10,9 @@
     "pub": "node ./tools/script.js --mode=production",
     "source": "node ./tools/script.js --mode=source",
     "test": "",
-    "lint": "eslint src && stylelint src/**/*.less",
+    "lint": "eslint src/**/*.js & stylelint src/**/*.less",
+    "lint:js": "eslint src/**/*.js",
+    "lint:style": "stylelint src/**/*.less",
     "tpl": "node ./tools/template.js"
   },
   "repository": {
@@ -38,6 +40,7 @@
   "dependencies": {},
   "devDependencies": {
     "@alloyteam/eslint-config-react": "0.0.4",
+    "@alloyteam/stylelint-config-standard": "0.0.2",
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.0.0",
@@ -103,7 +106,6 @@
     "steamer-webpack-utils": "^1.0.2",
     "style-loader": "^0.18.2",
     "stylelint": "^7.11.0",
-    "stylelint-config-standard": "^16.0.0",
     "url-loader": "^0.5.9",
     "webpack": "^2.6.1",
     "webpack-dev-middleware": "^1.10.2",
