@@ -44,7 +44,8 @@ export default class List extends Component {
 					var win = window.open(item.url, '_blank');
 
 					win && win.focus();
-				} else {
+				}
+ else {
 					if (!this.props.details.hasOwnProperty(item.id)) {
 						this.props.getNewsDetail(item);
 					}

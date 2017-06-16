@@ -6,7 +6,7 @@ import {
 
 // Map Redux state to component props
 // ownProps stores react-router-redux props
-function mapStateToProps(state)  {   
+function mapStateToProps(state) {   
     return {
         data: state.data
     };
@@ -16,7 +16,7 @@ function mapStateToProps(state)  {
 function mapDispatchToProps(dispatch) {
     return {
         request: (cgiName, params, opts) => dispatch(request(cgiName, params, opts)),
-        getAction: (value) => dispatch(getAction(value)),
+        getAction: (value) => dispatch(getAction(value))
     };
 }
 

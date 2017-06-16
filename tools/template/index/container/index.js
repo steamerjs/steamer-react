@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import merge from 'lodash.merge';
 import Connect from '../connect/connect';
 import { 
 	
@@ -8,11 +7,9 @@ import {
 
 } from '../constants/constants';
 
-
 import './index.less';
 
 class Wrapper extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {};
@@ -23,7 +20,6 @@ class Wrapper extends Component {
 	}
 
 	render() {
-
 		return (
 	        <div>hello world</div>
 		);

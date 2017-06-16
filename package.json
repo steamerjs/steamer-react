@@ -39,7 +39,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@alloyteam/eslint-config-react": "0.0.4",
+    "@alloyteam/eslint-config-react": "0.0.5",
     "@alloyteam/stylelint-config-standard": "0.0.2",
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.25.0",

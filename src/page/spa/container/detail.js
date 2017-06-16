@@ -104,7 +104,8 @@ class Detail extends Component {
 								<img src={item.replace('\[', '').replace('\]', '')} />
 							</p>
 						);
-					} else {
+					}
+ else {
 						return (
 							<p key={index} className="text">{item}</p>
 						);

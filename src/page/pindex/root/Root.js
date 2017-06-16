@@ -3,7 +3,8 @@ if (process.env.NODE_ENV !== 'production') {
 	window.console.dev = function(msg) {
 		console.log(msg);
 	};
-} else {
+}
+ else {
 	window.console.dev = function(msg) {};
 }
 

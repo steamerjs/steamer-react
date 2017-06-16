@@ -8,10 +8,8 @@ import Touch from 'touch';
 import classNames from 'classnames';
 import './index.less';
 
-
 @pureRender
 export default class Tab extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -40,12 +38,11 @@ export default class Tab extends Component {
 
 	switchTab(e) {
 		let tab = parseInt(e.target.dataset.tab);
-		this.props.updateActiveTab(tab);
 
+		this.props.updateActiveTab(tab);
 	}
 
 	render() {
-		
 		return (
 			<div id="cm-tab">
 				<div className="cm-tabs">

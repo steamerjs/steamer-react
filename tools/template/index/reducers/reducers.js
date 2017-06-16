@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux';
-import merge from 'lodash.merge';
-import { setItem } from 'utils';
 import initialState from '../stores/stores';
 import { 
 
@@ -9,14 +7,12 @@ import {
 
 } from '../actions/actions';
 
-
 var data = function(state = initialState.data, action) {
-	switch(action.type) {
+	switch (action.type) {
 		default:
 			return state;
 	}
 };
-
 
 const rootReducer = combineReducers({
 	data

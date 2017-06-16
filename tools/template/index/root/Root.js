@@ -1,4 +1,4 @@
-if ("production" !== process.env.NODE_ENV) {
+if (process.env.NODE_ENV !== 'production') {
 	window.console.dev = function(msg) {
 		console.log(msg);
 	};
