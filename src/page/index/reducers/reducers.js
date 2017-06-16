@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import merge from 'lodash.merge';
-import { setItem } from 'utils';
+import {
+	setItem
+} from 'sutils';
 import initialState from '../stores/stores';
 import { 
 	GET_NEWS_LIST,

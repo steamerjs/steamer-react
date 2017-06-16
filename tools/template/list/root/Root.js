@@ -1,4 +1,4 @@
-if ("production" !== process.env.NODE_ENV) {
+if (process.env.NODE_ENV !== 'production') {
 	window.console.dev = function(msg) {
 		console.log(msg);
 	};
@@ -7,8 +7,7 @@ if ("production" !== process.env.NODE_ENV) {
 
 	// enable it and don't forget to add back render() function
 	// module.exports = require('./Root.dev');
-}
-else {
+} else {
 	window.console.dev = function(msg) {};
 	module.exports = require('./Root.prod');
 }

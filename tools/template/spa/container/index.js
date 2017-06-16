@@ -3,13 +3,12 @@ import Connect from '../connect/connect';
 import { 
 	loadTopNews,
 	getNewsDetail,
-	loadData,
+	loadData
 } from '../../common/db';
 import { 
 	LATEST_NEWS, 
 	LIKE_NEWS 
 } from '../../common/constants';
-
 
 import Scroll from 'scroll';
 import Spinner from 'spinner';
@@ -19,9 +18,7 @@ import Loading from '../components/loading/index';
 
 import './index.less';
 
-
 class Wrapper extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -39,7 +36,7 @@ class Wrapper extends Component {
 	componentDidMount() {
 		setTimeout(() => {
 			this.setState({
-				lock: false,
+				lock: false
 			});
 		}, 100);
 	}
@@ -87,7 +84,7 @@ class Wrapper extends Component {
 							  likeNews={this.props.likeNews}
 							  getNewsDetail={this.getNewsDetail}
 							  details={this.props.details}
-						/>
+	            		/>
 						<List 
 							  tabs={this.props.tabs}
 							  tabsType={LIKE_NEWS}

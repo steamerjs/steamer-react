@@ -1,4 +1,7 @@
-import { getItem, getHash } from 'utils';
+import {
+	getItem,
+	getHash
+} from 'sutils';
 import { LATEST_NEWS } from '../constants/constants';
 
 /** other const **/

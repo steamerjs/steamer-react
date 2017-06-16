@@ -1,7 +1,9 @@
 /** @jsx h */
 import { combineReducers } from 'redux';
 import merge from 'lodash.merge';
-import { setItem } from 'utils';
+import {
+	setItem
+} from 'sutils';
 import initialState from '../stores/stores';
 import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/cgiPath';
 import { 
@@ -12,11 +14,8 @@ import {
 	DISLIKE_NEWS 
 } from '../actions/actions';
 
-
 var news = function(state = initialState.news, action) {
-
-	switch(action.type) {
-
+	switch (action.type) {
 		case GET_TOP_NEWS + '_SUCCESS':
 
 			if (!action.data || !action.data.idlist || action.data.idlist.length === 0) {
@@ -31,9 +30,9 @@ var news = function(state = initialState.news, action) {
 
 			return newState;
 
-
 		case GET_NEWS_LIST + '_ON':
 			var newState = merge({}, state);
+
 			newState.listInfo['listLatest'].isLoading = true;
 
 			return newState;
@@ -47,7 +46,7 @@ var news = function(state = initialState.news, action) {
 			var newState = merge({}, state),
 				listInfo = {
 					curPage: (++newState.listInfo['listLatest'].curPage),
-					isLoading: false,
+					isLoading: false
 				};
 
 			newState.listInfo['listLatest'] = merge({}, newState.listInfo['listLatest'], listInfo);
@@ -57,6 +56,7 @@ var news = function(state = initialState.news, action) {
 
 		case GET_NEWS_LIST + '_ERROR':
 			var newState = merge({}, state);
+
 			newState.listInfo['listLatest'].isLoading = false;
 
 			return newState;
@@ -90,6 +90,7 @@ var news = function(state = initialState.news, action) {
 			}
 
 			var newState = merge({}, state);
+
 			newState['listLike'] = newState['listLike'].filter((item) => {
 				return (item.id !== action.value.id);
 			});
@@ -103,7 +104,7 @@ var news = function(state = initialState.news, action) {
 };
 
 var args = function(state = initialState.args, action) {
-	switch(action.type) {
+	switch (action.type) {
 		case GET_ARGS:
 			return merge({}, state, action.value);
 		default:
@@ -112,7 +113,7 @@ var args = function(state = initialState.args, action) {
 };
 
 var tabs = function(state = initialState.tabs, action) {
-	switch(action.type) {
+	switch (action.type) {
 		case TABS_UPDATE:
 			return action.value;
 		default:
@@ -121,7 +122,7 @@ var tabs = function(state = initialState.tabs, action) {
 };
 
 var listLoading = function(state = initialState.listLoading, action) {
-	switch(action.type) {
+	switch (action.type) {
 		case TOGGLE_LIST_LOADING:
 			return action.value;
 		default:
@@ -130,7 +131,7 @@ var listLoading = function(state = initialState.listLoading, action) {
 };
 
 var spinLoading = function(state = initialState.spinLoading, action) {
-	switch(action.type) {
+	switch (action.type) {
 		case TOGGLE_SPIN_LOADING:
 			return action.value;
 		default:
@@ -138,13 +139,12 @@ var spinLoading = function(state = initialState.spinLoading, action) {
 	}
 };
 
-
 const rootReducer = combineReducers({
 	args,
 	tabs,
 	news,
 	listLoading,
-	spinLoading,
+	spinLoading
 });
 
 export default rootReducer;

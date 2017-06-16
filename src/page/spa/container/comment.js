@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { 
-	formatDate 
-} from 'utils';
+import {
+	formatDate
+} from 'sutils';
 import Connect from '../connect/connect';
 import { 
 	getCommentList

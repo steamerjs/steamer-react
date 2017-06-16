@@ -11,13 +11,13 @@ import {
 
 // Map Redux state to component props
 // ownProps stores react-router-redux props
-function mapStateToProps(state)  {   
+function mapStateToProps(state) {   
     return {
         args: state.args,
         tabs: state.tabs,
         news: state.news,
         spinLoading: state.spinLoading,
-        listLoading: state.listLoading,
+        listLoading: state.listLoading
     };
 }
 
@@ -30,7 +30,7 @@ function mapDispatchToProps(dispatch) {
         toggleSpinLoading: (value) => dispatch(toggleSpinLoading(value)),
         updateActiveTab: (value) => dispatch(updateActiveTab(value)),
         likeNews: (value) => dispatch(likeNews(value)),
-        dislikeNews: (value) => dispatch(dislikeNews(value)),
+        dislikeNews: (value) => dispatch(dislikeNews(value))
     };
 }
 

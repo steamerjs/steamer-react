@@ -9,7 +9,6 @@ const finalCreateStore = compose(
 )(createStore);
 
 export default function configureStore(initialState) {
-
 	const store = finalCreateStore(rootReducer, initialState);
     
   	return store;

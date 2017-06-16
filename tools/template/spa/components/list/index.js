@@ -11,7 +11,6 @@ require('./index.less');
 
 @pureRender
 export default class List extends Component {
-
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -21,7 +20,7 @@ export default class List extends Component {
 		this.jumpToDetail = this.jumpToDetail.bind(this);
 		this.showLikeBtn = this.showLikeBtn.bind(this);
 		this.hideLikeBtn = this.hideLikeBtn.bind(this);
-		this.isClickOnBtn = false;  // 是否点击在修改、删除按钮上
+		this.isClickOnBtn = false; // 是否点击在修改、删除按钮上
 		this.like = this.like.bind(this);
 		this.dislike = this.dislike.bind(this);
 	}
@@ -43,23 +42,22 @@ export default class List extends Component {
 			if (!this.isClickOnBtn) {
 				if (item.articletype === '100') {
 					var win = window.open(item.url, '_blank');
+
 					win && win.focus();
-				}
-				else {
+				} else {
 					if (!this.props.details.hasOwnProperty(item.id)) {
 						this.props.getNewsDetail(item);
 					}
 					this.context.router.push('detail/' + item.id + '/' + item.commentid);
 				}
-				
 			}
 		};
 	}
 
 	renderNewsIcon(pic) {
 		return {
-			"backgroundImage": "url(" + pic + ")",
-            "backgroundSize": "100%"
+			'backgroundImage': 'url(' + pic + ')',
+            'backgroundSize': '100%'
 		};
 	}
 
@@ -75,13 +73,12 @@ export default class List extends Component {
 
     hideLikeBtn(e) {
     	return (e) => {
-
 			if (this.state.activeNewsId === null) {
 				return;
 			}
 
 			this.setState({
-				activeNewsId: null,
+				activeNewsId: null
 			});
 		};
     }
@@ -109,7 +106,6 @@ export default class List extends Component {
     }
 
 	render() {
-
 		console.dev('render List!!');
 
 		let news = this.props.news;
@@ -119,29 +115,36 @@ export default class List extends Component {
 		
 		let list = news.map((item, index) => {
 			return (
-				<li key={index + tabsType} className={classnames('item ui-border-1px', {'active-like': this.state.activeNewsId === item.id})}>
-			    	<Touch  className="item-inner" onSwipeLeft={this.showLikeBtn(item)} onTap={this.jumpToDetail(item)}>
-				    	<div className={"icon "} style={this.renderNewsIcon(item.thumbnails[0])}></div>
+				<li 
+					key={index + tabsType} 
+					className={
+						classnames('item ui-border-1px', {'active-like': this.state.activeNewsId === item.id})
+					}
+				>
+					<Touch className="item-inner" onSwipeLeft={this.showLikeBtn(item)} onTap={this.jumpToDetail(item)}>
+				    	<div className={'icon '} style={this.renderNewsIcon(item.thumbnails[0])}></div>
 				    	<div className="info-wrap clearfix">
 				    		<div className="info-left">
-				    			<div className="info-name">
-		                            <div className="info-name-text">{item.title}</div>
-		                        </div>
+								<div className="info-name">
+									<div className="info-name-text">{item.title}</div>
+								</div>
 				    			<p className="info-content">{item.des}</p>
 				    		</div>
 				    	</div>
-		                <Touch onTap={(tabsType === LATEST_NEWS) ? this.like(item) : this.dislike(item)} 
-		                		className={classnames((tabsType === LATEST_NEWS) ? "like-btn" : 'dislike-btn')}>
-		                		{(tabsType === LATEST_NEWS) ? "收藏" : "取消"}
-		                </Touch>
-	                </Touch>
-			    </li>
+						<Touch
+							onTap={(tabsType === LATEST_NEWS) ? this.like(item) : this.dislike(item)} 
+		                		className={classnames((tabsType === LATEST_NEWS) ? 'like-btn' : 'dislike-btn')}
+						>
+		                		{(tabsType === LATEST_NEWS) ? '收藏' : '取消'}
+						</Touch>
+					</Touch>
+				</li>
 			);
 		});
 
 		let wrapperStyle = {
-			display: (this.props.tabs === tabsType) ? "block" : "none",
-			paddingTop: 46,
+			display: (this.props.tabs === tabsType) ? 'block' : 'none',
+			paddingTop: 46
 		};
 
 		return (
