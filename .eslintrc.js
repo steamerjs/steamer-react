@@ -4,6 +4,10 @@ module.exports = {
         "@alloyteam/eslint-config-react",
     ],
     "plugins": [],
-    "rules": {},
-    "globals": {}
+    "rules": {
+    	"no-mixed-operators": 0,
+    },
+    "globals": {
+    	"define": true,
+    }
 };

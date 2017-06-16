@@ -59,6 +59,9 @@ var config = {
             production: false,
         },
 
+        // lint
+        lint: true,
+
         // 预编译器，默认支持css 和 less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
         style: [
             "css", "less"
@@ -207,7 +210,8 @@ config.custom = {
             ]
         }; 
 
-        var jsRule = null;
+        var jsRule = null,
+            eslintRule = null;
 
         if (isProduction) {
             // js 使用了 happypack 进行编译，具体 babel 配置参看 happypack 插件的配置

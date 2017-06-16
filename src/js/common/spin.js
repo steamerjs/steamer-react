@@ -106,10 +106,10 @@
        i;
 
     prop = prop.charAt(0).toUpperCase() + prop.slice(1);
-    if (s[prop] !== undefined) return prop;
+    if (typeof s[prop] !== 'undefined') return prop;
     for (i = 0; i < prefixes.length; i++) {
       pp = prefixes[i] + prop;
-      if (s[pp] !== undefined) return pp;
+      if (typeof s[pp] !== 'undefined') return pp;
     }
   }
 
@@ -132,7 +132,7 @@
       var def = arguments[i];
 
       for (var n in def) {
-        if (obj[n] === undefined) obj[n] = def[n];
+        if (typeof obj[n] === 'undefined') obj[n] = def[n];
       }
     }
     return obj;
@@ -238,7 +238,7 @@
       if (el) {
         clearTimeout(this.timeout);
         if (el.parentNode) el.parentNode.removeChild(el);
-        this.el = undefined;
+        this.el = null;
       }
       return this;
     },
@@ -260,7 +260,8 @@
          background: color,
          boxShadow: shadow,
          transformOrigin: 'left',
-         transform: 'rotate(' + ~~(360 / o.lines * i + o.rotate) + 'deg) translate(' + o.scale * o.radius + 'px' + ',0)',
+         transform: 'rotate(' + ~~(360 / o.lines * i + o.rotate) + 'deg) translate(' 
+                    + o.scale * o.radius + 'px' + ',0)',
          borderRadius: (o.corners * o.scale * o.width >> 1) + 'px'
         });
       }
@@ -271,7 +272,8 @@
          top: 1 + ~(o.scale * o.width / 2) + 'px',
          transform: o.hwaccel ? 'translate3d(0,0,0)' : '',
          opacity: o.opacity,
-         animation: useCssAnimations && addAnimation(o.opacity, o.trail, start + i * o.direction, o.lines) + ' ' + 1 / o.speed + 's linear infinite'
+         animation: useCssAnimations && addAnimation(o.opacity, o.trail, start + i 
+                                        * o.direction, o.lines) + ' ' + 1 / o.speed + 's linear infinite'
         });
 
         if (o.shadow) ins(seg, css(fill('#000', '0 0 4px #000'), {top: '2px'}));
