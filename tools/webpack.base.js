@@ -232,20 +232,6 @@ if (isProduction && !isWindows) {
 
 baseConfig.module.rules.push(imageLoader);
 
-// eslint loader
-if (!isProduction && configWebpack.lint) {
-    let eslintLoader = {
-        enforce: "pre",
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-        options: {
-            failOnError: true,
-        }
-    };
-    baseConfig.module.rules.push(eslintLoader);
-}
-
 /************* plugins 处理 *************/
 if (isProduction) {
     baseConfig.plugins.push(new webpack.DefinePlugin(configWebpack.injectVar));
@@ -263,19 +249,6 @@ if (isProduction) {
 }
 else {
     baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-
-    // stylelint plugin
-    if (configWebpack.lint) {
-        baseConfig.plugins.push(new StylelintWebpackPlugin({
-            configFile: '.stylelintrc.js',
-            context: 'inherits from webpack',
-            files: '../src/**/*.less)',
-            failOnError: true,
-            syntax: 'less',
-            lintDirtyModulesOnly: true,  // 只在改变的时候lint，其他时候跳过
-            extractStyleTagsFromHtml: true,
-        }));
-    }
 }
 
 if (configWebpack.clean) {

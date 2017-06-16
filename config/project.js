@@ -210,8 +210,7 @@ config.custom = {
             ]
         }; 
 
-        var jsRule = null,
-            eslintRule = null;
+        var jsRule = null;
 
         if (isProduction) {
             // js 使用了 happypack 进行编译，具体 babel 配置参看 happypack 插件的配置
