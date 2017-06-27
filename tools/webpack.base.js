@@ -21,7 +21,6 @@ var Clean = require('clean-webpack-plugin'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
     NpmInstallPlugin  = require('npm-install-webpack-plugin-steamer'),
-    StylelintWebpackPlugin = require('stylelint-webpack-plugin'),
     NameAllModulesPlugin = require('name-all-modules-plugin');
 
 var baseConfig = {
