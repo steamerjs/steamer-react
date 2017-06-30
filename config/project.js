@@ -83,8 +83,6 @@ var config = {
 
         // 生产环境下资源(js, css, html)是否压缩
         compress: true,
-        // 非windows系统生产环境下图片是否压缩
-        imgCompress: true,
 
         // 不经webpack打包的资源
         static: [
@@ -342,7 +340,6 @@ config.webpackMerge = {
 
     // 在smartStrategy merge 之前，用户可以先行对 webpack.base.js 的配置进行处理
     mergeProcess: function(webpackBaseConfig) {
-
         return webpackBaseConfig;
     }
 };
