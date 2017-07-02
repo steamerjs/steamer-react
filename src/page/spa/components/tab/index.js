@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
 import { 
-	LATEST_NEWS, 
-	LIKE_NEWS 
-} from '../../../common/constants';
+	LATEST_NEWS,
+	LIKE_NEWS
+} from '../../constants/constants';
 
 import Touch from 'touch';
 import classNames from 'classnames';

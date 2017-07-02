@@ -3,16 +3,16 @@ import Preact, { h, Component } from 'preact';
 import merge from 'lodash.merge';
 import Connect from '../connect/connect';
 import { 
-	GET_NEWS_LIST, 
-	GET_TOP_NEWS 
-} from '../../common/constants/cgiPath';
+	loadTopNews,
+	loadNewsList,
+} from '../db';
 import { 
 	LATEST_NEWS, 
 	LIKE_NEWS 
 } from '../constants/constants';
 
 import Scroll from 'scroll-p';
-import Spinner from 'spinner-p';
+import Spinner from 'react-spin-component/dist/pindex';
 import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
@@ -28,7 +28,6 @@ class Wrapper extends Component {
 		this.firstGetAllData = false;
 		this.loadTopNews = this.loadTopNews.bind(this);
 		this.loadNewsList = this.loadNewsList.bind(this);
-		this.loadData = this.loadData.bind(this);
 		this.loadDataForScroll = this.loadDataForScroll.bind(this);
 	}
 
@@ -47,90 +46,16 @@ class Wrapper extends Component {
 	}
 
 	loadDataForScroll() {
-		this.loadNewsList(null);
+		this.loadNewsList();
 	}
 
 	loadTopNews() {
-		var url = GET_TOP_NEWS,
-			opts = {};
-
-		var pa = merge({}, {
-			chlid: 'news_news_top',
-			refer: 'mobilewwwqqcom',
-			otype: 'jsonp',
-			jsonCbName: 'getNewsIndexOutput',
-			t: (new Date()).getTime()
-		});
-
-		var param = {
-			param: pa,
-			ajaxType: 'JSONP',
-			onSuccess: function(res) {
-				// console.log(res);
-			},
-			onError: function(res) {
-				// console.log(res);
-				// alert(res.errMsg || '加载新闻列表失败，请稍后重试');
-			}
-		};
-
-		this.props.request(url, param, opts);
+		loadTopNews.bind(this)();
 	}
 
-	loadNewsList(props) {
-		var props = props || this.props;
+	loadNewsList() {
+		loadNewsList.bind(this)();
 
-		this.loadData(LATEST_NEWS, {});
-	}
-
-	// http://mat1.gtimg.com/www/mobi/image/loadimg.png
-
-	loadData(listType, pa = {}, opts = {}) {
-		var url = GET_NEWS_LIST;
-
-		var listInfoParam = this.props.news.listInfo['listLatest'],
-			ids = this.props.news.ids;
-
-		// 防止重复拉取
-		if (listInfoParam.isLoading) {
-			return;
-		}
-
-		var curPage = listInfoParam.curPage,
-			pageSize = listInfoParam.pageSize,
-			startIndex = 0 + (curPage - 1) * pageSize,
-			endIndex = startIndex + pageSize;
-
-		var newIds = ids.slice(startIndex, endIndex),
-			newIdArray = [];
-
-		newIds.forEach((item, index) => {
-			newIdArray.push(item.id);
-		});
-
-		var pa = merge({}, {
-			cmd: GET_NEWS_LIST,
-			ids: newIdArray.join(','),
-			refer: 'mobilewwwqqcom',
-			otype: 'jsonp',
-			jsonCbName: 'getNewsContentOnlyOutput',
-			t: (new Date()).getTime()
-		}, pa);
-
-		var param = {
-			param: pa,
-			ajaxType: 'JSONP',
-			onSuccess: function(data) {
-				// console.log(data);
-			},
-			onError: function(res) {
-				console.log('err');
-				// console.log(res);
-				// alert(res.errMsg || '加载新闻列表失败，请稍后重试');
-			}
-		};
-
-		this.props.request(url, param, opts);
 	}
 
 	render() {

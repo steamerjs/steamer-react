@@ -3,15 +3,15 @@ import Connect from '../connect/connect';
 import { 
 	loadTopNews,
 	getNewsDetail,
-	loadData
-} from '../../common/db';
+	loadNewsList,
+} from '../db';
 import { 
-	LATEST_NEWS, 
-	LIKE_NEWS 
-} from '../../common/constants';
+	LATEST_NEWS,
+	LIKE_NEWS
+} from '../constants/constants';
 
 import Scroll from 'scroll';
-import Spinner from 'spinner';
+import Spinner from 'react-spin-component';
 import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
@@ -27,9 +27,7 @@ class Wrapper extends Component {
 		this.firstGetAllData = false;
 		
 		this.loadTopNews = loadTopNews.bind(this);
-		this.loadNewsList = this.loadNewsList.bind(this);
-		this.loadData = loadData.bind(this);
-		// this.loadDataForScroll = loadDataForScroll.bind(this);
+		this.loadNewsList = loadNewsList.bind(this);
 		this.getNewsDetail = getNewsDetail.bind(this);
 	}
 
@@ -51,10 +49,6 @@ class Wrapper extends Component {
 		this.props.toggleSpinLoading(false);
 		
 		return true;
-	}
-
-	loadNewsList() {
-		this.loadData(LATEST_NEWS, {});
 	}
 
 	render() {

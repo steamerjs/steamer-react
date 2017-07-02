@@ -37,7 +37,7 @@ export default store => next => action => {
     });
 
     net.ajax({
-        url: CGI_PATH[cgiName],
+        url: params.url || CGI_PATH[cgiName],
         ajaxType: ajaxType,
         param,
         localData,

@@ -5,7 +5,10 @@ import {
 	setItem
 } from 'sutils';
 import initialState from '../stores/stores';
-import { GET_NEWS_LIST, GET_TOP_NEWS } from '../../common/constants/cgiPath';
+import { 
+	GET_NEWS_LIST, 
+	GET_TOP_NEWS 
+} from '../db';
 import { 
 	GET_ARGS, TABS_UPDATE,
 	TOGGLE_LIST_LOADING, 

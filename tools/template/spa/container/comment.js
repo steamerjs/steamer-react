@@ -5,9 +5,9 @@ import {
 import Connect from '../connect/connect';
 import { 
 	getCommentList
-} from '../../common/db';
+} from '../db';
 
-import Spinner from 'spinner';
+import Spinner from 'react-spin-component';
 import Touch from 'touch';
 
 import './comment.less';

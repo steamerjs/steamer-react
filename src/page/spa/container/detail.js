@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import merge from 'lodash.merge';
 import Connect from '../connect/connect';
 import { 
-	GET_NEWS_DETAIL 
-} from '../../common/constants/cgiPath';
+	getNewsDetail 
+} from '../db';
 
-import Spinner from 'spinner';
+import Spinner from 'react-spin-component';
 import Touch from 'touch';
 
 import './detail.less';
@@ -19,7 +19,7 @@ class Detail extends Component {
 		this.newsId = this.props.params.id;
 		this.commentId = this.props.params.commentid;
 
-		this.getNewsDetail = this.getNewsDetail.bind(this);
+		this.getNewsDetail = getNewsDetail.bind(this);
 		this.goBack = this.goBack.bind(this);
 		this.goToComment = this.goToComment.bind(this);
 	}
@@ -36,36 +36,6 @@ class Detail extends Component {
 
 	componentWillMount() {
 		
-	}
-
-	getNewsDetail(item) {
-		let url = GET_NEWS_DETAIL,
-			opts = {};
-			
-		var pa = merge({}, {
-			url: item.url,
-			news_id: item.id,
-			v: (new Date()).getTime()
-		});
-
-		var param = {
-			param: pa,
-			ajaxType: 'POST',
-			localData: {
-				content: '险企碰红线 监管将下手快下手狠\n\n2017-01-12 23:00:39 腾讯财经\n\n文/刘鹏\n\n进入2017年，'
-						 + '保险业监管将保持高压状态。\n\n1月12日，2017年全国保险监管工作会议在京召开，保监会主席项'
-						 + '俊波在会议上部署了2017年的保险业监管工作。他强调，要将“保险业姓保、保监会姓监”理念贯穿到'
-						 + '监管工作各个方面。要打赢一场硬仗，坚决守住不发生系统性风险底线。\n\n'
-			},
-			onSuccess: function(data) {
-				
-			},
-			onError: function(res) {
-				console.log('err');
-			}
-		};
-
-		this.props.request(url, param, opts);
 	}
 
 	goBack() {

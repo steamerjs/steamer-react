@@ -10,7 +10,7 @@ import {
 	GET_TOP_NEWS, 
 	GET_COMMENT_LIST, 
 	GET_NEWS_DETAIL 
-} from '../../common/constants/cgiPath';
+} from '../db';
 import { 
 	GET_ARGS, TABS_UPDATE,
 	TOGGLE_LIST_LOADING, 

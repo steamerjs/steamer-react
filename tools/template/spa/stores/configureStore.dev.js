@@ -32,7 +32,8 @@ if (DEBUG) {
         DevTools.instrument(),
         persistState(getDebugSessionKey())
     )(createStore);
-} else {
+}
+ else {
     finalCreateStore = compose(
         applyMiddleware(thunk, api, reduxRouterMiddleware)
     )(createStore);

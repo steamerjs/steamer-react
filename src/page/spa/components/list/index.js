@@ -3,7 +3,7 @@ import pureRender from 'pure-render-decorator';
 import classnames from 'classnames';
 import { 
 	LATEST_NEWS
-} from '../../../common/constants';
+} from '../../constants/constants';
 
 import Touch from 'touch';
 

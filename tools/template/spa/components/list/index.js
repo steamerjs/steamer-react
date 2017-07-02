@@ -3,7 +3,7 @@ import pureRender from 'pure-render-decorator';
 import classnames from 'classnames';
 import { 
 	LATEST_NEWS
-} from '../../../common/constants';
+} from '../../constants/constants';
 
 import Touch from 'touch';
 
@@ -44,7 +44,8 @@ export default class List extends Component {
 					var win = window.open(item.url, '_blank');
 
 					win && win.focus();
-				} else {
+				}
+ else {
 					if (!this.props.details.hasOwnProperty(item.id)) {
 						this.props.getNewsDetail(item);
 					}

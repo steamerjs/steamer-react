@@ -7,7 +7,7 @@ import initialState from '../stores/stores';
 import { 
 	GET_NEWS_LIST,
 	GET_TOP_NEWS 
-} from 'page/common/constants/cgiPath';
+} from '../db';
 import { 
 	GET_ARGS, 
 	TABS_UPDATE, 

@@ -3,8 +3,8 @@ import {
 	getHash
 } from 'sutils';
 import { 
-	LATEST_NEWS 
-} from '../../common/constants';
+	LATEST_NEWS,
+} from '../constants/constants';
 
 /** other const **/
 const initialState = {
