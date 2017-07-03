@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 	// enable it and don't forget to add back render() function
 	// module.exports = require('./Root.dev');
 }
- else {
+else {
 	window.console.dev = function(msg) {};
 	module.exports = require('./Root.prod');
 }

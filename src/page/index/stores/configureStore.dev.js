@@ -24,7 +24,7 @@ if (DEBUG) {
         persistState(getDebugSessionKey())
     )(createStore);
 }
- else {
+else {
     finalCreateStore = compose(
         applyMiddleware(thunk, api)
     )(createStore);
@@ -40,7 +40,7 @@ export default function configureStore(initialState) {
     	// Enable Webpack hot module replacement for reducers
     	module.hot.accept('../reducers/reducers', () => {
       		const nextRootReducer = require('../reducers/reducers').default;
-
+          
       		store.replaceReducer(nextRootReducer);
     	});
   	}

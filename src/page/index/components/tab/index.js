@@ -1,29 +1,12 @@
 import React, { Component } from 'react';
 import pureRender from 'pure-render-decorator';
-import { LATEST_NEWS, LIKE_NEWS } from '../../constants/constants';
+import { 
+
+} from '../../constants/constants';
 
 import Touch from 'touch';
 import classNames from 'classnames';
 import './index.less';
-
-function TabItem(item, key) {
-	return (
-		<li
-			data-tab={item.label} 
-			key={key}
-		>
-			<Touch data-tab={item.label} onTap={this.switchTab}>{item.text}</Touch>
-		</li>
-	);
-}
-
-function TabHighlight(props) {
-	var isActive = (props.active === LIKE_NEWS);
-
-	return (
-		<i className={classNames('icon-active', {'pull-right': isActive})}></i>
-	);
-}
 
 @pureRender
 export default class Tab extends Component {
@@ -34,11 +17,11 @@ export default class Tab extends Component {
 		};
 		this.tabs = [
 			{
-				label: LATEST_NEWS,
+				label: 1,
 				text: '最新新闻'
 			},
 			{
-				label: LIKE_NEWS,
+				label: 2,
 				text: '我的收藏'
 			}
 		];
@@ -50,7 +33,7 @@ export default class Tab extends Component {
 	}
 
 	componentDidMount() {
-		
+
 	}
 
 	switchTab(e) {
@@ -60,8 +43,6 @@ export default class Tab extends Component {
 	}
 
 	render() {
-		console.dev('render Tab');
-
 		return (
 			<div id="cm-tab">
 				<div className="cm-tabs">
