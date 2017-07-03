@@ -2,12 +2,7 @@
 
 const utils = require('steamer-webpack-utils'),
 	  webpack = require('webpack'),
-	  fs = require('fs'),
-	  dependency = require('./dependency');
-
-if (dependency.installDependency()) {
-	return;
-}
+	  fs = require('fs');
 
 var argv = utils.getArgvs(),
 	npmArgv = utils.getArgvs(JSON.parse(process.env.npm_config_argv || "[]").original),
@@ -18,10 +13,20 @@ var isProduction = mode === "production";
 if (mode === 'development') {
 	process.env.NODE_ENV = "development";
 
+	const dependency = require('./dependency');
+	if (dependency.installDependency()) {
+		return;
+	}
+
 	require('./server');
 }
 else if (mode === 'production' || mode === 'source') {
 	process.env.NODE_ENV = isProduction ? "production" : "development";
+
+	const dependency = require('./dependency');
+	if (dependency.installDependency()) {
+		return;
+	}
 
 	var compiler = webpack(require('./webpack.base'));
 	compiler.run(function(err, stats) {
