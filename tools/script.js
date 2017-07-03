@@ -12,7 +12,7 @@ var isProduction = mode === "production";
 
 if (mode === 'development') {
 	process.env.NODE_ENV = "development";
-
+	
 	const dependency = require('./dependency');
 	if (dependency.installDependency()) {
 		return;

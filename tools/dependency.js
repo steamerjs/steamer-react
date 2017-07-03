@@ -1,5 +1,7 @@
 'use strict';
 
+// used for install dependencies to support different type of files
+
 var project = require('../config/project'),
 	pkgJson = require('../package.json'),
 	merge = require('lodash.merge'),
