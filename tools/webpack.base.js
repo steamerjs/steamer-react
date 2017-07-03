@@ -20,7 +20,6 @@ var Clean = require('clean-webpack-plugin'),
     WebpackMd5Hash = require('webpack-md5-hash'),
     UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    NpmInstallPlugin  = require('npm-install-webpack-plugin-steamer'),
     NameAllModulesPlugin = require('name-all-modules-plugin');
 
 var baseConfig = {
@@ -73,14 +72,6 @@ var baseConfig = {
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new NpmInstallPlugin({
-            // Use --save or --save-dev
-            dev: true,
-            // Install missing peerDependencies
-            peerDependencies: true,
-            // Reduce amount of console logging
-            quiet: false,
-        }),
         new webpack.NamedModulesPlugin(),
         new NameAllModulesPlugin()
     ],

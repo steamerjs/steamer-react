@@ -2,7 +2,8 @@
 
 const utils = require('steamer-webpack-utils'),
 	  webpack = require('webpack'),
-	  fs = require('fs');
+	  fs = require('fs'),
+	  dependency = require('./dependency');
 
 var argv = utils.getArgvs(),
 	npmArgv = utils.getArgvs(JSON.parse(process.env.npm_config_argv || "[]").original),
