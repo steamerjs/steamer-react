@@ -3,12 +3,8 @@
 var project = require('../config/project'),
 	pkgJson = require('../package.json'),
 	merge = require('lodash.merge'),
-	spawnSync = require('child_process').spawnSync;
-
-// console.log(project.webpack.style);
-// console.log(project.webpack.template);
-
-var dependencies = merge({}, pkgJson.dependencies, pkgJson.devDependencies);
+	spawnSync = require('child_process').spawnSync,
+	utils = require('steamer-webpack-utils');
 
 var dependency = {
 	template: {
@@ -61,36 +57,45 @@ var dependency = {
 	}
 };
 
-// console.log(dependencies);
 
-var installDep = {},
-	cmd = '';
+module.exports = {
+	installDependency: function() {
+		var dependencies = merge({}, pkgJson.dependencies, pkgJson.devDependencies);
 
-project.webpack.template.forEach((item1) => {
-	let dep = dependency['template'][item1] || {};
-	Object.keys(dep).forEach((item2) => {
-		if (!dependencies[item2]) {
-			installDep[item2] = dependency['template'][item1][item2];
+		var installDep = {},
+			cmd = '';
+
+		project.webpack.template.forEach((item1) => {
+			let dep = dependency['template'][item1] || {};
+			Object.keys(dep).forEach((item2) => {
+				if (!dependencies[item2]) {
+					installDep[item2] = dependency['template'][item1][item2];
+				}
+			});
+		});
+
+		project.webpack.style.forEach((item1) => {
+			let dep = dependency['style'][item1] || {};
+			Object.keys(dep).forEach((item2) => {
+				if (!dependencies[item2]) {
+					installDep[item2] = dependency['style'][item1][item2];
+				}
+			});
+		});
+
+		Object.keys(installDep).forEach((item) => {
+			cmd += (item + '@' + installDep[item] + ' ');
+		});
+
+		if (cmd) {
+			utils.info("Start installing missing dependencies. Please wait......");
+			spawnSync("npm", ['install', "--save-dev", cmd], { stdio: 'inherit', shell: true });
+			utils.info("Dependencies installation complete. Please run your command again.");
+			return true;
 		}
-	});
-});
-
-project.webpack.style.forEach((item1) => {
-	let dep = dependency['style'][item1] || {};
-	Object.keys(dep).forEach((item2) => {
-		if (!dependencies[item2]) {
-			installDep[item2] = dependency['style'][item1][item2];
+		else {
+			return false;
 		}
-	});
-});
-
-Object.keys(installDep).forEach((item) => {
-	cmd += (item + '@' + installDep[item] + ' ');
-});
-
-console.log(cmd);
-
-if (cmd) {
-	spawnSync("npm", ['install', "--save-dev", cmd], { stdio: 'inherit', shell: true });
-}
+	}
+};
 

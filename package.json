@@ -69,7 +69,6 @@
     "less-loader": "^4.0.4",
     "lodash.merge": "^4.6.0",
     "name-all-modules-plugin": "^1.0.1",
-    "npm-install-webpack-plugin-steamer": "^4.0.6",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
     "preact": "^8.1.0",
