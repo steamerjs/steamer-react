@@ -64,7 +64,7 @@ var config = {
 
         // 预编译器，默认支持css 和 less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
         style: [
-            "css", "less", "sass", "stylus", "scss"
+            "css", "less"
         ],
         // 生产环境是否提取css
         extractCss: true,
@@ -78,7 +78,7 @@ var config = {
 
         // html 模板. 默认支持html 和 ejs, handlebars 和 pug 由npm-install-webpack-plugin自动安装
         template: [
-            "html", "handlebars", "pug"
+            "html"
         ],
 
         // 生产环境下资源(js, css, html)是否压缩
