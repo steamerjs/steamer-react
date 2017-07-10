@@ -63,8 +63,8 @@ var config = {
             production: false
         },
 
-        // javascript 方言，目前仅支持 typescript
-        js: ['ts'],
+        // javascript 方言，目前仅支持 ts(typescript)
+        js: [],
 
         // 预编译器，默认支持css 和 less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
         style: [

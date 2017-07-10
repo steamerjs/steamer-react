@@ -23,5 +23,9 @@ module.exports = {
 		"immutable": "^3.8.1",
 		"pure-render-immutable-decorator": "^1.0.3",
 		"redux-immutable": "^4.0.0",
+	},
+	"ts": {
+		'@types/react': '^15.0.35',
+		'@types/react-dom': '^15.5.1'
 	}
 }
