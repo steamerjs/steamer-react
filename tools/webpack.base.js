@@ -167,6 +167,14 @@ var templateRules = {
     }
 };
 
+// js方言
+var jsRules = {
+    ts: {
+        test: /\.(tsx|ts)$/,
+        loader: 'awesome-typescript-loader'
+    }
+};
+
 configWebpack.style.forEach((style) => {
     style = (style === 'scss') ? 'sass' : style;
     let rule = styleRules[style] || '';
@@ -176,6 +184,12 @@ configWebpack.style.forEach((style) => {
 
 configWebpack.template.forEach((tpl) => {
     let rule = templateRules[tpl] || '';
+
+    rule && baseConfig.module.rules.push(rule);
+});
+
+configWebpack.js.forEach((tpl) => {
+    let rule = jsRules[tpl] || '';
 
     rule && baseConfig.module.rules.push(rule);
 });

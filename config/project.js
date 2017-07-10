@@ -9,17 +9,17 @@ const path = require('path'),
       __env = process.env.NODE_ENV,
       isProduction = __env === 'production';
 
-var srcPath = path.resolve(__basename, "src"),
-    devPath = path.resolve(__basename, "dev"),
-    distPath = path.resolve(__basename, "dist"),
-    spritePath = path.resolve(__basename, "src/img/sprites");
+var srcPath = path.resolve(__basename, 'src'),
+    devPath = path.resolve(__basename, 'dev'),
+    distPath = path.resolve(__basename, 'dist'),
+    spritePath = path.resolve(__basename, 'src/img/sprites');
 
-var hash = "[hash:6]",
-    chunkhash = "[chunkhash:6]",
-    contenthash = "[contenthash:6]";
+var hash = '[hash:6]',
+    chunkhash = '[chunkhash:6]',
+    contenthash = '[contenthash:6]';
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
     HappyPack = require('happypack');
 
 // ========================= webpack快捷配置 =========================
@@ -37,8 +37,8 @@ var config = {
             dev: devPath,
             dist: distPath,
             sprite: spritePath,
-            distCdn: "cdn", // 生成cdn的目录，dist/cdn
-            distWebserver: "../webserver" // 生成webserver的目录, dist/webserver， 目录相对于 distCdn
+            distCdn: 'cdn', // 生成cdn的目录，dist/cdn
+            distWebserver: '../webserver' // 生成webserver的目录, dist/webserver， 目录相对于 distCdn
         },
 
         // ========================= webpack服务器及路由配置 =========================
@@ -47,7 +47,7 @@ var config = {
         cdn: steamerConfig.cdn,
         cssCdn: steamerConfig.cssCdn || steamerConfig.cdn,
         imgCdn: steamerConfig.imgCdn || steamerConfig.cdn,
-        port: steamerConfig.port,    // port for local server
+        port: steamerConfig.port, // port for local server
         route: steamerConfig.route, // http://host/news/
 
         // ========================= webpack自定义配置 =========================
@@ -56,15 +56,17 @@ var config = {
         // sourcemap
         sourceMap: {
             development: false,
-            production: false,
+            production: false
         },
 
-        // lint
-        lint: true,
+        // javascript 方言，目前仅支持 typescript
+        js: [
+          'ts'
+        ],
 
         // 预编译器，默认支持css 和 less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
         style: [
-            "css", "less"
+            'css', 'less'
         ],
         // 生产环境是否提取css
         extractCss: true,
@@ -72,13 +74,13 @@ var config = {
         cssModule: false,
 
         // 合图，normal (仅1倍图) , retinaonly (仅2倍图), retina (包括1倍及2倍图), none (不使用合图)
-        spriteMode: "normal",
+        spriteMode: 'normal',
         // 默认支持less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
-        spriteStyle: "less",
+        spriteStyle: 'less',
 
         // html 模板. 默认支持html 和 ejs, handlebars 和 pug 由npm-install-webpack-plugin自动安装
         template: [
-            "html"
+            'html'
         ],
 
         // 生产环境下资源(js, css, html)是否压缩
@@ -87,14 +89,14 @@ var config = {
         // 不经webpack打包的资源
         static: [
             {
-                src: "libs/",
-                hash: true,
+                src: 'libs/',
+                hash: true
             }
         ],
 
         // 利用DefinePlugin给应用注入变量
         injectVar: {
-            "process.env": {
+            'process.env': {
                 NODE_ENV: JSON.stringify(__env)
             }
         },
@@ -119,9 +121,9 @@ var config = {
         hash: hash,
         chunkhash: chunkhash,
         contenthash: contenthash,
-        hashName: isProduction ? ("[name]-" + hash) : "[name]",
-        chunkhashName: isProduction ? ("[name]-" + chunkhash) : "[name]",
-        contenthashName: isProduction ? ("[name]-" + contenthash) : "[name]",
+        hashName: isProduction ? ('[name]-' + hash) : '[name]',
+        chunkhashName: isProduction ? ('[name]-' + chunkhash) : '[name]',
+        contenthashName: isProduction ? ('[name]-' + contenthash) : '[name]',
 
         // ========================= webpack entry配置 =========================
         // 根据约定，自动扫描js entry，约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx
@@ -134,10 +136,10 @@ var config = {
             }
          */
         entry: utils.filterJsFileByCmd(utils.getJsEntry({
-            srcPath: path.join(srcPath, "page"), 
-            fileName: "main",
-            extensions: ["js", "jsx"],
-            keyPrefix: "js/",
+            srcPath: path.join(srcPath, 'page'), 
+            fileName: 'main',
+            extensions: ['js', 'jsx'],
+            keyPrefix: 'js/',
             level: 1
         })),
 
@@ -160,7 +162,7 @@ var config = {
             ]
          */
         html: utils.filterHtmlFileByCmd(utils.getHtmlEntry({
-            srcPath: path.join(srcPath, "page"),
+            srcPath: path.join(srcPath, 'page'),
             level: 1
         })),
 
@@ -180,12 +182,10 @@ var config = {
          */
         sprites: utils.getSpriteEntry({
             srcPath: spritePath
-        }),
+        })
 
-    },
+    }
 };
-
-
 
 // ========================= webpack深度配置 =========================
 // 使用了webpack-merge与webpack.base.js进行配置合并
@@ -198,7 +198,6 @@ config.custom = {
 
     // webpack module
     getModule: function() {
-
         var module = {
             rules: [
                 
@@ -212,7 +211,7 @@ config.custom = {
             jsRule = { 
                 test: /\.js$/,
                 loader: 'happypack/loader?id=1',
-                exclude: /node_modules/,
+                exclude: /node_modules/
             };
         }
         else {
@@ -220,22 +219,22 @@ config.custom = {
                 test: /\.js$/,
                 use: [
                     {
-                        loader: "cache-loader",
+                        loader: 'cache-loader',
                         options: {
                             // provide a cache directory where cache items should be stored
-                            cacheDirectory: path.resolve(".cache")
+                            cacheDirectory: path.resolve('.cache')
                         }
                     },
                     {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
                             plugins: [
-                                'react-hot-loader/babel',
-                            ],
-                        },
-                    },
+                                'react-hot-loader/babel'
+                            ]
+                        }
+                    }
                 ],
-                exclude: /node_modules/,
+                exclude: /node_modules/
             };
         }
 
@@ -255,11 +254,11 @@ config.custom = {
     getPlugins: function() {
         var plugins = [
             new ExtractTextPlugin({
-                filename:  (getPath) => {
+                filename: (getPath) => {
                   return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
                 },
                 allChunks: false,
-                disable: (isProduction || !config.webpack.extractCss) ? false : true,
+                disable: !((isProduction || !config.webpack.extractCss))
             }),
             new webpack.ProvidePlugin({
                 Promise: 'imports?this=>global!exports?global.Promise!es6-promise'
@@ -273,27 +272,28 @@ config.custom = {
                 loaders: [{
                     path: 'babel-loader',
                     options: {
-                        cacheDirectory: './.cache/',
-                    },
-                }],
+                        cacheDirectory: './.cache/'
+                    }
+                }]
             }));
         }
 
         config.webpack.html.forEach(function(page, key) {
             plugins.push(new HtmlResWebpackPlugin({
-                mode: "html",
-                filename: isProduction ? (config.webpack.path.distWebserver + "/" + page.key + ".html") : page.key + ".html",
+                mode: 'html',
+                filename: isProduction ? (config.webpack.path.distWebserver + '/' + page.key + '.html') : page.key + '.html',
                 template: page.path,
-                favicon: "src/favicon.ico",
+                favicon: 'src/favicon.ico',
                 htmlMinify: null,
-                entryLog: !key ? true : false,
+                entryLog: !key,
                 cssPublicPath: isProduction ? config.webpack.cssCdn : config.webpack.webserver,
                 templateContent: function(tpl) {
                     if (isProduction) {
                         return tpl;
                     }
 
-                    var regex = new RegExp("<script.*src=[\"|\']*(.+).*?[\"|\']><\/script>", "ig");
+                    var regex = new RegExp('<script.*src=["|\']*(.+).*?["|\']><\/script>', 'ig');
+
                     tpl = tpl.replace(regex, function(script, route) {
                         if (!!~script.indexOf('react.js') || !!~script.indexOf('react-dom.js')) {
                             return '';
@@ -312,9 +312,9 @@ config.custom = {
     getExternals: function() {
         if (isProduction) {
             return {
-                'react': "React",
-                'react-dom': "ReactDOM",
-                'preact': 'preact',
+                'react': 'React',
+                'react-dom': 'ReactDOM',
+                'preact': 'preact'
             };
         }
 
@@ -331,8 +331,8 @@ config.custom = {
 config.webpackMerge = {
     // webpack-merge smartStrategy 配置
     smartStrategyOption: {
-        "module.rules": "prepend",
-        "plugins": "append"
+        'module.rules': 'prepend',
+        'plugins': 'append'
     },
 
     // 在smartStrategy merge 之前，用户可以先行对 webpack.base.js 的配置进行处理
