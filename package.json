@@ -86,7 +86,7 @@
     "spritesheet-templates-steamer": "^1.0.0",
     "steamer-browserutils": "^1.0.1",
     "steamer-net": "^1.1.2",
-    "steamer-webpack-utils": "^1.0.2",
+    "steamer-webpack-utils": "^1.1.0",
     "style-loader": "^0.18.2",
     "stylelint": "^7.12.0",
     "url-loader": "^0.5.9",

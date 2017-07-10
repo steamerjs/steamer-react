@@ -135,7 +135,7 @@ module.exports = {
 		if (cmd) {
 			utils.info('Start installing missing dependencies. Please wait......');
 			this.copyFile(installFile);
-			spawnSync('npm', ['install', '--save-dev', cmd], { stdio: 'inherit', shell: true });
+			spawnSync(project.npm, ['install', '--save-dev', cmd], { stdio: 'inherit', shell: true });
 			utils.info('Dependencies installation complete. Please run your command again.');
 			return true;
 		}
