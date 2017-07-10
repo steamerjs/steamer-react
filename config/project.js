@@ -138,7 +138,7 @@ var config = {
         entry: utils.filterJsFileByCmd(utils.getJsEntry({
             srcPath: path.join(srcPath, 'page'), 
             fileName: 'main',
-            extensions: ['js', 'jsx'],
+            extensions: ['js', 'jsx', 'ts', 'tsx'],
             keyPrefix: 'js/',
             level: 1
         })),

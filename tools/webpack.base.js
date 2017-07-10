@@ -67,7 +67,7 @@ var baseConfig = {
             'node_modules',
             path.join(configWebpack.path.src, 'css/sprites')
         ],
-        extensions: ['.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl', '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.handlebars', 'swf'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl', '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.handlebars', 'swf'],
         alias: {}
     },
     plugins: [
@@ -94,7 +94,8 @@ var commonLoaders = [
         options: {
             localIdentName: '[name]-[local]-[hash:base64:5]',
             module: config.webpack.cssModule,
-            autoprefixer: true
+            autoprefixer: true,
+	        minimize: true
         }
     },
     { 
