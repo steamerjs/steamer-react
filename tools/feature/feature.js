@@ -37,25 +37,25 @@ var dependency = {
 			'style-loader': '^0.18.2',
 			'css-loader': '^0.28.4',
 			'less': '^2.7.2',
-    		'less-loader': '^4.0.4'
+			'less-loader': '^4.0.4'
 		},
 		sass: {
 			'style-loader': '^0.18.2',
 			'css-loader': '^0.28.4',
 			'node-sass': '^4.5.3',
-    		'sass-loader': '^6.0.6'
+			'sass-loader': '^6.0.6'
 		},
 		scss: {
 			'style-loader': '^0.18.2',
 			'css-loader': '^0.28.4',
 			'node-sass': '^4.5.3',
-    		'sass-loader': '^6.0.6'
+			'sass-loader': '^6.0.6'
 		},
 		stylus: {
 			'style-loader': '^0.18.2',
 			'css-loader': '^0.28.4',
 			'stylus': '^0.54.5',
-    		'stylus-loader': '^3.0.1'
+			'stylus-loader': '^3.0.1'
 		}
 	},
 	js: {
@@ -117,16 +117,16 @@ module.exports = {
 			});
 		});
 
-        project.webpack.js.forEach((item1) => {
-            let dep = dependency['js'][item1] || {};
+		project.webpack.js.forEach((item1) => {
+			let dep = dependency['js'][item1] || {};
 
-            Object.keys(dep).forEach((item2) => {
-                if (!dependencies[item2]) {
-                    installDep[item2] = dependency['js'][item1][item2];
-	                installFile.js[item1] = true;
-                }
-            });
-        });
+			Object.keys(dep).forEach((item2) => {
+				if (!dependencies[item2]) {
+					installDep[item2] = dependency['js'][item1][item2];
+					installFile.js[item1] = true;
+				}
+			});
+		});
 
 		Object.keys(installDep).forEach((item) => {
 			cmd += (item + '@' + installDep[item] + ' ');
@@ -145,20 +145,23 @@ module.exports = {
 	},
 	copyFile: function(installFile) {
 		Object.keys(installFile.template).forEach((item1) => {
-			files.template[item1].forEach((item2) => {
+			let fileArr = files.template[item1] || [];
+			fileArr.forEach((item2) => {
 				utils.info('file ' + item2.src + ' is copyied to ' + item2.dist);
 				utils.fs.copySync(item2.src, item2.dist);
 			});
 		});
 
 		Object.keys(installFile.style).forEach((item1) => {
-			files.style[item1].forEach((item2) => {
+			let fileArr = files.style[item1] || [];
+			fileArr.forEach((item2) => {
 				utils.info('file ' + item2.src + ' is copyied to ' + item2.dist);
 				utils.fs.copySync(item2.src, item2.dist);
 			});
 		});
 		Object.keys(installFile.js).forEach((item1) => {
-			files.js[item1].forEach((item2) => {
+			let fileArr = files.js[item1] || [];
+			fileArr.forEach((item2) => {
 				utils.info('file ' + item2.src + ' is copyied to ' + item2.dist);
 				utils.fs.copySync(item2.src, item2.dist);
 			});
