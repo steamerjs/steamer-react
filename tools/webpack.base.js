@@ -179,19 +179,16 @@ var jsRules = {
 configWebpack.style.forEach((style) => {
     style = (style === 'scss') ? 'sass' : style;
     let rule = styleRules[style] || '';
-
     rule && baseConfig.module.rules.push(rule);
 });
 
 configWebpack.template.forEach((tpl) => {
     let rule = templateRules[tpl] || '';
-
     rule && baseConfig.module.rules.push(rule);
 });
 
 configWebpack.js.forEach((tpl) => {
     let rule = jsRules[tpl] || '';
-
     rule && baseConfig.module.rules.push(rule);
 });
 
@@ -200,7 +197,7 @@ let imageLoader = {
     loaders: [
         {
             loader: 'url-loader',
-            query: {
+            options: {
                 publicPath: isProduction ? configWebpack.imgCdn : configWebpack.webserver,
                 limit: 1000,
                 name: 'img/[path]/' + configWebpack.hashName + '.[ext]'
@@ -292,7 +289,7 @@ configWebpack.sprites.forEach(function(sprites) {
     baseConfig.plugins.push(new SpritesmithPlugin(spritesConfig));
 });
 
-/** *********** base 与 user config 合并 *************/
+/************* base 与 user config 合并 *************/
 var userConfig = {
     output: configCustom.getOutput(),
     module: configCustom.getModule(),
