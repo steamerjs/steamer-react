@@ -4,33 +4,24 @@ const utils = require('steamer-webpack-utils'),
 	  webpack = require('webpack'),
 	  fs = require('fs');
 
-var argv = utils.getArgvs(),
-	npmArgv = utils.getArgvs(JSON.parse(process.env.npm_config_argv || '[]').original),
-	mode = argv.mode;
+var isProduction = process.env.NODE_ENV === 'production';
 
-var isProduction = mode === 'production';
+const feature = require('./feature/feature');
 
-if (mode === 'development') {
-	process.env.NODE_ENV = 'development';
-	
-	const feature = require('./feature/feature');
+if (feature.installDependency()) {
+	return;
+}
 
-	if (feature.installDependency()) {
-		return;
-	}
-
+if (!isProduction) {	
 	require('./server');
 }
-else if (mode === 'production' || mode === 'source') {
-	process.env.NODE_ENV = isProduction ? 'production' : 'development';
+else if (isProduction) {
 
-	const feature = require('./feature/feature');
+	compilerRun(require('./webpack.base'));
+}
 
-	if (feature.installDependency()) {
-		return;
-	}
-
-	var compiler = webpack(require('./webpack.base'));
+function compilerRun(config) {
+	var compiler = webpack(config);
 
 	compiler.run(function(err, stats) {
 	    if (!err) {

@@ -18,9 +18,10 @@ var Clean = require('clean-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin-hash'),
     SpritesmithPlugin = require('webpack-spritesmith'),
     WebpackMd5Hash = require('webpack-md5-hash'),
-    UglifyJsParallelPlugin = require('webpack-uglify-parallel'),
+    ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    NameAllModulesPlugin = require('name-all-modules-plugin');
+    NameAllModulesPlugin = require('name-all-modules-plugin'),
+    WriteFilePlugin = require('write-file-webpack-plugin');
 
 var baseConfig = {
     context: configWebpack.path.src,
@@ -72,7 +73,11 @@ var baseConfig = {
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.NamedModulesPlugin(),
+        new webpack.HashedModuleIdsPlugin({
+            hashFunction: 'sha256',
+            hashDigest: 'hex',
+            hashDigestLength: 10
+        }),
         new NameAllModulesPlugin()
     ],
     watch: !isProduction,
@@ -214,17 +219,21 @@ if (isProduction) {
     baseConfig.plugins.push(new WebpackMd5Hash());
 
     if (configWebpack.compress) {
-        baseConfig.plugins.push(new UglifyJsParallelPlugin({
-            workers: os.cpus().length, // usually having as many workers as cpu cores gives good results 
-            // other uglify options 
-            compress: {
-                warnings: true
-            }
+        baseConfig.plugins.push(new ParallelUglifyPlugin({
+            cacheDir: path.resolve('.cache'), 
+            workerCount: os.cpus().length,
+            uglifyJS: {
+                warning: true
+            },
         }));
     }
 }
 else {
     baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+    if (configWebpack.showSource) {
+        baseConfig.plugins.push(new WriteFilePlugin());
+    }
 }
 
 if (configWebpack.clean) {

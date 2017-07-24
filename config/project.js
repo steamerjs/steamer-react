@@ -54,7 +54,8 @@ var config = {
         route: steamerConfig.route, // http://host/news/
 
         // ========================= webpack自定义配置 =========================
-
+        // 是否显示开发环境下的生成文件
+        showSource: true,
         // 是否清理生成文件夹
         clean: true,
         // sourcemap
@@ -229,11 +230,7 @@ config.custom = {
                     },
                     {
                         loader: 'babel-loader',
-                        options: {
-                            plugins: [
-                                'react-hot-loader/babel'
-                            ]
-                        }
+                        options: {}
                     }
                 ],
                 exclude: /node_modules/
