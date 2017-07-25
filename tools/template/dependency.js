@@ -30,6 +30,7 @@ module.exports = {
 	},
 	"react-mobx": {
 		"mobx": "^3.2.1",
-    	"mobx-react": "^4.2.2",
+		"mobx-react": "^4.2.2",
+		"mobx-react-devtools": "^4.2.15"
 	}
 }
