@@ -19,9 +19,6 @@ npm start 或 npm run dev
 // 打开链接
 localhost:9000
 
-// 查看开发环境源码
-npm run source
-
 // 代码规范安装
 npm i -g eslint
 npm i -g stylelint
