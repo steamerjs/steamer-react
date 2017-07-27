@@ -86,6 +86,9 @@ var config = {
             'html'
         ],
 
+        // 是否注入es6-promise包
+        promise: true,
+
         // 生产环境下资源(js, css, html)是否压缩
         compress: true,
 
@@ -219,21 +222,21 @@ config.custom = {
         }
         else {
             jsRule = { 
-                test: /\.js$/,
-                use: [
-                    {
-                        loader: 'cache-loader',
-                        options: {
-                            // provide a cache directory where cache items should be stored
-                            cacheDirectory: path.resolve('.cache')
-                        }
-                    },
-                    {
-                        loader: 'babel-loader',
-                        options: {}
-                    }
-                ],
-                exclude: /node_modules/
+                // test: /\.js$/,
+                // use: [
+                //     {
+                //         loader: 'cache-loader',
+                //         options: {
+                //             // provide a cache directory where cache items should be stored
+                //             cacheDirectory: path.resolve('.cache')
+                //         }
+                //     },
+                //     {
+                //         loader: 'babel-loader',
+                //         options: {}
+                //     }
+                // ],
+                // exclude: /node_modules/
             };
         }
 
@@ -259,10 +262,14 @@ config.custom = {
                 allChunks: false,
                 disable: !((isProduction || !config.webpack.extractCss))
             }),
-            new webpack.ProvidePlugin({
-                Promise: 'imports?this=>global!exports?global.Promise!es6-promise'
-            })
+            
         ];
+
+        if (config.webpack.promise) {
+            plugins.push(new webpack.ProvidePlugin({
+                Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise'
+            }));
+        }
 
         if (isProduction) {
             plugins.push(new HappyPack({

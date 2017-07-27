@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Connect from '../connect/connect';
+
 import { 
 	
 } from 'page/common/constants/cgiPath';
