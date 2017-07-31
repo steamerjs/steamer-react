@@ -223,7 +223,7 @@ if (isProduction) {
             cacheDir: path.resolve('.cache'), 
             workerCount: os.cpus().length,
             uglifyJS: {
-                warning: true
+                warnings: true
             },
         }));
     }
