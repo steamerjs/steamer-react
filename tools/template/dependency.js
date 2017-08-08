@@ -1,16 +1,16 @@
 module.exports = {
 	"list": {
-		"react-list-scroll": "^1.0.4",
+		"react-list-scroll": "^1.0.5",
 		"react-touch-component": "^1.1.1",
 		"react-spin-component": "0.0.1",
 	},
 	"preact-list": {
-		"react-list-scroll": "^1.0.4",
+		"react-list-scroll": "^1.0.5",
 		"react-touch-component": "^1.1.1",
 		"react-spin-component": "0.0.1",
 	},
 	"spa": {
-		"react-list-scroll": "^1.0.4",
+		"react-list-scroll": "^1.0.5",
 		"react-touch-component": "^1.1.1",
 		"react-spin-component": "0.0.1",
 		"react-router": "^3.0.0",
@@ -18,7 +18,7 @@ module.exports = {
     	"history": "^4.6.3",
 	},
 	"list-immutable": {
-		"react-list-scroll": "^1.0.4",
+		"react-list-scroll": "^1.0.5",
 		"react-touch-component": "^1.1.1",
 		"immutable": "^3.8.1",
 		"pure-render-immutable-decorator": "^1.0.3",
@@ -29,7 +29,7 @@ module.exports = {
 		'@types/react-dom': '^15.5.1'
 	},
 	"react-mobx": {
-		"mobx": "^3.2.1",
+		"mobx": "^3.2.2",
 		"mobx-react": "^4.2.2",
 		"mobx-react-devtools": "^4.2.15"
 	}

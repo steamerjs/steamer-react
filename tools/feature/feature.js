@@ -12,7 +12,7 @@ var path = require('path'),
 var dependency = {
 	template: {
 		html: {
-			'html-loader': '^0.4.5'
+			'html-loader': '^0.5.0'
 		},
 		handlebars: {
 			'handlebars-loader': '^1.5.0',
@@ -20,11 +20,11 @@ var dependency = {
 		},
 		pug: {
 			'pug-loader': '^2.3.0',
-			'pug': '^2.0.0-rc.2'
+			'pug': '^2.0.0-rc.3'
 		},
 		ejs: {
 			'ejs-compiled-loader': '^1.1.0',
-			'ejs': '^2.5.6'
+			'ejs': '^2.5.7'
 		}
 
 	},
@@ -37,7 +37,7 @@ var dependency = {
 			'style-loader': '^0.18.2',
 			'css-loader': '^0.28.4',
 			'less': '^2.7.2',
-			'less-loader': '^4.0.4'
+			'less-loader': '^4.0.5'
 		},
 		sass: {
 			'style-loader': '^0.18.2',
@@ -60,8 +60,8 @@ var dependency = {
 	},
 	js: {
 		ts: {
-			'awesome-typescript-loader': '^3.2.1',
-			'typescript': '^2.4.1',
+			'awesome-typescript-loader': '^3.2.2',
+			'typescript': '^2.4.2',
 			'@types/react': '^15.0.35',
 			'@types/react-dom': '^15.5.1'
 		}
