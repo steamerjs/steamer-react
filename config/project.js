@@ -33,7 +33,7 @@ var config = {
 
     webpack: {
 
-        useCdn: true,
+        useCdn: true,  // 是否使用webserver, cdn 分离 html 与其它静态资源
 
         // ========================= webpack路径与url =========================
         // 项目路径
