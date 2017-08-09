@@ -33,6 +33,8 @@ var config = {
 
     webpack: {
 
+        useCdn: true,
+
         // ========================= webpack路径与url =========================
         // 项目路径
         path: {
@@ -40,8 +42,8 @@ var config = {
             dev: devPath,
             dist: distPath,
             sprite: spritePath,
-            distCdn: 'cdn', // 生成cdn的目录，dist/cdn
-            distWebserver: '../webserver' // 生成webserver的目录, dist/webserver， 目录相对于 distCdn
+            distCdn: '', // 生成cdn的目录，dist/cdn
+            distWebserver: './' // 生成webserver(html)的目录, dist/webserver， 目录相对于 distCdn
         },
 
         // ========================= webpack服务器及路由配置 =========================
@@ -286,6 +288,7 @@ config.custom = {
 
         config.webpack.html.forEach(function(page, key) {
             plugins.push(new HtmlResWebpackPlugin({
+                removeUnMatchedAssets: true,
                 mode: 'html',
                 filename: isProduction ? (config.webpack.path.distWebserver + '/' + page.key + '.html') : page.key + '.html',
                 template: page.path,

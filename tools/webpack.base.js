@@ -21,7 +21,8 @@ var Clean = require('clean-webpack-plugin'),
     ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NameAllModulesPlugin = require('name-all-modules-plugin'),
-    WriteFilePlugin = require('write-file-webpack-plugin');
+    WriteFilePlugin = require('write-file-webpack-plugin'),
+    FileWebpackPlugin = require('file-webpack-plugin');
 
 var baseConfig = {
     context: configWebpack.path.src,
@@ -225,6 +226,37 @@ if (isProduction) {
             uglifyJS: {
                 warnings: true
             },
+        }));
+    }
+
+    var useCdn = configWebpack.useCdn || true;
+
+    if (useCdn) {
+        baseConfig.plugins.push(new FileWebpackPlugin({
+            'after-emit': [
+                {
+                    from: path.join(configWebpack.path.dist, '**/*'),
+                    to: path.join(configWebpack.path.dist, 'cdn/'),
+                    action: 'move',
+                    options: {
+                        cwd: configWebpack.path.dist,
+                        absolute: true,
+                        ignore: [
+                            '*.html',
+                            '**/*.html'
+                        ]
+                    }
+                },
+                {
+                    from: path.join(configWebpack.path.dist, '*.html'),
+                    to: path.join(configWebpack.path.dist, 'webserver/'),
+                    action: 'move',
+                    options: {
+                        cwd: configWebpack.path.dist,
+                        absolute: true,
+                    }
+                }
+            ]
         }));
     }
 }
