@@ -73,6 +73,7 @@
     "less-loader": "^4.0.5",
     "lodash.merge": "^4.6.0",
     "name-all-modules-plugin": "^1.0.1",
+    "offline-plugin": "^4.8.3",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
     "preact": "^8.2.1",

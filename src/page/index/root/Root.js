@@ -1,3 +1,5 @@
+require('offline-plugin/runtime').install();
+
 if (process.env.NODE_ENV !== 'production') {
 	window.console.dev = function(msg) {
 		console.log(msg);

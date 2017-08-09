@@ -20,7 +20,8 @@ var hash = '[hash:6]',
 
 var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HappyPack = require('happypack');
+    HappyPack = require('happypack'),
+    OfflinePlugin = require("offline-plugin");
 
 // ========================= webpack快捷配置 =========================
 // 基本情况下，你只需要关注这里的配置
@@ -313,6 +314,8 @@ config.custom = {
                 }
             }));
         }); 
+
+        plugins.push(new OfflinePlugin());
 
         return plugins;
     },
