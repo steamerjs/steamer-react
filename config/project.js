@@ -315,7 +315,9 @@ config.custom = {
             }));
         }); 
 
-        plugins.push(new OfflinePlugin());
+        plugins.push(new OfflinePlugin({
+            relativePaths: true,
+        }));
 
         return plugins;
     },
