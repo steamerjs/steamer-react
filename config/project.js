@@ -39,7 +39,7 @@ var config = {
             dist: distPath,
             sprite: spritePath,
             distCdn: '', // 生成cdn的目录，dist/cdn
-            distWebserver: './' // 生成webserver(html)的目录, dist/webserver， 目录相对于 distCdn
+            distWebserver: '' // 生成webserver(html)的目录, dist/webserver， 目录相对于 distCdn
         },
 
         // ========================= webpack服务器及路由配置 =========================
@@ -54,6 +54,10 @@ var config = {
         // ========================= webpack自定义配置 =========================
         // 是否显示开发环境下的生成文件
         showSource: true,
+
+        // 是否在生产环境下生成manifest文件
+        manifest: false,
+
         // 是否清理生成文件夹
         clean: true,
         // sourcemap

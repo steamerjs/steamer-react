@@ -36,7 +36,39 @@ module.exports = function(config, webpack) {
         
 	];
 
-	if (!isProduction) {
+	if (isProduction) {
+		var useCdn = configWebpack.useCdn || true;
+
+	    if (useCdn) {
+	        plugins.push(new FileWebpackPlugin({
+	            'after-emit': [
+	                {
+	                    from: path.join(configWebpack.path.dist, '**/*'),
+	                    to: path.join(configWebpack.path.dist, 'cdn/'),
+	                    action: 'move',
+	                    options: {
+	                        cwd: configWebpack.path.dist,
+	                        absolute: true,
+	                        ignore: [
+	                            '*.html',
+	                            '**/*.html'
+	                        ]
+	                    }
+	                },
+	                {
+	                    from: path.join(configWebpack.path.dist, '*.html'),
+	                    to: path.join(configWebpack.path.dist, 'webserver/'),
+	                    action: 'move',
+	                    options: {
+	                        cwd: configWebpack.path.dist,
+	                        absolute: true,
+	                    }
+	                }
+	            ]
+	        }));
+	    }
+	}
+	else {
 		if (configWebpack.showSource) {
 	        plugins.push(new WriteFilePlugin());
 	    }
@@ -63,7 +95,7 @@ module.exports = function(config, webpack) {
         plugins.push(new HtmlResWebpackPlugin({
             removeUnMatchedAssets: true,
             mode: 'html',
-            filename: isProduction ? (config.webpack.path.distWebserver + '/' + page.key + '.html') : page.key + '.html',
+            filename: page.key + '.html',
             template: page.path,
             favicon: 'src/favicon.ico',
             htmlMinify: null,

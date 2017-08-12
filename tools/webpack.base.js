@@ -41,13 +41,19 @@ var baseConfig = {
         new webpack.NoEmitOnErrorsPlugin(),
     ],
     watch: !isProduction,
-    devtool: isProduction ? configWebpack.sourceMap.production : configWebpack.sourceMap.development
+    devtool: isProduction ? configWebpack.sourceMap.production : configWebpack.sourceMap.development,
+    performance: {
+        hints: isProduction ? 'warning' : false,
+        assetFilter: function(assetFilename) {
+            return assetFilename.endsWith('.js') || assetFilename.endsWith('.css');
+        }
+    }
 };
 
 var rules = fs.readdirSync(path.join(__dirname, 'rules')),
     plugins = fs.readdirSync(path.join(__dirname, 'plugins'));
 
-console.log(rules, plugins);
+// console.log(rules, plugins);
 
 var baseConfigRules = [],
     baseConfigPlugins = [];

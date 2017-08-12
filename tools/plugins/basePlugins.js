@@ -4,7 +4,8 @@ const path = require('path'),
 	  os = require('os');
 
 var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin'),
-	ExtractTextPlugin = require('extract-text-webpack-plugin');
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = function(config, webpack) {
 
@@ -28,35 +29,8 @@ module.exports = function(config, webpack) {
 	        }));
 	    }
 
-	    var useCdn = configWebpack.useCdn || true;
-
-	    if (useCdn) {
-	        plugins.push(new FileWebpackPlugin({
-	            'after-emit': [
-	                {
-	                    from: path.join(configWebpack.path.dist, '**/*'),
-	                    to: path.join(configWebpack.path.dist, 'cdn/'),
-	                    action: 'move',
-	                    options: {
-	                        cwd: configWebpack.path.dist,
-	                        absolute: true,
-	                        ignore: [
-	                            '*.html',
-	                            '**/*.html'
-	                        ]
-	                    }
-	                },
-	                {
-	                    from: path.join(configWebpack.path.dist, '*.html'),
-	                    to: path.join(configWebpack.path.dist, 'webserver/'),
-	                    action: 'move',
-	                    options: {
-	                        cwd: configWebpack.path.dist,
-	                        absolute: true,
-	                    }
-	                }
-	            ]
-	        }));
+	    if (configWebpack.manifest) {
+	    	plugins.push(new ManifestPlugin());
 	    }
 	}
 	else {
