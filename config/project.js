@@ -49,7 +49,7 @@ var config = {
         cssCdn: steamerConfig.cssCdn || steamerConfig.cdn,
         imgCdn: steamerConfig.imgCdn || steamerConfig.cdn,
         port: steamerConfig.port, // port for local server
-        route: steamerConfig.route, // http://host/news/
+        route: [], // proxy route, 例如: /news/
 
         // ========================= webpack自定义配置 =========================
         // 是否显示开发环境下的生成文件

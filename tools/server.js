@@ -22,6 +22,7 @@ app.use(webpackDevMiddleware(compiler, {
 	stats: { 
 		colors: true 
 	},
+	publicPath: configWebpack.webserver
 }));
 app.use(webpackHotMiddleware(compiler));
 
