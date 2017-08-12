@@ -18,10 +18,6 @@ var hash = '[hash:6]',
     chunkhash = '[chunkhash:6]',
     contenthash = '[contenthash:6]';
 
-var HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HappyPack = require('happypack');
-
 // ========================= webpack快捷配置 =========================
 // 基本情况下，你只需要关注这里的配置
 var config = {
@@ -211,38 +207,6 @@ config.custom = {
                 
             ]
         }; 
-
-        var jsRule = null;
-
-        if (isProduction) {
-            // js 使用了 happypack 进行编译，具体 babel 配置参看 happypack 插件的配置
-            jsRule = { 
-                test: /\.js$/,
-                loader: 'happypack/loader?id=1',
-                exclude: /node_modules/
-            };
-        }
-        else {
-            jsRule = { 
-                // test: /\.js$/,
-                // use: [
-                //     {
-                //         loader: 'cache-loader',
-                //         options: {
-                //             // provide a cache directory where cache items should be stored
-                //             cacheDirectory: path.resolve('.cache')
-                //         }
-                //     },
-                //     {
-                //         loader: 'babel-loader',
-                //         options: {}
-                //     }
-                // ],
-                // exclude: /node_modules/
-            };
-        }
-
-        module.rules.push(jsRule);
         
         return module;
     },
@@ -256,63 +220,7 @@ config.custom = {
 
     // webpack plugins
     getPlugins: function() {
-        var plugins = [
-            new ExtractTextPlugin({
-                filename: (getPath) => {
-                  return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
-                },
-                allChunks: false,
-                disable: !((isProduction || !config.webpack.extractCss))
-            }),
-            
-        ];
-
-        if (config.webpack.promise) {
-            plugins.push(new webpack.ProvidePlugin({
-                Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise'
-            }));
-        }
-
-        if (isProduction) {
-            plugins.push(new HappyPack({
-                id: '1',
-                verbose: false,
-                loaders: [{
-                    path: 'babel-loader',
-                    options: {
-                        cacheDirectory: './.cache/'
-                    }
-                }]
-            }));
-        }
-
-        config.webpack.html.forEach(function(page, key) {
-            plugins.push(new HtmlResWebpackPlugin({
-                removeUnMatchedAssets: true,
-                mode: 'html',
-                filename: isProduction ? (config.webpack.path.distWebserver + '/' + page.key + '.html') : page.key + '.html',
-                template: page.path,
-                favicon: 'src/favicon.ico',
-                htmlMinify: null,
-                entryLog: !key,
-                cssPublicPath: isProduction ? config.webpack.cssCdn : config.webpack.webserver,
-                templateContent: function(tpl) {
-                    if (isProduction) {
-                        return tpl;
-                    }
-
-                    var regex = new RegExp('<script.*src=["|\']*(.+).*?["|\']><\/script>', 'ig');
-
-                    tpl = tpl.replace(regex, function(script, route) {
-                        if (!!~script.indexOf('react.js') || !!~script.indexOf('react-dom.js')) {
-                            return '';
-                        }
-                        return script;
-                    });
-                    return tpl;
-                }
-            }));
-        }); 
+        var plugins = [];
 
         return plugins;
     },
@@ -340,7 +248,7 @@ config.custom = {
 config.webpackMerge = {
     // webpack-merge smartStrategy 配置
     smartStrategyOption: {
-        'module.rules': 'prepend',
+        'module.rules': 'append',
         'plugins': 'append'
     },
 
