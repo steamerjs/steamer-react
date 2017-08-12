@@ -8,6 +8,15 @@ react 高效快速启动脚手架
 ## 快速启动
 
 * 推荐 >> 使用[steamerjs](https://steamerjs.github.io/docs/How-To-Start.html)安装
+
+```javascript
+npm i steamerjs steamer-plugin-kit
+
+steamer kit
+
+// 根据列出来的选项，选择 react 脚手架
+```
+
 * 直接从github clone 下来
 
 ```javascript
@@ -22,6 +31,7 @@ localhost:9000
 // 代码规范安装
 npm i -g eslint
 npm i -g stylelint
+
 // 代码规范扫描
 npm lint
 
