@@ -26,6 +26,19 @@ module.exports = function(config, webpack) {
                 }
             }]
         }),
+        new HappyPack({
+            id: '2',
+            verbose: false,
+            loaders: [{
+                path: 'babel-loader',
+                options: {
+		            'plugins': [
+		                ['transform-react-jsx', { 'pragma': 'h' }]
+		            ],
+		            cacheDirectory: './.cache/'
+		        },
+            }]
+        }),
         new ExtractTextPlugin({
             filename: (getPath) => {
               return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');

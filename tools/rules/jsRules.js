@@ -1,5 +1,6 @@
 `use strict`;
 
+const path = require('path');
 
 module.exports = function(config) {
 
@@ -19,17 +20,11 @@ module.exports = function(config) {
             loader: 'happypack/loader?id=1',
             exclude: /node_modules/
 	    },
-	    { 
-	        test: /\.jsx$/,
-	        loader: 'babel-loader',
-	        options: {
-	            'plugins': [
-	                ['transform-react-jsx', { 'pragma': 'h' }]
-	            ],
-	            cacheDirectory: './.cache/'
-	        },
-	        exclude: /node_modules/
-	    }
+	    {
+	    	test: /\.jsx$/,
+            loader: 'happypack/loader?id=2',
+            exclude: /node_modules/
+	    },
 	];
 
 	configWebpack.js.forEach((tpl) => {
