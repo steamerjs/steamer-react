@@ -57,7 +57,7 @@ module.exports = function(config, webpack) {
 	            'after-emit': [
 	                {
 	                    from: path.join(configWebpack.path.dist, '**/*'),
-	                    to: path.join(configWebpack.path.dist, 'cdn/'),
+	                    to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
 	                    action: 'move',
 	                    options: {
 	                        cwd: configWebpack.path.dist,
@@ -70,7 +70,7 @@ module.exports = function(config, webpack) {
 	                },
 	                {
 	                    from: path.join(configWebpack.path.dist, '*.html'),
-	                    to: path.join(configWebpack.path.dist, 'webserver/'),
+	                    to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
 	                    action: 'move',
 	                    options: {
 	                        cwd: configWebpack.path.dist,
