@@ -10,7 +10,7 @@ module.exports = {
         ".stylelintignore",
         "postcss.config.js",
         ".gitignore",
-        ".babelrc",
+        ".babelrc"
     ],
     options: [
         {

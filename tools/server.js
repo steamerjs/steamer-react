@@ -10,6 +10,8 @@ var webpackConfig = require("./webpack.base.js"),
 	configWebpack = config.webpack,
 	port = configWebpack.port,
 	route = Array.isArray(configWebpack.route) ? configWebpack.route : [configWebpack.route];
+	apiPort = configWebpack['api-port'],
+	apiRoute = configWebpack['api-route'];
 
 for (var key in webpackConfig.entry) {
 	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
@@ -26,9 +28,14 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-// 转发
+// 静态资源转发
 route.forEach((rt) => {
 	app.use(rt, proxy({target: `http://127.0.0.1:${port}`, pathRewrite: {[`^${rt}`] : '/'}}));
+});
+
+// 后台转发
+apiRoute.forEach((rt) => {
+	app.use(rt, proxy({target: `http://127.0.0.1:${apiPort}`}));
 });
 
 app.listen(port, function(err) {

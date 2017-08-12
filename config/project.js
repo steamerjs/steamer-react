@@ -51,6 +51,9 @@ var config = {
         port: steamerConfig.port, // port for local server
         route: [], // proxy route, 例如: /news/
 
+        "api-port": steamerConfig["api-port"] || 6800, // 后台转发端口
+        "api-route": steamerConfig["api-route"] || [], // 后台转发路径
+
         // ========================= webpack自定义配置 =========================
         // 是否显示开发环境下的生成文件
         showSource: true,
@@ -89,7 +92,7 @@ var config = {
         ],
 
         // 是否注入es6-promise包
-        promise: true,
+        promise: false,
 
         // 生产环境下资源(js, css, html)是否压缩
         compress: true,
@@ -207,9 +210,7 @@ config.custom = {
     // webpack module
     getModule: function() {
         var module = {
-            rules: [
-                
-            ]
+            rules: []
         }; 
         
         return module;
