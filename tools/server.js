@@ -9,12 +9,12 @@ var webpackConfig = require("./webpack.base.js"),
 	config = require("../config/project"),
 	configWebpack = config.webpack,
 	port = configWebpack.port,
-	route = Array.isArray(configWebpack.route) ? configWebpack.route : [configWebpack.route];
+	route = Array.isArray(configWebpack.route) ? configWebpack.route : [configWebpack.route],
 	apiPort = configWebpack['api-port'],
 	apiRoute = configWebpack['api-route'];
 
 for (var key in webpackConfig.entry) {
-	webpackConfig.entry[key].unshift('webpack-hot-middleware/client');
+	webpackConfig.entry[key].unshift('webpack-hot-middleware/client?reload=true&dynamicPublicPath=true&path=__webpack_hmr')
 	webpackConfig.entry[key].unshift('react-hot-loader/patch');
 }
 
