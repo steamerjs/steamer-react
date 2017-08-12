@@ -50,10 +50,9 @@ var baseConfig = {
     }
 };
 
+/************* 处理脚手架基础rules & plugins *************/
 var rules = fs.readdirSync(path.join(__dirname, 'rules')),
     plugins = fs.readdirSync(path.join(__dirname, 'plugins'));
-
-// console.log(rules, plugins);
 
 var baseConfigRules = [],
     baseConfigPlugins = [];
@@ -68,6 +67,8 @@ plugins.forEach((plugin) => {
 
 baseConfig.module.rules = baseConfigRules;
 baseConfig.plugins = baseConfigPlugins;
+
+// console.log(rules, plugins);
 
 /************* base 与 user config 合并 *************/
 var userConfig = {

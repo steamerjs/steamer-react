@@ -38,7 +38,6 @@ module.exports = function(config, webpack) {
 	            css: [
 	                [
 	                    path.join(configWebpack.path.src, 'css/sprites/' + sprites.key + '.' + extMap[style]),
-	                    {format: sprites.key}
 	                ]
 	            ]
 	        },
@@ -50,12 +49,22 @@ module.exports = function(config, webpack) {
 	        }
 	    };
 
+	    let templatePath = path.join(__dirname, '../../node_modules/', './spritesheet-templates-steamer/lib/templates/' + style + retinaTpl + '.template.handlebars');
 	    spritesConfig.customTemplates = {
-	        [sprites.key]: path.join(__dirname, '../../node_modules/', './spritesheet-templates-steamer/lib/templates/' + style + retinaTpl + '.template.handlebars')
+	        [`${sprites.key}${retinaTpl}`]: templatePath
 	    };
+
 
 	    if (spriteMode === 'retina') {
 	        spritesConfig.retina = '@2x';
+	        spritesConfig.target.css[0].push({
+            	format: `${sprites.key}`
+            });
+	    }
+	    else {
+	    	spritesConfig.target.css[0].push({
+            	format: `${sprites.key}${retinaTpl}`
+            });
 	    }
 
 	    plugins.push(new SpritesmithPlugin(spritesConfig));
