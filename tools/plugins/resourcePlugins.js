@@ -107,6 +107,7 @@ module.exports = function(config, webpack) {
 	config.webpack.html.forEach(function(page, key) {
         plugins.push(new HtmlResWebpackPlugin({
             removeUnMatchedAssets: true,
+            env: isProduction ? 'production' : 'development',
             mode: 'html',
             filename: page.key + '.html',
             template: page.path,
@@ -115,18 +116,6 @@ module.exports = function(config, webpack) {
             entryLog: !key,
             cssPublicPath: isProduction ? config.webpack.cssCdn : config.webpack.webserver,
             templateContent: function(tpl) {
-                if (isProduction) {
-                    return tpl;
-                }
-
-                var regex = new RegExp('<script.*src=["|\']*(.+).*?["|\']><\/script>', 'ig');
-
-                tpl = tpl.replace(regex, function(script, route) {
-                    if (!!~script.indexOf('react.js') || !!~script.indexOf('react-dom.js')) {
-                        return '';
-                    }
-                    return script;
-                });
                 return tpl;
             }
         }));
