@@ -3,7 +3,7 @@
 const path = require('path'),
 	  os = require('os');
 
-var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin'),
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
 	ManifestPlugin = require('webpack-manifest-plugin');
 
@@ -20,12 +20,12 @@ module.exports = function(config, webpack) {
 	if (isProduction) {
 
 		if (configWebpack.compress) {
-	        plugins.push(new ParallelUglifyPlugin({
-	            cacheDir: path.resolve('.cache'), 
-	            workerCount: os.cpus().length,
-	            uglifyJS: {
-	                warnings: true
-	            },
+	        plugins.push(new UglifyJSPlugin({
+	        	parallel: {
+			    	cache: true,
+			    	workers: os.cpus().length,
+			    },
+			    warnings: true,
 	        }));
 	    }
 
