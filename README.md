@@ -43,6 +43,9 @@ npm run dist 或 npm run pub
 
 ```
 
+## 脚手架文档
+[参见文档-项目脚手架](https://steamerjs.github.io/docs/projectkits/Starterkit.html)
+
 
 ## 文章参考
 
