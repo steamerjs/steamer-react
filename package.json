@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0-rc.5",
   "description": "alloyteam react starterkit",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
@@ -37,7 +37,6 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@alloyteam/eslint-config-react": "0.0.8",
     "@alloyteam/stylelint-config-standard": "0.0.2",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
@@ -58,6 +57,7 @@
     "css-loader": "^0.28.4",
     "es6-promise": "^4.1.1",
     "eslint": "^4.4.1",
+    "eslint-config-alloy": "^1.0.0",
     "exports-loader": "^0.6.4",
     "expose-loader": "^0.7.3",
     "express": "^4.15.4",
