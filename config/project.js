@@ -1,31 +1,31 @@
 'use strict';
 
 const path = require('path'),
-      os = require('os'),
-      webpack = require('webpack'),
-      utils = require('steamer-webpack-utils'),
-      steamerConfig = require('./steamer.config'),
-      __basename = path.dirname(__dirname),
-      __env = process.env.NODE_ENV,
-      isProduction = __env === 'production';
+    os = require('os'),
+    webpack = require('webpack'),
+    utils = require('steamer-webpack-utils'),
+    steamerConfig = require('./steamer.config'),
+    __basename = path.dirname(__dirname),
+    __env = process.env.NODE_ENV,
+    isProduction = __env === 'production';
 
-var srcPath = path.resolve(__basename, 'src'),
+let srcPath = path.resolve(__basename, 'src'),
     devPath = path.resolve(__basename, 'dev'),
     distPath = path.resolve(__basename, 'dist'),
     spritePath = path.resolve(__basename, 'src/img/sprites');
 
-var hash = '[hash:6]',
+let hash = '[hash:6]',
     chunkhash = '[chunkhash:6]',
     contenthash = '[contenthash:6]';
 
 // ========================= webpack快捷配置 =========================
 // 基本情况下，你只需要关注这里的配置
-var config = {
+let config = {
     // ========================= webpack环境配置 =========================
     env: __env,
 
-	// 默认使用的npm命令行
-	npm: 'npm',
+    // 默认使用的npm命令行
+    npm: 'npm',
 
     webpack: {
 
@@ -51,8 +51,8 @@ var config = {
         port: steamerConfig.port, // port for local server
         route: [], // proxy route, 例如: /news/
 
-        "api-port": steamerConfig["api-port"] || 6800, // 后台转发端口
-        "api-route": steamerConfig["api-route"] || [], // 后台转发路径
+        'api-port': steamerConfig['api-port'] || 6800, // 后台转发端口
+        'api-route': steamerConfig['api-route'] || [], // 后台转发路径
 
         // ========================= webpack自定义配置 =========================
         // 是否显示开发环境下的生成文件
@@ -63,7 +63,7 @@ var config = {
 
         // 是否清理生成文件夹
         clean: true,
-        
+
         // sourcemap, 请写具体的sourcemap名称，而不是写true
         // 参考文章： https://segmentfault.com/a/1190000004280859
         sourceMap: {
@@ -149,7 +149,7 @@ var config = {
             }
          */
         entry: utils.filterJsFileByCmd(utils.getJsEntry({
-            srcPath: path.join(srcPath, 'page'), 
+            srcPath: path.join(srcPath, 'page'),
             fileName: 'main',
             extensions: ['js', 'jsx', 'ts', 'tsx'],
             keyPrefix: 'js/',
@@ -211,10 +211,10 @@ config.custom = {
 
     // webpack module
     getModule: function() {
-        var module = {
+        let module = {
             rules: []
-        }; 
-        
+        };
+
         return module;
     },
 
@@ -227,11 +227,11 @@ config.custom = {
 
     // webpack plugins
     getPlugins: function() {
-        var plugins = [];
+        let plugins = [];
 
         return plugins;
     },
-        
+
     // webpack externals
     getExternals: function() {
         if (isProduction) {
