@@ -49,7 +49,7 @@ module.exports = function(config, webpack) {
             }
         };
 
-        let templatePath = path.join(__dirname, '../../node_modules/', './spritesheet-templates-steamer/lib/templates/' + style + retinaTpl + '.template.handlebars');
+        let templatePath = require.resolve('spritesheet-templates-steamer/lib/templates/' + style + retinaTpl + '.template.handlebars');
         spritesConfig.customTemplates = {
             [`${sprites.key}${retinaTpl}`]: templatePath
         };

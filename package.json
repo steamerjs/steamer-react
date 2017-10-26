@@ -1,6 +1,6 @@
 {
   "name": "steamer-react",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "alloyteam react starterkit",
   "main": "./.steamer/steamer-react.js",
   "scripts": {
