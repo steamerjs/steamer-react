@@ -4,6 +4,8 @@ module.exports = {
         "eslint-config-alloy/react",
     ],
     "plugins": [],
-    "rules": {},
+    "rules": {
+        'one-var': 'off'
+    },
     "globals": {}
 };

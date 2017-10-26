@@ -2,9 +2,9 @@
 
 const path = require('path');
 
-var Clean = require('clean-webpack-plugin'),
-	CopyWebpackPlugin = require('copy-webpack-plugin-hash'),
-	WriteFilePlugin = require('write-file-webpack-plugin'),
+let Clean = require('clean-webpack-plugin'),
+    CopyWebpackPlugin = require('copy-webpack-plugin-hash'),
+    WriteFilePlugin = require('write-file-webpack-plugin'),
     FileWebpackPlugin = require('file-webpack-plugin'),
     HappyPack = require('happypack'),
     HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
@@ -12,11 +12,11 @@ var Clean = require('clean-webpack-plugin'),
 
 module.exports = function(config, webpack) {
 
-	var configWebpack = config.webpack,
-		isProduction = config.env === 'production';
+    let configWebpack = config.webpack,
+        isProduction = config.env === 'production';
 
-	var plugins = [
-		new HappyPack({
+    let plugins = [
+        new HappyPack({
             id: '1',
             verbose: false,
             loaders: [{
@@ -32,79 +32,79 @@ module.exports = function(config, webpack) {
             loaders: [{
                 path: 'babel-loader',
                 options: {
-		            'plugins': [
-		                ['transform-react-jsx', { 'pragma': 'h' }]
-		            ],
-		            cacheDirectory: './.cache/'
-		        },
+                    'plugins': [
+                        ['transform-react-jsx', { 'pragma': 'h' }]
+                    ],
+                    cacheDirectory: './.cache/'
+                },
             }]
         }),
         new ExtractTextPlugin({
             filename: (getPath) => {
-              return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
+                return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
             },
             allChunks: true,
             disable: !((isProduction || !config.webpack.extractCss))
         }),
-        
-	];
 
-	if (isProduction) {
-		var useCdn = configWebpack.useCdn || true;
+    ];
 
-	    if (useCdn) {
-	        plugins.push(new FileWebpackPlugin({
-	            'after-emit': [
-	                {
-	                    from: path.join(configWebpack.path.dist, '**/*'),
-	                    to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
-	                    action: 'move',
-	                    options: {
-	                        cwd: configWebpack.path.dist,
-	                        absolute: true,
-	                        ignore: [
-	                            '*.html',
-	                            '**/*.html'
-	                        ]
-	                    }
-	                },
-	                {
-	                    from: path.join(configWebpack.path.dist, '*.html'),
-	                    to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
-	                    action: 'move',
-	                    options: {
-	                        cwd: configWebpack.path.dist,
-	                        absolute: true,
-	                    }
-	                }
-	            ]
-	        }));
-	    }
-	}
-	else {
-		if (configWebpack.showSource) {
-	        plugins.push(new WriteFilePlugin());
-	    }
-	}
+    if (isProduction) {
+        let useCdn = configWebpack.useCdn || true;
 
-	if (configWebpack.clean) {
-	    plugins.push(new Clean([isProduction ? configWebpack.path.dist : configWebpack.path.dev], {root: path.resolve()}));
-	}
+        if (useCdn) {
+            plugins.push(new FileWebpackPlugin({
+                'after-emit': [
+                    {
+                        from: path.join(configWebpack.path.dist, '**/*'),
+                        to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
+                        action: 'move',
+                        options: {
+                            cwd: configWebpack.path.dist,
+                            absolute: true,
+                            ignore: [
+                                '*.html',
+                                '**/*.html'
+                            ]
+                        }
+                    },
+                    {
+                        from: path.join(configWebpack.path.dist, '*.html'),
+                        to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
+                        action: 'move',
+                        options: {
+                            cwd: configWebpack.path.dist,
+                            absolute: true,
+                        }
+                    }
+                ]
+            }));
+        }
+    }
+    else {
+        if (configWebpack.showSource) {
+            plugins.push(new WriteFilePlugin());
+        }
+    }
 
-	if (config.webpack.promise) {
-		plugins.push(new webpack.ProvidePlugin({
+    if (configWebpack.clean) {
+        plugins.push(new Clean([isProduction ? configWebpack.path.dist : configWebpack.path.dev], { root: path.resolve() }));
+    }
+
+    if (config.webpack.promise) {
+        plugins.push(new webpack.ProvidePlugin({
             Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise'
-        }));	
-	}
+        }));
+    }
 
-	configWebpack.static.forEach((item) => {
-	    plugins.push(new CopyWebpackPlugin([{
-	        from: item.src,
-	        to: (item.dist || item.src) + (item.hash ? configWebpack.hashName : '[name]') + '.[ext]'
-	    }]));
-	});
+    configWebpack.static.forEach((item) => {
+        plugins.push(new CopyWebpackPlugin([{
+            from: item.src,
+            to: (item.dist || item.src) + (item.hash ? configWebpack.hashName : '[name]') + '.[ext]'
+        }]));
+    });
 
-	config.webpack.html.forEach(function(page, key) {
+    config.webpack.html.forEach(function(page, key) {
         plugins.push(new HtmlResWebpackPlugin({
             removeUnMatchedAssets: true,
             env: isProduction ? 'production' : 'development',
@@ -119,7 +119,7 @@ module.exports = function(config, webpack) {
                 return tpl;
             }
         }));
-    }); 
+    });
 
-	return plugins;
+    return plugins;
 };
