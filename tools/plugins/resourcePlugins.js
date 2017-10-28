@@ -1,5 +1,3 @@
-`use strict`;
-
 const path = require('path');
 
 let Clean = require('clean-webpack-plugin'),

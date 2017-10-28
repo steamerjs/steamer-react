@@ -1,19 +1,15 @@
-'use strict';
-
 const path = require('path'),
-      fs = require('fs'),
-      os = require('os'),
-      utils = require('steamer-webpack-utils'),
-      webpack = require('webpack'),
-      webpackMerge = require('webpack-merge');
+    fs = require('fs'),
+    webpack = require('webpack'),
+    webpackMerge = require('webpack-merge');
 
-var config = require('../config/project'),
+let config = require('../config/project'),
     configWebpack = config.webpack,
     configWebpackMerge = config.webpackMerge,
     configCustom = config.custom,
     isProduction = config.env === 'production';
 
-var baseConfig = {
+let baseConfig = {
     context: configWebpack.path.src,
     entry: configWebpack.entry,
     output: {
@@ -32,7 +28,7 @@ var baseConfig = {
             path.join(configWebpack.path.src, 'css/sprites')
         ],
         extensions: [
-            '.ts', '.tsx', '.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl', 
+            '.ts', '.tsx', '.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl',
             '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.handlebars', 'swf'
         ],
         alias: {}
@@ -50,11 +46,11 @@ var baseConfig = {
     }
 };
 
-/************* 处理脚手架基础rules & plugins *************/
-var rules = fs.readdirSync(path.join(__dirname, 'rules')),
+/** *********** 处理脚手架基础rules & plugins *************/
+let rules = fs.readdirSync(path.join(__dirname, 'rules')),
     plugins = fs.readdirSync(path.join(__dirname, 'plugins'));
 
-var baseConfigRules = [],
+let baseConfigRules = [],
     baseConfigPlugins = [];
 
 rules.forEach((rule) => {
@@ -70,8 +66,8 @@ baseConfig.plugins = baseConfigPlugins;
 
 // console.log(rules, plugins);
 
-/************* base 与 user config 合并 *************/
-var userConfig = {
+/** *********** base 与 user config 合并 *************/
+let userConfig = {
     output: configCustom.getOutput(),
     module: configCustom.getModule(),
     resolve: configCustom.getResolve(),
@@ -79,15 +75,17 @@ var userConfig = {
     plugins: configCustom.getPlugins()
 };
 
-var otherConfig = configCustom.getOtherOptions();
+let otherConfig = configCustom.getOtherOptions();
 
 for (let key in otherConfig) {
-    userConfig[key] = otherConfig[key];
+    if (otherConfig.hasOwnProperty(key)) {
+        userConfig[key] = otherConfig[key];
+    }
 }
 
 baseConfig = configWebpackMerge.mergeProcess(baseConfig);
 
-var webpackConfig = webpackMerge.smartStrategy(
+let webpackConfig = webpackMerge.smartStrategy(
     configWebpackMerge.smartStrategyOption
 )(baseConfig, userConfig);
 

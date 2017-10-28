@@ -1,5 +1,3 @@
-`use strict`;
-
 const os = require('os');
 
 let UglifyJSPlugin = require('uglifyjs-webpack-plugin'),

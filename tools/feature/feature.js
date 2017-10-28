@@ -1,5 +1,3 @@
-'use strict';
-
 // used for install dependencies and files to support certain kinds of features
 
 let path = require('path'),

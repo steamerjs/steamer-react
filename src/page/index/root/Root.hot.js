@@ -14,16 +14,16 @@ render(
 );
 
 if (module.hot) {
-	module.hot.accept('./Root.dev', () => {
-    	// If you use Webpack 2 in ES modules mode, you can
-    	// use <App /> here rather than require() a <NextApp />.
-    	const NextApp = require('./Root.dev').default;
-        
-    	render(
-	      	<AppContainer>
-	        	<NextApp />
-	      	</AppContainer>,
-	      	rootEl
-    	);
-  	});
+    module.hot.accept('./Root.dev', () => {
+        // If you use Webpack 2 in ES modules mode, you can
+        // use <App /> here rather than require() a <NextApp />.
+        const NextApp = require('./Root.dev').default;
+
+        render(
+            <AppContainer>
+                <NextApp />
+            </AppContainer>,
+            rootEl
+        );
+    });
 }

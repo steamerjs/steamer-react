@@ -1,5 +1,3 @@
-`use strict`;
-
 const path = require('path');
 
 let SpritesmithPlugin = require('webpack-spritesmith');
