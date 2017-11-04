@@ -15,7 +15,7 @@ function getDebugSessionKey() {
     return (matches && matches.length > 0) ? matches[1] : null;
 }
 
-var finalCreateStore = null;
+let finalCreateStore = null;
 
 if (DEBUG) {
     finalCreateStore = compose(
@@ -24,7 +24,7 @@ if (DEBUG) {
         persistState(getDebugSessionKey())
     )(createStore);
 }
- else {
+else {
     finalCreateStore = compose(
         applyMiddleware(thunk, api)
     )(createStore);
@@ -36,14 +36,14 @@ export default function configureStore(initialState) {
     // Required for replaying actions from devtools to work
     // reduxRouterMiddleware.listenForReplays(store);
 
-  	if (module.hot) {
-    	// Enable Webpack hot module replacement for reducers
-    	module.hot.accept('../reducers/reducers', () => {
-      		const nextRootReducer = require('../reducers/reducers').default;
+    if (module.hot) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('../reducers/reducers', () => {
+            const nextRootReducer = require('../reducers/reducers').default;
 
-      		store.replaceReducer(nextRootReducer);
-    	});
-  	}
+            store.replaceReducer(nextRootReducer);
+        });
+    }
 
-  	return store;
+    return store;
 }

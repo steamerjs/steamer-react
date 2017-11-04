@@ -5,11 +5,10 @@ import thunk from 'redux-thunk';
 import api from '../../common/middleware/api';
 
 const finalCreateStore = compose(
-  	applyMiddleware(thunk, api)
+    applyMiddleware(thunk, api)
 )(createStore);
 
 export default function configureStore(initialState) {
     const store = finalCreateStore(rootReducer, initialState);
-    
-  	return store;
+    return store;
 }

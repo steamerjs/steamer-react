@@ -1,18 +1,18 @@
 /** @jsx h */
 import { connect } from 'preact-redux';
 import { request } from '../../common/actions/actions';
-import { 
-    getArgs, 
+import {
+    getArgs,
     updateActiveTab,
-    toggleListLoading, 
-    toggleSpinLoading, 
-    likeNews, 
-    dislikeNews 
+    toggleListLoading,
+    toggleSpinLoading,
+    likeNews,
+    dislikeNews
 } from '../actions/actions';
 
 // Map Redux state to component props
 // ownProps stores react-router-redux props
-function mapStateToProps(state) {   
+function mapStateToProps(state) {
     return {
         args: state.args,
         tabs: state.tabs,

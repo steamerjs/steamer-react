@@ -1,5 +1,5 @@
-import { 
-    Component 
+import {
+    Component
 } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,11 +13,11 @@ import App from '../container/app';
 
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import { 
-    Router, 
-    IndexRoute, 
-    Route, 
-    hashHistory 
+import {
+    Router,
+    IndexRoute,
+    Route,
+    hashHistory
 } from 'react-router';
 
 let store = configureStore();
@@ -27,26 +27,26 @@ const history = syncHistoryWithStore(hashHistory, store);
 export default class Root extends Component {
     render() {
         return (
-            <Provider 
+            <Provider
                 store={store}
             >
                 <div>
-                    <Router 
+                    <Router
                         history={history}
                     >
-                        <Route 
-                            path="/" 
+                        <Route
+                            path="/"
                             component={App}
                         >
-                            <IndexRoute 
+                            <IndexRoute
                                 component={IndexWrapper}
                             />
-                            <Route 
-                                path="comment/:id" 
+                            <Route
+                                path="comment/:id"
                                 component={CommentWrapper}
                             />
-                            <Route 
-                                path="detail/:id/:commentid" 
+                            <Route
+                                path="detail/:id/:commentid"
                                 component={DetailWrapper}
                             />
                         </Route>

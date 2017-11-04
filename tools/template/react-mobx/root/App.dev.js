@@ -6,23 +6,23 @@ import { observer } from 'mobx-react';
 import App from './App';
 
 const renderApp = Component => {
-	let Wrapper = observer(() => {
-		return (
-			<AppContainer>
-				<Component/>
-			</AppContainer>
-		);
-	});
-	render(
-		<Wrapper/>,
-		document.getElementById('pages')
-	)
-}
+    let Wrapper = observer(() => {
+        return (
+            <AppContainer>
+                <Component />
+            </AppContainer>
+        );
+    });
+    render(
+        <Wrapper />,
+        document.getElementById('pages')
+    );
+};
 
-renderApp(App)
+renderApp(App);
 
 if (module.hot) {
-	module.hot.accept(() => {
-		renderApp(App)
-	});
+    module.hot.accept(() => {
+        renderApp(App);
+    });
 }

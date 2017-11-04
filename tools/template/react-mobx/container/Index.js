@@ -10,17 +10,14 @@ import './Index.less';
 export default class Page extends Component {
     constructor(props, context) {
         super(props, context);
-    }
-
-    componentDidMount() {
-        
+        this.state = {};
     }
 
     render() {
         return (
             <div className="wrapper">
                 Hello world
-                <Test/>    
+                <Test/>
             </div>
         );
     }

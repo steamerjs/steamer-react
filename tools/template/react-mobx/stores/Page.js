@@ -1,12 +1,17 @@
-import { observable, computed, action, asFlat } from 'mobx';
+import {
+    observable,
+    // computed,
+    action,
+    asFlat
+} from 'mobx';
 
 export default class Store {
     @observable msg = '666';
 
-    constructor(){}
+    constructor() {}
 
     @action
-    setMsg(msg){
+    setMsg(msg) {
         this.msg = msg;
     }
 }

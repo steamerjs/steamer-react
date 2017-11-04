@@ -1,8 +1,6 @@
 /** other const **/
 const initialState = {
-	data: {
-
-	}
+    data: {}
 };
 
 export default initialState;

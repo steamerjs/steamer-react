@@ -38,9 +38,9 @@ export function updateActiveTab(value) {
 }
 
 export function likeNews(value) {
-	return { type: LIKE_NEWS, value };
+    return { type: LIKE_NEWS, value };
 }
 
 export function dislikeNews(value) {
-	return { type: DISLIKE_NEWS, value };
+    return { type: DISLIKE_NEWS, value };
 }

@@ -1,21 +1,15 @@
 import { combineReducers } from 'redux';
 import initialState from '../stores/stores';
-import { 
 
-} from 'page/common/constants/cgiPath';
-import { 
-
-} from '../actions/actions';
-
-var data = function(state = initialState.data, action) {
-	switch (action.type) {
-		default:
-			return state;
-	}
+let data = function(state = initialState.data, action) {
+    switch (action.type) {
+        default:
+            return state;
+    }
 };
 
 const rootReducer = combineReducers({
-	data
+    data
 });
 
 export default rootReducer;

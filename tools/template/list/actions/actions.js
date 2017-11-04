@@ -34,13 +34,13 @@ export function toggleSpinLoading(value) {
 }
 
 export function updateActiveTab(value) {
-	return { type: TABS_UPDATE, value };
+    return { type: TABS_UPDATE, value };
 }
 
 export function likeNews(value) {
-	return { type: LIKE_NEWS, value };
+    return { type: LIKE_NEWS, value };
 }
 
 export function dislikeNews(value) {
-	return { type: DISLIKE_NEWS, value };
+    return { type: DISLIKE_NEWS, value };
 }

@@ -8,7 +8,7 @@ import { DEBUG } from '../constants/constants';
 
 let store = configureStore();
 
-var DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
+let DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
 
 export default class Root extends Component {
     render() {
@@ -16,7 +16,7 @@ export default class Root extends Component {
             <Provider store={store}>
                 <div>
                     <IndexWrapper />
-                    { DevToolsWrapper }
+                    {DevToolsWrapper}
                 </div>
             </Provider>
         );

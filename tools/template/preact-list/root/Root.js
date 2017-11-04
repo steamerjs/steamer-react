@@ -1,11 +1,11 @@
 /** @jsx h */
 if (process.env.NODE_ENV !== 'production') {
-	window.console.dev = function(msg) {
-		console.log(msg);
-	};
+    window.console.dev = function(msg) {
+        console.log(msg);
+    };
 }
- else {
-	window.console.dev = function(msg) {};
+else {
+    window.console.dev = function(msg) {};
 }
 
 import Preact, { h, render, Component } from 'preact';

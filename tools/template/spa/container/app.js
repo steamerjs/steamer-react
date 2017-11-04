@@ -2,11 +2,11 @@ import React from 'react';
 import Connect from '../connect/connect';
 
 function App(props) {
-	return (
+    return (
         <div>
-        	{props.children}
+            {props.children}
         </div>
-	);
+    );
 }
 
 App.contextTypes = {

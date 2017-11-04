@@ -2,201 +2,209 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import merge from 'lodash.merge';
 import {
-	setItem
+    setItem
 } from 'sutils';
 import initialState from '../stores/stores';
-import { 
-	GET_NEWS_LIST, 
-	GET_TOP_NEWS, 
-	GET_COMMENT_LIST, 
-	GET_NEWS_DETAIL 
+import {
+    GET_NEWS_LIST,
+    GET_TOP_NEWS,
+    GET_COMMENT_LIST,
+    GET_NEWS_DETAIL
 } from '../db';
-import { 
-	GET_ARGS, TABS_UPDATE,
-	TOGGLE_LIST_LOADING, 
-	TOGGLE_SPIN_LOADING, 
-	LIKE_NEWS, 
-	DISLIKE_NEWS 
+import {
+    GET_ARGS, TABS_UPDATE,
+    TOGGLE_LIST_LOADING,
+    TOGGLE_SPIN_LOADING,
+    LIKE_NEWS,
+    DISLIKE_NEWS
 } from '../actions/actions';
 
-var news = function(state = initialState.news, action) {
-	switch (action.type) {
-		case GET_TOP_NEWS + '_SUCCESS':
+let news = function(state = initialState.news, action) {
+    switch (action.type) {
+        case GET_TOP_NEWS + '_SUCCESS': {
 
-			if (!action.data || !action.data.idlist || action.data.idlist.length === 0) {
-				return state;
-			}
+            if (!action.data || !action.data.idlist || action.data.idlist.length === 0) {
+                return state;
+            }
 
-			var idlist = action.data.idlist,
-			    newState = merge({}, state);
-			
-			newState.ids = merge([], idlist[0].ids);
-			newState.listLatest = merge([], newState.listLatest.concat(idlist[0].newslist));
+            let idlist = action.data.idlist,
+                newState = merge({}, state);
 
-			return newState;
+            newState.ids = merge([], idlist[0].ids);
+            newState.listLatest = merge([], newState.listLatest.concat(idlist[0].newslist));
 
-		case GET_NEWS_LIST + '_ON':
-			var newState = merge({}, state);
+            return newState;
+        }
+        case GET_NEWS_LIST + '_ON': {
+            let newState = merge({}, state);
+            newState.listInfo['listLatest'].isLoading = true;
 
-			newState.listInfo['listLatest'].isLoading = true;
+            return newState;
+        }
+        case GET_NEWS_LIST + '_SUCCESS': {
 
-			return newState;
+            if (!action.data || !action.data.newslist) {
+                return state;
+            }
 
-		case GET_NEWS_LIST + '_SUCCESS':
+            let newState = merge({}, state),
+                listInfo = {
+                    curPage: (++newState.listInfo['listLatest'].curPage),
+                    isLoading: false
+                };
 
-			if (!action.data || !action.data.newslist) {
-				return state;
-			}
+            newState.listInfo['listLatest'] = merge({}, newState.listInfo['listLatest'], listInfo);
+            newState['listLatest'] = newState['listLatest'].concat(action.data.newslist);
 
-			var newState = merge({}, state),
-				listInfo = {
-					curPage: (++newState.listInfo['listLatest'].curPage),
-					isLoading: false
-				};
+            return newState;
+        }
+        case GET_NEWS_LIST + '_ERROR': {
+            let newState = merge({}, state);
 
-			newState.listInfo['listLatest'] = merge({}, newState.listInfo['listLatest'], listInfo);
-			newState['listLatest'] = newState['listLatest'].concat(action.data.newslist);
+            newState.listInfo['listLatest'].isLoading = false;
 
-			return newState;
+            return newState;
+        }
+        case LIKE_NEWS: {
+            if (!action.value) {
+                return state;
+            }
 
-		case GET_NEWS_LIST + '_ERROR':
-			var newState = merge({}, state);
+            let newState = merge({}, state),
+                isDuplicate = false;
 
-			newState.listInfo['listLatest'].isLoading = false;
+            newState['listLike'].map((item) => {
+                if (item.id === action.value.id) {
+                    isDuplicate = true;
+                }
+            });
 
-			return newState;
+            if (isDuplicate) {
+                return newState;
+            }
 
-		case LIKE_NEWS:
-			if (!action.value) {
-				return state;
-			}
+            newState['listLike'] = newState['listLike'].concat(action.value);
+            setItem('like-list', JSON.stringify(newState['listLike']));
 
-			var newState = merge({}, state),
-				isDuplicate = false;
+            return newState;
+        }
+        case DISLIKE_NEWS: {
+            if (!action.value) {
+                return state;
+            }
 
-			newState['listLike'].map((item) => {
-				if (item.id === action.value.id) {
-					isDuplicate = true;
-				}
-			});
+            let newState = merge({}, state);
 
-			if (isDuplicate) {
-				return newState;
-			}
+            newState['listLike'] = newState['listLike'].filter((item) => {
+                return (item.id !== action.value.id);
+            });
+            setItem('like-list', JSON.stringify(newState['listLike']));
 
-			newState['listLike'] = newState['listLike'].concat(action.value);
-			setItem('like-list', JSON.stringify(newState['listLike']));
-
-			return newState;
-
-		case DISLIKE_NEWS:
-			if (!action.value) {
-				return state;
-			}
-
-			var newState = merge({}, state);
-
-			newState['listLike'] = newState['listLike'].filter((item) => {
-				return (item.id !== action.value.id);
-			});
-			setItem('like-list', JSON.stringify(newState['listLike']));
-
-			return newState;
-
-		default:
-			return state;
-	}
+            return newState;
+        }
+        default: {
+            return state;
+        }
+    }
 };
 
-var details = function(state = initialState.details, action) {
-	switch (action.type) {
-		case GET_NEWS_DETAIL + '_SUCCESS':
-			var newState = merge({}, state);
+let details = function(state = initialState.details, action) {
+    switch (action.type) {
+        case GET_NEWS_DETAIL + '_SUCCESS': {
+            let newState = merge({}, state);
 
-			if (!action.data || !action.data.content) {
-				return newState;
-			}
-			newState[action.param.news_id] = action.data.content;
-			return newState;
-		default:
-			return state;
-	}
+            if (!action.data || !action.data.content) {
+                return newState;
+            }
+            newState[action.param.news_id] = action.data.content;
+            return newState;
+        }
+        default: {
+            return state;
+        }
+    }
 };
 
-var comments = function(state = initialState.comments, action) {
-	switch (action.type) {
-		case GET_COMMENT_LIST + '_SUCCESS':
-			var newState = merge({}, state);
+let comments = function(state = initialState.comments, action) {
+    switch (action.type) {
+        case GET_COMMENT_LIST + '_SUCCESS': {
+            let newState = merge({}, state);
 
-			if (!action.data || !action.data.comments || !action.data.comments.list) {
-				return newState;
-			}
+            if (!action.data || !action.data.comments || !action.data.comments.list) {
+                return newState;
+            }
 
-			newState[action.param.comment_id] = action.data.comments.list;
-			return newState;
-		default:
-			
-			return state;
-	}
+            newState[action.param.comment_id] = action.data.comments.list;
+            return newState;
+        }
+        default: {
+            return state;
+        }
+    }
 };
 
-var args = function(state = initialState.args, action) {
-	switch (action.type) {
-		case GET_ARGS:
-			return merge({}, state, action.value);
-		default:
-			return state;
-	}
+let args = function(state = initialState.args, action) {
+    switch (action.type) {
+        case GET_ARGS: {
+            return merge({}, state, action.value);
+        }
+        default: {
+            return state;
+        }
+    }
 };
 
-var tabs = function(state = initialState.tabs, action) {
-	switch (action.type) {
-		case TABS_UPDATE:
-			return action.value;
-		default:
-			return state;
-	}
+let tabs = function(state = initialState.tabs, action) {
+    switch (action.type) {
+        case TABS_UPDATE: {
+            return action.value;
+        }
+        default: {
+            return state;
+        }
+    }
 };
 
-var listLoading = function(state = initialState.listLoading, action) {
-	switch (action.type) {
-		case TOGGLE_LIST_LOADING:
-			return action.value;
-
-		default:
-			return state;
-	}
+let listLoading = function(state = initialState.listLoading, action) {
+    switch (action.type) {
+        case TOGGLE_LIST_LOADING: {
+            return action.value;
+        }
+        default: {
+            return state;
+        }
+    }
 };
 
-var spinLoading = function(state = initialState.spinLoading, action) {
-	switch (action.type) {
-		case TOGGLE_SPIN_LOADING:
-			return action.value;
-		
-		case GET_COMMENT_LIST + '_ON':
-		case GET_NEWS_DETAIL + '_ON':
-			return true;
+let spinLoading = function(state = initialState.spinLoading, action) {
+    switch (action.type) {
+        case TOGGLE_SPIN_LOADING:
+            return action.value;
 
-		case GET_COMMENT_LIST + '_SUCCESS':
-		case GET_COMMENT_LIST + '_ERROR':
-		case GET_NEWS_DETAIL + '_SUCCESS':
-		case GET_NEWS_DETAIL + '_ERROR':
-			return false;
+        case GET_COMMENT_LIST + '_ON':
+        case GET_NEWS_DETAIL + '_ON':
+            return true;
 
-		default:
-			return state;
-	}
+        case GET_COMMENT_LIST + '_SUCCESS':
+        case GET_COMMENT_LIST + '_ERROR':
+        case GET_NEWS_DETAIL + '_SUCCESS':
+        case GET_NEWS_DETAIL + '_ERROR':
+            return false;
+
+        default:
+            return state;
+    }
 };
 
 const rootReducer = combineReducers({
-	routing: routerReducer,
-	args,
-	tabs,
-	news,
-	details,
-	comments,
-	listLoading,
-	spinLoading
+    routing: routerReducer,
+    args,
+    tabs,
+    news,
+    details,
+    comments,
+    listLoading,
+    spinLoading
 });
 
 export default rootReducer;

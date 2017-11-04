@@ -5,36 +5,28 @@ require('./index.less');
 
 @pureRender
 export default class List extends Component {
-	constructor(props, context) {
-		super(props, context);
-		this.state = {
-			
-		};
-	}
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
 
-	componentWillMount() {
+        };
+    }
 
-	}
+    render() {
+        console.dev('render Loading');
 
-	componentDidMount() {
+        let isShow = this.props.isShow || false;
+        let loadingStyle = {
+            display: (isShow) ? 'block' : 'none'
+        };
 
-	}
+        let isEnd = this.props.isEnd || false;
+        let loadingText = (isEnd) ? '已加载全部' : '正在加载中…';
 
-	render() {
-		console.dev('render Loading');
-
-		var isShow = this.props.isShow || false;
-		var loadingStyle = {
-			display: (isShow) ? 'block' : 'none'
-		};
-
-		var isEnd = this.props.isEnd || false;
-		var loadingText = (isEnd) ? '已加载全部' : '正在加载中…';
-
-		return (
-			<div className="loading" style={loadingStyle}>
-			    <p>{loadingText}</p>
-			</div>
-		);
-	}
+        return (
+            <div className="loading" style={loadingStyle}>
+                <p>{loadingText}</p>
+            </div>
+        );
+    }
 }

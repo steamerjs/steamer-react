@@ -3,20 +3,21 @@ import CommentWrapper from '../container/comment';
 import App from '../container/app';
 
 export const routeConfig = [
-    { path: '/spa.html',
+    {
+        path: '/spa.html',
         component: App,
         indexRoute: {
             component: IndexWrapper
         },
         childRoutes: [
-        	{
-        		path: '',
-        		component: IndexWrapper
-        	},
-        	{
-        		path: '/comment',
-        		component: CommentWrapper
-        	}
+            {
+                path: '',
+                component: IndexWrapper
+            },
+            {
+                path: '/comment',
+                component: CommentWrapper
+            }
         ]
     }
 ];

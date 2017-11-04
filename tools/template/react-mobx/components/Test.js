@@ -4,21 +4,21 @@ import { observer, inject } from 'mobx-react';
 @inject('store')
 @observer
 export default class Test extends Component {
-    componentDidMount(){
+    componentDidMount() {
         let {
             store
         } = this.props;
 
         setTimeout(() => {
             store.setMsg('2333');
-        }, 2000)
+        }, 2000);
     }
 
-    render(){
+    render() {
         let { store } = this.props;
 
         return (
-            <div className="name">1234{ store.msg }</div>
+            <div className="name">1234{store.msg}</div>
         );
     }
 }

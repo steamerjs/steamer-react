@@ -11,15 +11,15 @@ import DevTools from '../../common/devtools/DevTools';
 import { DEBUG } from '../constants/constants';
 // import { routeConfig } from './route';
 
-import { 
-    syncHistoryWithStore 
+import {
+    syncHistoryWithStore
 } from 'react-router-redux';
 
-import { 
-    Router, 
-    IndexRoute, 
-    Route, 
-    hashHistory 
+import {
+    Router,
+    IndexRoute,
+    Route,
+    hashHistory
 } from 'react-router';
 
 // for hot reload
@@ -31,31 +31,31 @@ let store = configureStore();
 
 const history = syncHistoryWithStore(hashHistory, store);
 
-var DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
+let DevToolsWrapper = (DEBUG) ? <DevTools /> : null;
 
 export default class Root extends Component {
     render() {
         return (
-            <Provider 
+            <Provider
                 store={store}
             >
                 <div>
-                    <Router 
+                    <Router
                         history={history}
                     >
-                        <Route 
-                            path="/" 
+                        <Route
+                            path="/"
                             component={App}
                         >
-                            <IndexRoute 
+                            <IndexRoute
                                 component={IndexWrapper}
                             />
-                            <Route 
-                                path="comment/:id" 
+                            <Route
+                                path="comment/:id"
                                 component={CommentWrapper}
                             />
-                            <Route 
-                                path="detail/:id/:commentid" 
+                            <Route
+                                path="detail/:id/:commentid"
                                 component={DetailWrapper}
                             />
                         </Route>
