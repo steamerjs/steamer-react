@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './index.less';
-// var style = require('./hello.css');
 
 interface HelloProps {
     name: string;

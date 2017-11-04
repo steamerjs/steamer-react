@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 @inject('store')
 @observer
-export default class Test extends Component {
+export default class Tab extends Component {
     componentDidMount() {
         let {
             store
@@ -18,7 +18,7 @@ export default class Test extends Component {
         let { store } = this.props;
 
         return (
-            <div className="name">1234{store.msg}</div>
+            <div className="name">Tab{store.msg}</div>
         );
     }
 }

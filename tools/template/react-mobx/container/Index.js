@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
-import Test from '../components/Test.js';
+import Tab from '../components/Tab.js';
 
 import './Index.less';
 
@@ -17,7 +17,7 @@ export default class Page extends Component {
         return (
             <div className="wrapper">
                 Hello world
-                <Test/>
+                <Tab />
             </div>
         );
     }
