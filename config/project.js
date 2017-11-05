@@ -1,8 +1,4 @@
-'use strict';
-
 const path = require('path'),
-    os = require('os'),
-    webpack = require('webpack'),
     utils = require('steamer-webpack-utils'),
     steamerConfig = require('./steamer.config'),
     __basename = path.dirname(__dirname),
@@ -51,7 +47,7 @@ let config = {
         port: steamerConfig.port, // port for local server
         route: [], // proxy route, 例如: /news/
 
-        'api-port': steamerConfig['api-port'] || 6800, // 后台转发端口
+        'api-port': steamerConfig['api-port'] || 7000, // 后台转发端口，默认配合 steamer-plugin-mock 使用
         'api-route': steamerConfig['api-route'] || [], // 后台转发路径
 
         // ========================= webpack自定义配置 =========================
@@ -74,7 +70,7 @@ let config = {
         // javascript 方言，目前仅支持 ts(typescript)
         js: [],
 
-        // 预编译器，默认支持css 和 less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
+        // 预编译器，默认支持css 和 less. sass, scss 和 stylus，会自动安装
         style: [
             'css', 'less'
         ],
@@ -85,10 +81,10 @@ let config = {
 
         // 合图，normal (仅1倍图) , retinaonly (仅2倍图), retina (包括1倍及2倍图), none (不使用合图)
         spriteMode: 'normal',
-        // 默认支持less. sass, scss 和 stylus 由npm-install-webpack-plugin自动安装
+        // 默认支持less. sass, scss 和 stylus，会自动安装
         spriteStyle: 'less',
 
-        // html 模板. 默认支持html 和 ejs, handlebars 和 pug 由npm-install-webpack-plugin自动安装
+        // html 模板. 默认支持html 和 ejs, handlebars 和 pug，会自动安装
         template: [
             'html'
         ],
@@ -140,7 +136,7 @@ let config = {
 
         // ========================= webpack entry配置 =========================
         // 根据约定，自动扫描js entry，约定是src/page/xxx/main.js 或 src/page/xxx/main.jsx
-        /** 
+        /**
             获取结果示例
             {
                 'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
@@ -159,19 +155,19 @@ let config = {
         // 自动扫描html，配合html-res-webpack-plugin
         /**
             获取结果示例
-            [ 
-                { 
+            [
+                {
                     key: 'index',
                     path: 'path/src/page/index/index.html'
                 },
-                { 
+                {
                     key: 'spa',
                     path: 'path/src/page/spa/index.html'
                 },
-                { 
+                {
                     key: 'pindex',
                     path: 'path/src/page/pindex/index.html'
-                } 
+                }
             ]
          */
         html: utils.filterHtmlFileByCmd(utils.getHtmlEntry({
@@ -183,14 +179,14 @@ let config = {
         /**
             获取结果示例
             [
-                { 
+                {
                     key: 'btn',
                     path: 'path/src/img/sprites/btn'
                 },
-                { 
+                {
                     key: 'list',
                     path: 'path/src/img/sprites/list'
-                } 
+                }
             ]
          */
         sprites: utils.getSpriteEntry({
