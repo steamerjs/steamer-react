@@ -42,7 +42,8 @@ module.exports = function(config, webpack) {
                 return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
             },
             allChunks: true,
-            disable: !((isProduction || config.webpack.extractCss))
+            // 开发环境禁用，生产环境根据配置开启或禁用
+            disable: !(isProduction && config.webpack.extractCss) || !isProduction
         }),
 
     ];

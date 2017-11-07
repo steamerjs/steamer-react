@@ -19,7 +19,7 @@ module.exports = function(config) {
                     options: {
                         publicPath: isProduction ? configWebpack.imgCdn : configWebpack.webserver,
                         limit: 1000,
-                        name: 'img/[path]/' + configWebpack.hashName + '.[ext]'
+                        name: `img/[path]${configWebpack.hashName}.[ext]`
                     }
                 }
             ]
