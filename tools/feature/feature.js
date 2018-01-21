@@ -10,15 +10,15 @@ let path = require('path'),
 let dependency = {
     template: {
         html: {
-            'html-loader': '^0.5.0'
+            'html-loader': '^0.5.5'
         },
         handlebars: {
-            'handlebars-loader': '^1.5.0',
-            'handlebars': '^4.0.10'
+            'handlebars-loader': '^1.6.0',
+            'handlebars': '^4.0.11'
         },
         pug: {
             'pug-loader': '^2.3.0',
-            'pug': '^2.0.0-rc.3'
+            'pug': '^2.0.0-rc.4'
         },
         ejs: {
             'ejs-compiled-loader': '^1.1.0',
@@ -31,30 +31,30 @@ let dependency = {
     },
     style: {
         css: {
-            'style-loader': '^0.18.2',
-            'css-loader': '^0.28.4'
+            'style-loader': '^0.19.1',
+            'css-loader': '^0.28.9'
         },
         less: {
-            'style-loader': '^0.18.2',
-            'css-loader': '^0.28.4',
-            'less': '^2.7.2',
+            'style-loader': '^0.19.1',
+            'css-loader': '^0.28.9',
+            'less': '^2.7.3',
             'less-loader': '^4.0.5'
         },
         sass: {
-            'style-loader': '^0.18.2',
-            'css-loader': '^0.28.4',
-            'node-sass': '^4.5.3',
+            'style-loader': '^0.19.1',
+            'css-loader': '^0.28.9',
+            'node-sass': '^4.7.2',
             'sass-loader': '^6.0.6'
         },
         scss: {
-            'style-loader': '^0.18.2',
-            'css-loader': '^0.28.4',
-            'node-sass': '^4.5.3',
+            'style-loader': '^0.19.1',
+            'css-loader': '^0.28.9',
+            'node-sass': '^4.7.2',
             'sass-loader': '^6.0.6'
         },
         stylus: {
-            'style-loader': '^0.18.2',
-            'css-loader': '^0.28.4',
+            'style-loader': '^0.19.1',
+            'css-loader': '^0.28.9',
             'stylus': '^0.54.5',
             'stylus-loader': '^3.0.1'
         }

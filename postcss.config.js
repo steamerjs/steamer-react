@@ -10,7 +10,9 @@ module.exports = {
             path: [config.webpack.path.src]
         }),
         Precss(),
-        Autoprefixer(),
+        Autoprefixer({
+            browsers: ['iOS 7', '> 0.1%', 'android 2.1']
+        }),
         PostcssAsset()
   	]
 };

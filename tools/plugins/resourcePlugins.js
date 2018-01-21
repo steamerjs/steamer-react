@@ -100,7 +100,7 @@ module.exports = function(config, webpack) {
     configWebpack.static.forEach((item) => {
         plugins.push(new CopyWebpackPlugin([{
             from: item.src,
-            to: (item.dist || item.src) + (item.hash ? configWebpack.hashName : '[name]') + '.[ext]'
+            to: (item.dist || item.src) + (item.hash ? '[path]' + configWebpack.hashName : '[path][name]') + '.[ext]',
         }]));
     });
 
