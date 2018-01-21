@@ -8,7 +8,7 @@ import {
 
 import Touch from 'touch-p';
 
-require('./index.less');
+require('./index.css');
 
 // @pureRender
 export default class List extends Component {

@@ -7,7 +7,7 @@ import {
 
 import Touch from 'touch';
 import classNames from 'classnames';
-require('./index.less');
+require('./index.css');
 
 function TabItem(item, key) {
     return (

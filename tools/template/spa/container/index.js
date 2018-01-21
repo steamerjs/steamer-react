@@ -16,7 +16,7 @@ import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
 
-import './index.less';
+import './index.css';
 
 class Wrapper extends Component {
     constructor(props, context) {

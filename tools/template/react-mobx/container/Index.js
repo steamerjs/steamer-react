@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 import Tab from '../components/Tab.js';
 
-import './Index.less';
+import './Index.css';
 
 @inject('store')
 @observer

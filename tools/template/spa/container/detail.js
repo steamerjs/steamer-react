@@ -8,7 +8,7 @@ import {
 import Spinner from 'react-spin-component';
 import Touch from 'touch';
 
-import './detail.less';
+import './detail.css';
 
 class Detail extends Component {
     constructor(props, context) {

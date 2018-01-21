@@ -10,7 +10,7 @@ import {
 import Spinner from 'react-spin-component';
 import Touch from 'touch';
 
-import './comment.less';
+import './comment.css';
 
 class Comment extends Component {
     constructor(props, context) {
