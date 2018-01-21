@@ -22,7 +22,8 @@ module.exports = function(config) {
                 localIdentName: '[name]-[local]-[hash:base64:5]',
                 module: config.webpack.cssModule,
                 autoprefixer: true,
-                minimize: true
+                minimize: true,
+                importLoaders: 1
             }
         },
         {

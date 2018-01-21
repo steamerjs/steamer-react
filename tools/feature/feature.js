@@ -23,8 +23,11 @@ let dependency = {
         ejs: {
             'ejs-compiled-loader': '^1.1.0',
             'ejs': '^2.5.7'
+        },
+        art: {
+            'art-template': '^4.12.2',
+            'art-template-loader': '^1.4.3'
         }
-
     },
     style: {
         css: {

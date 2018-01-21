@@ -15,10 +15,12 @@
 
 .item {
     -webkit-tap-highlight-color: transparent;
+
     &::after {
         border-top: 1px solid #dedfe0;
         border-bottom: 1px solid #dedfe0;
     }
+
     & + .item::after {
         border-top: 0 none;
     }
@@ -68,7 +70,7 @@
     .info-name-text {
         line-height: 16px;
     }
-   
+
     .info-wrap p {
         line-height: 1.2;
     }

@@ -1,13 +1,13 @@
-const path = require('path'),
-    fs = require('fs'),
-    webpack = require('webpack'),
-    webpackMerge = require('webpack-merge');
+const path = require('path');
+const fs = require('fs');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 
-let config = require('../config/project'),
-    configWebpack = config.webpack,
-    configWebpackMerge = config.webpackMerge,
-    configCustom = config.custom,
-    isProduction = config.env === 'production';
+let config = require('../config/project');
+let configWebpack = config.webpack;
+let configWebpackMerge = config.webpackMerge;
+let configCustom = config.custom;
+let isProduction = config.env === 'production';
 
 let baseConfig = {
     context: configWebpack.path.src,
@@ -29,7 +29,7 @@ let baseConfig = {
         ],
         extensions: [
             '.ts', '.tsx', '.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl',
-            '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.handlebars', 'swf'
+            '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.art', '.handlebars', 'swf'
         ],
         alias: {}
     },
@@ -47,11 +47,11 @@ let baseConfig = {
 };
 
 /** *********** 处理脚手架基础rules & plugins *************/
-let rules = fs.readdirSync(path.join(__dirname, 'rules')),
-    plugins = fs.readdirSync(path.join(__dirname, 'plugins'));
+let rules = fs.readdirSync(path.join(__dirname, 'rules'));
+let plugins = fs.readdirSync(path.join(__dirname, 'plugins'));
 
-let baseConfigRules = [],
-    baseConfigPlugins = [];
+let baseConfigRules = [];
+let baseConfigPlugins = [];
 
 rules.forEach((rule) => {
     baseConfigRules = baseConfigRules.concat(require(`./rules/${rule}`)(config));

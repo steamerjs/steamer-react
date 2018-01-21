@@ -13,6 +13,7 @@ module.exports = function(config, webpack) {
     configWebpack.sprites.forEach(function(sprites) {
         let style = configWebpack.spriteStyle,
             extMap = {
+                css: 'css',
                 stylus: 'styl',
                 less: 'less',
                 sass: 'sass',
@@ -36,22 +37,39 @@ module.exports = function(config, webpack) {
                 css: [
                     [
                         path.join(configWebpack.path.src, 'css/sprites/' + sprites.key + '.' + extMap[style]),
-                    ]
+                        {
+                            format: `${sprites.key}${retinaTpl}`
+                        }
+                    ],
+                    [
+                        path.join(configWebpack.path.src, 'css/sprites/' + sprites.key + '.full.css'),
+                        {
+                            format: `${sprites.key}${retinaTpl}-full`
+                        }
+                    ],
                 ]
             },
             spritesmithOptions: {
-                padding: 10
+                padding: 2
             },
             apiOptions: {
-                cssImageRef: '~' + sprites.key + '.png'
+                cssImageRef: '~' + sprites.key + '.png',
+                handlebarsHelpers: {
+                    'half': function(val) {
+                        return (val.replace('px', '') / 2) + 'px';
+                    }
+                }
             }
         };
 
         let templatePath = require.resolve('spritesheet-templates-steamer/lib/templates/' + style + retinaTpl + '.template.handlebars');
-        spritesConfig.customTemplates = {
-            [`${sprites.key}${retinaTpl}`]: templatePath
-        };
+        // 引入所有的合图样式模板
+        let templateFullPath = require.resolve(`spritesheet-templates-steamer/lib/templates/full${retinaTpl}.template.handlebars`);
 
+        spritesConfig.customTemplates = {
+            [`${sprites.key}${retinaTpl}`]: templatePath,
+            [`${sprites.key}${retinaTpl}-full`]: templateFullPath
+        };
 
         if (spriteMode === 'retina') {
             spritesConfig.retina = '@2x';

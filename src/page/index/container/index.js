@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Connect from '../connect/connect';
 
-import './index.less';
+import './index.css';
 
 class Wrapper extends Component {
     constructor(props, context) {

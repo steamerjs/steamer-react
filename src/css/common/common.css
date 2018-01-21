@@ -24,7 +24,7 @@
     text-overflow: ellipsis;
 }
 
-/*border-1px 部分*/
+/* border-1px 部分 */
 .border-1px {
     position: relative;
 }
@@ -72,7 +72,7 @@
     }
 }
 
-// 1px border 四条边都可以指定
+/* 1px border 四条边都可以指定 */
 
 .ui-border-1px {
     position: relative;

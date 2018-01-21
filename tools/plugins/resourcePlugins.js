@@ -41,7 +41,8 @@ module.exports = function(config, webpack) {
             filename: (getPath) => {
                 return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
             },
-            allChunks: true,
+            // 若false, 拆包中的样式，会单独放到所拆包中
+            allChunks: false,
             // 开发环境禁用，生产环境根据配置开启或禁用
             disable: !(isProduction && config.webpack.extractCss) || !isProduction
         }),
@@ -105,7 +106,7 @@ module.exports = function(config, webpack) {
 
     config.webpack.html.forEach(function(page, key) {
         plugins.push(new HtmlResWebpackPlugin({
-            removeUnMatchedAssets: true,
+            // removeUnMatchedAssets: true,
             env: isProduction ? 'production' : 'development',
             mode: 'html',
             filename: page.key + '.html',

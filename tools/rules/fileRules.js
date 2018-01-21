@@ -23,6 +23,18 @@ module.exports = function(config) {
                     }
                 }
             ]
+        },
+        {
+            test: /\.(woff|woff2|eot|ttf)\??.*$/,
+            loaders: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 1000,
+                        name: `font/[path]${configWebpack.hashName}.[ext]`
+                    }
+                }
+            ]
         }
     ];
 

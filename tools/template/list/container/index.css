@@ -1,13 +1,12 @@
-@charset "utf-8";
+@charset "UTF-8";
 
-@import "~css/common/common.less";
-@import "~css/common/reset.less";
-@import "~css/sprites/list.less";
+@import "css/common/common.css";
+@import "css/common/reset.css";
 
 html,
 body {
     height: 100%;
-    width: 100%;;;;
+    width: 100%;
 }
 
 body {
@@ -22,5 +21,4 @@ body {
 
 .logo_news {
 	margin-top: 100px;
-	.sprite(@logo-news);
 }
