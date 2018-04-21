@@ -8,6 +8,11 @@ module.exports = function(config) {
     let configWebpack = config.webpack;
     let isProduction = config.env === 'production';
 
+    let includePaths = [
+        path.resolve('node_modules'),
+        path.resolve(config.webpack.path.src)
+    ];
+
     // 样式loader
     let commonLoaders = [
         {
@@ -43,25 +48,28 @@ module.exports = function(config) {
         css: {
             test: /\.css$/,
             use: commonLoaders,
-            include: path.resolve(config.webpack.path.src)
+            include: includePaths
         },
         less: {
             test: /\.less$/,
             use: merge([], commonLoaders).concat([{
                 loader: 'less-loader'
-            }])
+            }]),
+            include: includePaths
         },
         stylus: {
             test: /\.styl$/,
             use: merge([], commonLoaders).concat([{
                 loader: 'stylus-loader'
-            }])
+            }]),
+            include: includePaths
         },
         sass: {
             test: /\.s(a|c)ss$/,
             use: merge([], commonLoaders).concat([{
                 loader: 'sass-loader'
-            }])
+            }]),
+            include: includePaths
         }
     };
 
