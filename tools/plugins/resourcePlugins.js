@@ -47,34 +47,34 @@ module.exports = function(config, webpack) {
     if (isProduction) {
         let useCdn = configWebpack.useCdn || true;
 
-        // if (useCdn) {
-        //     plugins.push(new FileWebpackPlugin({
-        //         'after-emit': [
-        //             {
-        //                 from: path.join(configWebpack.path.dist, '**/*'),
-        //                 to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
-        //                 action: 'move',
-        //                 options: {
-        //                     cwd: configWebpack.path.dist,
-        //                     absolute: true,
-        //                     ignore: [
-        //                         '*.html',
-        //                         '**/*.html'
-        //                     ]
-        //                 }
-        //             },
-        //             {
-        //                 from: path.join(configWebpack.path.dist, '*.html'),
-        //                 to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
-        //                 action: 'move',
-        //                 options: {
-        //                     cwd: configWebpack.path.dist,
-        //                     absolute: true,
-        //                 }
-        //             }
-        //         ]
-        //     }));
-        // }
+        if (useCdn) {
+            plugins.push(new FileWebpackPlugin({
+                'after-emit': [
+                    {
+                        from: path.join(configWebpack.path.dist, '**/*'),
+                        to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
+                        action: 'move',
+                        options: {
+                            cwd: configWebpack.path.dist,
+                            absolute: true,
+                            ignore: [
+                                '*.html',
+                                '**/*.html'
+                            ]
+                        }
+                    },
+                    {
+                        from: path.join(configWebpack.path.dist, '*.html'),
+                        to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
+                        action: 'move',
+                        options: {
+                            cwd: configWebpack.path.dist,
+                            absolute: true,
+                        }
+                    }
+                ]
+            }));
+        }
     }
     else {
         if (configWebpack.showSource) {

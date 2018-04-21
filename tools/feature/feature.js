@@ -13,16 +13,16 @@ let dependency = {
             'html-loader': '^0.5.5'
         },
         handlebars: {
-            'handlebars-loader': '^1.6.0',
+            'handlebars-loader': '^1.7.0',
             'handlebars': '^4.0.11'
         },
         pug: {
-            'pug-loader': '^2.3.0',
-            'pug': '^2.0.0-rc.4'
+            'pug-loader': '^2.4.0',
+            'pug': '^2.0.3'
         },
         ejs: {
             'ejs-compiled-loader': '^1.1.0',
-            'ejs': '^2.5.7'
+            'ejs': '^2.5.9'
         },
         art: {
             'art-template': '^4.12.2',
@@ -31,40 +31,40 @@ let dependency = {
     },
     style: {
         css: {
-            'style-loader': '^0.19.1',
-            'css-loader': '^0.28.9'
+            'style-loader': '^0.21.0',
+            'css-loader': '^0.28.11'
         },
         less: {
-            'style-loader': '^0.19.1',
-            'css-loader': '^0.28.9',
-            'less': '^2.7.3',
-            'less-loader': '^4.0.5'
+            'style-loader': '^0.21.0',
+            'css-loader': '^0.28.11',
+            'less': '^3.0.1',
+            'less-loader': '^4.1.0'
         },
         sass: {
-            'style-loader': '^0.19.1',
-            'css-loader': '^0.28.9',
-            'node-sass': '^4.7.2',
-            'sass-loader': '^6.0.6'
+            'style-loader': '^0.21.0',
+            'css-loader': '^0.28.11',
+            'node-sass': '^4.8.3',
+            'sass-loader': '^7.0.1'
         },
         scss: {
-            'style-loader': '^0.19.1',
-            'css-loader': '^0.28.9',
-            'node-sass': '^4.7.2',
-            'sass-loader': '^6.0.6'
+            'style-loader': '^0.21.0',
+            'css-loader': '^0.28.11',
+            'node-sass': '^4.8.3',
+            'sass-loader': '^7.0.1'
         },
         stylus: {
-            'style-loader': '^0.19.1',
-            'css-loader': '^0.28.9',
+            'style-loader': '^0.21.0',
+            'css-loader': '^0.28.11',
             'stylus': '^0.54.5',
-            'stylus-loader': '^3.0.1'
+            'stylus-loader': '^3.0.2'
         }
     },
     js: {
         ts: {
-            'awesome-typescript-loader': '^3.2.2',
-            'typescript': '^2.4.2',
-            '@types/react': '^15.0.35',
-            '@types/react-dom': '^15.5.1'
+            'awesome-typescript-loader': '^5.0.0',
+            'typescript': '^2.8.3',
+            '@types/react': '^15.6.12',
+            '@types/react-dom': '^15.5.7'
         }
     }
 };
