@@ -6,7 +6,7 @@ let Clean = require('clean-webpack-plugin'),
     FileWebpackPlugin = require('file-webpack-plugin'),
     HappyPack = require('happypack'),
     HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+    MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = function(config, webpack) {
 
@@ -37,14 +37,9 @@ module.exports = function(config, webpack) {
                 },
             }]
         }),
-        new ExtractTextPlugin({
-            filename: (getPath) => {
-                return getPath('css/' + config.webpack.contenthashName + '.css').replace('css/js', 'css');
-            },
-            // 若false, 拆包中的样式，会单独放到所拆包中
-            allChunks: false,
-            // 开发环境禁用，生产环境根据配置开启或禁用
-            disable: !(isProduction && config.webpack.extractCss) || !isProduction
+        new MiniCssExtractPlugin({
+            filename: `css/${config.webpack.contenthashName}.css`,
+            chunkFilename: 'css/[name]-[id]-[hash].css'
         }),
 
     ];
@@ -52,34 +47,34 @@ module.exports = function(config, webpack) {
     if (isProduction) {
         let useCdn = configWebpack.useCdn || true;
 
-        if (useCdn) {
-            plugins.push(new FileWebpackPlugin({
-                'after-emit': [
-                    {
-                        from: path.join(configWebpack.path.dist, '**/*'),
-                        to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
-                        action: 'move',
-                        options: {
-                            cwd: configWebpack.path.dist,
-                            absolute: true,
-                            ignore: [
-                                '*.html',
-                                '**/*.html'
-                            ]
-                        }
-                    },
-                    {
-                        from: path.join(configWebpack.path.dist, '*.html'),
-                        to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
-                        action: 'move',
-                        options: {
-                            cwd: configWebpack.path.dist,
-                            absolute: true,
-                        }
-                    }
-                ]
-            }));
-        }
+        // if (useCdn) {
+        //     plugins.push(new FileWebpackPlugin({
+        //         'after-emit': [
+        //             {
+        //                 from: path.join(configWebpack.path.dist, '**/*'),
+        //                 to: path.join(configWebpack.path.dist, configWebpack.path.distCdn),
+        //                 action: 'move',
+        //                 options: {
+        //                     cwd: configWebpack.path.dist,
+        //                     absolute: true,
+        //                     ignore: [
+        //                         '*.html',
+        //                         '**/*.html'
+        //                     ]
+        //                 }
+        //             },
+        //             {
+        //                 from: path.join(configWebpack.path.dist, '*.html'),
+        //                 to: path.join(configWebpack.path.dist, configWebpack.path.distWebserver),
+        //                 action: 'move',
+        //                 options: {
+        //                     cwd: configWebpack.path.dist,
+        //                     absolute: true,
+        //                 }
+        //             }
+        //         ]
+        //     }));
+        // }
     }
     else {
         if (configWebpack.showSource) {

@@ -105,9 +105,9 @@ let config = {
 
         // 利用DefinePlugin给应用注入变量
         injectVar: {
-            'process.env': {
-                NODE_ENV: JSON.stringify(__env)
-            }
+            // 'process.env': {
+            //     NODE_ENV: JSON.stringify(__env)
+            // }
         },
 
         // webpack resolve.alias 包别名
@@ -139,16 +139,15 @@ let config = {
         /**
             获取结果示例
             {
-                'js/index': [path.join(configWebpack.path.src, "/page/index/main.js")],
-                'js/spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
-                'js/pindex': [path.join(configWebpack.path.src, "/page/pindex/main.jsx")],
+                'index': [path.join(configWebpack.path.src, "/page/index/main.js")],
+                'spa': [path.join(configWebpack.path.src, "/page/spa/main.js")],
+                'pindex': [path.join(configWebpack.path.src, "/page/pindex/main.jsx")],
             }
          */
         entry: utils.filterJsFileByCmd(utils.getJsEntry({
             srcPath: path.join(srcPath, 'page'),
             fileName: 'main',
             extensions: ['js', 'jsx', 'ts', 'tsx'],
-            keyPrefix: 'js/',
             level: 1
         })),
 
@@ -243,7 +242,9 @@ config.custom = {
 
     // 其它 webpack 配置
     getOtherOptions: function() {
-        return {};
+        return {
+            optimization: {}
+        };
     }
 };
 

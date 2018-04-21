@@ -1,14 +1,15 @@
 const path = require('path'),
     merge = require('lodash.merge');
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = function(config) {
 
     let configWebpack = config.webpack;
+    let isProduction = config.env === 'production';
 
     // 样式loader
-    const commonLoaders = [
+    let commonLoaders = [
         {
             loader: 'cache-loader',
             options: {
@@ -31,42 +32,36 @@ module.exports = function(config) {
         }
     ];
 
+    if (isProduction) {
+        commonLoaders.splice(0, 0, { loader: MiniCssExtractPlugin.loader });
+    }
+    else {
+        commonLoaders.splice(0, 0, { loader: 'style-loader' });
+    }
+
     const styleRules = {
         css: {
             test: /\.css$/,
-            // 单独抽出样式文件
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: commonLoaders
-            }),
+            use: commonLoaders,
             include: path.resolve(config.webpack.path.src)
         },
         less: {
             test: /\.less$/,
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: merge([], commonLoaders).concat([{
-                    loader: 'less-loader'
-                }])
-            })
+            use: merge([], commonLoaders).concat([{
+                loader: 'less-loader'
+            }])
         },
         stylus: {
             test: /\.styl$/,
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: merge([], commonLoaders).concat([{
-                    loader: 'stylus-loader'
-                }])
-            })
+            use: merge([], commonLoaders).concat([{
+                loader: 'stylus-loader'
+            }])
         },
         sass: {
             test: /\.s(a|c)ss$/,
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: merge([], commonLoaders).concat([{
-                    loader: 'sass-loader'
-                }])
-            })
+            use: merge([], commonLoaders).concat([{
+                loader: 'sass-loader'
+            }])
         }
     };
 

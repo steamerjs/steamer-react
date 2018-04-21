@@ -23,9 +23,9 @@ function compilerRun(config) {
         if (!err) {
             console.log(stats.toString({
                 assets: true,
-                cached: true,
+                cached: false,
                 colors: true,
-                children: false,
+                children: true,
                 errors: true,
                 warnings: true,
                 version: true,

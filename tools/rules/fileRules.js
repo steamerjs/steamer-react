@@ -13,7 +13,7 @@ module.exports = function(config) {
         },
         {
             test: /\.(jpe?g|png|gif|svg)$/i,
-            loaders: [
+            use: [
                 {
                     loader: 'url-loader',
                     options: {
@@ -26,7 +26,7 @@ module.exports = function(config) {
         },
         {
             test: /\.(woff|woff2|eot|ttf)\??.*$/,
-            loaders: [
+            use: [
                 {
                     loader: 'url-loader',
                     options: {
