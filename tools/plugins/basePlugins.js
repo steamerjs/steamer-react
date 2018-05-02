@@ -4,8 +4,8 @@ let ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = function(config, webpack) {
 
-    let configWebpack = config.webpack,
-        isProduction = config.env === 'production';
+    let configWebpack = config.webpack;
+    let isProduction = config.env === 'production';
 
     let plugins = [
         new webpack.DefinePlugin(configWebpack.injectVar)

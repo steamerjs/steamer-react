@@ -1,17 +1,17 @@
 const path = require('path');
 
-let Clean = require('clean-webpack-plugin'),
-    CopyWebpackPlugin = require('copy-webpack-plugin-hash'),
-    WriteFilePlugin = require('write-file-webpack-plugin'),
-    FileWebpackPlugin = require('file-webpack-plugin'),
-    HappyPack = require('happypack'),
-    HtmlResWebpackPlugin = require('html-res-webpack-plugin'),
-    MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let Clean = require('clean-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin-hash');
+let WriteFilePlugin = require('write-file-webpack-plugin');
+let FileWebpackPlugin = require('file-webpack-plugin');
+let HappyPack = require('happypack');
+let HtmlResWebpackPlugin = require('html-res-webpack-plugin');
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function(config, webpack) {
 
-    let configWebpack = config.webpack,
-        isProduction = config.env === 'production';
+    let configWebpack = config.webpack;
+    let isProduction = config.env === 'production';
 
     let plugins = [
         new HappyPack({

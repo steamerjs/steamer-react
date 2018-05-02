@@ -1,5 +1,5 @@
-let UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
-    OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+let OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = function(config, webpack) {
     let configWebpack = config.webpack;

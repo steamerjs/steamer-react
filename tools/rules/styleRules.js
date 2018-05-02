@@ -1,7 +1,7 @@
-const path = require('path'),
-    merge = require('lodash.merge');
+const path = require('path');
+const merge = require('lodash.merge');
 
-let MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function(config) {
 
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     let includePaths = [
         path.resolve('node_modules'),
-        path.resolve(config.webpack.path.src),
+        config.webpack.path.src,
         path.join(configWebpack.path.src, 'css/sprites')
     ];
 
@@ -31,7 +31,7 @@ module.exports = function(config) {
                 autoprefixer: true,
                 minimize: true,
                 sourceMap: configWebpack.cssSourceMap,
-                includePaths: includePaths,
+                // includePaths: includePaths,
                 importLoaders: 2
             }
         },
@@ -59,7 +59,7 @@ module.exports = function(config) {
                 loader: 'less-loader',
                 options: {
                     sourceMap: configWebpack.cssSourceMap,
-                    paths: includePaths
+                    // paths: includePaths
                 }
             }]),
             include: includePaths
@@ -86,7 +86,7 @@ module.exports = function(config) {
     let rules = [];
 
     configWebpack.style.forEach((styleParam) => {
-        style = (styleParam === 'scss') ? 'sass' : styleParam;
+        let style = (styleParam === 'scss') ? 'sass' : styleParam;
         let rule = styleRules[style] || '';
         rule && rules.push(rule);
     });

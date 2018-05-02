@@ -1,18 +1,19 @@
-const path = require('path'),
-    utils = require('steamer-webpack-utils'),
-    steamerConfig = require('./steamer.config'),
-    __basename = path.dirname(__dirname),
-    __env = process.env.NODE_ENV,
-    isProduction = __env === 'production';
+const path = require('path');
 
-let srcPath = path.resolve(__basename, 'src'),
-    devPath = path.resolve(__basename, 'dev'),
-    distPath = path.resolve(__basename, 'dist'),
-    spritePath = path.resolve(__basename, 'src/img/sprites');
+let utils = require('steamer-webpack-utils');
+let steamerConfig = require('./steamer.config');
+let __basename = path.dirname(__dirname);
+let __env = process.env.NODE_ENV;
+let isProduction = __env === 'production';
 
-let hash = '[hash:6]',
-    chunkhash = '[chunkhash:6]',
-    contenthash = '[contenthash:6]';
+let srcPath = path.resolve(__basename, 'src');
+let devPath = path.resolve(__basename, 'dev');
+let distPath = path.resolve(__basename, 'dist');
+let spritePath = path.resolve(__basename, 'src/img/sprites');
+
+let hash = '[hash:6]';
+let chunkhash = '[chunkhash:6]';
+let contenthash = '[contenthash:6]';
 
 // ========================= webpack快捷配置 =========================
 // 基本情况下，你只需要关注这里的配置

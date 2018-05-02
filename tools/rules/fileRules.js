@@ -1,7 +1,7 @@
 module.exports = function(config) {
 
-    let configWebpack = config.webpack,
-        isProduction = config.env === 'production';
+    let configWebpack = config.webpack;
+    let isProduction = config.env === 'production';
 
     let rules = [
         {

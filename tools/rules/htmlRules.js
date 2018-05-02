@@ -28,7 +28,7 @@ module.exports = function(config) {
         },
         art: {
             test: /\.art$/,
-            loader: "art-template-loader",
+            loader: 'art-template-loader',
         }
     };
 

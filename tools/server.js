@@ -1,18 +1,18 @@
-const url = require('url'),
-    express = require('express'),
-    app = express(),
-    webpack = require('webpack'),
-    webpackDevMiddleware = require('webpack-dev-middleware'),
-    webpackHotMiddleware = require('webpack-hot-middleware'),
-    proxy = require('http-proxy-middleware');
+const url = require('url');
+const express = require('express');
+const app = express();
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const proxy = require('http-proxy-middleware');
 
-let webpackConfig = require('./webpack.base.js'),
-    config = require('../config/project'),
-    configWebpack = config.webpack,
-    port = configWebpack.port,
-    route = Array.isArray(configWebpack.route) ? configWebpack.route : [configWebpack.route],
-    apiPort = configWebpack['api-port'],
-    apiRoute = configWebpack['api-route'];
+let webpackConfig = require('./webpack.base.js');
+let config = require('../config/project');
+let configWebpack = config.webpack;
+let port = configWebpack.port;
+let route = Array.isArray(configWebpack.route) ? configWebpack.route : [configWebpack.route];
+let apiPort = configWebpack['api-port'];
+let apiRoute = configWebpack['api-route'];
 
 function addProtocal(urlString) {
     if (!!~urlString.indexOf('http:') || !!~urlString.indexOf('https:')) {
