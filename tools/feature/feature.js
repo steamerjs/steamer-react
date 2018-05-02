@@ -1,11 +1,11 @@
 // used for install dependencies and files to support certain kinds of features
 
-let path = require('path'),
-    project = require('../../config/project'),
-    pkgJson = require('../../package.json'),
-    merge = require('lodash.merge'),
-    spawnSync = require('child_process').spawnSync,
-    utils = require('steamer-webpack-utils');
+let path = require('path');
+let project = require('../../config/project');
+let pkgJson = require('../../package.json');
+let merge = require('lodash.merge');
+let spawnSync = require('child_process').spawnSync;
+let utils = require('steamer-webpack-utils');
 
 let dependency = {
     template: {
@@ -21,7 +21,7 @@ let dependency = {
             'pug': '^2.0.3'
         },
         ejs: {
-            'ejs-compiled-loader': '^1.1.0',
+            'ejs-loader': '^1.1.0',
             'ejs': '^2.5.9'
         },
         art: {
@@ -63,7 +63,7 @@ let dependency = {
         ts: {
             'awesome-typescript-loader': '^5.0.0',
             'typescript': '^2.8.3',
-            '@types/react': '^15.6.12',
+            '@types/react': '^15.6.15',
             '@types/react-dom': '^15.5.7'
         }
     }
@@ -88,13 +88,13 @@ module.exports = {
 
         let dependencies = merge({}, pkgJson.dependencies, pkgJson.devDependencies);
 
-        let installDep = {},
-            installFile = {
-                template: {},
-                style: {},
-                js: {}
-            },
-            cmd = '';
+        let installDep = {};
+        let installFile = {
+            template: {},
+            style: {},
+            js: {}
+        };
+        let cmd = '';
 
         project.webpack.template.forEach((item1) => {
             let dep = dependency['template'][item1] || {};

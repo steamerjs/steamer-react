@@ -5,7 +5,7 @@ import { LATEST_NEWS, LIKE_NEWS } from '../../constants/constants';
 
 import Touch from 'touch-p';
 import classNames from 'classnames';
-require('./index.css');
+import './index.less';
 
 function TabItem(item, key) {
     return (

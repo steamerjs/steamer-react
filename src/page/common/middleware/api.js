@@ -1,4 +1,4 @@
-// ajax 
+// ajax
 import net from 'net';
 import merge from 'lodash.merge';
 import CGI_PATH from '../constants/cgiPath';

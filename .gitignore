@@ -11,3 +11,4 @@ webpack_cache
 .happypack
 npm-debug.log
 .idea
+.vscode

@@ -16,7 +16,7 @@ import List from '../components/list/index';
 import Tab from '../components/tab/index';
 import Loading from '../components/loading/index';
 
-import './index.css';
+import './index.less';
 
 class Wrapper extends Component {
     constructor(props, context) {
@@ -52,9 +52,9 @@ class Wrapper extends Component {
 
     render() {
         console.dev('render container!!!');
-        let tabStyle = this.props.tabs,
-            isEnd = this.props.news.listInfo['listLatest']['isEnd'],
-            isLoadingShow = tabStyle === LATEST_NEWS;
+        let tabStyle = this.props.tabs;
+        let isEnd = this.props.news.listInfo['listLatest']['isEnd'];
+        let isLoadingShow = tabStyle === LATEST_NEWS;
 
         return (
             <article className="cm-page">
@@ -64,8 +64,13 @@ class Wrapper extends Component {
                 />
                 <div className="cm-content">
                     <Scroll
-                        wrapper={'.content-wrap'}
-                        loadDataForScroll={this.loadDataForScroll}
+                        ref={(scrollEle) => {
+                            this.scrollEle = scrollEle;
+                        }}
+                        loadDataForScroll={this.loadNewsList}
+                        disable={this.state.lock}
+                        isHalf={true}
+                        useWindow={true}
                     >
                         <List
                             tabs={this.props.tabs}

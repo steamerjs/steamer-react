@@ -18,7 +18,7 @@ module.exports = function(config) {
                     loader: 'url-loader',
                     options: {
                         publicPath: isProduction ? configWebpack.imgCdn : configWebpack.webserver,
-                        limit: 1000,
+                        limit: 10,
                         name: `img/[path]${configWebpack.hashName}.[ext]`
                     }
                 }
@@ -30,7 +30,7 @@ module.exports = function(config) {
                 {
                     loader: 'url-loader',
                     options: {
-                        limit: 1000,
+                        limit: 10,
                         name: `font/[path]${configWebpack.hashName}.[ext]`
                     }
                 }

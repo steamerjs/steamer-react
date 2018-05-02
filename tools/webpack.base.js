@@ -28,10 +28,10 @@ let baseConfig = {
             'node_modules',
             path.join(configWebpack.path.src, 'css/sprites')
         ],
-        // extensions: [
-        //     '.ts', '.tsx', '.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl',
-        //     '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.art', '.handlebars', 'swf'
-        // ],
+        extensions: [
+            '.ts', '.tsx', '.js', '.jsx', '.css', '.scss', 'sass', '.less', '.styl',
+            '.png', '.jpg', '.jpeg', '.ico', '.ejs', '.pug', '.art', '.handlebars', 'swf', 'svg',
+        ],
         // alias: {}
     },
     plugins: [],

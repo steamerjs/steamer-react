@@ -10,7 +10,8 @@ module.exports = function(config) {
 
     let includePaths = [
         path.resolve('node_modules'),
-        path.resolve(config.webpack.path.src)
+        path.resolve(config.webpack.path.src),
+        path.join(configWebpack.path.src, 'css/sprites')
     ];
 
     // 样式loader
@@ -29,7 +30,9 @@ module.exports = function(config) {
                 module: config.webpack.cssModule,
                 autoprefixer: true,
                 minimize: true,
-                importLoaders: 1
+                sourceMap: configWebpack.cssSourceMap,
+                includePaths: includePaths,
+                importLoaders: 2
             }
         },
         {
@@ -53,7 +56,11 @@ module.exports = function(config) {
         less: {
             test: /\.less$/,
             use: merge([], commonLoaders).concat([{
-                loader: 'less-loader'
+                loader: 'less-loader',
+                options: {
+                    sourceMap: configWebpack.cssSourceMap,
+                    paths: includePaths
+                }
             }]),
             include: includePaths
         },
@@ -67,7 +74,10 @@ module.exports = function(config) {
         sass: {
             test: /\.s(a|c)ss$/,
             use: merge([], commonLoaders).concat([{
-                loader: 'sass-loader'
+                loader: 'sass-loader',
+                options: {
+                    sourceMap: configWebpack.cssSourceMap,
+                }
             }]),
             include: includePaths
         }

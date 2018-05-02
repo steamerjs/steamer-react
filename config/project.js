@@ -67,6 +67,8 @@ let config = {
             production: false,
         },
 
+        cssSourceMap: false,
+
         // javascript 方言，目前仅支持 ts(typescript)
         js: [],
 
@@ -112,12 +114,16 @@ let config = {
 
         // webpack resolve.alias 包别名
         alias: {
+            '@': path.join(srcPath),
+            'IMG': path.join(srcPath, '/img'),
+            'CSS': path.join(srcPath, '/css'),
+            'JS': path.join(srcPath, '/js'),
             'react/lib/ReactMount': 'react-dom/lib/ReactMount',
             'redux': isProduction ? 'redux/dist/redux.min' : 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
             'utils': path.join(srcPath, '/js/common/utils'),
             'sutils': 'steamer-browserutils/index',
-            'net': 'steamer-net/index',
+            'net': 'steamer-net/dist/index',
             'touch': 'react-touch-component/lib/index',
             'touch-p': 'react-touch-component/lib/pindex',
             'scroll': 'react-list-scroll/dist/',

@@ -25,10 +25,12 @@ function compilerRun(config) {
                 assets: true,
                 cached: false,
                 colors: true,
-                children: true,
+                children: false,
                 errors: true,
                 warnings: true,
                 version: true,
+                modules: false,
+                publicPath: true,
             }));
         }
         else {

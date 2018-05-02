@@ -2,7 +2,7 @@
 import Preact, { h, Component } from 'preact';
 // import pureRender from 'pure-render-decorator';
 
-require('./index.css');
+import './index.less';
 
 // @pureRender
 export default class Loading extends Component {

@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+@import "css/common/common.less";
+@import "css/common/reset.less";
+@import "css/sprites/icons.full.css";
+
+
+.wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+h2.title {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.logo {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background-size: 100%;
+    background-image: inline('img/steamer.png');
+}
+
+.text {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        flex: 1;
+        max-width: 64px;
+        margin: 0 10px;
+    }
+}
