@@ -20,6 +20,7 @@ module.exports = {
     },
     'react-spa-mobx': {
         'react-list-scroll': '^1.0.6',
+        'react-loadable': '^5.3.1',
         'react-touch-component': '^1.1.4',
         'react-spin-component': '0.0.1',
         'react-router': '^4.2.0',
@@ -29,6 +30,7 @@ module.exports = {
     },
     'react-spa-redux': {
         'react-list-scroll': '^1.0.6',
+        'react-loadable': '^5.3.1',
         'react-touch-component': '^1.1.4',
         'react-spin-component': '0.0.1',
         'react-router': '^4.2.0',
