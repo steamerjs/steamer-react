@@ -14,7 +14,13 @@ module.exports = function(config, webpack) {
             sourceMap: true // set to true if you want JS source maps
         }));
         optimization.minimizer.push(
-            new OptimizeCSSAssetsPlugin({})
+            new OptimizeCSSAssetsPlugin({
+                cssProcessor: require('cssnano'),
+                cssProcessorOptions: {
+                    reduceIdents: false,
+                    autoprefixer: false,
+                },
+            })
         );
     }
 
