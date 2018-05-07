@@ -26,7 +26,8 @@ module.exports = {
         'react-router': '^4.2.0',
         'react-router-dom': '^4.2.2',
         'mobx-react-router': '^4.0.2',
-        'history': '^4.7.2'
+        'history': '^4.7.2',
+        'mobx-react-devtools': '^4.2.15'
     },
     'react-spa-redux': {
         'react-list-scroll': '^1.0.6',
@@ -36,7 +37,11 @@ module.exports = {
         'react-router': '^4.2.0',
         'react-router-dom': '^4.2.2',
         'react-router-redux': '^5.0.0-alpha.9',
-        'history': '^4.7.2'
+        'history': '^4.7.2',
+        'redux-devtools': '^3.4.1',
+        'redux-devtools-dock-monitor': '^1.1.3',
+        'redux-devtools-log-monitor': '^1.4.0',
+        'redux-thunk': '^2.2.0'
     },
     'react-typescript': {
         '@types/react': '^15.0.35',
