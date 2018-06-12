@@ -10,11 +10,11 @@ react 高效快速启动脚手架
 * 推荐 >> 使用[steamerjs](https://steamerjs.github.io/docs/projectkits/Bootstrap.html)安装
 
 ```javascript
-
-npm i -g steamerjs steamer-plugin-kit
-
-npm i -g steamer-react
-
+// 安装 steamerjs，已经内置 steamer-plugin-kit
+npm i -g steamerjs
+// 下载脚手架到全局
+steamer kit --add https://github.com/steamerjs/steamer-react.git
+// 基于脚手架初始化项目
 steamer kit
 ```
 
@@ -27,19 +27,15 @@ steamer kit
 npm i
 
 // 开发
-npm start 或 npm run dev
+npm start
 // 打开链接
 localhost:9000
-
-// 代码规范安装
-npm i -g eslint
-npm i -g stylelint
 
 // 代码规范扫描
 npm lint
 
 // 生产代码生成
-npm run dist 或 npm run pub
+npm run dist
 
 ```
 
