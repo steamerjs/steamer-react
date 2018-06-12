@@ -21,8 +21,8 @@ let dependency = {
             'pug': '^2.0.3'
         },
         ejs: {
-            'ejs-loader': '^1.1.0',
-            'ejs': '^2.5.9'
+            'ejs-loader': '^0.3.1',
+            'ejs': '^2.6.1'
         },
         art: {
             'art-template': '^4.12.2',
