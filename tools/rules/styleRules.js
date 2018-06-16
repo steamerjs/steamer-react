@@ -59,6 +59,7 @@ module.exports = function(config) {
                 loader: 'less-loader',
                 options: {
                     sourceMap: configWebpack.cssSourceMap,
+                    javascriptEnabled: true
                     // paths: includePaths
                 }
             }]),
