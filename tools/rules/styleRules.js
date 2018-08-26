@@ -27,7 +27,7 @@ module.exports = function(config) {
             loader: 'css-loader',
             options: {
                 localIdentName: '[name]-[local]-[hash:base64:5]',
-                module: config.webpack.cssModule,
+                modules: config.webpack.cssModule,
                 autoprefixer: true,
                 minimize: true,
                 sourceMap: configWebpack.cssSourceMap,
