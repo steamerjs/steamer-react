@@ -104,11 +104,7 @@ let config = {
         ],
 
         // 利用DefinePlugin给应用注入变量
-        injectVar: {
-            // 'process.env': {
-            //     NODE_ENV: JSON.stringify(__env)
-            // }
-        },
+        injectVar: {},
 
         // webpack resolve.alias 包别名
         alias: {
