@@ -24,19 +24,6 @@ module.exports = function(config, webpack) {
                 }
             }]
         }),
-        new HappyPack({
-            id: '2',
-            verbose: false,
-            loaders: [{
-                path: 'babel-loader',
-                options: {
-                    'plugins': [
-                        ['transform-react-jsx', { 'pragma': 'h' }]
-                    ],
-                    cacheDirectory: './.cache/'
-                },
-            }]
-        }),
         new MiniCssExtractPlugin({
             filename: `css/${config.webpack.contenthashName}.css`,
             chunkFilename: 'css/[name]-[id]-[hash].css'

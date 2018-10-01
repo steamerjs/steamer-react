@@ -11,15 +11,10 @@ module.exports = function(config) {
 
     let rules = [
         {
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             loader: 'happypack/loader?id=1',
             exclude: /node_modules/
-        },
-        {
-            test: /\.jsx$/,
-            loader: 'happypack/loader?id=2',
-            exclude: /node_modules/
-        },
+        }
     ];
 
     configWebpack.js.forEach((tpl) => {
