@@ -239,8 +239,7 @@ config.custom = {
         if (isProduction) {
             return {
                 'react': 'React',
-                'react-dom': 'ReactDOM',
-                'preact': 'preact'
+                'react-dom': 'ReactDOM'
             };
         }
 

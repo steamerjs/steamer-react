@@ -28,7 +28,6 @@ module.exports = function(config, webpack) {
             filename: `css/${config.webpack.contenthashName}.css`,
             chunkFilename: 'css/[name]-[id]-[hash].css'
         }),
-
     ];
 
     if (isProduction) {
