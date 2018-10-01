@@ -1,5 +1,3 @@
-const os = require('os');
-
 let ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = function(config, webpack) {

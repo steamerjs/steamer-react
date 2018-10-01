@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 
 let isProduction = process.env.NODE_ENV === 'production';
+let isDLL = process.env.DLL;
 
 const feature = require('./feature/feature');
 
@@ -12,8 +13,12 @@ if (!isProduction) {
     require('./server');
 }
 else if (isProduction) {
-
-    compilerRun(require('./webpack.base'));
+    if (isDLL) {
+        compilerRun(require('./webpack.dll'));
+    }
+    else {
+        compilerRun(require('./webpack.base'));
+    }
 }
 
 function compilerRun(config) {

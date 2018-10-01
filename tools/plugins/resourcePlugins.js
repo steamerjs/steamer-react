@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 
 let Clean = require('clean-webpack-plugin');
@@ -29,6 +30,14 @@ module.exports = function(config, webpack) {
             chunkFilename: 'css/[name]-[id]-[hash].css'
         }),
     ];
+
+    let manifestFile = '../manifest.dll.json';
+    if (fs.existsSync(manifestFile)) {
+        plugins.push(new webpack.DllReferencePlugin({
+            context: config.webpack.path.src,
+            manifest: require(manifestFile)
+        }));
+    }
 
     if (isProduction) {
         let useCdn = configWebpack.useCdn || true;
@@ -70,12 +79,6 @@ module.exports = function(config, webpack) {
 
     if (configWebpack.clean) {
         plugins.push(new Clean([isProduction ? configWebpack.path.dist : configWebpack.path.dev], { root: path.resolve() }));
-    }
-
-    if (config.webpack.promise) {
-        plugins.push(new webpack.ProvidePlugin({
-            Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise'
-        }));
     }
 
     configWebpack.static.forEach((item) => {

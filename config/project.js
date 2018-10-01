@@ -92,9 +92,6 @@ let config = {
             'html'
         ],
 
-        // 是否注入es6-promise包
-        promise: false,
-
         // 生产环境下资源(js, css, html)是否压缩
         compress: true,
 
@@ -119,6 +116,7 @@ let config = {
             'IMG': path.join(srcPath, '/img'),
             'CSS': path.join(srcPath, '/css'),
             'JS': path.join(srcPath, '/js'),
+            'PAGE': path.join(srcPath, '/page'),
             'react/lib/ReactMount': 'react-dom/lib/ReactMount',
             'redux': isProduction ? 'redux/dist/redux.min' : 'redux/dist/redux',
             'react-redux': 'react-redux/dist/react-redux',
@@ -126,9 +124,7 @@ let config = {
             'sutils': 'steamer-browserutils/index',
             'net': 'steamer-net/dist/index',
             'touch': 'react-touch-component/lib/index',
-            'touch-p': 'react-touch-component/lib/pindex',
             'scroll': 'react-list-scroll/dist/',
-            'scroll-p': 'react-list-scroll/dist/pindex',
             'pure-render-decorator': 'pure-render-deepCompare-decorator/dist/',
             'pure-render-immutable-decorator': 'pure-render-immutable-decorator/dist'
         },
@@ -197,8 +193,14 @@ let config = {
          */
         sprites: utils.getSpriteEntry({
             srcPath: spritePath
-        })
+        }),
 
+        dll: {
+            entry: [
+                'react',
+                'react-dom'
+            ]
+        }
     }
 };
 
@@ -236,12 +238,12 @@ config.custom = {
 
     // webpack externals
     getExternals: function() {
-        if (isProduction) {
-            return {
-                'react': 'React',
-                'react-dom': 'ReactDOM'
-            };
-        }
+        // if (isProduction) {
+        //     return {
+        //         'react': 'React',
+        //         'react-dom': 'ReactDOM'
+        //     };
+        // }
 
         return {};
     },
