@@ -23,8 +23,3 @@ export default class Root extends Component {
         );
     }
 }
-
-// render(
-//     <Root />,
-//     document.getElementById('pages')
-// );
